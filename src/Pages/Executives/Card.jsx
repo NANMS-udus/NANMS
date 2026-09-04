@@ -15,6 +15,8 @@ export default function Card({ details, pos }) {
     default_caption
   } = details || {}
 
+  console.log(members)
+
   return (
     <div class={`exec-card card-${position === 'President' ? 'president' : position === 'Vice-President 1' || position === 'Vice-President 2' ? 'medium' : 'small'}`}
     >
