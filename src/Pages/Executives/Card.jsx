@@ -24,8 +24,8 @@ export default function Card({ details, pos }) {
         <img class="exec-card-img"
           data-alt=''
           src={
-            members.find((m) => {
-             m.id === id
+            members.all.find((m) => {
+             return m.id === id
             }).avatar_url}
             />
       </div>
