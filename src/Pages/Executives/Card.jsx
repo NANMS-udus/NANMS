@@ -21,9 +21,11 @@ export default function Card({ details, pos }) {
       <div class="exec-card-img-container">
         <img class="exec-card-img"
           data-alt=''
-          src={members.find((m) => {
-            m.id === id
-          })/>
+          src={
+            members.find((m) => {
+             m.id === id
+            }).avatar_url
+            />
       </div>
       {
         position === 'President'
