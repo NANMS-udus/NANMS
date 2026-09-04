@@ -257,12 +257,20 @@ useEffect(() => {
           avatar_url,
           avatar_path
         })
-        .eq('id', session.user.id)
+        .eq('id', session?.user?.id)
+        .select()
+        .single()
 
         if (error) {
           throw new Error(error.message);
-          
         }
+
+        if (!error && data) {
+          console.log(data);
+
+          setDetails(data)
+        }
+        
       }
     } catch (error) {
       console.log(error.message);
