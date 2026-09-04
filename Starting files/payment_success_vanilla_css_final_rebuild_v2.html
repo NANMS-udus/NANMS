@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NANSM - Payment Successful</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            /* Colors */
+            --primary: #00342b;
+            --primary-container: #004d40;
+            --on-primary: #ffffff;
+            --secondary: #4c616c;
+            --surface: #f8f9fa;
+            --surface-container-lowest: #ffffff;
+            --on-surface: #191c1d;
+            --outline: #707975;
+            --success: #0a8451;
+            --on-secondary-fixed: #071e27;
+            --primary-fixed: #afefdd;
+            
+            /* Typography */
+            --font-headline: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Spacing */
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+            --spacing-xl: 80px;
+            --gutter: 24px;
+            --container-max: 1200px;
+            
+            /* Radius */
+            --radius-md: 4px;
+            --radius-lg: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--surface);
+            color: var(--on-surface);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Nav & Footer - Specific Rules overridden as per prompt (No Tailwind) */
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: var(--spacing-xl) var(--gutter);
+        }
+
+        .success-card {
+            background-color: var(--surface-container-lowest);
+            border: 1px solid #e0e0e0;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .success-icon {
+            font-size: 64px;
+            color: var(--success);
+            margin-bottom: var(--spacing-md);
+            font-variation-settings: 'FILL' 1;
+        }
+
+        .success-heading {
+            font-family: var(--font-headline);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .success-message {
+            font-size: 16px;
+            color: var(--secondary);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .transaction-summary {
+            background-color: var(--surface);
+            border: 1px solid #e0e0e0;
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            text-align: left;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--spacing-xs) 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            font-size: 14px;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .summary-value {
+            font-size: 14px;
+            color: var(--on-surface);
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        @media (max-width: 600px) {
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-container);
+            color: var(--on-primary);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--secondary);
+            border: 1px solid var(--outline);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .footer-note {
+            font-size: 12px;
+            color: var(--secondary);
+        }
+        
+        /* Shared Components Styles */
+        .top-nav {
+            background-color: var(--surface-container-lowest);
+            border-bottom: 1px solid var(--primary);
+            width: 100%;
+        }
+        
+        .top-nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: var(--spacing-sm) var(--gutter);
+        }
+        
+        .brand-logo {
+            font-family: var(--font-headline);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-md);
+            list-style: none;
+        }
+        
+        .nav-link {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--secondary);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .footer-area {
+            background-color: var(--on-secondary-fixed);
+            width: 100%;
+            color: var(--surface-container-lowest);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--gutter);
+        }
+        
+        .footer-logo {
+            font-family: var(--font-headline);
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .footer-text {
+            font-family: var(--font-body);
+            font-size: 16px;
+        }
+        
+        .footer-link {
+            color: var(--surface-variant);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .footer-link:hover {
+            color: var(--primary-fixed);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Suppressed navigation shell for transactional page (Top Nav normally here, but suppressed by rule) -->
+<main class="main-content">
+<div class="success-card">
+<span class="material-symbols-outlined success-icon" data-icon="check_circle" data-weight="fill">check_circle</span>
+<h1 class="success-heading">Payment Successful</h1>
+<p class="success-message">Your payment for the 2023 Annual Association Dues has been received and is being processed.</p>
+<div class="transaction-summary">
+<div class="summary-row">
+<span class="summary-label">Transaction ID:</span>
+<span class="summary-value">#NANS-8293-XP</span>
+</div>
+<div class="summary-row">
+<span class="summary-label">Date:</span>
+<span class="summary-value">October 24, 2023</span>
+</div>
+<div class="summary-row">
+<span class="summary-label">Amount Paid:</span>
+<span class="summary-value">₦45,000.00</span>
+</div>
+<div class="summary-row">
+<span class="summary-label">Payment Method:</span>
+<span class="summary-value">Online (Paystack)</span>
+</div>
+<div class="summary-row">
+<span class="summary-label">Status:</span>
+<span class="summary-value">Completed</span>
+</div>
+</div>
+<div class="action-buttons">
+<a class="btn btn-primary" href="#">Download Receipt</a>
+<a class="btn btn-secondary" href="#">Return to Dashboard</a>
+</div>
+<p class="footer-note">A copy of this receipt has also been sent to your registered email address.</p>
+</div>
+</main>
+<!-- Suppressed footer for transactional page -->
+</body></html>

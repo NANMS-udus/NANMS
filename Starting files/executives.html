@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Executives - NANMS</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Source+Serif+4:wght@600;700&display=swap');
+
+        :root {
+            --primary: #004d27;
+            --primary-container: #006837;
+            --on-primary: #ffffff;
+            --on-primary-container: #8ee4a6;
+
+            --secondary: #5c5f60;
+            --on-secondary: #ffffff;
+
+            --tertiary-container: #765400;
+            --on-tertiary-container: #ffc961;
+
+            --surface: #f7f9ff;
+            --surface-dim: #d7dadf;
+            --on-surface: #181c20;
+            --surface-variant: #e0e3e8;
+            --on-surface-variant: #3f4940;
+            --surface-container-lowest: #ffffff;
+            --surface-container-highest: #e0e3e8;
+
+            --outline: #6f7a70;
+            --outline-variant: #bec9be;
+
+            --font-display-lg: 'Source Serif 4', serif;
+            --font-headline-lg: 'Source Serif 4', serif;
+            --font-headline-md: 'Source Serif 4', serif;
+            --font-body-lg: 'Inter', sans-serif;
+            --font-body-md: 'Inter', sans-serif;
+            --font-label-sm: 'Inter', sans-serif;
+
+            --container-max: 1200px;
+            --margin-desktop: 48px;
+            --margin-mobile: 16px;
+            --gutter: 24px;
+            --stack-lg: 48px;
+            --stack-md: 24px;
+            --stack-sm: 12px;
+            --unit: 8px;
+        }
+
+        body {
+            font-family: var(--font-body-md);
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--on-surface);
+            background-color: var(--surface);
+            margin: 0;
+            padding-top: 64px;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--outline-variant);
+            box-sizing: border-box;
+            padding: 0 var(--margin-desktop);
+        }
+
+        .nav-inner {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: var(--unit);
+        }
+
+        .logo-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--outline-variant);
+        }
+
+        .logo-text {
+            font-family: var(--font-headline-md);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: none;
+            gap: var(--stack-md);
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            font-family: var(--font-body-md);
+            color: var(--secondary);
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 4px;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+
+        .nav-actions {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .nav-actions {
+                display: block;
+            }
+        }
+
+        .btn-register {
+            background-color: var(--primary);
+            color: var(--on-primary);
+            font-family: var(--font-label-sm);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-register:hover {
+            background-color: var(--primary-container);
+        }
+
+        .menu-btn {
+            color: var(--primary);
+            display: block;
+        }
+
+        @media (min-width: 768px) {
+            .menu-btn {
+                display: none;
+            }
+        }
+
+        /* Main Content */
+        main {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: var(--stack-lg) var(--margin-desktop);
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 767px) {
+            main {
+                padding-left: var(--margin-mobile);
+                padding-right: var(--margin-mobile);
+            }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: var(--stack-lg);
+        }
+
+        h1 {
+            font-family: var(--font-display-lg);
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--primary);
+            margin: 0 0 var(--unit) 0;
+        }
+
+        .header-desc {
+            font-family: var(--font-body-lg);
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--secondary);
+            max-width: 672px;
+            margin: 0 auto;
+        }
+
+        /* Grid */
+        .exec-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--gutter);
+        }
+
+        @media (min-width: 768px) {
+            .exec-grid {
+                grid-template-columns: repeat(12, 1fr);
+            }
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--surface-container-lowest);
+            border-radius: 8px;
+            border: 1px solid var(--outline-variant);
+            padding: var(--stack-md);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .card-img-container {
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--outline-variant);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-label {
+            font-family: var(--font-label-sm);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 4px 8px;
+            border-radius: 2px;
+            display: inline-block;
+            width: max-content;
+            margin-bottom: var(--unit);
+            margin-top: var(--stack-sm);
+        }
+
+        .card-title {
+            font-family: var(--font-headline-md);
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--on-surface);
+            margin: 0 0 var(--unit) 0;
+        }
+
+        .card-desc {
+            font-family: var(--font-body-md);
+            color: var(--secondary);
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        /* President Card Specifics */
+        .card-president {
+            grid-column: span 1;
+        }
+
+        @media (min-width: 768px) {
+            .card-president {
+                grid-column: span 12;
+                flex-direction: row;
+                gap: var(--gutter);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .card-president {
+                grid-column: span 8;
+            }
+        }
+
+        .card-president .card-img-container {
+            margin-bottom: var(--stack-sm);
+        }
+
+        @media (min-width: 768px) {
+            .card-president .card-img-container {
+                width: 50%;
+                margin-bottom: 0;
+            }
+        }
+
+        .card-president .card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .card-president .card-content {
+                width: 50%;
+            }
+        }
+
+        .card-president .card-label {
+            background-color: var(--tertiary-container);
+            color: var(--on-tertiary-container);
+            margin-top: 0;
+        }
+
+        .card-president .card-title {
+            font-family: var(--font-headline-lg);
+            font-size: 32px;
+            line-height: 1.3;
+        }
+
+        .card-president .card-desc {
+            margin-bottom: var(--stack-md);
+            flex-grow: 0;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: var(--unit);
+        }
+
+        .card-action-btn {
+            color: var(--primary);
+            transition: color 0.2s;
+            padding: 0;
+        }
+
+        .card-action-btn:hover {
+            color: var(--primary-container);
+        }
+
+        .bg-icon {
+            position: absolute;
+            bottom: -32px;
+            right: -32px;
+            opacity: 0.05;
+            font-size: 120px !important;
+            color: var(--primary);
+            pointer-events: none;
+        }
+
+        /* Other Cards Specifics */
+        .card-medium {
+            grid-column: span 1;
+        }
+
+        @media (min-width: 768px) {
+            .card-medium {
+                grid-column: span 6;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .card-medium {
+                grid-column: span 4;
+            }
+        }
+
+        .card-medium .card-img-container {
+            height: 192px;
+            margin-bottom: var(--stack-sm);
+        }
+
+        .label-vp {
+            background-color: var(--primary-container);
+            color: var(--on-primary-container);
+        }
+
+        .label-sec {
+            background-color: var(--surface-variant);
+            color: var(--on-surface-variant);
+        }
+
+        .label-fin {
+            background-color: var(--surface-variant);
+            color: var(--on-surface-variant);
+        }
+
+        .label-pro {
+            background-color: var(--surface-variant);
+            color: var(--on-surface-variant);
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            padding: var(--stack-lg) var(--margin-desktop);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--gutter);
+            background-color: var(--surface-container-highest);
+            margin-top: var(--stack-lg);
+            border-top: 1px solid var(--outline-variant);
+            box-sizing: border-box;
+        }
+
+        @media (min-width: 768px) {
+            footer {
+                flex-direction: row;
+            }
+        }
+
+        .footer-logo {
+            font-family: var(--font-headline-md);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .footer-text {
+            color: var(--on-surface-variant);
+            font-family: var(--font-body-md);
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .footer-text {
+                text-align: left;
+            }
+        }
+
+        .footer-links {
+            display: flex;
+            gap: var(--unit);
+        }
+
+        .footer-link {
+            color: var(--on-surface-variant);
+            font-family: var(--font-label-sm);
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+            text-decoration-color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- TopNavBar -->
+    <nav>
+        <div class="nav-inner">
+            <div class="logo-container">
+                <img alt="NANMS Logo" class="logo-img"
+                    src="https://lh3.googleusercontent.com/aida/AEtjO1Ub2iBGTgP8zE9BanukacK_8uqewOP2YCWu9YJY0Zm6YLPNt9Rb6g5vw5B-QwiiSSRhIXD1ryewtJgg6GMcQnq1EaNYP7iH-nldYnl7Z4rTsPSlR6hmkPCUv0JZTmoYNrur-hGtW5jClZlTwBQrPBBhidGKlPdYIlcma_9a5S4SeTcTKD2nzxfz3gqb0wwzzZG4QmzMpg2eE3JuB8v9U2IxBAMy6tJtSvfzO4p4w8ZBZNG9EdTSGfxZcQ" />
+                <span class="logo-text">NANMS</span>
+            </div>
+            <div class="nav-links">
+                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="#">About Us</a>
+                <a class="nav-link active" href="#">Executives</a>
+                <a class="nav-link" href="#">Projects</a>
+                <a class="nav-link" href="#">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button class="btn-register">Register</button>
+            </div>
+            <button class="menu-btn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </nav>
+    <main>
+        <header>
+            <h1>Central Executive Council</h1>
+            <p class="header-desc">Meet the dedicated scholar-physicians leading the National Association of Niger State
+                Medical Students through academic excellence and professional development.</p>
+        </header>
+        <!-- Bento Grid for Executives -->
+        <div class="exec-grid">
+            <!-- President Card - Large -->
+            <div class="card card-president">
+                <div class="card-img-container">
+                    <img class="card-img"
+                        data-alt="Portrait of a young male medical student in a white coat, looking confidently at the camera in a modern, well-lit clinical environment. Clean, minimalist background with subtle medical equipment out of focus. Green and white tones dominating."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgxtjHJro4ZGgnSVeOpMRGIA9ZjNmYZ-axTJBq8_m8ZYVSrkHzmIMY9oVwouSlDkXkcvmiOL6eK7UfxoDpKLYrsKP93rWwzlQNUQmNDzAIR77oWI_xllKBC1yYpzrK4xID2Kby9u-2dDaf3oBkizyiJnMEXn_o6pwTTSuE-WJ8F6w47Lo1oScQeIAaK-NvN5t2eWCBYzdveG3TNGtMK0NuTYAQT_S2AJGDlZxG36JHt2ifkNqvKzM6" />
+                </div>
+                <div class="card-content">
+                    <span class="card-label">President</span>
+                    <h2 class="card-title">Dr. Aminu Bello</h2>
+                    <p class="card-desc">Overseeing the strategic direction of NANMS, Dr. Bello brings a commitment to
+                        structural integrity and academic rigor, fostering an environment where student excellence
+                        thrives.</p>
+                    <div class="card-actions">
+                        <button class="card-action-btn"><span class="material-symbols-outlined">mail</span></button>
+                        <button class="card-action-btn"><span class="material-symbols-outlined">link</span></button>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined bg-icon">local_hospital</span>
+            </div>
+            <!-- Vice President - Medium -->
+            <div class="card card-medium">
+                <div class="card-img-container">
+                    <img class="card-img"
+                        data-alt="Portrait of a young female medical student wearing scrubs and a stethoscope, standing in a bright hospital corridor. The lighting is crisp and sterile, emphasizing a professional, academic medical aesthetic."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhaXFWQCQZkerfgLapYCnVJBnhjTBEXirg_GE4Vd7FARpMEicqDEiKIMB8yMl3juHjykjqA673a3sGqhxXZgAVgnwMfXeJRLCBw-HPVKQnfTpq2qvN0yJ8lqfoLLkNNFd0MaGk1klJ2CFT47mcvCz1-ZXxcT1sy5u13tbPxgO4hwA5OXxmc7SDL6g6Hq7GzxtBwxcvxcK6Rokxz4DWA7NIKwsuaYNgnVZFbjWzPayxhbGAjSL9-Vqd" />
+                </div>
+                <span class="card-label label-vp">Vice President</span>
+                <h3 class="card-title">Dr. Fatima Usman</h3>
+                <p class="card-desc">Dedicated to internal affairs and student welfare, ensuring every member has access
+                    to the resources needed for clinical success.</p>
+            </div>
+            <!-- Secretary General - Medium -->
+            <div class="card card-medium">
+                <div class="card-img-container">
+                    <img class="card-img"
+                        data-alt="Professional headshot of a male medical student taking notes on a clipboard in a medical library setting. Books and medical journals are visible in the background. Soft, focused lighting conveying academic discipline."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEyZROLaokgGZ_3oNmK43xA3NSd7-3PhslYaDacq9wlDJqiwaAiM1C7P-KHWhcMvNmMgPH3bN9oMokS60l9nF-bCJ2JpW6A-JxhkJAyA219WdXxiZBfa7ac9vCIsnreHIhLsjHvVkNFddJmpcovuhVeDQeRKGm__lbQfeGeGeJWNioIjGR_DmulrZtIZBNBX_-gA5TvJPorcK2dWzdkagaPAXqPjVZWy3Mw-EWhoM7PM9KSOwCvicX" />
+                </div>
+                <span class="card-label label-sec">Secretary General</span>
+                <h3 class="card-title">Dr. Yusuf Ibrahim</h3>
+                <p class="card-desc">Managing the administrative backbone of the association with precision and clarity.
+                </p>
+            </div>
+            <!-- Financial Secretary - Medium -->
+            <div class="card card-medium">
+                <div class="card-img-container">
+                    <img class="card-img"
+                        data-alt="Close up portrait of a female medical student reviewing data on a tablet. She is in a modern, well-lit office with medical charts subtlely visible. The tone is serious and professional, with high contrast."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdf4ljw6Jat9p4sjgPm2ICi14j0rLpiWgcWafLwM3pimRhPdPipZj1f7zv7cEwkoAKyRU-HW5ckVk3cYNiCZYgCtSPaEZmqWhRDPZR41Yv36dDWhFCmurVft3CDwkN7Ww2VHTt9UBfYgvYNzu7BcIyHdCAR6VqL4AomrDkE9fowrceDDXAIqdyodqtDuJFiHHnyslztcYXl2mHduYzm2L3VrD_Fdsu7prZ7wf354Wy7-B7YclBaorr" />
+                </div>
+                <span class="card-label label-fin">Financial Secretary</span>
+                <h3 class="card-title">Dr. Aisha Mohammed</h3>
+                <p class="card-desc">Maintaining fiscal responsibility and transparency for all association projects and
+                    academic grants.</p>
+            </div>
+            <!-- PRO - Medium -->
+            <div class="card card-medium">
+                <div class="card-img-container">
+                    <img class="card-img"
+                        data-alt="Portrait of an energetic male medical student speaking confidently, perhaps at a small podium or during a presentation. Medical conference setting with clear, bright lighting."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2fgS6I6ffHKYLCrLFjycNPbHH8MUkg7sSQxseFygzA7KhJ_XDqCZzBVKh5jcehwKM24hBowoqgPiWuvYvazxq4Xlf1ByAeA8luMCoZxbP0dlpYK4zDk4eSE--kAEZXES_HJLzHNeRSTHeqgwAt9mItoWAX2XTrrTkZlMtodqf3IEWjj1F1DoK7nALzpTGkpG2ZMEkuXYs7ZRiXN_uPlq4wISUtEbbhwn26SCu3MRcnxFh7Dsp--vE" />
+                </div>
+                <span class="card-label label-pro">Public Relations Officer</span>
+                <h3 class="card-title">Dr. Kabir Sani</h3>
+                <p class="card-desc">Bridging the gap between the association, the student body, and external healthcare
+                    stakeholders.</p>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">
+            NANMS
+        </div>
+        <div class="footer-text">
+            © 2024 National Association of Niger State Medical Students (NANMS). All rights reserved.
+        </div>
+        <div class="footer-links">
+            <a class="footer-link" href="#">Privacy Policy</a>
+            <a class="footer-link" href="#">Terms of Service</a>
+            <a class="footer-link" href="#">Constitution</a>
+            <a class="footer-link" href="#">FAQ</a>
+        </div>
+    </footer>
+</body>
+
+</html>

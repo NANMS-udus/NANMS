@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NANSM - View All Announcements</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            /* Colors */
+            --primary: #00342b;
+            --primary-container: #004d40;
+            --on-primary: #ffffff;
+            --on-primary-container: #7ebdac;
+            --secondary: #4c616c;
+            --background: #f8f9fa;
+            --on-background: #191c1d;
+            --surface: #f8f9fa;
+            --on-surface: #191c1d;
+            --surface-variant: #e1e3e4;
+            --on-surface-variant: #3f4945;
+            --surface-container-lowest: #ffffff;
+            --outline: #707975;
+            --outline-variant: #bfc9c4;
+            --on-secondary-fixed: #071e27;
+            --inverse-primary: #94d3c1;
+            --on-tertiary-container: #ff9288;
+            --tertiary-container: #8d000d;
+            --secondary-container: #cfe6f2;
+            --on-secondary-container: #526772;
+
+            /* Spacing */
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+            --spacing-xl: 80px;
+            --gutter: 24px;
+            --container-max: 1200px;
+
+            /* Typography */
+            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Playfair Display', serif;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--background);
+            color: var(--on-background);
+            font-size: 16px;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background-color: var(--primary-container);
+            color: var(--on-primary-container);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            border: none;
+            background: none;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .material-symbols-outlined {
+            vertical-align: middle;
+        }
+
+        /* Container */
+        .container {
+            max-w: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--gutter);
+            width: 100%;
+            max-width: var(--container-max);
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--surface-container-lowest);
+            border-bottom: 1px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--spacing-sm);
+            padding-bottom: var(--spacing-sm);
+        }
+
+        .navbar-brand {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .navbar-links {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .navbar-links {
+                display: flex;
+                align-items: center;
+                gap: var(--spacing-md);
+                font-size: 14px;
+                font-weight: 600;
+                letter-spacing: 0.05em;
+            }
+        }
+
+        .nav-link {
+            color: var(--secondary);
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 4px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-container);
+            color: var(--on-primary);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            padding-top: var(--spacing-lg);
+            padding-bottom: var(--spacing-lg);
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                padding-top: var(--spacing-xl);
+                padding-bottom: var(--spacing-xl);
+            }
+        }
+
+        /* Header & Filters */
+        .page-header {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .page-title {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .page-title {
+                font-size: 48px;
+            }
+        }
+
+        .page-description {
+            font-size: 18px;
+            color: var(--secondary);
+            max-width: 42rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .filter-bar {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            background-color: var(--surface-container-lowest);
+            padding: var(--spacing-sm);
+            border-radius: 8px;
+            border: 1px solid var(--outline-variant);
+        }
+
+        @media (min-width: 768px) {
+            .filter-bar {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .search-container {
+                width: 50%;
+            }
+        }
+
+        .search-icon {
+            position: absolute;
+            left: var(--spacing-sm);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
+        }
+
+        .search-input {
+            width: 100%;
+            background-color: var(--surface);
+            padding: var(--spacing-xs) var(--spacing-sm) var(--spacing-xs) var(--spacing-xl);
+            border-radius: 4px;
+            border: 1px solid var(--outline);
+            font-family: var(--font-body);
+            font-size: 16px;
+            color: var(--on-surface);
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-container);
+            box-shadow: 0 0 0 1px var(--primary-container);
+        }
+
+        .category-filters {
+            display: flex;
+            gap: var(--spacing-xs);
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .category-filters::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+
+        @media (min-width: 768px) {
+            .category-filters {
+                width: auto;
+                padding-bottom: 0;
+            }
+        }
+
+        .filter-btn {
+            white-space: nowrap;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 9999px;
+            border: 1px solid var(--outline-variant);
+            background-color: transparent;
+            color: var(--secondary);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-container);
+            border-color: var(--primary-container);
+            color: var(--on-primary);
+        }
+
+        .filter-btn:not(.active):hover {
+            border-color: var(--primary-container);
+            color: var(--primary-container);
+        }
+
+        /* Announcements Grid */
+        .announcements-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+        }
+
+        @media (min-width: 768px) {
+            .announcements-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .announcements-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--surface-container-lowest);
+            border-radius: 8px;
+            border: 1px solid var(--outline-variant);
+            padding: var(--spacing-sm);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .tag .material-symbols-outlined {
+            font-size: 16px;
+        }
+
+        .tag-academic {
+            color: var(--primary-container);
+            background-color: rgba(148, 211, 193, 0.2); /* inverse-primary/20 */
+        }
+
+        .tag-welfare {
+            color: var(--on-tertiary-container);
+            background-color: rgba(141, 0, 13, 0.1); /* tertiary-container/10 */
+        }
+
+        .tag-events {
+            color: var(--on-secondary-container);
+            background-color: rgba(82, 103, 114, 0.1); /* on-secondary-container/10 */
+        }
+
+        .card-date {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--secondary);
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: var(--spacing-xs);
+            transition: color 0.2s;
+            line-height: 1.3;
+        }
+
+        .card:hover .card-title {
+            color: var(--primary-container);
+        }
+
+        .card-excerpt {
+            color: var(--secondary);
+            margin-bottom: var(--spacing-sm);
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--primary-container);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-top: auto;
+        }
+
+        .card-footer .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        /* Pagination */
+        .pagination {
+            margin-top: var(--spacing-lg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .page-btn {
+            padding: 8px;
+            border: 1px solid var(--outline-variant);
+            border-radius: 4px;
+            color: var(--secondary);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-num {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 4px 12px;
+            border-radius: 4px;
+        }
+
+        .page-num.active {
+            background-color: var(--primary-container);
+            color: var(--on-primary);
+        }
+
+        .page-num.inactive {
+            border: 1px solid var(--outline-variant);
+            color: var(--secondary);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .page-num.inactive:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .page-dots {
+            color: var(--secondary);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--on-secondary-fixed);
+            color: var(--surface-container-lowest);
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+            padding-top: var(--spacing-xl);
+            padding-bottom: var(--spacing-xl);
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .footer-brand {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .footer-desc {
+            color: var(--surface-variant);
+            margin-bottom: var(--spacing-md);
+            max-width: 320px;
+        }
+
+        .footer-copyright {
+            font-size: 14px;
+            color: var(--surface-variant);
+        }
+
+        .footer-heading {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--inverse-primary); /* primary-fixed fallback */
+            margin-bottom: var(--spacing-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+            color: var(--surface-variant);
+        }
+
+        .footer-link:hover {
+            color: var(--inverse-primary);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-contact-item .material-symbols-outlined {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<!-- TopNavBar (Shared Component) -->
+<nav class="navbar">
+<div class="container navbar-content">
+<div class="navbar-brand">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_hospital</span>
+                NANSM
+            </div>
+<div class="navbar-links">
+<a class="nav-link" href="#">Home</a>
+<a class="nav-link" href="#">About</a>
+<a class="nav-link" href="#">Executives</a>
+<a class="nav-link" href="#">Projects</a>
+<a class="nav-link active" href="#">News</a>
+<a class="nav-link" href="#">Members</a>
+<a class="nav-link" href="#">Contact</a>
+</div>
+<button class="btn-primary">
+                Portal Login
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="main-content container">
+<!-- Page Header & Filtering -->
+<header class="page-header">
+<h1 class="page-title">Announcements &amp; Notices</h1>
+<p class="page-description">Stay updated with the latest academic schedules, welfare initiatives, and official communications from the National Association of Niger State Medical Students.</p>
+<div class="filter-bar">
+<!-- Search -->
+<div class="search-container">
+<span class="material-symbols-outlined search-icon">search</span>
+<input class="search-input" placeholder="Search announcements..." type="text"/>
+</div>
+<!-- Category Filters -->
+<div class="category-filters">
+<button class="filter-btn active">All</button>
+<button class="filter-btn">Academic</button>
+<button class="filter-btn">Welfare</button>
+<button class="filter-btn">Events</button>
+</div>
+</div>
+</header>
+<!-- Announcements Grid -->
+<div class="announcements-grid">
+<!-- Card 1 -->
+<article class="card">
+<div class="card-header">
+<span class="tag tag-academic">
+<span class="material-symbols-outlined">menu_book</span> Academic
+                    </span>
+<time class="card-date">Oct 24, 2024</time>
+</div>
+<h2 class="card-title">Revised Clinical Rotation Schedule for Final Year Students</h2>
+<p class="card-excerpt">Please be advised that the clinical rotation schedule for the upcoming semester has been revised to accommodate the new consultant rounds at the teaching hospital. Review the attached document for your specific grouping.</p>
+<div class="card-footer">
+                    Read Full Notice <span class="material-symbols-outlined">arrow_forward</span>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="card">
+<div class="card-header">
+<span class="tag tag-welfare">
+<span class="material-symbols-outlined">volunteer_activism</span> Welfare
+                    </span>
+<time class="card-date">Oct 20, 2024</time>
+</div>
+<h2 class="card-title">Call for Applications: Annual Bursary Disbursement</h2>
+<p class="card-excerpt">The portal for the annual Niger State Medical Students bursary is now open. Eligible students are required to submit their current academic standing forms and indigene letters before the deadline.</p>
+<div class="card-footer">
+                    Read Full Notice <span class="material-symbols-outlined">arrow_forward</span>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="card">
+<div class="card-header">
+<span class="tag tag-events">
+<span class="material-symbols-outlined">event</span> Events
+                    </span>
+<time class="card-date">Oct 15, 2024</time>
+</div>
+<h2 class="card-title">Upcoming Medical Outreach in Minna Suburbs</h2>
+<p class="card-excerpt">We are calling for student volunteers across all clinical levels to participate in the upcoming free medical outreach program focusing on maternal health and basic hygiene in local communities.</p>
+<div class="card-footer">
+                    Read Full Notice <span class="material-symbols-outlined">arrow_forward</span>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="card">
+<div class="card-header">
+<span class="tag tag-academic">
+<span class="material-symbols-outlined">menu_book</span> Academic
+                    </span>
+<time class="card-date">Oct 10, 2024</time>
+</div>
+<h2 class="card-title">Notice on Continuous Assessment Examinations</h2>
+<p class="card-excerpt">The timetable for the mid-semester continuous assessment examinations has been published on the faculty notice board. Students are advised to verify their seating arrangements.</p>
+<div class="card-footer">
+                    Read Full Notice <span class="material-symbols-outlined">arrow_forward</span>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="pagination">
+<button class="page-btn" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<span class="page-num active">1</span>
+<button class="page-num inactive">2</button>
+<button class="page-num inactive">3</button>
+<span class="page-dots">...</span>
+<button class="page-btn">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="footer">
+<div class="container footer-content">
+<div>
+<div class="footer-brand">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_hospital</span>
+                    NANSM
+                </div>
+<p class="footer-desc">Dedicated to the academic excellence and welfare of medical students originating from Niger State.</p>
+<p class="footer-copyright">© 2024 National Association of Niger State Medical Students. All rights reserved.</p>
+</div>
+<div>
+<h3 class="footer-heading">Association Links</h3>
+<ul class="footer-links">
+<li><a class="footer-link" href="#">About Us</a></li>
+<li><a class="footer-link" href="#">Constitution</a></li>
+<li><a class="footer-link" href="#">Executive Council</a></li>
+<li><a class="footer-link" href="#">Alumni Network</a></li>
+</ul>
+</div>
+<div>
+<h3 class="footer-heading">Contact Details</h3>
+<ul class="footer-links">
+<li class="footer-contact-item"><span class="material-symbols-outlined">location_on</span> Secretariat, Minna, Niger State</li>
+<li class="footer-contact-item"><span class="material-symbols-outlined">mail</span> contact@nansm.org.ng</li>
+<li class="footer-contact-item"><span class="material-symbols-outlined">call</span> +234 (0) 800 000 0000</li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

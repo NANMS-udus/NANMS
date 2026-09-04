@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Edit Profile - NANSM</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #191c1d;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* TopNavBar Custom Styles */
+        .top-nav {
+            background-color: #ffffff;
+            border-bottom: 1px solid #00342b;
+            padding: 16px 24px;
+        }
+
+        .top-nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #00342b;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-link {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4c616c;
+            text-decoration: none;
+            padding-bottom: 4px;
+        }
+
+        .nav-link.active {
+            color: #00342b;
+            border-bottom: 2px solid #00342b;
+            font-weight: 700;
+        }
+
+        .nav-link:hover {
+            color: #00342b;
+        }
+
+        .nav-portal {
+            background-color: #004d40;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Form Area */
+        .page-container {
+            max-width: 800px;
+            margin: 48px auto;
+            padding: 0 24px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #4c616c;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .back-link:hover {
+            color: #00342b;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #191c1d;
+            margin-bottom: 32px;
+            margin-top: 0;
+        }
+
+        .form-card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 32px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e1e3e4;
+        }
+
+        .profile-photo {
+            width: 96px;
+            height: 96px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1px solid #e1e3e4;
+        }
+
+        .upload-btn {
+            background-color: transparent;
+            border: 1px solid #707975;
+            color: #4c616c;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .upload-btn:hover {
+            background-color: #f3f4f5;
+        }
+
+        .form-section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #00342b;
+            margin-bottom: 24px;
+            margin-top: 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #3f4945;
+        }
+
+        .form-input {
+            padding: 12px;
+            border: 1px solid #707975;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #191c1d;
+            background-color: #ffffff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #004d40;
+            box-shadow: 0 0 0 2px rgba(0, 77, 64, 0.2);
+        }
+
+        .form-select {
+            padding: 12px;
+            border: 1px solid #707975;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #191c1d;
+            background-color: #ffffff;
+            appearance: none;
+            width: 100%;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #3f4945;
+            cursor: pointer;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #e1e3e4;
+        }
+
+        .btn-primary {
+            background-color: #004d40;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #4c616c;
+            border: 1px solid #707975;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #071e27;
+            color: #ffffff;
+            padding: 80px 24px;
+            margin-top: 80px;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+        }
+
+        .footer-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            margin-top: 0;
+            color: #ffffff;
+        }
+
+        .footer-link {
+            color: #e1e3e4;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .footer-link:hover {
+            color: #afefdd;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- TopNavBar component -->
+    <header class="top-nav">
+        <div class="top-nav-inner">
+            <a class="nav-logo" href="#">NANSM</a>
+            <nav class="nav-links">
+                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="#">Executives</a>
+                <a class="nav-link" href="#">Projects</a>
+                <a class="nav-link" href="#">News</a>
+                <a class="nav-link active" href="#">Members</a>
+                <a class="nav-link" href="#">Contact</a>
+            </nav>
+            <a class="nav-portal" href="#">Portal Login</a>
+        </div>
+    </header>
+    <main class="page-container">
+        <a class="back-link" href="#">
+            <span class="material-symbols-outlined" style="margin-right: 4px; font-size: 18px;">arrow_back</span>
+            Back to Dashboard
+        </a>
+        <h1 class="page-title">Edit Profile</h1>
+        <div class="form-card">
+            <div class="profile-header">
+                <img alt="Profile Photo" class="profile-photo"
+                    data-alt="A professional headshot of a diverse medical student wearing a crisp white coat against a clean, bright clinical background. The lighting is soft and flattering, highlighting a friendly yet serious demeanor typical of a dedicated healthcare professional. The overall aesthetic is academic and trustworthy, emphasizing a modern light-mode design with subtle, soft shadows."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg_lhh2IM7LY2HlBldVyzbfgEZJ_VY_-QKamsJmO6g7XpkVdWQfB8Mmz5zlVJvZn6frngLQsNHLBwmR_z1xXSi4BW8UBmZWSpyDKC5Hz4oCHD2w7CUhjnao2Ki3hfacrDWc2R29pOj6Pu8shE4vjLzT4mEnQpiKcLwt5oiXV7q9jlDtbC05EPOppJ28N81-QgZCbMgAe4P6nPWaKxZfP5i_LtzW9k8owNn9oqdvFpug87YLIntp_MQ" />
+                <div>
+                    <h3
+                        style="font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 600; color: #191c1d; margin-bottom: 8px; margin-top: 0;">
+                        Profile Picture</h3>
+                    <p style="font-size: 14px; color: #4c616c; margin-bottom: 16px; margin-top: 0;">JPG or PNG, max size
+                        5MB.</p>
+                    <button class="upload-btn">Upload New Photo</button>
+                </div>
+            </div>
+            <form>
+                <div class="form-section">
+                    <h2 class="section-title">Personal Information</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="fullName">Full Name</label>
+                            <input class="form-input" id="fullName" type="text" value="Dr. Sarah Johnson" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address</label>
+                            <input class="form-input" id="email" type="email" value="s.johnson@med.edu.ng" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone Number</label>
+                            <input class="form-input" id="phone" type="tel" value="+234 800 000 0000" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="dob">Date of Birth</label>
+                            <input class="form-input" id="dob" type="date" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <h2 class="section-title">Academic Details</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="medSchool">Medical School</label>
+                            <select class="form-select" id="medSchool">
+                                <option>Niger State University</option>
+                                <option>Federal Medical College</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="admissionYear">Admission Year</label>
+                            <input class="form-input" id="admissionYear" type="number" value="2020" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="level">Current Level</label>
+                            <select class="form-select" id="level">
+                                <option>Part I</option>
+                                <option>Part II</option>
+                                <option>Part III</option>
+                                <option selected="">Part IV</option>
+                                <option>Part V</option>
+                                <option>Part VI</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="studentId">Student ID</label>
+                            <input class="form-input" id="studentId" type="text" value="NSU/MED/20/045" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <h2 class="section-title">Professional Interests</h2>
+                    <div class="form-group full-width">
+                        <label class="form-label">Select areas of interest (Max 3)</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-label"><input checked="" type="checkbox" /> Surgery</label>
+                            <label class="checkbox-label"><input type="checkbox" /> Pediatrics</label>
+                            <label class="checkbox-label"><input checked="" type="checkbox" /> Internal Medicine</label>
+                            <label class="checkbox-label"><input type="checkbox" /> Obstetrics</label>
+                            <label class="checkbox-label"><input type="checkbox" /> Psychiatry</label>
+                            <label class="checkbox-label"><input type="checkbox" /> Public Health</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <h2 class="section-title">Bio / Summary</h2>
+                    <div class="form-group full-width">
+                        <label class="form-label" for="bio">Professional Bio</label>
+                        <textarea class="form-input" id="bio"
+                            placeholder="Write a short summary about your medical journey...">Dedicated Part IV medical student with a strong passion for Internal Medicine and surgical innovations. Active member of the clinical research society.</textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn-secondary" type="button">Cancel</button>
+                    <button class="btn-primary" type="submit">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <!-- Footer component -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <h4 class="footer-heading">Association Links</h4>
+                <a class="footer-link" href="#">About Us</a>
+                <a class="footer-link" href="#">Executives</a>
+                <a class="footer-link" href="#">Projects &amp; Initiatives</a>
+            </div>
+            <div>
+                <h4 class="footer-heading">Contact Details</h4>
+                <p style="color: #e1e3e4; margin-bottom: 8px; margin-top: 0;">123 Medical Avenue, Minna, Niger State</p>
+                <p style="color: #e1e3e4; margin-bottom: 8px; margin-top: 0;">info@nansm.org</p>
+                <p style="color: #e1e3e4; margin-top: 0;">+234 800 NANSM MED</p>
+            </div>
+            <div>
+                <h4 class="footer-heading">Social Media</h4>
+                <a class="footer-link" href="#">Twitter / X</a>
+                <a class="footer-link" href="#">LinkedIn</a>
+                <a class="footer-link" href="#">Instagram</a>
+            </div>
+        </div>
+        <div
+            style="max-width: 1200px; margin: 48px auto 0; text-align: center; color: #bfc9c4; font-size: 14px; border-top: 1px solid #354a53; padding-top: 24px;">
+            © 2024 National Association of Niger State Medical Students. All rights reserved.
+        </div>
+    </footer>
+</body>
+
+</html>

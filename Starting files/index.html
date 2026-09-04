@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NANMS - National Association of Niger State Medical Students</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Source+Serif+4:wght@600;700&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            /* Colors */
+            --primary: #004d27;
+            --primary-container: #006837;
+            --surface: #f7f9ff;
+            --surface-container-lowest: #ffffff;
+            --surface-container-high: #e5e8ee;
+            --surface-container-highest: #e0e3e8;
+            --on-surface: #181c20;
+            --on-surface-variant: #3f4940;
+            --secondary: #5c5f60;
+            --outline-variant: #bec9be;
+            --on-primary: #ffffff;
+            --tertiary-fixed: #ffdea6;
+            --on-tertiary-fixed: #271900;
+
+            /* Typography */
+            --font-body: 'Inter', sans-serif;
+            --font-headline: 'Source Serif 4', serif;
+
+            /* Spacing */
+            --margin-mobile: 16px;
+            --margin-desktop: 48px;
+            --container-max: 1200px;
+            --stack-lg: 48px;
+            --stack-md: 24px;
+            --stack-sm: 12px;
+            --unit: 8px;
+            --gutter: 24px;
+
+            /* Radii */
+            --radius-default: 0.125rem;
+            --radius-xl: 0.5rem;
+            --radius-full: 0.75rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--surface);
+            color: var(--on-surface);
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Typography classes */
+        .text-primary {
+            color: var(--primary);
+        }
+
+        .text-secondary {
+            color: var(--secondary);
+        }
+
+        .font-headline {
+            font-family: var(--font-headline);
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .text-display-lg {
+            font-size: 48px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+        }
+
+        .text-headline-lg {
+            font-size: 32px;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+
+        .text-headline-md {
+            font-size: 24px;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        .text-body-lg {
+            font-size: 18px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .text-body-md {
+            font-size: 16px;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .text-label-sm {
+            font-size: 13px;
+            line-height: 1;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        /* Container */
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding-left: var(--margin-mobile);
+            padding-right: var(--margin-mobile);
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding-left: var(--margin-desktop);
+                padding-right: var(--margin-desktop);
+            }
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--outline-variant);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 24px;
+            color: var(--primary);
+            font-family: var(--font-headline);
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: none;
+            gap: var(--gutter);
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--secondary);
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 4px;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            border-radius: var(--radius-default);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            border: none;
+            font-family: var(--font-body);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--on-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-container);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--surface-container-high);
+        }
+
+        .btn-large {
+            padding: 12px 24px;
+        }
+
+        .nav-btn {
+            display: none;
+        }
+
+        .menu-toggle {
+            display: block;
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .nav-btn {
+                display: block;
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 96px;
+            padding-bottom: var(--stack-lg);
+        }
+
+        section {
+            padding-top: var(--stack-lg);
+            padding-bottom: var(--stack-lg);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            gap: var(--stack-lg);
+            min-height: 60vh;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--stack-md);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            background-color: var(--surface-container-high);
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid var(--outline-variant);
+            width: max-content;
+        }
+
+        .hero-title {
+            color: var(--primary);
+            font-family: var(--font-headline);
+        }
+
+        .hero-desc {
+            max-width: 672px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 448px;
+            object-fit: contain;
+            border-radius: var(--radius-xl);
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--outline-variant);
+            background-color: var(--surface-container-lowest);
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                flex-direction: row;
+            }
+        }
+
+        /* About Section */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--stack-md);
+        }
+
+        .section-header h2 {
+            color: var(--primary);
+            font-family: var(--font-headline);
+            margin-bottom: var(--unit);
+        }
+
+        .section-header p {
+            max-width: 672px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--gutter);
+            align-items: center;
+            margin-top: var(--stack-md);
+        }
+
+        @media (min-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .about-image {
+            position: relative;
+            height: 384px;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            border: 1px solid var(--outline-variant);
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            background-color: var(--surface-container-lowest);
+        }
+
+        .about-image-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .about-content {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 24px;
+            border-radius: var(--radius-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--stack-sm);
+        }
+
+        .about-content h3 {
+            color: var(--primary);
+            font-family: var(--font-headline);
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+        }
+
+        .feature-item span:last-child {
+            color: var(--on-surface);
+        }
+
+        /* Bento Grid - Executives */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: var(--stack-md);
+        }
+
+        .bento-card {
+            background-color: var(--surface-container-lowest);
+            border: 1px solid var(--outline-variant);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.2s;
+        }
+
+        .bento-card:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .bento-item-large {
+            grid-column: span 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            text-align: center;
+        }
+
+        .bento-item-standard {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .bento-item-large {
+                grid-column: span 2;
+                flex-direction: row;
+                text-align: left;
+            }
+        }
+
+        .avatar-lg {
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--surface);
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .avatar-lg {
+                width: 192px;
+                height: 192px;
+            }
+        }
+
+        .avatar-md {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--surface);
+            margin-bottom: 16px;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .exec-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            width: max-content;
+        }
+
+        .role-badge-primary {
+            background-color: var(--tertiary-fixed);
+            color: var(--on-tertiary-fixed);
+        }
+
+        .role-badge-secondary {
+            background-color: var(--surface-container-high);
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .exec-name {
+            font-family: var(--font-headline);
+            color: var(--primary);
+        }
+
+        .exec-name-std {
+            font-family: var(--font-headline);
+            color: var(--on-surface);
+            font-size: 18px;
+        }
+
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--gutter);
+            margin-top: var(--stack-md);
+        }
+
+        .news-card {
+            background-color: var(--surface-container-lowest);
+            border: 1px solid var(--outline-variant);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .news-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .news-date {
+            font-size: 13px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .news-title {
+            font-family: var(--font-headline);
+            font-size: 20px;
+            color: var(--on-surface);
+            line-height: 1.3;
+        }
+
+        .news-excerpt {
+            color: var(--secondary);
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--surface-container-highest);
+            padding: var(--stack-lg) 0;
+            width: 100%;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--gutter);
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+            }
+        }
+
+        .footer-brand {
+            font-family: var(--font-headline);
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .footer-text {
+            color: var(--on-surface-variant);
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .footer-text {
+                text-align: left;
+            }
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-links a {
+            color: var(--on-surface-variant);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+            text-decoration-color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- TopNavBar -->
+    <nav class="navbar container">
+        <a class="nav-brand" href="#">NANMS</a>
+        <div class="nav-links">
+            <a class="active" href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#executives">Executives</a>
+            <a href="#projects">Projects</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <button class="btn btn-primary nav-btn">Register</button>
+        <button class="menu-toggle">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+    </nav>
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <span class="badge">Official Association</span>
+                <h1 class="hero-title text-display-lg">Excellence in Medical Education &amp; Community Service</h1>
+                <p class="hero-desc text-body-lg text-secondary">The unified voice of Niger State medical students,
+                    dedicated to fostering academic excellence, ethical practice, and impactful community health
+                    initiatives.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary btn-large" href="#about">Learn More</a>
+                    <a class="btn btn-outline btn-large" href="#contact">Contact Us</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img alt="NANMS Logo"
+                    src="https://lh3.googleusercontent.com/aida/AEtjO1Ub2iBGTgP8zE9BanukacK_8uqewOP2YCWu9YJY0Zm6YLPNt9Rb6g5vw5B-QwiiSSRhIXD1ryewtJgg6GMcQnq1EaNYP7iH-nldYnl7Z4rTsPSlR6hmkPCUv0JZTmoYNrur-hGtW5jClZlTwBQrPBBhidGKlPdYIlcma_9a5S4SeTcTKD2nzxfz3gqb0wwzzZG4QmzMpg2eE3JuB8v9U2IxBAMy6tJtSvfzO4p4w8ZBZNG9EdTSGfxZcQ" />
+            </div>
+        </section>
+        <!-- About Us Section -->
+        <section id="about">
+            <div class="section-header">
+                <h2 class="text-headline-lg">Our Legacy &amp; Vision</h2>
+                <p class="text-secondary text-body-md">Founded in the heart of Niger State, built on a foundation of
+                    rigorous academic pursuit and unwavering commitment to public health.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-image">
+                    <div class="about-image-bg"
+                        data-alt="A pristine, modern medical library with natural light streaming through large windows onto neat rows of medical texts. Students in clean white lab coats are studying quietly at minimalist white desks. The scene has a clinical, bright light-mode aesthetic with deep green accents on the chairs and bookshelves, conveying academic rigor and focus."
+                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCfkByLrPVZwkqw9uxdJFOL8TDf2pRrqqNRMFu6ASBG18X1CD4j1JNXpB5p-wtj2AnzYwgxo6eqeI2k-rS9k6nld77u9L5tXRXgiE4U6DsFoIC5I52jo_msylVQJQYeRch8l3EVQHbNFs3hWkm-NQ1MGSy9zelqUC32z_vCfXIzKi1DrPMfhpdulz7-crhY7ZKXTb8OuYycX_BT8tCO4WcMuAlQ8tksF01Fyd4c_c4Y2wt_8rZnC8CD')">
+                    </div>
+                </div>
+                <div class="about-content">
+                    <h3 class="text-headline-md">Fostering Academic Excellence</h3>
+                    <p class="text-body-md text-secondary">NANMS was established to provide a supportive network for
+                        medical students originating from or studying in Niger State. We bridge the gap between rigorous
+                        medical training and professional development.</p>
+                    <p class="text-body-md text-secondary">Our mission extends beyond the classroom. We envision a
+                        healthier future driven by competent, compassionate scholar-physicians who are deeply connected
+                        to their communities.</p>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span class="text-label-sm">Academic Mentorship</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span class="text-label-sm">Clinical Skills Workshops</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span class="text-label-sm">Professional Networking</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- Executives Section (Bento Grid) -->
+        <section id="executives">
+            <div class="section-header">
+                <h2 class="text-headline-lg">Central Executive Council</h2>
+                <p class="text-secondary text-body-md">The dedicated team leading the association towards greater
+                    heights in academic and administrative excellence.</p>
+            </div>
+            <div class="bento-grid">
+                <!-- President Card (Large) -->
+                <div class="bento-card bento-item-large">
+                    <div class="avatar avatar-lg">
+                        <img data-alt="A professional headshot of a confident young medical student in a crisp white lab coat over formal attire, standing in a brightly lit, sterile hospital corridor. The lighting is soft and high-key, emphasizing cleanliness and modern clinical aesthetics. The student has a focused, authoritative expression, fitting for an executive president."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2U97xGoudAYBuh-lTXzy-S_-AhpBc7ob4GfdeB8jRvjNg2NxI-aX_zGJBzufin9cbeY_HJxGzO0_m16QE41aNStGoDW-1gHcGqXHGQP3anMey-hUIXD9UrcVHZt_3kzaxfVQtBr6Q21q0Tf_WtVLosSiaAHgVxdb2knQu63crtXIZnvG4LnZThPg7DpYdrrKlD_Y1SgkVgNphAS4eTtpLp1iMHBIv6kk1zPlEPrrUj59lLTTcqGvW" />
+                    </div>
+                    <div class="exec-info">
+                        <span class="role-badge role-badge-primary">President</span>
+                        <h3 class="exec-name text-headline-md">Dr. (In-View) Aminu Bello</h3>
+                        <p class="text-body-md text-secondary">Leading with vision and dedication to ensure NANMS
+                            remains at the forefront of medical student advocacy and professional development.</p>
+                    </div>
+                </div>
+                <!-- VP Card -->
+                <div class="bento-card bento-item-standard">
+                    <div class="avatar avatar-md">
+                        <img data-alt="A professional headshot of a young female medical student in a white coat, looking approachable yet disciplined. She is in a bright, modern academic setting with subtle deep green and white tones in the background, maintaining a clinical minimalist aesthetic."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjBKpI2GgeVDCIt683Dh4-CHgAHTB2TRumY6BtaFF0llquRVuBdqPyypJlZppHKDqUPf0nzakLhxiqsJYyWlBF3dMwcSBV4pSXcXdXkS-JlHxfZpcHCQmNULFrofXB9Hbs_YjVXjUnRdA3Xtsz4LCvSH7PfJPdTeDW8CzfjPASNqrHhhTh2JamLQa8URdAUl5XxaZH_cRnv2zLn7xRQEkOO6yYBPXjO-izAn7SNMkinEVaLmFjE0mZ" />
+                    </div>
+                    <span class="role-badge role-badge-secondary">Vice President</span>
+                    <h4 class="exec-name-std font-semibold">Fatima Umar</h4>
+                </div>
+                <!-- Sec Gen Card -->
+                <div class="bento-card bento-item-standard">
+                    <div class="avatar avatar-md">
+                        <img data-alt="A professional headshot of a young male medical student wearing glasses and a neat white coat, set against a pristine, light-gray clinical background. His expression is serious and scholarly, reflecting academic rigor and organizational skill."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEcm8npO5GcFWNsZrshH7pzdsq_o-ohYDTh6aPVU2tJZ3SO2-B-wc7MpAqZvk4V61MsRjCCiVTGUAZwn0LiC3s9Gvt6FttjPlV5TpNcFNGkYxa6w84RUGa6WdzwBu4QysYSnAMrHepTgPD3BDJnXiMzvMIlpJAq3SMVxohrSKPUcBro3m0LeprSqSKRMA5jAc6xbKBCqfj2xflFXSLNSJKWt-Q0y_XTEDaA1sqwGEYql0lNubBXU-W" />
+                    </div>
+                    <span class="role-badge role-badge-secondary">Secretary General</span>
+                    <h4 class="exec-name-std font-semibold">Musa Ibrahim</h4>
+                </div>
+            </div>
+        </section>
+        <!-- Latest News Section -->
+        <section id="news">
+            <div class="section-header">
+                <h2 class="text-headline-lg">Latest News</h2>
+                <p class="text-secondary text-body-md">Stay updated with our recent activities, announcements, and
+                    health outreach programs.</p>
+            </div>
+            <div class="news-grid">
+                <article class="news-card">
+                    <img alt="Medical Outreach" class="news-img"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBVvShCPpwxfwNKTqFRfIDHLtQzhk0T9edNUwbtaq4DcGZOFGhZoynAEmJFdY8fZrNXB6LvMjCjKM1CYsXXjx1JOGf6qFCEQ_FSpWPwwYCHrBSkoWaulPM7QsJrERhsEcX2cHxSol_oaRevaokZULx14BbKAcl3UgUo2GH6RrLKbT1b9UMIVgfxp03xjDegGHP3Pc4X_p3QfZt83XGirlQ_9P0YXdDw10O5RUVsKoPn046Fc5sd3gi" />
+                    <div class="news-content">
+                        <span class="news-date">Oct 15, 2023</span>
+                        <h3 class="news-title">Annual Free Medical Outreach Concludes Successfully</h3>
+                        <p class="news-excerpt">Over 500 residents received free medical screenings and treatments
+                            during our week-long rural health campaign.</p>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <img alt="Symposium" class="news-img"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-KSGBQoxYhpvL0Xz-yWrpfnkdXroY5ASrAZUDXUDIrtYba50OGBbMNkZSRTUqT8NUmqkpls7On8eWM29EDfluR7mRfz2IOARM43f-g5HkVYD7ZUwPSGZaydC6W04GIBYIDk3EOI_ngS0w8OD9j0OkhFp97PzIg27i2oIgcOHXaOKWkz3BVEW0cXXQu91HPGdH629a4DPeKeKOaYRI6o3KVmAKRpk7obus3D0aEYfV8bNWdaP6hInf" />
+                    <div class="news-content">
+                        <span class="news-date">Sep 28, 2023</span>
+                        <h3 class="news-title">NANMS Hosts Regional Health Symposium</h3>
+                        <p class="news-excerpt">Medical students and professionals gathered to discuss emerging trends
+                            in tropical medicine and public health.</p>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <img alt="New Library" class="news-img"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtIzaxWUfDocf3ZqXrm4oybLrceYJYG72Ib4TZHoRlY0PPllsFxl_-W3urDVzIlcnu3SV34vLwh1GxW_16bk-XixqzG_tDHlXuiwzGxmTI3cCHeJXpyo_c6YZKodCcaGTbMgYrD_-JCAuszRSiX75pvxFKjoD0wxzI0OMXftgqJ-hd2KKqufStfbezFzURMDxu6Op6RZB9E7Z--Xq8fHOjfx2dBZbu5MoWlUHOGudZsa9nginFhmoO" />
+                    <div class="news-content">
+                        <span class="news-date">Aug 10, 2023</span>
+                        <h3 class="news-title">New Digital Library Access for Members</h3>
+                        <p class="news-excerpt">Members can now access a wide range of premium medical journals and
+                            research papers through our new digital portal.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                NANMS
+            </div>
+            <div class="footer-text text-body-md">
+                © 2024 National Association of Niger State Medical Students (NANMS). All rights reserved.
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Constitution</a>
+                <a href="#">FAQ</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

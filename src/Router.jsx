@@ -1,0 +1,78 @@
+import { createBrowserRouter } from "react-router";
+import Index from "./Pages/Index/Index";
+import About from "./Pages/About/About";
+import Executives from "./Pages/Executives/Executives";
+import Contact from "./Pages/Contact/Contact";
+import News from "./Pages/News/News";
+import Members from "./Pages/Members/Members";
+import Registration from "./Pages/Portal/Authentication/Registration";
+import RegSuccess from "./Pages/Portal/Authentication/RegSuccess";
+import Dashboard from "./Pages/Portal/Dashboard/Dashboard";
+import Login from "./Pages/Portal/Authentication/Login";
+import EditProfile from "./Pages/Portal/Dashboard/EditProfile";
+
+export const myRouter = createBrowserRouter([
+ {
+  path: '/',
+  Component: Index,
+ },
+ {
+  path: 'about',
+  Component: About,
+ },
+ {
+  path: 'executives',
+  Component: Executives
+ },
+ {
+  path: 'contact',
+  Component: Contact
+ },
+ {
+  path: 'news',
+  Component: News
+ },
+ {
+  path: 'members',
+  children: [
+   {
+    index: true,
+    Component: Members
+   },
+   {
+    path: 'registration',
+    Component: Registration
+   },
+   {
+    path: 'login',
+    Component: Login
+   },
+   {
+    path: 'reg-success',
+    Component: RegSuccess
+   },
+   {
+    path: 'dashboard',
+    children: [
+     {
+      index: true,
+      Component: Dashboard
+     },
+     {
+      path: 'edit-profile',
+      Component: EditProfile
+     }
+    ]
+   },
+  ]
+  
+ },
+ 
+])
+
+/* export default function Router() {
+ 
+ return (
+  <RouterProvider router={myRouter} />
+ )
+}  */

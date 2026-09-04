@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>NANMS - News &amp; Updates</title>
+  <style data-purpose="layout">
+    :root {
+      --primary-color: #004d25;
+      --text-main: #333;
+      --text-light: #666;
+      --bg-light: #f9f9f9;
+      --border-color: #eaeaea;
+      --font-family: 'Georgia', serif;
+      --font-sans: 'Arial', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-main);
+      background-color: #fff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background-color: var(--bg-light);
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-family);
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: 16px;
+      color: var(--text-light);
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 5px;
+    }
+
+    .btn-register {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-color: var(--bg-light);
+      padding: 60px 0;
+    }
+
+    .hero-content {
+      max-width: 600px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-family);
+      font-size: 48px;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-main);
+    }
+
+    /* Main Content Area */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      padding: 60px 0;
+    }
+
+    /* News Cards */
+    .news-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .card {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .badge-announcement {
+      background-color: #e0f2e9;
+      color: #2e8b57;
+    }
+
+    .badge-academic {
+      background-color: #fff3e0;
+      color: #ff8c00;
+    }
+
+    .badge-health {
+      background-color: #e8f5e9;
+      color: #4caf50;
+    }
+
+    .badge-campus {
+      background-color: #f3e5f5;
+      color: #9c27b0;
+    }
+
+    .date {
+      color: var(--text-light);
+    }
+
+    .card h2 {
+      font-family: var(--font-family);
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #000;
+    }
+
+    .card p {
+      color: var(--text-light);
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .read-more {
+      font-weight: bold;
+      color: #000;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Sidebar */
+    .sidebar>div {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+
+    .sidebar h3 {
+      font-family: var(--font-family);
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #000;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background-color: var(--bg-light);
+    }
+
+    .categories-list {
+      list-style: none;
+    }
+
+    .categories-list li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      color: var(--text-main);
+    }
+
+    .cat-count {
+      background-color: var(--bg-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    .recent-post {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .recent-post img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .recent-post h4 {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .recent-post span {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      grid-column: 1 / -1;
+    }
+
+    .page-btn {
+      padding: 8px 15px;
+      border: 1px solid var(--border-color);
+      background-color: white;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .page-btn.active {
+      background-color: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    .page-btn:disabled {
+      color: #ccc;
+      cursor: not-allowed;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #e5e7eb;
+      padding: 40px 0;
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      font-size: 14px;
+    }
+
+    .copyright {
+      font-size: 14px;
+      color: var(--text-light);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- BEGIN: Header -->
+  <header>
+    <div class="container header-content">
+      <div class="logo">NANMS</div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Executives</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a class="active" href="#">News</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><button class="btn-register">Register</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <!-- END: Header -->
+  <!-- BEGIN: Hero Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <h1>News &amp; Updates</h1>
+      <p>Stay informed on the latest developments in medical education, community health initiatives, and academic
+        achievements from the National Association of Niger State Medical Students.</p>
+    </div>
+  </section>
+  <!-- END: Hero Section -->
+  <!-- BEGIN: Main Content -->
+  <main class="container main-grid">
+    <!-- Left Column: News Grid -->
+    <div class="news-cards">
+      <!-- Card 1 -->
+      <article class="card">
+        <img alt="Rural Health Outreach"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuB82crTLyB4VvGz-7OabZjixge0d4N2GraR2fulofsfBINJvt--W3gNQ84-vdcqLH8oZUTwpvxjI7HLqlUlBvqhOUKe9HwS9I8kkpLlb1cGtApTmSLZ2kLXvKcB_eE6kMafNLXYjlP7fI4MtW4Cq0P-OgFPaoT2lK3WD3DQdk9-ijUoQX_lr5mAC8OGn-RSHg055GZ1H1p_6IPjJkzDxLk5Ia6YxSgf_XN2t6u9Q_GEk8ah7LItf0km" />
+        <div class="card-content">
+          <div class="card-meta">
+            <span class="badge badge-announcement">Announcement</span>
+            <span class="date">Oct 24, 2024</span>
+          </div>
+          <h2>Upcoming Rural Health Outreach 2024</h2>
+          <p>Join us for our annual medical outreach program targeting underserved communities in Niger State. We will
+            b...</p>
+          <a class="read-more" href="#">Read More →</a>
+        </div>
+      </article>
+      <!-- Card 2 -->
+      <article class="card">
+        <img alt="Mentorship Cohort"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMKNOT_KuYj_kJFgghFaqNcI7vWqXhZiQ3sYTkmpen1ER1vgojygkqCmy587qZ4A7HV1BtEtjqn3aIpFiU__bATSsAu0T7Cqy8sjUWQWlAJ-QtepSEJJ-lYbQlS538SUFl0rVxGLXEovAsP71l3bzQbbE3JOgD9oiABZWasrtRdFP9x1wUphcXmPhoNcXkIluudqNa8FdrnjBZfT0FH87OGvNxbNogyqCN5AuhdThG55nBIRZ19qCN" />
+        <div class="card-content">
+          <div class="card-meta">
+            <span class="badge badge-academic">Academic</span>
+            <span class="date">Oct 18, 2024</span>
+          </div>
+          <h2>New Mentorship Cohort Opening</h2>
+          <p>Applications are now open for the senior-junior mentorship program. This initiative pairs clinical students
+            with pr...</p>
+          <a class="read-more" href="#">Read More →</a>
+        </div>
+      </article>
+      <!-- Card 3 -->
+      <article class="card">
+        <img alt="Partnership"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8YDzvP17zeSwDvARSxuc-4ERcUapHNJAlLnxhYEt3i86HfNq08hoAKlzCP5756-rQ0szs3n0JU6Eo0plEHGBjFK5z7ljsOcvGszn4xUSB-AWYRRSJ_qatcp1s6A4CDb1Eg_TUuTHyuDpOT__7RxudzMshFWLe3-g_ViGKonrfCbnk8UjlEFy-VmZQ9vZYZ15o531kyOG5Mt1_pqE4IQx2YUA__LzJF9PwAlftw1uYtisse-I4Dqlc" />
+        <div class="card-content">
+          <div class="card-meta">
+            <span class="badge badge-health">Health Initiative</span>
+            <span class="date">Oct 12, 2024</span>
+          </div>
+          <h2>Partnership with State Ministry of Health</h2>
+          <p>NANMS has officially secured a partnership to integrate our student volunteers into the new state-wide...
+          </p>
+          <a class="read-more" href="#">Read More →</a>
+        </div>
+      </article>
+      <!-- Card 4 -->
+      <article class="card">
+        <img alt="Renovation"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXXg0dR0-I_P7ZDFwTey0CHkjsGo5GPx_IBHuJOr7SoVnU5yEPDb6llgmruDZGfdc7x2skaR9wEIhhkeCjyI4Ln38Tcd1AMyf5eExCUxwziiHVLF3ZfgL1w_590nF7-DOTdR-hyDtSexLIZKOHzCBpLVIw6M0X_7cRJvNcIXBjzb5_kzMS6Zk9K7TOWSho0b5UptEvs3KxFDuC0PJsdNrgdz34sMH3GaZge4aw82ZYAj4aXChVWytC" />
+        <div class="card-content">
+          <div class="card-meta">
+            <span class="badge badge-campus">Campus News</span>
+            <span class="date">Oct 05, 2024</span>
+          </div>
+          <h2>Renovation of Clinical Skills Lab</h2>
+          <p>The highly anticipated upgrades to the main clinical skills laboratory have been completed, featuring
+            state-of-the-art...</p>
+          <a class="read-more" href="#">Read More →</a>
+        </div>
+      </article>
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="page-btn" disabled="">Previous</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">Next</button>
+      </div>
+    </div>
+    <!-- Right Column: Sidebar -->
+    <aside class="sidebar">
+      <!-- Search -->
+      <div class="search-box">
+        <h3>Search</h3>
+        <input placeholder="Search news..." type="text" />
+      </div>
+      <!-- Categories -->
+      <div>
+        <h3>Categories</h3>
+        <ul class="categories-list">
+          <li><span>Announcement</span> <span class="cat-count">12</span></li>
+          <li><span>Academic</span> <span class="cat-count">8</span></li>
+          <li><span>Health Initiative</span> <span class="cat-count">5</span></li>
+          <li><span>Campus News</span> <span class="cat-count">14</span></li>
+        </ul>
+      </div>
+      <!-- Recent Posts -->
+      <div>
+        <h3>Recent Posts</h3>
+        <div class="recent-post">
+          <img alt="Exam Schedules"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOR6QyH6Q2uZppMFpat6E_eqDYQnEKVqRCbBR8NdFwHCE-6nM0q711lvNjeQldiq2k-FIXyHhbYVl6AgzS9WMgUomJCWCYf3A6plFBTAytzfS-KKGjoWOTVFsiq5LYCUOFZKSp3eUQoS1P11kbE5HJGKR_pjB2laDzpSrK5-kvR7rBcMLDlsAKzYVeJBqQL6WA5QwXNysAtTucQGGkbKzjwAXpsdSRqA_vUf-se0koUKNbYEf6yqDl" />
+          <div>
+            <h4>Exam Schedules Released for Clinical Years</h4>
+            <span>Oct 20, 2024</span>
+          </div>
+        </div>
+        <div class="recent-post">
+          <img alt="Council Meeting"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7uDmPu7AhyO8EEXHbKwBfilLeOwjTEY0Vd2LYiczgSj0gPNXueWgqi_7-3TamO_8OQX9vEXEjEH2YIceDH_NT2Ow5VhJ2fdlFv3U_6_HZgR0-yWnAqqchtSCYTH9Z9D2x-hXypUy7V9_Me-ZHxhHs-_fL-JCifJFf8nPSQMJYMdclsINFgwrjZyxOcTqOIkndG7Q6wyGzojsW-M6QjDQF45RWWoHpy28r1lKASXmf2qtfjaQqn8Dg" />
+          <div>
+            <h4>Executive Council Meeting Summary</h4>
+            <span>Oct 15, 2024</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+  <!-- END: Main Content -->
+  <!-- BEGIN: Footer -->
+  <footer>
+    <div class="container footer-content">
+      <div class="logo">NANMS</div>
+      <div>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Constitution</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="copyright">
+        © 2024 National Association of Niger State Medical Students (NANMS). All rights reserved.
+      </div>
+    </div>
+  </footer>
+  <!-- END: Footer -->
+</body>
+
+</html>

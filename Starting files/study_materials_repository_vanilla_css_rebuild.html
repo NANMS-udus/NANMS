@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NANSM - Study Materials</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            /* Colors based on Tailwind Config */
+            --primary: #00342b; /* primary */
+            --primary-container: #004d40; /* primary-container - requested as primary in prompt, using config closest match */
+            --on-primary: #ffffff;
+            --surface-container-lowest: #ffffff;
+            --surface-bright: #f8f9fa; /* background */
+            --on-surface: #191c1d;
+            --secondary: #4c616c;
+            --outline: #707975;
+            --outline-variant: #bfc9c4;
+            --on-secondary-fixed: #071e27; /* Footer BG */
+            
+            /* Typography */
+            --font-headline: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Spacing (approximations from config) */
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+            --spacing-xl: 80px;
+            --gutter: 24px;
+            
+            /* Borders */
+            --border-radius: 4px; /* lg from config */
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--on-surface);
+            background-color: var(--surface-bright);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* TopNavBar */
+        .top-nav {
+            background-color: var(--surface-container-lowest);
+            border-bottom: 1px solid var(--primary);
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-sm) var(--gutter);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-family: var(--font-headline);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-md);
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        /* Active Navigation state is 'Home' as per JSON intent fallback, but prompt says 'Study Materials'. 
+           Since 'Projects' or 'Home' are closest, let's highlight Projects as an academic endeavor fallback, 
+           or leave inactive since none perfectly match. Let's highlight Home for structural base. */
+        .nav-link.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            font-weight: bold;
+            padding-bottom: 4px; /* pb-1 */
+        }
+
+        .primary-action {
+            background-color: var(--primary-container);
+            color: var(--on-primary);
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Layout Structure */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--gutter);
+        }
+
+        /* Hero Header */
+        .hero-section {
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .hero-title {
+            font-family: var(--font-headline);
+            font-size: 48px; /* display-lg */
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0 0 var(--spacing-sm) 0;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 18px; /* body-lg */
+            color: var(--secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Search & Filter Bar */
+        .filter-bar {
+            display: flex;
+            gap: var(--spacing-md);
+            background-color: var(--surface-container-lowest);
+            padding: var(--spacing-md);
+            border: 1px solid var(--outline-variant);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .search-group {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--outline);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            border: 1px solid var(--outline-variant);
+            border-radius: var(--border-radius);
+            font-family: var(--font-body);
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border: 2px solid var(--primary-container);
+            padding: 11px 11px 11px 39px; /* compensate for thicker border */
+        }
+
+        .select-group {
+            min-width: 150px;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--outline-variant);
+            border-radius: var(--border-radius);
+            font-family: var(--font-body);
+            font-size: 16px;
+            background-color: var(--surface-container-lowest);
+            color: var(--on-surface);
+            cursor: pointer;
+        }
+
+        /* Content Layout */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        /* Resource Grid */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+        }
+
+        .resource-card {
+            background-color: var(--surface-container-lowest);
+            border: 1px solid var(--outline-variant);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            transition: box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resource-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .resource-icon {
+            color: var(--primary-container);
+            font-size: 32px;
+        }
+
+        .resource-title {
+            font-family: var(--font-headline);
+            font-size: 24px; /* headline-md */
+            font-weight: 600;
+            margin: 0;
+            color: var(--primary);
+            line-height: 1.3;
+        }
+
+        .resource-meta {
+            font-size: 14px;
+            color: var(--secondary);
+            margin-bottom: var(--spacing-md);
+            flex-grow: 1;
+        }
+
+        .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-right: 12px;
+        }
+        
+        .meta-item .material-symbols-outlined {
+            font-size: 16px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-container);
+            color: var(--on-primary);
+            padding: 8px 16px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            flex: 1;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--secondary);
+            padding: 8px 16px;
+            border: 1px solid var(--outline);
+            border-radius: var(--border-radius);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            flex: 1;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--surface-container-lowest);
+            border: 1px solid var(--outline-variant);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            height: fit-content;
+        }
+
+        .sidebar-title {
+            font-family: var(--font-headline);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0 0 var(--spacing-md) 0;
+            border-bottom: 1px solid var(--outline-variant);
+            padding-bottom: var(--spacing-sm);
+        }
+
+        .sidebar-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--surface-bright);
+        }
+
+        .sidebar-item:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-item-icon {
+            color: var(--secondary);
+        }
+
+        .sidebar-item-text {
+            font-size: 14px;
+            color: var(--on-surface);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .sidebar-item-text:hover {
+            color: var(--primary-container);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--on-secondary-fixed);
+            color: var(--surface-container-lowest);
+            padding: var(--spacing-xl) 0;
+            margin-top: var(--spacing-xl);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--gutter);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        .footer-heading {
+            font-family: var(--font-headline);
+            font-size: 24px;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 var(--spacing-md) 0;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .footer-link {
+            color: var(--surface-variant);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .footer-link:hover {
+            color: #afefdd; /* primary-fixed */
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: var(--spacing-lg) auto 0;
+            padding: var(--spacing-md) var(--gutter) 0;
+            border-top: 1px solid var(--secondary);
+            text-align: center;
+            font-size: 14px;
+            color: var(--surface-variant);
+        }
+
+        /* Material Icons setup */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body>
+<!-- TopNavBar -->
+<header class="top-nav">
+<div class="nav-container">
+<a class="brand-logo" href="#">NANSM</a>
+<ul class="nav-links">
+<li><a class="nav-link active" href="#">Home</a></li>
+<li><a class="nav-link" href="#">About</a></li>
+<li><a class="nav-link" href="#">Executives</a></li>
+<li><a class="nav-link" href="#">Projects</a></li>
+<li><a class="nav-link" href="#">News</a></li>
+<li><a class="nav-link" href="#">Members</a></li>
+<li><a class="nav-link" href="#">Contact</a></li>
+</ul>
+<button class="primary-action">Portal Login</button>
+</div>
+</header>
+<main class="main-container">
+<!-- Hero Section -->
+<section class="hero-section">
+<h1 class="hero-title">Study Materials</h1>
+<p class="hero-subtitle">Access a comprehensive repository of lecture notes, past questions, and academic resources curated for medical excellence.</p>
+</section>
+<!-- Search & Filter Bar -->
+<div class="filter-bar">
+<div class="search-group">
+<span class="material-symbols-outlined search-icon">search</span>
+<input class="search-input" placeholder="Search by course code, topic, or author..." type="text"/>
+</div>
+<div class="select-group">
+<select class="filter-select">
+<option value="">All Levels</option>
+<option value="100L">100 Level</option>
+<option value="200L">200 Level</option>
+<option value="300L">300 Level</option>
+<option value="400L">400 Level (Clinical)</option>
+<option value="500L">500 Level (Clinical)</option>
+<option value="600L">600 Level (Clinical)</option>
+</select>
+</div>
+<div class="select-group">
+<select class="filter-select">
+<option value="">Department</option>
+<option value="anatomy">Anatomy</option>
+<option value="physiology">Physiology</option>
+<option value="biochemistry">Biochemistry</option>
+<option value="pathology">Pathology</option>
+<option value="pharmacology">Pharmacology</option>
+</select>
+</div>
+<div class="select-group">
+<select class="filter-select">
+<option value="">Category</option>
+<option value="notes">Lecture Notes</option>
+<option value="past_questions">Past Questions</option>
+<option value="textbooks">Textbooks</option>
+<option value="slides">Presentation Slides</option>
+</select>
+</div>
+</div>
+<!-- Content Area -->
+<div class="content-grid">
+<!-- Resource Grid -->
+<div class="resource-grid">
+<!-- Card 1 -->
+<div class="resource-card">
+<div class="card-header">
+<span class="material-symbols-outlined resource-icon" style="font-variation-settings: 'FILL' 1;">description</span>
+<h3 class="resource-title">Principles of Clinical Surgery Notes</h3>
+</div>
+<div class="resource-meta">
+<span class="meta-item"><span class="material-symbols-outlined">school</span> 400L</span>
+<span class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Oct 12, 2023</span>
+<span class="meta-item"><span class="material-symbols-outlined">save</span> 2.4 MB PDF</span>
+</div>
+<div class="card-actions">
+<button class="btn-primary">Download</button>
+<button class="btn-secondary">View Online</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="resource-card">
+<div class="card-header">
+<span class="material-symbols-outlined resource-icon" style="font-variation-settings: 'FILL' 1;">folder_open</span>
+<h3 class="resource-title">Anatomy Past Questions 2018-2022</h3>
+</div>
+<div class="resource-meta">
+<span class="meta-item"><span class="material-symbols-outlined">school</span> 200L</span>
+<span class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Sep 05, 2023</span>
+<span class="meta-item"><span class="material-symbols-outlined">save</span> 1.1 MB ZIP</span>
+</div>
+<div class="card-actions">
+<button class="btn-primary">Download</button>
+<button class="btn-secondary">View Online</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="resource-card">
+<div class="card-header">
+<span class="material-symbols-outlined resource-icon" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<h3 class="resource-title">Cardiovascular Physiology Slides</h3>
+</div>
+<div class="resource-meta">
+<span class="meta-item"><span class="material-symbols-outlined">school</span> 300L</span>
+<span class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Nov 20, 2023</span>
+<span class="meta-item"><span class="material-symbols-outlined">save</span> 5.7 MB PPTX</span>
+</div>
+<div class="card-actions">
+<button class="btn-primary">Download</button>
+<button class="btn-secondary">View Online</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="resource-card">
+<div class="card-header">
+<span class="material-symbols-outlined resource-icon" style="font-variation-settings: 'FILL' 1;">description</span>
+<h3 class="resource-title">Pharmacology Drug Mechanisms Summary</h3>
+</div>
+<div class="resource-meta">
+<span class="meta-item"><span class="material-symbols-outlined">school</span> 400L</span>
+<span class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Jan 15, 2024</span>
+<span class="meta-item"><span class="material-symbols-outlined">save</span> 850 KB PDF</span>
+</div>
+<div class="card-actions">
+<button class="btn-primary">Download</button>
+<button class="btn-secondary">View Online</button>
+</div>
+</div>
+</div>
+<!-- Sidebar -->
+<aside class="sidebar">
+<h3 class="sidebar-title">Most Downloaded</h3>
+<ul class="sidebar-list">
+<li class="sidebar-item">
+<span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
+<a class="sidebar-item-text" href="#">Gross Anatomy Dissection Guide</a>
+</li>
+<li class="sidebar-item">
+<span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
+<a class="sidebar-item-text" href="#">Pathology Specimen Image Bank</a>
+</li>
+<li class="sidebar-item">
+<span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
+<a class="sidebar-item-text" href="#">Biochemistry Metabolic Pathways Map</a>
+</li>
+<li class="sidebar-item">
+<span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
+<a class="sidebar-item-text" href="#">Clinical Examination OSCE Checklist</a>
+</li>
+<li class="sidebar-item">
+<span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
+<a class="sidebar-item-text" href="#">Microbiology Lab Manual</a>
+</li>
+</ul>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="footer">
+<div class="footer-container">
+<div>
+<h4 class="footer-heading">Association Links</h4>
+<ul class="footer-links">
+<li><a class="footer-link">About NANSM</a></li>
+<li><a class="footer-link">Constitution</a></li>
+<li><a class="footer-link">Membership</a></li>
+<li><a class="footer-link">Events Calendar</a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-heading">Contact Details</h4>
+<ul class="footer-links">
+<li style="display: flex; gap: 8px; align-items: center;">
+<span class="material-symbols-outlined" style="font-size: 18px;">location_on</span>
+<a class="footer-link">Secretariat, Minna, Niger State</a>
+</li>
+<li style="display: flex; gap: 8px; align-items: center;">
+<span class="material-symbols-outlined" style="font-size: 18px;">mail</span>
+<a class="footer-link">contact@nansm.org</a>
+</li>
+<li style="display: flex; gap: 8px; align-items: center;">
+<span class="material-symbols-outlined" style="font-size: 18px;">phone</span>
+<a class="footer-link">+234 (0) 800 MEDICAL</a>
+</li>
+</ul>
+</div>
+<div>
+<h4 class="footer-heading">Social Media</h4>
+<ul class="footer-links">
+<li><a class="footer-link">Twitter / X</a></li>
+<li><a class="footer-link">LinkedIn</a></li>
+<li><a class="footer-link">Facebook</a></li>
+<li><a class="footer-link">Instagram</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+            © 2024 National Association of Niger State Medical Students. All rights reserved.
+        </div>
+</footer>
+</body></html>

@@ -1,0 +1,9 @@
+main {
+ padding-top: 96px;
+ padding-bottom: var(--stack-lg);
+}
+
+section {
+ padding-top: var(--stack-lg);
+ padding-bottom: var(--stack-lg);
+}

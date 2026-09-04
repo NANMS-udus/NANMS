@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Members Directory - NANSM</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols Outlined -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --primary: #00342b;
+            --background: #f8f9fa;
+            --surface-container-lowest: #ffffff;
+            --surface-container-low: #f3f4f5;
+            --surface-variant: #e1e3e4;
+            --outline-variant: #bfc9c4;
+            --secondary: #4c616c;
+            --on-surface: #191c1d;
+            --on-surface-variant: #3f4945;
+            --on-secondary-fixed: #071e27;
+            --on-primary-fixed-variant: #065043;
+            --on-primary: #ffffff;
+
+            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Playfair Display', serif;
+
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+            --spacing-xl: 80px;
+            --spacing-gutter: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--background);
+            color: var(--on-surface);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+            border: none;
+            background: transparent;
+        }
+
+        input,
+        select {
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 0 2px rgba(0, 52, 43, 0.2) !important;
+            outline: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-gutter);
+        }
+
+        /* Typography */
+        .headline-md {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .headline-lg {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .headline-sm {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .label-md {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.0;
+            letter-spacing: 0.05em;
+        }
+
+        .body-lg {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .text-primary {
+            color: var(--primary);
+        }
+
+        .text-secondary {
+            color: var(--secondary);
+        }
+
+        .text-white {
+            color: white;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--surface-container-lowest);
+            border-bottom: 1px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--spacing-sm);
+            padding-bottom: var(--spacing-sm);
+        }
+
+        .brand {
+            color: var(--primary);
+            letter-spacing: -0.02em;
+        }
+
+        .main-nav {
+            display: none;
+            gap: var(--spacing-gutter);
+        }
+
+        .main-nav a {
+            color: var(--secondary);
+            transition: color 0.2s, opacity 0.2s;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary);
+        }
+
+        .main-nav a:active {
+            opacity: 0.7;
+        }
+
+        .main-nav a.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 4px;
+        }
+
+        .login-btn {
+            display: none;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: var(--surface-variant);
+        }
+
+        .mobile-menu-btn {
+            color: var(--primary);
+        }
+
+        @media (min-width: 768px) {
+            .main-nav {
+                display: flex;
+            }
+
+            .login-btn {
+                display: inline-block;
+            }
+
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            width: 100%;
+            padding-top: var(--spacing-xl);
+            padding-bottom: var(--spacing-xl);
+        }
+
+        .page-header {
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .page-header {
+                text-align: left;
+            }
+
+            .headline-lg {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .headline-lg {
+                font-size: 28px;
+            }
+        }
+
+        .page-header h1 {
+            margin-bottom: 4px;
+        }
+
+        .page-header p {
+            max-width: 42rem;
+        }
+
+        /* Utility Bar */
+        .utility-bar {
+            background-color: var(--surface-container-lowest);
+            border: 1px solid var(--surface-variant);
+            padding: var(--spacing-sm);
+            border-radius: 8px;
+            margin-bottom: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        @media (min-width: 768px) {
+            .utility-bar {
+                flex-direction: row;
+            }
+        }
+
+        .search-container {
+            position: relative;
+            flex-grow: 1;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: var(--spacing-sm);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px var(--spacing-sm) 10px var(--spacing-xl);
+            border: 1px solid var(--outline-variant);
+            border-radius: 4px;
+            background-color: var(--surface-container-lowest);
+            color: var(--on-surface);
+            transition: border-color 0.2s;
+        }
+
+        .search-input::placeholder {
+            color: var(--secondary);
+        }
+
+        .filters-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        @media (min-width: 640px) {
+            .filters-container {
+                flex-direction: row;
+            }
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 10px var(--spacing-sm);
+            border: 1px solid var(--outline-variant);
+            border-radius: 4px;
+            background-color: var(--surface-container-lowest);
+            color: var(--on-surface);
+            cursor: pointer;
+        }
+
+        @media (min-width: 640px) {
+            .filter-select {
+                width: auto;
+            }
+        }
+
+        /* Grid Layout */
+        .members-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+        }
+
+        @media (min-width: 640px) {
+            .members-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .members-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .members-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Card */
+        .card {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--surface-container-lowest);
+            border: 1px solid var(--surface-variant);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-image-wrapper {
+            padding: var(--spacing-sm);
+            padding-bottom: 0;
+        }
+
+        .card-image-container {
+            aspect-ratio: 1 / 1;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: var(--surface-container-low);
+            border: 1px solid var(--surface-variant);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: var(--spacing-sm);
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            color: var(--primary);
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .card-detail:last-of-type {
+            margin-bottom: var(--spacing-sm);
+            color: var(--on-surface-variant);
+        }
+
+        .card-icon {
+            font-size: 16px;
+            margin-right: 4px;
+        }
+
+        .card-btn {
+            margin-top: auto;
+            width: 100%;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background-color: var(--primary);
+            color: var(--on-primary);
+            border: 1px solid var(--primary);
+            border-radius: 4px;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+
+        .card-btn:hover {
+            background-color: var(--on-primary-fixed-variant);
+        }
+
+        /* Pagination */
+        .pagination {
+            margin-top: var(--spacing-xl);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .page-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            border: 1px solid var(--surface-variant);
+            color: var(--secondary);
+            transition: background-color 0.2s;
+        }
+
+        .page-btn:hover:not(.active) {
+            background-color: var(--surface-variant);
+        }
+
+        .page-btn.active {
+            background-color: var(--primary);
+            color: var(--on-primary);
+            border-color: var(--primary);
+        }
+
+        .page-dots {
+            color: var(--secondary);
+            padding: 0 var(--spacing-xs);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--on-secondary-fixed);
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+            padding-top: var(--spacing-xl);
+            padding-bottom: var(--spacing-xl);
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .footer-heading {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .footer-col.brand-col {
+            justify-content: space-between;
+        }
+
+        .footer-link {
+            color: var(--surface-variant);
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: #afefdd;
+            /* primary-fixed */
+        }
+
+        .footer-text {
+            color: var(--surface-variant);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- TopNavBar -->
+    <header class="header">
+        <div class="container header-content">
+            <!-- Brand -->
+            <div class="brand headline-md">
+                NANSM
+            </div>
+            <!-- Navigation Links -->
+            <nav class="main-nav">
+                <a class="label-md" href="#">Home</a>
+                <a class="label-md" href="#">About</a>
+                <a class="label-md" href="#">Executives</a>
+                <a class="label-md" href="#">Projects</a>
+                <a class="label-md" href="#">News</a>
+                <!-- Active Item -->
+                <a class="label-md active" href="#">Members</a>
+                <a class="label-md" href="#">Contact</a>
+            </nav>
+            <!-- Trailing Action -->
+            <button class="login-btn label-md">
+                Portal Login
+            </button>
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-btn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="container main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="headline-lg text-primary">Members of the Association</h1>
+            <p class="body-lg text-secondary">Connect with medical students across affiliated institutions. Search the
+                directory to find colleagues and build your professional network.</p>
+        </div>
+        <!-- Utility Bar (Search & Filters) -->
+        <div class="utility-bar">
+            <!-- Search -->
+            <div class="search-container">
+                <span class="material-symbols-outlined search-icon">search</span>
+                <input class="search-input" placeholder="Search by name..." type="text" />
+            </div>
+            <!-- Filters -->
+            <div class="filters-container">
+                <select class="filter-select">
+                    <option value="">All Institutions</option>
+                    <option value="abu">Ahmadu Bello University</option>
+                    <option value="udu">Usmanu Danfodiyo University</option>
+                    <option value="unilorin">University of Ilorin</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">All Levels</option>
+                    <option value="100">100 Level</option>
+                    <option value="200">200 Level</option>
+                    <option value="300">300 Level (Pre-Clinical)</option>
+                    <option value="400">400 Level (Clinical)</option>
+                    <option value="500">500 Level</option>
+                    <option value="600">600 Level</option>
+                </select>
+            </div>
+        </div>
+        <!-- Members Grid -->
+        <div class="members-grid">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-image-wrapper">
+                    <div class="card-image-container">
+                        <img class="card-image"
+                            data-alt="A professional headshot of a young male medical student of African descent. He is wearing a crisp white coat over a light blue shirt, with a stethoscope draped neatly around his neck. The background is a brightly lit, modern academic library with soft focus. The lighting is clean and professional, creating an atmosphere of trust and dedication suitable for a medical association directory."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAegJYFoUq7qWu3dSOs85P47B6UxtyiDowgOiTbJ4nst71-bOdNDi5aa6nU28gd-hDPidlElEgjBQxDxPbvmH9bLSYAXxL1bVpqx_0WeBOTnH_xs6w4F_aRPy3RBd37A4_anQlQ6_P1fHiUJWcvJtBFxs8CHfKbpaJXXPy7oCnoPS0L7OgM9iucJqdAJ0CPaGh2HKLcWTlAexD4FCqEuZJNwQ-mPiOu2ukDvxtSpt0UursQ69iLSGiS" />
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title headline-md">Abdullahi Ibrahim</h3>
+                    <p class="card-detail text-secondary label-md"><span
+                            class="material-symbols-outlined card-icon">school</span>Ahmadu Bello University</p>
+                    <p class="card-detail label-md"><span
+                            class="material-symbols-outlined card-icon">medical_services</span>400 Level</p>
+                    <button class="card-btn label-md">View Profile</button>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-image-wrapper">
+                    <div class="card-image-container">
+                        <img class="card-image"
+                            data-alt="A clear, professional portrait of a female medical student of African descent. She is dressed in neat forest green scrubs, conveying a clinical setting. Her expression is confident and approachable. The background features blurred, high-tech medical laboratory equipment in a sterile white and grey environment. The aesthetic is clean, modern, and perfectly aligned with a serious academic medical directory."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8aMZGzwm5L05gQze2dekIq22WKkT8Mt646EDixUxs64SpBYmAlsecvVCw1JXW50v9yX9LDxLrkbq1J0tDAX-Be0FuPoYOg1_tIRK4vFEu1PRQ0YNrmPdPjeAeuTn82FJq85n2-g7JVGfTasDn4o0lVHokCzYS-TBR-ZjlCmiCiXkc0fOdt6yPX8YAEmZa4DF_WlhnSZsqC6HyY8BmfcQX9pft4tIS5BMRmJz3UbPIvncNMwTodKw8" />
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title headline-md">Fatima Usman</h3>
+                    <p class="card-detail text-secondary label-md"><span
+                            class="material-symbols-outlined card-icon">school</span>Usmanu Danfodiyo University</p>
+                    <p class="card-detail label-md"><span
+                            class="material-symbols-outlined card-icon">medical_services</span>600 Level</p>
+                    <button class="card-btn label-md">View Profile</button>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-image-wrapper">
+                    <div class="card-image-container">
+                        <img class="card-image"
+                            data-alt="A well-composed headshot of a male medical student of African descent. He is wearing business casual attire, an open-collar shirt under a dark blazer, suitable for a pre-clinical student. The background is a softly lit university lecture hall with rows of empty seats visible in a very blurred bokeh. The color palette emphasizes deep greens and greys, reflecting a professional academic atmosphere."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzVLxoYjn7oxnTPBChZlQuIMnlesWT19GO6qCfWQ220ezqQg4w8h9AHNVuSbwKPACBobpRFIq41A4F7JNqKjLR62Rxuni55N-wZQ8zVB_b8nYb-63FamLHURGTj8gBlHPFhGxl9TFRW9AIFLoaljmDNmIxNyeXHHDJoK3CfM4YzZ2Xyj1MUZKhkaUpiLFIt-pOpxBcjgEzcWlqoCUx22ycQ74AwHvclLAk7FIZeeew7ibnvBFJsbMD" />
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title headline-md">Musa Bello</h3>
+                    <p class="card-detail text-secondary label-md"><span
+                            class="material-symbols-outlined card-icon">school</span>University of Ilorin</p>
+                    <p class="card-detail label-md"><span
+                            class="material-symbols-outlined card-icon">medical_services</span>300 Level</p>
+                    <button class="card-btn label-md">View Profile</button>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="card">
+                <div class="card-image-wrapper">
+                    <div class="card-image-container">
+                        <img class="card-image"
+                            data-alt="An engaging profile photo of a female medical student of African descent wearing a white clinical coat. She is holding a digital tablet. The setting is a brightly lit hospital corridor with minimal visual noise, creating a clean, high-key lighting effect. The overall mood is academic, clinical, and forward-looking, utilizing crisp whites and subtle cool tones to maintain corporate professionalism."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBwzZmvO4ZuC5RGQtDHvpcJU0Pe-3S1hCkRre-20Xhp1wfEIzUYrdZM5QnRSQxrP_6Y39S8ShPj7JpgebARLqTkqoIqZ8sQjfWDgp2T3u6-4uj_l17pvxJnsGD5dVdG1Y6hVF52cCrrn1hE7CXOj9iMMlu-FkhkwyYospaLWYvmM2v3ziEioW-yWKGlcWAR6gQ0XuPnVnIU6JeAmAdxf_SNzEMSftYb6BGSbUeVsEfcP24ZMcBYHaM" />
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title headline-md">Zainab Aliyu</h3>
+                    <p class="card-detail text-secondary label-md"><span
+                            class="material-symbols-outlined card-icon">school</span>Ahmadu Bello University</p>
+                    <p class="card-detail label-md"><span
+                            class="material-symbols-outlined card-icon">medical_services</span>500 Level</p>
+                    <button class="card-btn label-md">View Profile</button>
+                </div>
+            </div>
+        </div>
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="page-btn">
+                <span class="material-symbols-outlined" style="font-size:18px;">chevron_left</span>
+            </button>
+            <button class="page-btn active label-md">1</button>
+            <button class="page-btn label-md">2</button>
+            <button class="page-btn label-md">3</button>
+            <span class="page-dots">...</span>
+            <button class="page-btn">
+                <span class="material-symbols-outlined" style="font-size:18px;">chevron_right</span>
+            </button>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <!-- Column 1: Brand/Copyright -->
+            <div class="footer-col brand-col">
+                <h4 class="headline-sm text-white">NANSM</h4>
+                <p class="copyright">
+                    © 2024 National Association of Niger State Medical Students. All rights reserved.
+                </p>
+            </div>
+            <!-- Column 2: Association Links -->
+            <div class="footer-col">
+                <h4 class="label-md text-white footer-heading">Association Links</h4>
+                <a class="footer-link" href="#">About Us</a>
+                <a class="footer-link" href="#">Executive Council</a>
+                <a class="footer-link" href="#">Projects &amp; Initiatives</a>
+                <a class="footer-link" href="#">Latest News</a>
+            </div>
+            <!-- Column 3: Contact & Social -->
+            <div class="footer-col">
+                <h4 class="label-md text-white footer-heading">Contact Details</h4>
+                <p class="footer-text">
+                    <span class="material-symbols-outlined" style="font-size:18px;">mail</span> secretariat@nansm.org
+                </p>
+                <p class="footer-text" style="margin-bottom: 16px;">
+                    <span class="material-symbols-outlined" style="font-size:18px;">location_on</span> Minna, Niger
+                    State, Nigeria
+                </p>
+                <h4 class="label-md text-white footer-heading" style="margin-top: 16px;">Social Media</h4>
+                <div class="social-links">
+                    <a class="footer-link" href="#">Twitter</a>
+                    <a class="footer-link" href="#">LinkedIn</a>
+                    <a class="footer-link" href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

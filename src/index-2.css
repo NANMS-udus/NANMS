@@ -1,0 +1,248 @@
+:root {
+  /* Colors - Updated to Sky Blue Palette */
+  --primary: #0288d1; /* Sky Blue Primary */
+  --primary-container: #01579b;
+  --on-primary-container: #e1f5fe;
+  --on-primary-fixed-variant: #0277bd;
+  --primary-fixed: #b3e5fc;
+  --on-primary-fixed: #012d3c;
+  --border-color: #e1e4e8;
+  --bg-light: #f5f9fc;
+  --surface: #f7f9ff;
+  --surface-dim: #d1d9e0;
+  --surface-variant: #e1e5eb;
+  --surface-container-lowest: #ffffff;
+  --surface-container-high: #e6ebf1;
+  --surface-container-highest: #dfe4ea;
+  --on-surface: #1a1c1e;
+  --on-surface-variant: #41474d;
+  --secondary: #546e7a;
+  --on-secondary: #ffffff;
+  --on-secondary-fixed: #0a1e26;
+  --secondary-container: #e1f5fe;
+  --on-secondary-container: #455a64;
+  --outline: #71787e;
+  --outline-variant: #c1c7ce;
+  --on-primary: #ffffff;
+  --tertiary-fixed: #e1f5fe;
+  --on-tertiary-fixed: #012d3c;
+  --tertiary-container: #0277bd;
+  --on-tertiary-container: #b3e5fc;
+  --text-secondary: #455a64;
+
+  /* Typography */
+  --font-body: 'Inter', sans-serif;
+  --font-headline: 'Source Serif 4', serif;
+  --font-heading: 'Playfair Display', serif;
+  --font-display-lg: 'Source Serif 4', serif;
+  --font-headline-lg: 'Source Serif 4', serif;
+  --font-headline-md: 'Source Serif 4', serif;
+  --font-body-lg: 'Inter', sans-serif;
+  --font-body-md: 'Inter', sans-serif;
+  --font-label-sm: 'Inter', sans-serif;
+  --font-family: 'Georgia', serif;
+  --font-sans: 'Arial', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
+  --text-light: #667885;
+  --text-main: #2c3e50;
+
+
+  /* Spacing */
+  --margin-mobile: 16px;
+  --margin-desktop: 48px;
+  --container-max: 1200px;
+  --stack-lg: 48px;
+  --stack-md: 24px;
+  --stack-sm: 12px;
+  --stack-xs: 8px;
+  --stack-xl: 80px;
+  --unit: 8px;
+  --gutter: 24px;
+
+  /* Radii */
+  --radius-default: 0.125rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+  --radius-md: 0.25rem;
+}
+
+#root {
+  min-width: 100vw;
+}
+
+#portal {}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-label-sm);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--unit);
+}
+
+.btn-primary:hover {
+  background-color: #0277bd;
+}
+
+.icon {
+  width: 20px;
+  aspect-ratio: 1/1;
+}
+
+
+
+/* Typography classes */
+.text-primary {
+  color: var(--primary);
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+
+.text-white {
+  color: white;
+}
+
+
+.font-headline {
+  font-family: var(--font-headline);
+}
+
+.headline-sm {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.text-display-lg {
+  font-size: 48px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.text-headline-lg {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.text-headline-md {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.text-body-lg {
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.text-body-md {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.text-label-sm {
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.text-on-surface {
+  color: var(--on-surface);
+}
+
+.text-on-surface-variant {
+  color: var(--on-surface-variant);
+}
+
+.text-tertiary-container {
+  color: var(--tertiary-container);
+}
+
+
+.container {
+  margin: 0 auto;
+  padding-left: var(--margin-mobile);
+  padding-right: var(--margin-mobile);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: var(--margin-desktop);
+    padding-right: var(--margin-desktop);
+  }
+}

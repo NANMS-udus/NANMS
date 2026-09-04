@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notifications - NANSM</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --primary-color: #004d40;
+            --text-main: #191c1d;
+            --text-light: #4c616c;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --border-color: #bfc9c4;
+            --font-family: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --footer-bg: #e5e7eb;
+            
+            --tag-bg: #edeeef;
+            --tag-text: #4c616c;
+            --tag-urgent-bg: #ffdad6;
+            --tag-urgent-text: #93000a;
+            
+            --icon-bg-primary: rgba(0, 77, 64, 0.1);
+            --icon-text-primary: #004d40;
+            --icon-bg-secondary: rgba(207, 230, 242, 0.3);
+            --icon-text-secondary: #4c616c;
+            --icon-bg-default: #e1e3e4;
+            --icon-text-default: #707975;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-white);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-family);
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            font-size: 16px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+        }
+
+        .btn-register {
+            background-color: transparent;
+            color: var(--text-main);
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            font-weight: 500;
+        }
+        
+        .btn-register:hover {
+            border-color: var(--text-main);
+        }
+
+        /* Main Content */
+        main {
+            padding: 48px 20px;
+            flex: 1;
+        }
+        
+        .page-header {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 24px;
+            margin-bottom: 48px;
+        }
+        
+        @media (min-width: 768px) {
+            .page-header {
+                flex-direction: row;
+                align-items: flex-end;
+                justify-content: space-between;
+            }
+        }
+        
+        .page-title h1 {
+            font-family: var(--font-family);
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        .page-title p {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        
+        .actions {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .btn-outline {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border: 1px solid #707975;
+            background: transparent;
+            color: var(--text-light);
+            border-radius: 4px;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-outline:hover {
+            background-color: #e7e8e9;
+        }
+        
+        .btn-outline .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        /* Notifications List */
+        .notifications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .notification-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            display: flex;
+            gap: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.2s, opacity 0.2s;
+        }
+        
+        .notification-card:hover {
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .notification-card.unread {
+            /* Left border indicator for unread */
+        }
+        
+        .notification-card.unread::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--primary-color);
+        }
+        
+        .notification-card.read {
+            opacity: 0.75;
+        }
+        
+        .notification-card.read:hover {
+            opacity: 1;
+        }
+        
+        .notification-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .icon-primary {
+            background-color: var(--icon-bg-primary);
+            color: var(--icon-text-primary);
+        }
+        
+        .icon-secondary {
+            background-color: var(--icon-bg-secondary);
+            color: var(--icon-text-secondary);
+        }
+        
+        .icon-default {
+            background-color: var(--icon-bg-default);
+            color: var(--icon-text-default);
+        }
+        
+        .notification-content {
+            flex: 1;
+        }
+        
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .notification-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-color);
+            letter-spacing: 0.05em;
+        }
+        
+        .read .notification-title {
+            color: var(--text-light);
+        }
+        
+        .notification-time {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        
+        .notification-body {
+            font-size: 16px;
+            color: #3f4945;
+            margin-bottom: 16px;
+        }
+        
+        .read .notification-body {
+            color: var(--text-light);
+        }
+        
+        .notification-tags {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .tag-default {
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+        }
+        
+        .tag-urgent {
+            background-color: var(--tag-urgent-bg);
+            color: var(--tag-urgent-text);
+        }
+
+        .load-more-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 48px;
+        }
+        
+        .btn-text {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: var(--primary-color);
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            padding: 16px 24px;
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        
+        .btn-text:hover {
+            color: #00342b;
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            padding: 40px 0;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            font-size: 14px;
+        }
+
+        .copyright {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            .notification-card {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+<div class="container header-content">
+<div class="logo">NANSM</div>
+<nav>
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">About</a></li>
+<li><a href="#">Executives</a></li>
+<li><a href="#">Projects</a></li>
+<li><a href="#">News</a></li>
+<li><a href="#">Members</a></li>
+<li><a href="#">Contact</a></li>
+<li><button class="btn-register">Portal Login</button></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="container">
+<div class="page-header">
+<div class="page-title">
+<h1>Notifications</h1>
+<p>Stay updated with association news, academic alerts, and portal activity.</p>
+</div>
+<div class="actions">
+<button class="btn-outline">
+<span class="material-symbols-outlined">filter_list</span> Filter
+                </button>
+<button class="btn-outline">
+<span class="material-symbols-outlined">done_all</span> Mark all read
+                </button>
+</div>
+</div>
+<div class="notifications-list">
+<!-- Unread Announcement -->
+<div class="notification-card unread">
+<div class="notification-icon icon-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">campaign</span>
+</div>
+<div class="notification-content">
+<div class="notification-header">
+<h3 class="notification-title">Annual Dues Deadline Approaching</h3>
+<span class="notification-time">2 hours ago</span>
+</div>
+<p class="notification-body">This is a reminder that the annual membership dues for the 2024/2025 academic session must be settled by October 31st to maintain active status.</p>
+<div class="notification-tags">
+<span class="tag tag-default">Announcement</span>
+<span class="tag tag-urgent">Urgent</span>
+</div>
+</div>
+</div>
+<!-- Unread Academic -->
+<div class="notification-card unread">
+<div class="notification-icon icon-secondary">
+<span class="material-symbols-outlined">clinical_notes</span>
+</div>
+<div class="notification-content">
+<div class="notification-header">
+<h3 class="notification-title">Clinical Logbook Entry Approved</h3>
+<span class="notification-time">5 hours ago</span>
+</div>
+<p class="notification-body">Dr. Olatunji has reviewed and approved your recent entry for the internal medicine rotation regarding patient management protocols.</p>
+<div class="notification-tags">
+<span class="tag tag-default">Academic</span>
+</div>
+</div>
+</div>
+<!-- Read System -->
+<div class="notification-card read">
+<div class="notification-icon icon-default">
+<span class="material-symbols-outlined">update</span>
+</div>
+<div class="notification-content">
+<div class="notification-header">
+<h3 class="notification-title">Portal Maintenance Scheduled</h3>
+<span class="notification-time">Yesterday</span>
+</div>
+<p class="notification-body">The NANSM member portal will undergo scheduled maintenance this weekend. Service may be intermittent between 02:00 and 04:00 WAT.</p>
+<div class="notification-tags">
+<span class="tag tag-default">System</span>
+</div>
+</div>
+</div>
+<!-- Read Payment -->
+<div class="notification-card read">
+<div class="notification-icon icon-default">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div class="notification-content">
+<div class="notification-header">
+<h3 class="notification-title">Payment Receipt Generated</h3>
+<span class="notification-time">Oct 12</span>
+</div>
+<p class="notification-body">Your payment for the upcoming regional conference has been confirmed. You can download your receipt from the billing section.</p>
+<div class="notification-tags">
+<span class="tag tag-default">Payments</span>
+</div>
+</div>
+</div>
+</div>
+<div class="load-more-container">
+<button class="btn-text">
+                Load More Notifications
+            </button>
+</div>
+</main>
+<footer>
+<div class="container footer-content">
+<div class="logo">NANMS</div>
+<div>
+<ul class="footer-links">
+<li><a href="#">Privacy Policy</a></li>
+<li><a href="#">Terms of Service</a></li>
+<li><a href="#">Constitution</a></li>
+<li><a href="#">FAQ</a></li>
+</ul>
+</div>
+<div class="copyright">
+                © 2024 National Association of Niger State Medical Students (NANMS). All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>

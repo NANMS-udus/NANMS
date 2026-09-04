@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Member Profile - NANSM</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --background: #f8f9fa;
+            --on-background: #191c1d;
+            --primary: #00342b;
+            --on-primary: #ffffff;
+            --primary-container: #004d40;
+            --surface-container-lowest: #ffffff;
+            --surface-variant: #e1e3e4;
+            --on-surface-variant: #3f4945;
+            --on-surface: #191c1d;
+            --secondary: #4c616c;
+            --surface-tint: #29695b;
+            --surface-container-high: #e7e8e9;
+            --outline-variant: #bfc9c4;
+            --outline: #707975;
+            --surface: #f8f9fa;
+            --on-secondary-fixed: #071e27;
+            --on-primary-fixed: #00201a;
+
+            --font-body: 'Inter', sans-serif;
+            --font-headline: 'Playfair Display', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--on-background);
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Typography */
+        .headline-lg {
+            font-family: var(--font-headline);
+            font-size: 32px;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .headline-md {
+            font-family: var(--font-headline);
+            font-size: 24px;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+
+        .headline-sm {
+            font-family: var(--font-headline);
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .body-lg {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .label-md {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 768px) {
+            .headline-lg {
+                font-size: 28px;
+            }
+        }
+
+        /* Utility */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+
+        .material-symbols-outlined {
+            vertical-align: middle;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--surface-container-lowest);
+            border-bottom: 1px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding: 16px 0;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            color: var(--primary);
+        }
+
+        .header-nav {
+            display: none;
+            align-items: center;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .header-nav {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            color: var(--secondary);
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 4px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-container);
+            color: var(--on-primary);
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--surface-tint);
+        }
+
+        .btn-primary-large {
+            padding: 12px 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Main Layout */
+        main {
+            flex-grow: 1;
+            padding: 80px 24px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media (min-width: 1024px) {
+            .main-grid {
+                grid-template-columns: repeat(12, 1fr);
+            }
+
+            .sidebar {
+                grid-column: span 4;
+            }
+
+            .content-area {
+                grid-column: span 8;
+            }
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--surface-container-lowest);
+            border: 1px solid var(--surface-variant);
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-profile {
+            text-align: center;
+        }
+
+        .profile-img-wrapper {
+            width: 192px;
+            height: 192px;
+            margin: 0 auto 24px;
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: var(--surface-container-high);
+            border: 2px solid var(--outline-variant);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .profile-desc {
+            color: var(--on-surface-variant);
+            margin-bottom: 24px;
+        }
+
+        .profile-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            color: var(--secondary);
+        }
+
+        .social-link {
+            padding: 8px;
+            background-color: var(--surface);
+            border: 1px solid var(--surface-variant);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+        }
+
+        .social-link:hover {
+            color: var(--primary);
+        }
+
+        .card-header {
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-header-border {
+            border-bottom: 1px solid var(--surface-variant);
+            padding-bottom: 8px;
+        }
+
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .info-label {
+            color: var(--secondary);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            color: var(--on-surface);
+        }
+
+        .bio-section {
+            padding: 32px;
+        }
+
+        .bio-title {
+            color: var(--primary);
+            margin-bottom: 16px;
+            border-left: 4px solid var(--primary);
+            padding-left: 16px;
+        }
+
+        .bio-text {
+            color: var(--on-surface-variant);
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+        }
+
+        .rotation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .rotation-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .rotation-icon-active {
+            color: var(--primary-container);
+            margin-top: 4px;
+        }
+
+        .rotation-icon-pending {
+            color: var(--outline);
+            margin-top: 4px;
+        }
+
+        .rotation-title {
+            font-weight: 600;
+            color: var(--on-surface);
+            display: block;
+        }
+
+        .rotation-subtitle {
+            color: var(--secondary);
+            font-size: 14px;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background-color: var(--surface-container-high);
+            border: 1px solid var(--outline-variant);
+            color: var(--on-surface-variant);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--on-secondary-fixed);
+            color: white;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            padding: 80px 24px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .footer-heading {
+            margin-bottom: 16px;
+        }
+
+        .footer-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-link {
+            color: var(--surface-variant);
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--surface-variant);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--secondary);
+            text-align: center;
+            padding: 16px;
+            background-color: var(--on-secondary-fixed);
+        }
+
+        .footer-bottom p {
+            color: var(--surface-container-lowest);
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- TopNavBar -->
+    <header>
+        <div class="container">
+            <div class="headline-md header-logo">
+                NANSM
+            </div>
+            <nav class="header-nav">
+                <a class="nav-link label-md" href="#">Home</a>
+                <a class="nav-link label-md" href="#">About</a>
+                <a class="nav-link label-md" href="#">Executives</a>
+                <a class="nav-link label-md" href="#">Projects</a>
+                <a class="nav-link label-md" href="#">News</a>
+                <a class="nav-link label-md active" href="#">Members</a>
+                <a class="nav-link label-md" href="#">Contact</a>
+            </nav>
+            <button class="btn-primary label-md">
+                Portal Login
+            </button>
+        </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="container">
+        <div class="main-grid">
+            <!-- Hero & Profile Sidebar -->
+            <aside class="sidebar">
+                <div class="card card-profile">
+                    <div class="profile-img-wrapper">
+                        <img alt="Profile Photo"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1IkgKaJ-mNRtw22y7smJ58QtXKPh4pXZBFhsjvkkzl9Z9uO-pTCatzqKvKPzz0unML_cvIugqZ0OvQVS26Ii6NK0ms2OzkHjzx_1dgBlCZQ13aSDDmK5ETfPc8eQbiHAC6r7a1-P3elcfTgX77xzmDfvIhkRPEWgjcvV3maVEtl9CvgGx_TAOedonWE3c-l1e1K0nDRHUVEH3YQS5msvMgzy2E1243xNsvowFreozUzSxbP8WJMfU4SOe2FlRp8225w" />
+                    </div>
+                    <h1 class="headline-lg profile-name">Abdullahi Ibrahim</h1>
+                    <p class="profile-desc">Final Year Medical Student<br />Ahmadu Bello University</p>
+                    <div class="profile-actions">
+                        <button class="btn-primary btn-primary-large label-md">
+                            <span class="material-symbols-outlined" style="font-size: 18px;">mail</span>
+                            Send Message
+                        </button>
+                    </div>
+                    <div class="social-links">
+                        <a class="social-link" href="#">
+                            <span class="material-symbols-outlined">link</span>
+                        </a>
+                        <a class="social-link" href="#">
+                            <span class="material-symbols-outlined">forum</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="headline-md card-header card-header-border">
+                        <span class="material-symbols-outlined">school</span>
+                        Academic Profile
+                    </h3>
+                    <ul class="info-list">
+                        <li>
+                            <div class="label-md info-label">University</div>
+                            <div class="info-value">Ahmadu Bello University (ABU)</div>
+                        </li>
+                        <li>
+                            <div class="label-md info-label">Clinical Level</div>
+                            <div class="info-value">Part IV, Final Year MBBS</div>
+                        </li>
+                        <li>
+                            <div class="label-md info-label">Admission Year</div>
+                            <div class="info-value">2018</div>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+            <!-- Detailed Info Canvas -->
+            <section class="content-area">
+                <!-- Bio -->
+                <div class="card bio-section">
+                    <h2 class="headline-lg bio-title">Professional Biography</h2>
+                    <p class="body-lg bio-text">
+                        Abdullahi is a dedicated and meticulous medical student currently in his final year of clinical
+                        rotations. With a profound interest in internal medicine and public health, he has consistently
+                        demonstrated academic excellence and clinical acumen. He is an active member of NANSM,
+                        contributing to several health outreach programs across Niger State, aiming to bridge healthcare
+                        disparities in rural communities.
+                    </p>
+                </div>
+                <!-- Bento Grid for Clinical & Research -->
+                <div class="bento-grid">
+                    <!-- Clinical Rotations -->
+                    <div class="card">
+                        <h3 class="headline-md card-header">
+                            <span class="material-symbols-outlined">local_hospital</span>
+                            Recent Rotations
+                        </h3>
+                        <ul class="rotation-list">
+                            <li class="rotation-item">
+                                <span class="material-symbols-outlined rotation-icon-active">check_circle</span>
+                                <div>
+                                    <span class="rotation-title">Internal Medicine</span>
+                                    <span class="rotation-subtitle">ABU Teaching Hospital (12 Weeks)</span>
+                                </div>
+                            </li>
+                            <li class="rotation-item">
+                                <span class="material-symbols-outlined rotation-icon-active">check_circle</span>
+                                <div>
+                                    <span class="rotation-title">Surgery</span>
+                                    <span class="rotation-subtitle">ABU Teaching Hospital (12 Weeks)</span>
+                                </div>
+                            </li>
+                            <li class="rotation-item">
+                                <span class="material-symbols-outlined rotation-icon-pending">pending</span>
+                                <div>
+                                    <span class="rotation-title">Pediatrics (Current)</span>
+                                    <span class="rotation-subtitle">ABU Teaching Hospital (8 Weeks)</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Research Interests -->
+                    <div class="card">
+                        <h3 class="headline-md card-header">
+                            <span class="material-symbols-outlined">science</span>
+                            Research Interests
+                        </h3>
+                        <div class="tag-list">
+                            <span class="tag label-md">Cardiology</span>
+                            <span class="tag label-md">Infectious Diseases</span>
+                            <span class="tag label-md">Public Health Policy</span>
+                            <span class="tag label-md">Tropical Medicine</span>
+                            <span class="tag label-md">Epidemiology</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <!-- Association Links -->
+            <div>
+                <h4 class="headline-sm footer-heading">Association Links</h4>
+                <ul class="footer-list">
+                    <li><a class="footer-link" href="#">About Us</a></li>
+                    <li><a class="footer-link" href="#">Constitution</a></li>
+                    <li><a class="footer-link" href="#">Member Portal</a></li>
+                </ul>
+            </div>
+            <!-- Contact Details -->
+            <div>
+                <h4 class="headline-sm footer-heading">Contact Details</h4>
+                <ul class="footer-list">
+                    <li class="footer-contact-item">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">email</span>
+                        info@nansm.org.ng
+                    </li>
+                    <li class="footer-contact-item">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">location_on</span>
+                        Secretariat, Minna, Niger State
+                    </li>
+                </ul>
+            </div>
+            <!-- Social Media -->
+            <div>
+                <h4 class="headline-sm footer-heading">Social Media</h4>
+                <div class="footer-socials">
+                    <a class="footer-link" href="#"><span class="material-symbols-outlined">share</span></a>
+                    <a class="footer-link" href="#"><span class="material-symbols-outlined">group</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 National Association of Niger State Medical Students. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

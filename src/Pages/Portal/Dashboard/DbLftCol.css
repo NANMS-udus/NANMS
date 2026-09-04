@@ -1,0 +1,187 @@
+.left-column {
+ display: flex;
+ flex-direction: column;
+ gap: var(--stack-lg);
+}
+
+
+.progress-content {
+ display: flex;
+ /* flex-direction: column; */
+ gap: var(--stack-lg);
+ align-items: center;
+}
+
+.progress-details {
+ flex: 1;
+}
+
+.progress-stats {
+ display: grid;
+ grid-template-columns: repeat(2, 1fr);
+ gap: var(--margin-mobile);
+ margin-top: var(--stack-md);
+}
+
+.progress-visual-container {
+ width: 100%;
+ display: flex;
+ justify-content: center;
+}
+
+@media (min-width: 768px) {
+ .progress-visual-container {
+  width: 33.333%;
+ }
+}
+
+.progress-circle {
+ position: relative;
+ width: 128px;
+ height: 128px;
+ border-radius: 50%;
+ border: 8px solid var(--surface-container-high);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.progress-circle-fill {
+ position: absolute;
+ top: -8px;
+ left: -8px;
+ right: -8px;
+ bottom: -8px;
+ border-radius: 50%;
+ border: 8px solid var(--primary);
+ clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 20%);
+ transform: rotate(-45deg);
+}
+
+/* Clinical Rotations */
+.rotations-list {
+ display: flex;
+ flex-direction: column;
+ gap: var(--margin-mobile);
+}
+
+.rotation-item {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: var(--margin-mobile);
+ border: 1px solid var(--outline-variant);
+ border-radius: var(--radius-md);
+ transition: background-color 0.2s;
+}
+
+.rotation-item:hover {
+ background-color: var(--surface-container-low);
+}
+
+.rotation-item.in-progress {
+ border-left: 4px solid var(--primary);
+ background-color: var(--surface-bright);
+ box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.rotation-item.upcoming {
+ opacity: 0.75;
+}
+
+.rotation-info {
+ display: flex;
+ align-items: center;
+ gap: var(--margin-mobile);
+}
+
+.rotation-icon {
+ border-radius: var(--radius-md);
+ padding: 4px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ margin-top: 4px;
+ width: 34px;
+ min-width: 30px;
+}
+
+.icon-completed {
+ background-color: var(--primary-fixed);
+ color: var(--on-primary-fixed);
+}
+
+.icon-progress {
+ background-color: var(--secondary-container);
+ color: var(--on-secondary-container);
+}
+
+.icon-upcoming {
+ background-color: var(--surface-container-high);
+ color: var(--on-surface-variant);
+}
+
+.status-badge {
+ font-size: 12px;
+ padding: 4px 8px;
+ border-radius: var(--radius-md);
+ border: 1px solid transparent;
+ text-overflow: ellipsis;
+ overflow: hidden;
+ text-wrap: nowrap;
+}
+
+.badge-completed {
+ background-color: var(--surface-container-high);
+ color: var(--on-surface-variant);
+ border-color: var(--outline-variant);
+}
+
+.badge-progress {
+ background-color: var(--primary-fixed-dim);
+ color: var(--primary-container);
+ border-color: var(--primary-fixed);
+}
+
+.badge-upcoming {
+ background-color: var(--surface-container);
+ color: var(--on-surface-variant);
+ border-color: var(--outline-variant);
+}
+
+.btn-link {
+ color: var(--primary);
+ text-decoration: none;
+}
+
+.btn-link:hover {
+ text-decoration: underline;
+}
+
+
+
+
+@media (min-width: 768px) {
+ .progress-content {
+  flex-direction: row;
+ }
+}
+
+@media (max-width: 700px) {
+ .profile-info {
+  flex-direction: column;
+ }
+}
+
+
+@media (max-width: 500px) {
+
+ .progress-content {
+  flex-direction: column-reverse;
+ }
+
+ .progress-circle {
+  width: 70px;
+  height: 70px;
+ }
+}

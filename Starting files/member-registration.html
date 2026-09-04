@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Registration - National Association of Niger State Medical Students</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            /* Colors */
+            --primary: #00342b;
+            --primary-container: #004d40;
+            --on-primary: #ffffff;
+            --surface: #f8f9fa;
+            --surface-container-lowest: #ffffff;
+            --outline: #707975;
+            --secondary: #4c616c;
+            --error: #ba1a1a;
+
+            /* Typography */
+            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Playfair Display', serif;
+
+            /* Spacing */
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+            --spacing-xl: 80px;
+
+            /* Borders */
+            --radius-md: 0.25rem;
+            --radius-lg: 0.5rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--surface);
+            color: #191c1d;
+            line-height: 1.6;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            background-color: var(--surface-container-lowest);
+            border-bottom: 1px solid var(--primary);
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-sm) var(--spacing-md);
+        }
+
+        .brand-logo {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-md);
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 4px;
+        }
+
+        .nav-action {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 800px;
+            margin: var(--spacing-xl) auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        .page-header {
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .page-title {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: var(--secondary);
+        }
+
+        /* Form Styling */
+        .registration-form {
+            background-color: var(--surface-container-lowest);
+            border: 1px solid #e0e0e0;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .form-section {
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            padding: 12px;
+            border: 1px solid var(--outline);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 16px;
+            background-color: var(--surface-container-lowest);
+            transition: border-color 0.2s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-container);
+            border-width: 2px;
+            padding: 11px;
+            /* Compensate for border width */
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .file-upload {
+            border: 1px dashed var(--outline);
+            padding: var(--spacing-md);
+            text-align: center;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .file-upload:hover {
+            background-color: var(--surface);
+        }
+
+        /* Tags Input Simulation */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 8px;
+            border: 1px solid var(--outline);
+            border-radius: var(--radius-md);
+            min-height: 48px;
+        }
+
+        .tag {
+            background-color: #cfe6f2;
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-container);
+            color: var(--on-primary);
+            border: none;
+            padding: 16px 32px;
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            width: 100%;
+            margin-top: var(--spacing-md);
+            transition: opacity 0.2s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #37474f;
+            /* Fallback for on-secondary-fixed */
+            color: var(--surface-container-lowest);
+            margin-top: var(--spacing-xl);
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        @media (min-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .footer-col h3 {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-col p {
+            font-size: 14px;
+            color: #e1e3e4;
+        }
+
+        .copyright {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 14px;
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid #526772;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="nav-container">
+            <a class="brand-logo" href="#">NANSM</a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Executives</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">News</a></li>
+                <li><a class="active" href="#">Members</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <a class="nav-action" href="#">Portal Login</a>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">Member Registration</h1>
+            <p class="page-subtitle">Join the National Association of Niger State Medical Students</p>
+        </div>
+        <form class="registration-form">
+            <!-- Section 1: Personal Information -->
+            <div class="form-section">
+                <h2 class="section-title">Personal Information</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="fullName">Full Name</label>
+                        <input id="fullName" placeholder="Dr. Jane Doe" required="" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input id="email" placeholder="jane.doe@university.edu" required="" type="email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input id="phone" placeholder="+234 XXX XXXX" type="tel" />
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Profile Photo</label>
+                        <div class="file-upload">
+                            <span class="material-symbols-outlined"
+                                style="font-size: 32px; color: var(--outline);">add_a_photo</span>
+                            <p style="color: var(--secondary); margin-top: 8px;">Click to upload professional headshot
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Section 2: Academic Profile -->
+            <div class="form-section">
+                <h2 class="section-title">Academic Profile</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="university">University</label>
+                        <select id="university" required="">
+                            <option disabled="" selected="" value="">Select Institution</option>
+                            <option value="futa">Federal University of Technology Minna</option>
+                            <option value="ibbu">Ibrahim Badamasi Babangida University</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="admissionYear">Admission Year</label>
+                        <input id="admissionYear" placeholder="YYYY" type="text" />
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="clinicalLevel">Current Clinical Level</label>
+                        <select id="clinicalLevel" required="">
+                            <option disabled="" selected="" value="">Select Level</option>
+                            <option value="preclinical">Pre-Clinical (Part I - III)</option>
+                            <option value="part4">Part IV</option>
+                            <option value="part5">Part V</option>
+                            <option value="final">Final Year MBBS</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- Section 3: Professional Details -->
+            <div class="form-section">
+                <h2 class="section-title">Professional Details</h2>
+                <div class="form-group full-width">
+                    <label for="bio">Professional Biography</label>
+                    <textarea id="bio"
+                        placeholder="Briefly describe your academic journey and professional aspirations..."></textarea>
+                </div>
+            </div>
+            <!-- Section 4: Clinical Experience -->
+            <div class="form-section">
+                <h2 class="section-title">Recent Clinical Rotations</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <input id="department" placeholder="e.g. Surgery" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="hospital">Hospital</label>
+                        <input id="hospital" placeholder="Teaching Hospital Name" type="text" />
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="duration">Duration</label>
+                        <input id="duration" placeholder="e.g. 12 Weeks" type="text" />
+                    </div>
+                </div>
+            </div>
+            <!-- Section 5: Research Interests -->
+            <div class="form-section">
+                <h2 class="section-title">Research Interests</h2>
+                <div class="form-group full-width">
+                    <label>Select Areas of Interest</label>
+                    <div class="tags-container">
+                        <div class="tag">
+                            Cardiology <span class="material-symbols-outlined"
+                                style="font-size: 16px; cursor: pointer;">close</span>
+                        </div>
+                        <div class="tag">
+                            Public Health <span class="material-symbols-outlined"
+                                style="font-size: 16px; cursor: pointer;">close</span>
+                        </div>
+                        <input placeholder="Add more..."
+                            style="border: none; background: transparent; flex-grow: 1; padding: 4px; outline: none;"
+                            type="text" />
+                    </div>
+                </div>
+            </div>
+            <button class="submit-btn" type="submit">Submit Registration</button>
+        </form>
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Association Links</h3>
+                <p>About Us<br />Our Executives<br />Projects &amp; Initiatives<br />News &amp; Updates</p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Details</h3>
+                <p><span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">mail</span>
+                    contact@nansm.org<br />
+                    <span class="material-symbols-outlined"
+                        style="font-size: 16px; vertical-align: middle;">location_on</span> Secretariat, Minna, Niger
+                    State
+                </p>
+            </div>
+            <div class="footer-col">
+                <h3>Social Media</h3>
+                <p>Twitter / X<br />LinkedIn<br />Instagram</p>
+            </div>
+            <div class="copyright">
+                © 2024 National Association of Niger State Medical Students. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Contact - NANMS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Source+Serif+4:wght@600;700&amp;display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #004d27;
+      --primary-container: #006837;
+      --on-primary: #ffffff;
+      --background: #f7f9ff;
+      --on-background: #181c20;
+      --surface: #f7f9ff;
+      --on-surface: #181c20;
+      --surface-variant: #e0e3e8;
+      --on-surface-variant: #3f4940;
+      --surface-container-lowest: #ffffff;
+      --surface-container-highest: #e0e3e8;
+      --outline-variant: #bec9be;
+      --secondary: #5c5f60;
+      --inverse-surface: #2d3135;
+      --on-secondary-container: #626566;
+
+      --font-headline-md: "Source Serif 4", serif;
+      --font-body-md: "Inter", sans-serif;
+      --font-label-sm: "Inter", sans-serif;
+      --font-display-lg: "Source Serif 4", serif;
+      --font-body-lg: "Inter", sans-serif;
+
+      --spacing-unit: 8px;
+      --spacing-margin-mobile: 16px;
+      --spacing-margin-desktop: 48px;
+      --spacing-gutter: 24px;
+      --spacing-stack-sm: 12px;
+      --spacing-stack-md: 24px;
+      --spacing-stack-lg: 48px;
+
+      --container-max: 1200px;
+    }
+
+    /* Reset & Base Styles */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--on-background);
+      font-family: var(--font-body-md);
+      font-size: 16px;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--outline-variant);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 var(--spacing-margin-mobile);
+      height: 64px;
+    }
+
+    @media (min-width: 768px) {
+      .site-header {
+        padding: 0 var(--spacing-margin-desktop);
+      }
+    }
+
+    .header-inner {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-unit);
+    }
+
+    .logo-img {
+      height: 32px;
+      width: 32px;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-family: var(--font-headline-md);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .main-nav {
+      display: none;
+      gap: var(--spacing-gutter);
+    }
+
+    @media (min-width: 768px) {
+      .main-nav {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      color: var(--secondary);
+      font-family: var(--font-body-md);
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-link.active {
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 4px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      opacity: 0.8;
+    }
+
+    .header-actions {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .header-actions {
+        display: flex;
+      }
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      font-family: var(--font-label-sm);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 8px 16px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-unit);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-container);
+    }
+
+    /* Main Content */
+    .main-content {
+      flex-grow: 1;
+      padding-top: 96px;
+      /* 64px header + 32px spacing */
+      padding-bottom: var(--spacing-stack-lg);
+      padding-left: var(--spacing-margin-mobile);
+      padding-right: var(--spacing-margin-mobile);
+      max-width: var(--container-max);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .main-content {
+        padding-left: var(--spacing-margin-desktop);
+        padding-right: var(--spacing-margin-desktop);
+      }
+    }
+
+    .page-header {
+      margin-bottom: var(--spacing-stack-lg);
+      text-align: center;
+    }
+
+    .page-title {
+      font-family: var(--font-display-lg);
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+      margin-bottom: var(--spacing-unit);
+    }
+
+    .page-description {
+      font-family: var(--font-body-lg);
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--on-surface-variant);
+      max-width: 672px;
+      margin: 0 auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: var(--spacing-gutter);
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+      .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .card {
+      background-color: var(--surface-container-lowest);
+      border: 1px solid var(--surface-variant);
+      border-radius: 8px;
+      padding: var(--spacing-stack-md);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+    }
+
+    .card-title {
+      font-family: var(--font-headline-md);
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--primary);
+      margin-bottom: var(--spacing-stack-md);
+    }
+
+    /* Contact Info */
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-stack-md);
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-unit);
+    }
+
+    .info-icon {
+      color: var(--primary);
+    }
+
+    .info-label {
+      font-family: var(--font-label-sm);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--on-surface);
+      margin-bottom: 2px;
+    }
+
+    .info-text {
+      font-family: var(--font-body-md);
+      font-size: 16px;
+      color: var(--on-surface-variant);
+    }
+
+    .map-container {
+      margin-top: var(--spacing-stack-lg);
+    }
+
+    .map-wrapper {
+      width: 100%;
+      height: 256px;
+      background-color: var(--surface-variant);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--outline-variant);
+      position: relative;
+    }
+
+    .map-image {
+      background-size: cover;
+      background-position: center;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* Contact Form */
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-unit);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-unit);
+    }
+
+    .form-label {
+      font-family: var(--font-label-sm);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    .form-input,
+    .form-textarea {
+      border: 1px solid var(--outline-variant);
+      border-radius: 4px;
+      padding: 8px;
+      font-family: var(--font-body-md);
+      font-size: 16px;
+      background-color: #f7f9ff;
+      transition: all 0.2s;
+      width: 100%;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(0, 104, 55, 0.2);
+    }
+
+    .form-textarea {
+      resize: vertical;
+    }
+
+    .btn-submit {
+      margin-top: var(--spacing-stack-sm);
+      padding: 12px 24px;
+      align-self: flex-start;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--surface-container-highest);
+      width: 100%;
+      padding: var(--spacing-stack-lg) var(--spacing-margin-mobile);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--spacing-gutter);
+    }
+
+    @media (min-width: 768px) {
+      .site-footer {
+        flex-direction: row;
+        padding-left: var(--spacing-margin-desktop);
+        padding-right: var(--spacing-margin-desktop);
+      }
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-unit);
+    }
+
+    .footer-logo-text {
+      font-family: var(--font-headline-md);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .footer-copy {
+      font-family: var(--font-body-md);
+      font-size: 16px;
+      color: var(--on-surface-variant);
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .footer-copy {
+        text-align: left;
+      }
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: var(--spacing-stack-sm);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-link {
+      color: var(--on-surface-variant);
+      font-family: var(--font-label-sm);
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+      text-decoration-color: var(--primary);
+    }
+
+    /* Dark mode overrides if needed later, kept structure simple */
+    @media (prefers-color-scheme: dark) {
+      .dark .site-footer {
+        background-color: var(--inverse-surface);
+      }
+
+      .dark .footer-copy,
+      .dark .footer-link {
+        color: var(--on-secondary-container);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- TopNavBar -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-container">
+        <img alt="NANMS Logo" class="logo-img"
+          src="https://lh3.googleusercontent.com/aida/AEtjO1Ub2iBGTgP8zE9BanukacK_8uqewOP2YCWu9YJY0Zm6YLPNt9Rb6g5vw5B-QwiiSSRhIXD1ryewtJgg6GMcQnq1EaNYP7iH-nldYnl7Z4rTsPSlR6hmkPCUv0JZTmoYNrur-hGtW5jClZlTwBQrPBBhidGKlPdYIlcma_9a5S4SeTcTKD2nzxfz3gqb0wwzzZG4QmzMpg2eE3JuB8v9U2IxBAMy6tJtSvfzO4p4w8ZBZNG9EdTSGfxZcQ" />
+        <span class="logo-text">NANMS</span>
+      </div>
+      <nav class="main-nav">
+        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="#">About Us</a>
+        <a class="nav-link" href="#">Executives</a>
+        <a class="nav-link" href="#">Projects</a>
+        <a class="nav-link active" href="#">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-primary">Register</button>
+      </div>
+    </div>
+  </header>
+  <main class="main-content">
+    <section class="page-header">
+      <h1 class="page-title">Contact Us</h1>
+      <p class="page-description">We are here to assist you. Reach out for any inquiries, partnerships, or support
+        regarding the National Association of Niger State Medical Students.</p>
+    </section>
+    <div class="contact-grid">
+      <!-- Contact Info Card -->
+      <div class="card">
+        <h2 class="card-title">Association Details</h2>
+        <div class="info-list">
+          <div class="info-item">
+            <span class="material-symbols-outlined info-icon" data-icon="location_on" data-weight="fill"
+              style="font-variation-settings: 'FILL' 1;">location_on</span>
+            <div>
+              <h3 class="info-label">Office Address</h3>
+              <p class="info-text">Minna General Hospital Campus,<br />Minna, Niger State,<br />Nigeria.</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="material-symbols-outlined info-icon" data-icon="mail" data-weight="fill"
+              style="font-variation-settings: 'FILL' 1;">mail</span>
+            <div>
+              <h3 class="info-label">Email Address</h3>
+              <p class="info-text">info@nanms.org.ng</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="material-symbols-outlined info-icon" data-icon="phone" data-weight="fill"
+              style="font-variation-settings: 'FILL' 1;">phone</span>
+            <div>
+              <h3 class="info-label">Phone Number</h3>
+              <p class="info-text">+234 800 000 0000</p>
+            </div>
+          </div>
+        </div>
+        <div class="map-container">
+          <div class="map-wrapper">
+            <!-- Map placeholder -->
+            <div class="map-image"
+              data-alt="A clean, minimalist digital map interface showing Minna, Niger State, Nigeria. The map uses a light mode aesthetic with subtle clinical gray tones and a stark, highly visible dark green marker pinpointing the central hospital location. The cartography is simplified, professional, and easily scannable, conveying a sense of academic precision."
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAx65fwzqnFwH2hUFHWfJ1lLd0S1SeRm86Ve-7jEJ6D4xk13Xfv-2DlOLQF0oYfg8JdBJO3LVZpDTYLQoOomZb8RQkH1x-RrHoioKXAWzM3mTE2r1MGhDFCMq_MRAvZjLLx2aNQ3EsiATCTzbFDUhdmC5ib8M1lP0OylaxxoIk3yCLXdoOvNfWSX0gqfA0NwrycOsJQus1WJFMFO7Y_dup_9bYDVcHbXyQgNkI6nF0JUQqSW3BUwxK8')">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Contact Form Card -->
+      <div class="card">
+        <h2 class="card-title">Send a Message</h2>
+        <form class="form">
+          <div class="form-group">
+            <label class="form-label" for="name">Full Name</label>
+            <input class="form-input" id="name" placeholder="Dr. John Doe" type="text" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input class="form-input" id="email" placeholder="john@example.com" type="email" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="subject">Subject</label>
+            <input class="form-input" id="subject" placeholder="Inquiry about membership" type="text" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea class="form-textarea" id="message" placeholder="How can we help you?" rows="5"></textarea>
+          </div>
+          <button class="btn-primary btn-submit" type="submit">
+            Send Message
+            <span class="material-symbols-outlined" data-icon="send">send</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-logo">
+      <span class="footer-logo-text">NANMS</span>
+    </div>
+    <p class="footer-copy">
+      © 2024 National Association of Niger State Medical Students (NANMS). All rights reserved.
+    </p>
+    <nav class="footer-nav">
+      <a class="footer-link" href="#">Privacy Policy</a>
+      <a class="footer-link" href="#">Terms of Service</a>
+      <a class="footer-link" href="#">Constitution</a>
+      <a class="footer-link" href="#">FAQ</a>
+    </nav>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+.bio-section {
+ padding: 32px;
+}
+
+.bio-title {
+ color: var(--primary);
+ margin-bottom: 16px;
+ border-left: 4px solid var(--primary);
+ padding-left: 16px;
+}
+
+.bio-text {
+ color: var(--on-surface-variant);
+}
+
+.rotations-grid {
+ display: grid;
+ grid-template-columns: 1fr;
+ gap: 16px;
+}
+
+@media (min-width: 768px) {
+ .rotations-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+ }
+}
+
+.rotation-item {
+ display: flex;
+ align-items: flex-start;
+ gap: 12px;
+ margin-bottom: 16px;
+}
+
+.rotation-item:last-child {
+ margin-bottom: 0;
+}
+
+.rotation-icon-active {
+ color: var(--primary-container);
+ margin-top: 4px;
+}
+
+.rotation-icon-pending {
+ color: var(--outline);
+ margin-top: 4px;
+}
+
+.rotation-title {
+ font-weight: 600;
+ color: var(--on-surface);
+ display: block;
+}
+
+.rotation-subtitle {
+ color: var(--secondary);
+ font-size: 14px;
+}
+
+.tag-list {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 8px;
+}
+
+.tag {
+ background-color: var(--surface-container-high);
+ border: 1px solid var(--outline-variant);
+ color: var(--on-surface-variant);
+ padding: 4px 12px;
+ border-radius: 4px;
+ font-size: 14px;
+}

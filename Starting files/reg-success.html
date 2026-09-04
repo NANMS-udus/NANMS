@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Registration Successful - NANSM</title>
+    <!-- Fonts and Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Inter:wght@400;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        /* Vanilla CSS Implementation */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            /* background */
+            font-family: 'Inter', sans-serif;
+            color: #191c1d;
+            /* on-background */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .site-header {
+            width: 100%;
+            background-color: #ffffff;
+            /* surface-container-lowest */
+            border-bottom: 1px solid #00342b;
+            /* primary */
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+        }
+
+        .header-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            line-height: 1.3;
+            font-weight: 700;
+            color: #00342b;
+            /* primary */
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 48px 24px;
+        }
+
+        .success-container {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 0.5rem;
+            max-width: 800px;
+            width: 100%;
+            padding: 48px;
+            text-align: center;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .icon-circle {
+            width: 96px;
+            height: 96px;
+            background-color: #afefdd;
+            /* primary-fixed */
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .icon-circle .material-symbols-outlined {
+            font-size: 48px;
+            color: #00342b;
+            /* primary */
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #00342b;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #4c616c;
+            /* secondary */
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        .next-steps {
+            text-align: left;
+            margin-bottom: 48px;
+        }
+
+        .next-steps h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #191c1d;
+            margin-bottom: 24px;
+            margin-top: 0;
+        }
+
+        .step-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .step-item {
+            background-color: #f3f4f5;
+            /* surface-container-low */
+            border: 1px solid #e1e3e4;
+            border-radius: 0.25rem;
+            padding: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .step-number {
+            background-color: #004d40;
+            /* primary-container */
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 16px;
+            color: #191c1d;
+            line-height: 1.5;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 0.25rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background-color: #004d40;
+            /* Forest green */
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid #4c616c;
+            /* Slate grey */
+            color: #4c616c;
+        }
+
+        /* Footer Styles */
+        .site-footer {
+            width: 100%;
+            background-color: #071e27;
+            /* on-secondary-fixed */
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .footer-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 24px;
+        }
+
+        .footer-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #e1e3e4;
+            /* surface-variant */
+            margin: 0;
+        }
+
+        .footer-links-col {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-link {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #e1e3e4;
+            /* surface-variant */
+            text-decoration: none;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .footer-link:hover {
+            color: #afefdd;
+            /* primary-fixed */
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .success-container {
+                padding: 24px;
+            }
+
+            .step-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- TopNavBar Shell Structure -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="header-logo">
+                NANSM
+            </div>
+            <!-- Navigation links hidden on this transactional page to focus on canvas -->
+        </div>
+    </header>
+    <main class="main-content">
+        <div class="success-container">
+            <div class="icon-circle">
+                <span class="material-symbols-outlined" data-weight="fill"
+                    style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            </div>
+            <h1>Registration Successful!</h1>
+            <p class="subtitle">Welcome to the association, <strong>Dr. Jane Doe</strong>. Your application has been
+                received and is currently being processed by our administrative team.</p>
+            <div class="next-steps">
+                <h2>Next Steps</h2>
+                <ul class="step-list">
+                    <li class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Check your email for a confirmation link to verify your contact address.
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Complete your profile details, including your current clinical rotation,
+                            in the member portal.</div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Join our official community forum to connect with fellow Niger State
+                            medical students.</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="action-buttons">
+                <a class="btn btn-primary" href="#">Go to Member Portal</a>
+                <a class="btn btn-secondary" href="#">Return to Home</a>
+            </div>
+        </div>
+    </main>
+    <!-- Footer Component -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div>
+                <div class="footer-heading">NANSM</div>
+                <p class="footer-text">© 2024 National Association of Niger State Medical Students. All rights reserved.
+                </p>
+            </div>
+            <div class="footer-links-col">
+                <a class="footer-link" href="#">Association Links</a>
+                <a class="footer-link" href="#">Contact Details</a>
+            </div>
+            <div class="footer-links-col">
+                <a class="footer-link" href="#">Social Media</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

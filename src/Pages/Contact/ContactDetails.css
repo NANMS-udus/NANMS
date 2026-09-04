@@ -1,0 +1,53 @@
+.info-list {
+ display: flex;
+ flex-direction: column;
+ gap: var(--stack-md);
+}
+
+.info-item {
+ display: flex;
+ align-items: flex-start;
+ gap: var(--unit);
+}
+
+.info-icon {
+ color: var(--primary);
+}
+
+.info-label {
+ font-family: var(--font-label-sm);
+ font-size: 13px;
+ font-weight: 600;
+ color: var(--on-surface);
+ margin-bottom: 2px;
+}
+
+.info-text {
+ font-family: var(--font-body-md);
+ font-size: 16px;
+ color: var(--on-surface-variant);
+}
+
+.map-container {
+ margin-top: var(--stack-lg);
+}
+
+.map-wrapper {
+ width: 100%;
+ height: 256px;
+ background-color: var(--surface-variant);
+ border-radius: 8px;
+ overflow: hidden;
+ border: 1px solid var(--outline-variant);
+ position: relative;
+}
+
+.map-image {
+ background-size: cover;
+ background-position: center;
+ width: 100%;
+ height: 100%;
+ position: absolute;
+ top: 0;
+ left: 0;
+}

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Password Reset Link Sent - NANSM</title>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind Config for reference, though prompt requested pure vanilla CSS for the main content -->
+    <!-- As a UI designer assistant, I must fulfill the user's explicit request to use pure vanilla CSS, but I must also include the Tailwind script to render the shared components (TopNavBar and Footer) properly as they rely on Tailwind utilities injected from the JSON. -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#4c616c",
+                        "surface": "#f8f9fa",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#00342b",
+                        "primary-container": "#004d40",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#071e27",
+                        "surface-variant": "#e1e3e4",
+                        "primary-fixed": "#afefdd"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "xl": "80px",
+                        "lg": "48px",
+                        "gutter": "24px"
+                    }
+                },
+            }
+        }
+    </script>
+    <style>
+        /* Vanilla CSS for the Reset Confirmation Screen */
+        :root {
+            --surface: #f8f9fa;
+            --surface-container-lowest: #ffffff;
+            --primary-container: #004d40;
+            --on-primary: #ffffff;
+            --secondary: #4c616c;
+            --outline-variant: #e0e0e0;
+            --font-inter: 'Inter', sans-serif;
+            --font-playfair: 'Playfair Display', serif;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-inter);
+            background-color: var(--surface);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .confirmation-card {
+            background-color: var(--surface-container-lowest);
+            border: 1px solid var(--outline-variant);
+            border-radius: 4px;
+            padding: 48px;
+            text-align: center;
+            max-width: 480px;
+            width: 100%;
+            /* Tonal layer instead of heavy shadow as per style guide */
+        }
+
+        .icon-container {
+            width: 64px;
+            height: 64px;
+            background-color: rgba(0, 77, 64, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        .icon-container .material-symbols-outlined {
+            font-size: 32px;
+            color: var(--primary-container);
+            /* font-variation-settings applied via class or inline */
+        }
+
+        .confirmation-title {
+            font-family: var(--font-playfair);
+            font-size: 32px;
+            line-height: 1.2;
+            font-weight: 700;
+            color: #00342b;
+            /* primary */
+            margin: 0 0 16px 0;
+        }
+
+        .confirmation-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--secondary);
+            margin: 0 0 32px 0;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--primary-container);
+            color: var(--on-primary);
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.05em;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+            /* Level 2 elevation */
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body class="bg-surface">
+    <!-- TopNavBar (Shared Component) - Rendered using Tailwind as instructed by JSON -->
+    <header
+        class="w-full top-0 bg-surface-container-lowest dark:bg-surface-dim border-b border-primary dark:border-primary-fixed-dim">
+        <nav class="flex justify-between items-center max-w-[1200px] mx-auto px-gutter py-sm">
+            <a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim"
+                href="#">NANSM</a>
+            <div class="hidden md:flex gap-md items-center">
+                <a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 cursor-pointer active:opacity-70"
+                    href="#">Home</a>
+                <a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 cursor-pointer active:opacity-70"
+                    href="#">About</a>
+                <a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 cursor-pointer active:opacity-70"
+                    href="#">Executives</a>
+                <a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 cursor-pointer active:opacity-70"
+                    href="#">Projects</a>
+                <a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 cursor-pointer active:opacity-70"
+                    href="#">News</a>
+                <a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 cursor-pointer active:opacity-70"
+                    href="#">Members</a>
+                <a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 cursor-pointer active:opacity-70"
+                    href="#">Contact</a>
+            </div>
+            <a class="font-label-md text-label-md text-primary dark:text-primary-fixed-dim border border-primary px-sm py-xs rounded hover:bg-primary hover:text-white transition-colors duration-200 cursor-pointer"
+                href="#">Portal Login</a>
+        </nav>
+    </header>
+    <!-- Main Content (Pure CSS) -->
+    <main class="main-content">
+        <div class="confirmation-card">
+            <div class="icon-container">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            </div>
+            <h1 class="confirmation-title">Reset Link Sent</h1>
+            <p class="confirmation-text">
+                We've sent a password reset link to your registered email address. Please check your inbox and follow
+                the instructions to create a new password.
+            </p>
+            <a class="btn-primary" href="#">Back to Login</a>
+        </div>
+    </main>
+    <!-- Footer (Shared Component) - Rendered using Tailwind as instructed by JSON -->
+    <footer class="w-full bg-on-secondary-fixed dark:bg-on-secondary-fixed-variant">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-lg max-w-[1200px] mx-auto px-gutter py-xl">
+            <!-- Brand Column -->
+            <div class="flex flex-col gap-sm">
+                <span class="font-headline-sm text-headline-sm text-white">NANSM</span>
+                <p class="font-body-md text-body-md text-surface-variant">
+                    National Association of Niger State Medical Students. Dedicated to the advancement of medical
+                    education and professional development.
+                </p>
+            </div>
+            <!-- Links Column -->
+            <div class="flex flex-col gap-sm">
+                <h3 class="font-label-md text-label-md text-white font-bold">Links</h3>
+                <a class="font-body-md text-body-md text-surface-variant hover:text-primary-fixed transition-colors cursor-pointer"
+                    href="#">Association Links</a>
+                <a class="font-body-md text-body-md text-surface-variant hover:text-primary-fixed transition-colors cursor-pointer"
+                    href="#">Contact Details</a>
+                <a class="font-body-md text-body-md text-surface-variant hover:text-primary-fixed transition-colors cursor-pointer"
+                    href="#">Social Media</a>
+            </div>
+            <!-- Contact Column -->
+            <div class="flex flex-col gap-sm">
+                <h3 class="font-label-md text-label-md text-white font-bold">Contact</h3>
+                <p class="font-body-md text-body-md text-surface-variant flex items-center gap-xs">
+                    <span class="material-symbols-outlined text-sm">mail</span>
+                    info@nansm.org
+                </p>
+            </div>
+        </div>
+        <div class="border-t border-secondary py-sm text-center">
+            <p class="font-body-md text-body-md text-surface-variant">© 2024 National Association of Niger State Medical
+                Students. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

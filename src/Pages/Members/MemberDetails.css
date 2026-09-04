@@ -1,0 +1,25 @@
+.details-main {
+ flex-grow: 1;
+ padding: 80px 24px;
+}
+
+.details-main-grid {
+ display: grid;
+ grid-template-columns: 1fr;
+ gap: 48px;
+}
+
+
+@media (min-width: 1024px) {
+ .details-main-grid {
+  grid-template-columns: repeat(12, 1fr);
+ }
+
+ .details-sidebar {
+  grid-column: span 4;
+ }
+
+ .content-area {
+  grid-column: span 8;
+ }
+}

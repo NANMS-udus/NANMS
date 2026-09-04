@@ -1,0 +1,94 @@
+.news-cards {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 30px;
+}
+
+.news-card {
+ border: 1px solid var(--border-color);
+ border-radius: 8px;
+ overflow: hidden;
+ display: flex;
+ flex-direction: column;
+}
+
+.news-card img {
+ width: 100%;
+ height: 200px;
+ object-fit: cover;
+}
+
+.news-card-content {
+ padding: 20px;
+ flex-grow: 1;
+ display: flex;
+ flex-direction: column;
+}
+
+.news-card-meta {
+ display: flex;
+ align-items: center;
+ gap: 15px;
+ margin-bottom: 15px;
+ font-size: 14px;
+}
+
+.news-badge {
+ padding: 4px 10px;
+ border-radius: 20px;
+ font-size: 12px;
+ font-weight: bold;
+}
+
+.badge-announcement {
+ background-color: #e0f2e9;
+ color: #2e8b57;
+}
+
+.badge-academic {
+ background-color: #fff3e0;
+ color: #ff8c00;
+}
+
+.badge-health {
+ background-color: #e8f5e9;
+ color: #4caf50;
+}
+
+.badge-campus {
+ background-color: #f3e5f5;
+ color: #9c27b0;
+}
+
+.date {
+ color: var(--text-light);
+}
+
+.news-card h2 {
+ font-family: var(--font-family);
+ font-size: 22px;
+ margin-bottom: 15px;
+ color: #000;
+}
+
+.news-card p {
+ color: var(--text-light);
+ margin-bottom: 20px;
+ flex-grow: 1;
+}
+
+.read-more {
+ font-weight: bold;
+ color: #000;
+ display: flex;
+ align-items: center;
+ gap: 5px;
+}
+
+
+
+@media (max-width: 600px) {
+ .news-cards {
+  grid-template-columns: 1fr;
+ }
+}

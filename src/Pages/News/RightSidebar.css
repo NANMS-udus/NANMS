@@ -1,0 +1,79 @@
+.sidebar>div {
+ border: 1px solid var(--border-color);
+ border-radius: 8px;
+ padding: 25px;
+ margin-bottom: 30px;
+}
+
+.sidebar h3 {
+ font-family: var(--font-family);
+ font-size: 24px;
+ margin-bottom: 20px;
+ color: #000;
+}
+
+.search-box input {
+ width: 100%;
+ padding: 12px;
+ border: 1px solid var(--border-color);
+ border-radius: 4px;
+ background-color: var(--bg-light);
+}
+
+.categories-list {
+ list-style: none;
+}
+
+.categories-list li {
+ display: flex;
+ justify-content: space-between;
+ margin-bottom: 15px;
+ color: var(--text-main);
+ cursor: pointer;
+ padding: 6px 8px;
+ border-radius: var(--stack-xs);
+}
+
+.categories-list li:hover{
+ background-color: rgb(235, 233, 233);
+}
+
+.cat-count {
+ background-color: var(--bg-light);
+ padding: 2px 8px;
+ border-radius: 4px;
+ font-size: 12px;
+ color: var(--text-light);
+}
+
+.using,
+.categories-list li:hover .cat-count{
+ background-color: rgb(235, 233, 233);
+}
+
+.using {
+
+}
+
+.recent-post {
+ display: flex;
+ gap: 15px;
+ margin-bottom: 20px;
+}
+
+.recent-post img {
+ width: 60px;
+ height: 60px;
+ object-fit: cover;
+ border-radius: 4px;
+}
+
+.recent-post h4 {
+ font-size: 14px;
+ margin-bottom: 5px;
+}
+
+.recent-post span {
+ font-size: 12px;
+ color: var(--text-light);
+}

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NANSM Member Portal Login</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --color-primary: #00342b;
+            --color-primary-container: #004d40;
+            --color-on-primary-container: #7ebdac;
+            --color-surface-container-lowest: #ffffff;
+            --color-surface: #f8f9fa;
+            --color-outline: #707975;
+            --color-on-surface: #191c1d;
+            --color-secondary: #4c616c;
+            --color-error: #ba1a1a;
+
+            --font-inter: 'Inter', sans-serif;
+            --font-playfair: 'Playfair Display', serif;
+
+            --radius-md: 0.25rem;
+        }
+
+        body {
+            font-family: var(--font-inter);
+            background-color: var(--color-surface);
+            color: var(--color-on-surface);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Header Styles --- */
+        .top-nav-bar {
+            background-color: var(--color-surface-container-lowest);
+            border-bottom: 1px solid var(--color-primary);
+            width: 100%;
+        }
+
+        .top-nav-bar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+        }
+
+        .brand-logo {
+            font-family: var(--font-playfair);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            font-family: var(--font-inter);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--color-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+        }
+
+        .primary-action-btn {
+            font-family: var(--font-inter);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-primary);
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        /* --- Main Content area --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 48px 24px;
+        }
+
+        /* --- Login Card Styles --- */
+        .login-card {
+            background-color: var(--color-surface-container-lowest);
+            border: 1px solid #e0e0e0;
+            border-radius: var(--radius-md);
+            padding: 48px 32px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .login-title {
+            font-family: var(--font-playfair);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-top: 0;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-inter);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--color-on-surface);
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            font-family: var(--font-inter);
+            font-size: 16px;
+            border: 1px solid var(--color-outline);
+            border-radius: var(--radius-md);
+            background-color: var(--color-surface-container-lowest);
+            box-sizing: border-box;
+            transition: border-color 0.2s, outline 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-primary-container);
+            box-shadow: 0 0 0 2px rgba(0, 77, 64, 0.2);
+        }
+
+        .form-input::placeholder {
+            color: var(--color-secondary);
+            opacity: 0.7;
+        }
+
+        .btn-login {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--color-primary-container);
+            color: #ffffff;
+            font-family: var(--font-inter);
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            margin-top: 32px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-login:hover {
+            background-color: var(--color-primary);
+        }
+
+        .links-container {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .auth-link {
+            font-family: var(--font-inter);
+            font-size: 14px;
+            color: var(--color-primary-container);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Footer Styles --- */
+        .site-footer {
+            background-color: #354a53;
+            color: var(--color-surface-container-lowest);
+            padding: 80px 24px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .footer-col-title {
+            font-family: var(--font-playfair);
+            font-size: 24px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 24px;
+            margin-top: 0;
+        }
+
+        .footer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-list-item {
+            font-family: var(--font-inter);
+            font-size: 16px;
+            color: #e1e3e4;
+        }
+
+        .footer-copyright {
+            margin-top: 48px;
+            text-align: center;
+            font-family: var(--font-inter);
+            font-size: 14px;
+            color: #e1e3e4;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Navigation Bar Header -->
+    <header class="top-nav-bar">
+        <div class="top-nav-bar-container">
+            <a class="brand-logo" href="#">NANSM</a>
+            <nav class="nav-links">
+                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="#">Executives</a>
+                <a class="nav-link" href="#">Projects</a>
+                <a class="nav-link" href="#">News</a>
+                <a class="nav-link" href="#">Members</a>
+                <a class="nav-link" href="#">Contact</a>
+            </nav>
+            <button class="primary-action-btn">Portal Login</button>
+        </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="main-content">
+        <div class="login-card">
+            <h1 class="login-title">Member Portal Login</h1>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="student-id">Student ID / Email</label>
+                    <input class="form-input" id="student-id" name="student-id" placeholder="Enter your ID or email"
+                        required="" type="text" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-input" id="password" name="password" placeholder="Enter your password"
+                        required="" type="password" />
+                </div>
+                <button class="btn-login" type="submit">Login</button>
+            </form>
+            <div class="links-container">
+                <a class="auth-link" href="#">Forgot Password?</a>
+                <a class="auth-link" href="#">Not registered? Join the Association</a>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div>
+                <h3 class="footer-col-title">Association Links</h3>
+                <ul class="footer-list">
+                    <li class="footer-list-item">About Us</li>
+                    <li class="footer-list-item">Constitution</li>
+                    <li class="footer-list-item">Leadership</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-col-title">Contact Details</h3>
+                <ul class="footer-list">
+                    <li class="footer-list-item">Secretariat, Minna</li>
+                    <li class="footer-list-item">contact@nansm.org</li>
+                    <li class="footer-list-item">+234 800 000 0000</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-col-title">Social Media</h3>
+                <ul class="footer-list">
+                    <li class="footer-list-item">Twitter</li>
+                    <li class="footer-list-item">LinkedIn</li>
+                    <li class="footer-list-item">Facebook</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            © 2024 National Association of Niger State Medical Students. All rights reserved.
+        </div>
+    </footer>
+</body>
+
+</html>
