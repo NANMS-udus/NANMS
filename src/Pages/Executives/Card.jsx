@@ -49,7 +49,7 @@ export default function Card({ details, pos }) {
               ? 'vp'
               : 'others'
               }`}>{position}</span>
-            <h3 class="exec-card-title">Dr. {holder_name}</h3>
+            <h3 class="exec-card-title">{holder_name}</h3>
             <p class="card-desc">
               {default_caption}
             </p>
