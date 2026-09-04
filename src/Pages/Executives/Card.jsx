@@ -26,7 +26,7 @@ export default function Card({ details, pos }) {
           src={
             members.all.find((m) => {
              return m.id === id
-            }).avatar_url}
+            })?.avatar_url}
             />
       </div>
       {
