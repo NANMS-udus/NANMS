@@ -238,7 +238,7 @@ useEffect(() => {
 
     try {
       if (avatar.size) {
-        const {data: updtData, error: updtError} = await supabase.storage.from('avatars').update('f1e559ba-1567-4697-9a5e-3592c7e2dcc2/Muhammad-Mukhtar Muslim-1787699199665', avatar, {contentType: avatar.type})
+        const {data: updtData, error: updtError} = await supabase.storage.from('avatars').update(myDetails.avatar_path, avatar, {contentType: avatar.type})
   
         if (updtError) {
           throw new Error(updtError.message);

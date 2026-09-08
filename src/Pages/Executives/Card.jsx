@@ -3,7 +3,7 @@ import './Card.css';
 import { GenContext } from '../../MyContexts/GenContexts';
 
 
-export default function Card({ details, pos }) {
+export default function Card({ details }) {
 
   const {members} = useContext(GenContext)
 
@@ -19,41 +19,37 @@ export default function Card({ details, pos }) {
   
 
   return (
-    <div class={`exec-card card-${position === 'President' ? 'president' : position === 'Vice-President 1' || position === 'Vice-President 2' ? 'medium' : 'small'}`}
+    <div className={`exec-card card-${position === 'President' ? 'president' : position === 'Vice-President 1' || position === 'Vice-President 2' ? 'medium' : 'small'}`}
     >
-      <div class="exec-card-img-container">
-        <img class="exec-card-img"
-          data-alt=''
-          src={members.all.find((m) => {
-            return m.id === id
-          })?.avatar_url} />
+      <div className="exec-card-img-container">
+        <img className="exec-card-img" alt='' src={members.all.find((m) => { return m.id === id })?.avatar_url} />
       </div>
       {
         position === 'President'
           ? <>
-            <div class="card-content">
-              <span class="exec-card-label">{position}</span>
-              <h2 class="exec-card-title">{holder_name}</h2>
-              <p class="exec-card-desc">
+            <div className="card-content">
+              <span className="exec-card-label">{position}</span>
+              <h2 className="exec-card-title">{holder_name}</h2>
+              <p className="exec-card-desc">
                 {custom_caption || default_caption}
               </p>
               <div class="card-actions">
-                <button class="card-action-btn"><span class="material-symbols-outlined">mail</span></button>
-                <button class="card-action-btn"><span class="material-symbols-outlined">link</span></button>
+                <button className="card-action-btn"><span className="material-symbols-outlined">mail</span></button>
+                <button className="card-action-btn"><span className="material-symbols-outlined">link</span></button>
               </div>
             </div>
             {/* <span class="material-symbols-outlined bg-icon">local_hospital</span> */}
           </>
           : <>
-            <span class={`exec-card-label label-${
+            <span className={`exec-card-label label-${
               position === 'President' 
               ? 'president' 
               : position.split(' ').includes('Vice-President')  
               ? 'vp'
               : 'others'
               }`}>{position}</span>
-            <h3 class="exec-card-title">Dr. {holder_name}</h3>
-            <p class="card-desc">
+            <h3 className="exec-card-title">{holder_name}</h3>
+            <p className="card-desc">
               {default_caption}
             </p>
           </>}
