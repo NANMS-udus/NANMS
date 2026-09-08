@@ -79,7 +79,7 @@ export const excoPositions = [
   name: 'Sales Director 1',
   defaultDet: {
    position: 'Sales Director 1',
-   holder_name: 'Mahmud Muhammad',
+   holder_name: 'Mahmud Mahmud Muhammad',
    default_caption: 'oversees the generation of income for the association through novel business ideas.'
   }
  },
@@ -130,3 +130,32 @@ export const excoPositions = [
   }
  },
 ]
+
+
+
+
+export const pastMembers = {
+ searchCats: {
+  patrons: {
+   
+  },
+  alumni: {
+   class: [
+    '2026',
+    '2025',
+    '2024',
+    '2023',
+   ],
+   specialty: [
+
+   ]
+  },
+  presidents: {
+   tenures: [
+    '2024-2025',
+    '2025-2026',
+    /* '2026-2027', */
+   ]
+  }
+ }
+}

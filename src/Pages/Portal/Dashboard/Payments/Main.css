@@ -1,0 +1,37 @@
+.pymnt-main-content {
+ flex: 1;
+ width: 100%;
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 90px var(--stack-md);
+ display: flex;
+ flex-direction: column;
+ gap: var(--stack-lg);
+}
+
+.pymnt-page-header {
+ text-align: center;
+ margin-bottom: var(--stack-md);
+}
+
+.pymnt-page-header p {
+ color: var(--secondary);
+ margin-top: 8px;
+}
+
+/* Grid Layouts */
+.grid-layout {
+ display: grid;
+ grid-template-columns: 1fr;
+ gap: var(--stack-md);
+}
+
+@media (min-width: 1024px) {
+ .grid-layout {
+  grid-template-columns: repeat(3, 1fr);
+ }
+
+ .col-span-2 {
+  grid-column: span 2;
+ }
+}

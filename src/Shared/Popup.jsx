@@ -9,25 +9,19 @@ import Loader from './Loader';
 export default function Popup() {
     console.log('popup');
 
-    const { popup, setPopup } = useContext(UiContext)
+    const { popup, hidePopup, removePopup } = useContext(UiContext)
 
     const width = window.getComputedStyle(document.getElementById('root')).width
 
-    const hidePopup = () => {
+    const autohidePopup = () => {
         const h = setTimeout(() => {
-            setPopup((p) => {
-                console.log('h', popup);
-
-                return { ...p, hide: true }
-            })
+            hidePopup()
         }, 6000)
 
         const s = setTimeout(() => {
             console.log('s', popup);
 
-            setPopup((p) => {
-                return { ...p, msg: '', msgType: '', show: false }
-            })
+            removePopup
         }, 10000);
 
 
@@ -42,7 +36,7 @@ export default function Popup() {
         let s;
 
         if (popup.autoHide && parseInt(width) > 550) {
-            [h, s] = hidePopup()
+            [h, s] = autohidePopup()
         }
 
         return () => {
@@ -54,7 +48,7 @@ export default function Popup() {
             }
             /*  */
         }
-    }, [popup.autoHide])
+    }, [popup])
 
 
     return (
@@ -65,7 +59,7 @@ export default function Popup() {
                 if (parseInt(width) <= 550 && popup.autoHide) {
                     console.log();
 
-                    hidePopup()
+                    autohidePopup()
                 }
             }}
         >

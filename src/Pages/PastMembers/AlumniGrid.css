@@ -1,0 +1,124 @@
+.alumni-intro {
+ background-color: var(--on-secondary);
+ border: 1px solid var(--border);
+ border-radius: var(--radius-lg);
+ padding: 2.25rem;
+ margin-bottom: 2rem;
+ display: flex;
+ flex-wrap: wrap;
+ align-items: center;
+ justify-content: space-between;
+ gap: 2rem;
+}
+
+.alumni-intro-text {
+ flex: 1 1 500px;
+}
+
+.alumni-intro-text h3 {
+ font-family: var(--font-serif);
+ font-size: 1.35rem;
+ font-weight: 700;
+ color: var(--primary);
+ margin-bottom: 0.5rem;
+}
+
+.alumni-intro-text p {
+ color: var(--text-muted);
+ font-size: 0.95rem;
+ line-height: 1.6;
+}
+
+.alumni-stats {
+ display: flex;
+ gap: 2.25rem;
+ flex-wrap: wrap;
+}
+
+.stat-item {
+ text-align: center;
+}
+
+.stat-num {
+ font-family: var(--font-serif);
+ font-size: 1.85rem;
+ font-weight: 700;
+ color: var(--primary);
+ display: block;
+ line-height: 1.2;
+}
+
+.stat-label {
+ font-size: 0.775rem;
+ color: var(--text-muted);
+ text-transform: uppercase;
+ letter-spacing: 0.05em;
+ font-weight: 600;
+}
+
+.alumni-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+ gap: 1.5rem;
+}
+
+.alumnus-card {
+ background: var(--on-secondary);
+ border: 1px solid var(--border);
+ border-radius: var(--font-xl);
+ padding: 1.5rem;
+ box-shadow: var(--shadow-sm);
+ display: flex;
+ flex-direction: column;
+ transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.alumnus-card:hover {
+ box-shadow: var(--shadow-md);
+ border-color: #cbd5e1;
+ transform: translateY(-2px);
+}
+
+.alumnus-top {
+ display: flex;
+ align-items: center;
+ gap: 1rem;
+ margin-bottom: 1rem;
+}
+
+.alumnus-thumb {
+ width: 54px;
+ height: 54px;
+ border-radius: 50%;
+ object-fit: cover;
+ flex-shrink: 0;
+ border: 2px solid var(--primary-light);
+ background-color: var(--primary-light);
+}
+
+.alumnus-meta h4 {
+ font-family: var(--font-serif);
+ font-size: 1.05rem;
+ font-weight: 700;
+ color: var(--text-main);
+ line-height: 1.3;
+}
+
+.alumnus-year {
+ font-size: 0.8rem;
+ color: var(--primary-dark);
+ font-weight: 600;
+}
+
+.alumnus-specialty {
+ font-size: 0.825rem;
+ color: var(--primary);
+ margin-bottom: 0.75rem;
+ font-weight: 600;
+}
+
+.alumnus-desc {
+ font-size: 0.875rem;
+ color: var(--text-muted);
+ line-height: 1.55;
+}

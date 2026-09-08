@@ -1,0 +1,194 @@
+.card {
+ background-color: var(--surface-container-lowest);
+ border: 1px solid var(--outline-variant);
+ border-radius: var(--radius-xl);
+ padding: var(--stack-md);
+ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+ margin-bottom: 16px;
+ border-bottom: 1px solid var(--outline-variant);
+ padding-bottom: 8px;
+}
+
+/* Outstanding Balance */
+.balance-container {
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ height: 100%;
+}
+
+.balance-info {
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+ .balance-info {
+  flex-direction: row;
+  align-items: flex-end;
+ }
+}
+
+.balance-amount p:first-child {
+ color: var(--secondary);
+ margin-bottom: 4px;
+}
+
+.balance-amount .amount {
+ color: var(--primary);
+}
+
+.due-date {
+ margin-top: 16px;
+ text-align: left;
+}
+
+@media (min-width: 768px) {
+ .due-date {
+  margin-top: 0;
+  text-align: right;
+ }
+}
+
+.due-date p:first-child {
+ color: var(--secondary);
+ margin-bottom: 4px;
+}
+
+.due-date-value {
+ color: var(--error);
+ font-weight: 600;
+ display: flex;
+ align-items: center;
+ gap: 4px;
+ justify-content: flex-start;
+}
+
+@media (min-width: 768px) {
+ .due-date-value {
+  justify-content: flex-end;
+ }
+}
+
+.btn-pay {
+ width: 100%;
+ background-color: var(--forest);
+ color: white;
+ padding: 12px;
+ border: none;
+ border-radius: var(--radius-lg);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 8px;
+ cursor: pointer;
+ transition: opacity 0.2s;
+ font-weight: 600;
+}
+
+.btn-pay:hover {
+ opacity: 0.9;
+}
+
+.secure-note {
+ color: var(--secondary);
+ text-align: center;
+ margin-top: 12px;
+ font-size: 14px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 4px;
+}
+
+/* Fee Breakdown */
+.fee-list {
+ list-style: none;
+ display: flex;
+ flex-direction: column;
+ gap: 12px;
+}
+
+.fee-item {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 8px 0;
+ border-bottom: 1px solid var(--surface-container);
+}
+
+.fee-item.total {
+ border-bottom: none;
+ padding-top: 16px;
+ margin-top: 8px;
+ font-weight: bold;
+ color: var(--primary);
+}
+
+.fee-item span:last-child {
+ font-weight: 600;
+}
+
+/* Account Details & Verification */
+.account-details-list {
+ list-style: none;
+ display: flex;
+ flex-direction: column;
+ gap: 16px;
+}
+
+.account-detail-item {
+ display: flex;
+ flex-direction: column;
+ gap: 4px;
+}
+
+.account-detail-label {
+ color: var(--secondary);
+ font-size: 14px;
+}
+
+.account-detail-value {
+ font-weight: 600;
+ color: var(--on-surface);
+}
+
+.file-upload-container {
+ display: flex;
+ flex-direction: column;
+ gap: 12px;
+}
+
+.file-input-wrapper {
+ border: 2px dashed var(--outline-variant);
+ border-radius: var(--radius-xl);
+ padding: 24px;
+ text-align: center;
+ background-color: var(--surface-container-low);
+ cursor: pointer;
+ transition: border-color 0.2s;
+}
+
+.file-input-wrapper:hover {
+ border-color: var(--color-forest);
+}
+
+.file-input {
+ display: none;
+}
+
+.btn-submit {
+ background-color: var(--surface-container-high);
+ color: var(--on-surface);
+ padding: 10px 16px;
+ border: 1px solid var(--outline-variant);
+ border-radius: var(--radius-md);
+ cursor: pointer;
+ font-weight: 600;
+ align-self: flex-start;
+}

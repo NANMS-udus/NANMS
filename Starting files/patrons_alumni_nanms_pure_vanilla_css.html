@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Patrons &amp; Alumni Network - NANMS</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #006837;
+      --primary-dark: #004d28;
+      --primary-light: #e8f5e9;
+      --surface: #f7f9ff;
+      --surface-card: #ffffff;
+      --text-main: #191c1e;
+      --text-muted: #536471;
+      --border: #e1e8ed;
+      --gold-accent: #d4af37;
+      --font-serif: 'Source Serif 4', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 24px -4px rgba(0, 0, 0, 0.08);
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--surface);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Navigation Header */
+    .site-header {
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--primary);
+      letter-spacing: -0.01em;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.15s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-link.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary);
+      border-radius: 2px;
+    }
+
+    .btn-register {
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 0.55rem 1.35rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      display: inline-block;
+    }
+
+    .btn-register:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* Page Hero Section */
+    .page-hero {
+      background: linear-gradient(180deg, #ffffff 0%, var(--surface) 100%);
+      padding: 4.25rem 1.5rem 2.75rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .page-title {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .page-subtitle {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* Main Container */
+    .main-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
+
+    /* Section Header */
+    .section-block {
+      margin-bottom: 4.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.85rem;
+      position: relative;
+    }
+
+    .section-header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 72px;
+      height: 2px;
+      background-color: var(--primary);
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.01em;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 0.35rem;
+    }
+
+    /* Section 1: Patrons Grid */
+    .patrons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .patron-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .patron-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: #bee3c9;
+    }
+
+    .patron-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 2rem;
+      right: 2rem;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 0 0 4px 4px;
+    }
+
+    .patron-badge {
+      align-self: flex-start;
+      background-color: #fff8e6;
+      color: #946200;
+      font-size: 0.775rem;
+      font-weight: 700;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid #fedf89;
+      margin-bottom: 1.35rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .patron-header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .patron-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary-light);
+      flex-shrink: 0;
+    }
+
+    .patron-info h3 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+
+    .patron-role {
+      font-size: 0.875rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .patron-institution {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+
+    .patron-bio {
+      color: var(--text-muted);
+      font-size: 0.925rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .patron-quote {
+      background-color: #f7faf8;
+      border-left: 3px solid var(--primary);
+      padding: 0.85rem 1rem;
+      font-style: italic;
+      color: #2c3e50;
+      font-size: 0.875rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    /* Section 2: Past Presidents Grid */
+    .presidents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .president-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .president-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .tenure-pill {
+      display: inline-block;
+      align-self: flex-start;
+      background: #f1f4f9;
+      color: var(--primary-dark);
+      font-size: 0.775rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+    }
+
+    .president-photo {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      background-color: #edf2f7;
+    }
+
+    .president-name {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+    }
+
+    .current-status {
+      font-size: 0.825rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 0.85rem;
+    }
+
+    .key-legacy {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .legacy-label {
+      font-weight: 700;
+      color: var(--text-main);
+      display: block;
+      margin-bottom: 0.2rem;
+      font-size: 0.775rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* Section 3: Notable Alumni Network */
+    .alumni-intro {
+      background-color: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .alumni-intro-text {
+      flex: 1 1 500px;
+    }
+
+    .alumni-intro-text h3 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .alumni-intro-text p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .alumni-stats {
+      display: flex;
+      gap: 2.25rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: block;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .alumni-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .alumnus-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .alumnus-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: #cbd5e1;
+      transform: translateY(-2px);
+    }
+
+    .alumnus-top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .alumnus-thumb {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--primary-light);
+      background-color: var(--primary-light);
+    }
+
+    .alumnus-meta h4 {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .alumnus-year {
+      font-size: 0.8rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .alumnus-specialty {
+      font-size: 0.825rem;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .alumnus-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Section 4: Call to Action Banner */
+    .connect-banner {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 3.25rem 2.5rem;
+      text-align: center;
+      margin-top: 5rem;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .connect-banner h2 {
+      font-family: var(--font-serif);
+      font-size: 2.15rem;
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+      letter-spacing: -0.01em;
+    }
+
+    .connect-banner p {
+      max-width: 620px;
+      margin: 0 auto 1.85rem;
+      font-size: 1.05rem;
+      opacity: 0.92;
+      line-height: 1.6;
+    }
+
+    .connect-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1.15rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-cta-white {
+      background-color: #ffffff;
+      color: var(--primary);
+      padding: 0.8rem 1.85rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+
+    .btn-cta-white:hover {
+      background-color: #f1f5f9;
+      transform: translateY(-2px);
+    }
+
+    .btn-cta-outline {
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      color: #ffffff;
+      padding: 0.8rem 1.85rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+
+    .btn-cta-outline:hover {
+      border-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+    }
+
+    /* Section 5: Standard Footer */
+    .site-footer {
+      background-color: #e8ecf3;
+      border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .footer-brand-text {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .footer-copy {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      transition: color 0.15s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--primary);
+    }
+
+    /* Responsive Media Queries */
+    @media (max-width: 900px) {
+      .page-title {
+        font-size: 2.25rem;
+      }
+
+      .main-nav {
+        display: none;
+      }
+
+      .alumni-intro {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .alumni-stats {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page-title {
+        font-size: 1.85rem;
+      }
+
+      .patrons-grid,
+      .presidents-grid,
+      .alumni-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .patron-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .patron-badge {
+        align-self: center;
+      }
+
+      .connect-banner {
+        padding: 2.25rem 1.25rem;
+      }
+
+      .connect-banner h2 {
+        font-size: 1.65rem;
+      }
+
+      .alumni-stats {
+        flex-direction: column;
+        gap: 1.25rem;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a class="brand-link" href="#">
+        <img alt="NANMS Crest" class="brand-logo"
+          src="https://lh3.googleusercontent.com/aida/AEtjO1UrhwC0BVv9KxClWzw3HLS6X1-kWIELbY4GSfydimXWrp4FNAbmSnBQa6QCrLEO7ezEgxKvhR-NzQjQkL7k964MJO5zob7RIURgSfmQeshPQ92NSO8MXhDvIzpAzisVIDO-3ajJBW7KBvytr9KIsjcaGLQHXWs1pNW4ZqSZRvK6XfFKPWU7XDLxZAoQIGrYN0q7abtXDEFHYvS6JqMy0YH161jAt5k-1wVAZOt0PmID74ONijVRJIIMpA" />
+        <span class="brand-title">NANMS</span>
+      </a>
+      <nav class="main-nav">
+        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="#">About Us</a>
+        <a class="nav-link" href="#">Executives</a>
+        <a class="nav-link" href="#">Projects</a>
+        <a class="nav-link" href="#">News</a>
+        <a class="nav-link active" href="#">Patrons &amp; Alumni</a>
+        <a class="nav-link" href="#">Contact</a>
+      </nav>
+      <a class="btn-register" href="#">Register</a>
+    </div>
+  </header>
+  <!-- Hero Section -->
+  <section class="page-hero">
+    <div class="hero-badge">Guardians of Our Legacy</div>
+    <h1 class="page-title">Patrons &amp; Alumni Network</h1>
+    <p class="page-subtitle">Honoring the eminent healthcare leaders who guide our mission, the visionary past
+      presidents who built our foundation, and our distinguished alumni practicing worldwide.</p>
+  </section>
+  <!-- Main Container -->
+  <main class="main-wrapper">
+    <!-- Section 1: Eminent Patrons & Mentors -->
+    <section class="section-block">
+      <div class="section-header">
+        <h2 class="section-title">Eminent Patrons &amp; Mentors</h2>
+        <p class="section-desc">Distinguished leaders providing institutional guidance, advocacy, and philanthropic
+          support to Niger State medical scholars.</p>
+      </div>
+      <div class="patrons-grid">
+        <!-- Patron 1 -->
+        <article class="patron-card">
+          <div class="patron-badge">★ Grand Patron</div>
+          <div class="patron-header">
+            <img alt="Prof. Mohammed K. Bello" class="patron-avatar"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTF-AK43L9-6og8BO7_dh9BYEch4tkXxaOfvsMffbC45HFvsWedZN4SxQkyN7TJt9y76AGJ11RBnHeLxrYtAmZQK4UVk_ILpWwgsmCEMvirx5Ksqfr3YUHLKLoBCCWMXFWNoAnSwRgfF7TWxClib-YarzYKwJLUcQD9lrFpPFW67XI98XJGpkwB6CEwltj3LBDWY4crflZMvwHz5ez5C4ABL0mPL4ggL_xoioFalMj5Tp_6DJXnjMP" />
+            <div class="patron-info">
+              <h3>Prof. Mohammed K. Bello</h3>
+              <div class="patron-role">FWACS, Consultant Neurosurgeon</div>
+              <div class="patron-institution">Former Provost, College of Health Sciences</div>
+            </div>
+          </div>
+          <p class="patron-bio">An icon in surgical neurology and pioneering medical education administrator in Niger
+            State. Prof. Bello has consistently championed scholarship endowments and clinical laboratory modernization
+            for medical trainees.</p>
+          <div class="patron-quote">
+            "The measure of our medical legacy is found in the integrity, empathy, and scientific competence of the
+            younger generation we nurture."
+          </div>
+        </article>
+        <!-- Patron 2 -->
+        <article class="patron-card">
+          <div class="patron-badge">★ Patron &amp; Health Advisor</div>
+          <div class="patron-header">
+            <img alt="Dr. Zainab Aliyu Tanko" class="patron-avatar"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOfzJ4zE6E9m9PFI2nfLdQXH6dRijopNGPma_fjXB8-z3HMHjwqcH-fr37r-7zxUM0wHGqDXaF-huBv6M-AF00MTdcaibs0tc_m-xjN73zQzKI1wHnnGKO9PdL1cRcOgRXVUqlks985w2KXgFfiXlNrljbLodEG8HGyLJeyYgrcvaPJ7YcVsFZemIEU74io4OazrS4GOc1NBkzSgaukQUwGDACK2gRBoUJEgx-mzj0TUCErAESUZg9" />
+            <div class="patron-info">
+              <h3>Dr. Zainab Aliyu Tanko</h3>
+              <div class="patron-role">FMCOG, Maternal Health Specialist</div>
+              <div class="patron-institution">Senior Healthcare Policy Consultant</div>
+            </div>
+          </div>
+          <p class="patron-bio">A dedicated advocate for rural healthcare reforms and maternal wellness across Northern
+            Nigeria. Dr. Tanko sponsors our annual rural clinical outreach programs and mentors aspiring female
+            surgeons.</p>
+          <div class="patron-quote">
+            "Every underserved village reached by our students is a testament to the transformative power of
+            compassionate clinical practice."
+          </div>
+        </article>
+        <!-- Patron 3 -->
+        <article class="patron-card">
+          <div class="patron-badge">★ Patron &amp; Clinical Benefactor</div>
+          <div class="patron-header">
+            <img alt="Dr. Ibrahim Ndagi" class="patron-avatar"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsMwnhSWGUF-sPx0SrpoqEhm2hRGEBsUT_HqIE0viXnK3c2WQ1DGIt1krXnf4Eupm5vj8xE2WOnBVB1tVOzLT2xqwuxSOU_6loA9WKI9Gwr9cniKoazeP4MTctiosmvnWTOwzOidEwlZRNwiST9YyukwnfIEOqke0dLQ1fbhrb_hODiuBh4HUGYCXFcPQm-43Wy0NNGBFj-jPiO3h29nIL8pfqazOdWmKjVH0Ck29l8ARsbTcSd_BS" />
+            <div class="patron-info">
+              <h3>Dr. Ibrahim Ndagi</h3>
+              <div class="patron-role">FACP, Chief Medical Consultant</div>
+              <div class="patron-institution">Minna Specialist Medical Services</div>
+            </div>
+          </div>
+          <p class="patron-bio">Over 25 years of diagnostic excellence and clinical mentorship. Dr. Ndagi provides
+            continuous residency guidance and subsidizes diagnostic equipment used during NANMS community health camps.
+          </p>
+          <div class="patron-quote">
+            "Academic excellence without moral courage is incomplete. We instill in our students the unyielding pledge
+            of service above self."
+          </div>
+        </article>
+      </div>
+    </section>
+    <!-- Section 2: Past Presidents & Administrations -->
+    <section class="section-block">
+      <div class="section-header">
+        <h2 class="section-title">Past Presidents &amp; Administrations</h2>
+        <p class="section-desc">Honoring the visionary leadership of past student executives who shaped NANMS across
+          successive academic sessions.</p>
+      </div>
+      <div class="presidents-grid">
+        <!-- President 1 -->
+        <article class="president-card">
+          <span class="tenure-pill">2022 – 2023 Administration</span>
+          <img alt="Dr. Umar Farooq Sani" class="president-photo"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxrWXkchyu8KFqTBuQGENKRJeluh2vU78V4dB24WKBrR2lx-AuUazsOpxJNvjcl3U-LuKaZ8zUzd1gR6EJZFTuam4HrcMzue8DAc3D5plxqEmEt1YUhNV_hNpCLIVccvYbKILqEKtW4T1QQMG-nMANNyqiENdCZvOGfGoqktWCMpGuOTEFL19rue57mZHUKYEsToqItgKSMwSnLL2e6aysQVYUIaw4uzKlrEUoKflt32OCwNyi5lzc" />
+          <h3 class="president-name">Dr. Umar Farooq Sani</h3>
+          <div class="current-status">Now Resident Physician, Internal Medicine</div>
+          <div class="key-legacy">
+            <span class="legacy-label">Key Achievement</span>
+            Instituted the Annual Rural Health Outreach grant and inaugurated the Central Medical Research Directorate.
+          </div>
+        </article>
+        <!-- President 2 -->
+        <article class="president-card">
+          <span class="tenure-pill">2021 – 2022 Administration</span>
+          <img alt="Dr. Maryam K. Mustapha" class="president-photo"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP8oAgNIsgavaKe8EU6DR_na6zJ-3ofZd8qkseGCkhTQ4ovw6Hy4dWiFUDFrVEI_T3XpDGWH7_4QzOaCFRRVYL_XZ-LOC2XaKLLvbhWgGAXFCihIbtW_kg6wzLVYk-xHeBtCdISW0Hjfn-i8Mtp3MsZBQRe4gyhfea7YdaLhvMovcdjYrPir_SIc3vJDarXHhOK-HdCq5400NP40iDDzu5tRG47PFxUrUXQf5GW1v8xREaMOOceQpc" />
+          <h3 class="president-name">Dr. Maryam K. Mustapha</h3>
+          <div class="current-status">Now Senior Medical Officer, Pediatrics</div>
+          <div class="key-legacy">
+            <span class="legacy-label">Key Achievement</span>
+            Secured state-wide university accreditation advocacy and launched the peer-to-peer clinical mentorship
+            series.
+          </div>
+        </article>
+        <!-- President 3 -->
+        <article class="president-card">
+          <span class="tenure-pill">2020 – 2021 Administration</span>
+          <img alt="Dr. Ahmad Abubakar Bida" class="president-photo"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1uK27dVjUKT3oPu6nsPL6sZOYYRVPZQn5JNL3Ait17bLSUlvzrzxr57dnhrqDlycE4C6_BzxDjmx9Mda_deYSzeATmAJQr0Fr9rlauhfas-Jlw_HjAgruT-Ctt8fR1HFcTPJM8OqfeEEN3DOHC_yKRlqr-VB6NSTytXpFmuj7YQaIkpXRcMohU7keh0ByrL3aGWPGt1MGLnZJAX06TO3fLykAZau3C5lUglw5_RVLG3chNgPG_mIa" />
+          <h3 class="president-name">Dr. Ahmad Abubakar Bida</h3>
+          <div class="current-status">Now Registrar in General Surgery</div>
+          <div class="key-legacy">
+            <span class="legacy-label">Key Achievement</span>
+            Spearheaded digital emergency learning during academic disruptions and established the first online NANMS
+            library portal.
+          </div>
+        </article>
+        <!-- President 4 -->
+        <article class="president-card">
+          <span class="tenure-pill">2019 – 2020 Administration</span>
+          <img alt="Dr. Salihu Danladi" class="president-photo"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq9joiSuyMpN5_WGY5WrH89RV8HteFAKZ8o-BR60AKFDlx4jjOWk-77i1pE6SPUJdbPcIzKrzI0qgWYbQWFFxwZhYORjQmMwUAo6vRrZAMYGwA4Zf9bu95t1VY7HMkhlrFvPiitKJ7dIlTYjYKNmvPD4B8CTQzDdIFSFX_ztkPAGitzDwsb6jxDTIGu1SLFu8oq1VM2r1xJ2v4A1Frqgs8GBe6ACj_EOPl1kwxDJtuTqQShhBR7wQn" />
+          <h3 class="president-name">Dr. Salihu Danladi</h3>
+          <div class="current-status">Now Clinical Epidemiologist &amp; Researcher</div>
+          <div class="key-legacy">
+            <span class="legacy-label">Key Achievement</span>
+            Formulated the modern NANMS Constitution and led the historic Niger State Primary Healthcare immunization
+            tour.
+          </div>
+        </article>
+      </div>
+    </section>
+    <!-- Section 3: Notable Alumni Network -->
+    <section class="section-block">
+      <div class="section-header">
+        <h2 class="section-title">Notable Alumni Network</h2>
+        <p class="section-desc">Our graduates making ground-breaking contributions in clinical medicine, surgical
+          specialties, and public health worldwide.</p>
+      </div>
+      <!-- Alumni Intro & Stats -->
+      <div class="alumni-intro">
+        <div class="alumni-intro-text">
+          <h3>A Global Community of Healers &amp; Researchers</h3>
+          <p>From university teaching hospitals in Nigeria to world-renowned research institutes across the UK, North
+            America, and beyond, NANMS alumni remain steadfast in advancing healthcare standards and supporting current
+            student cohorts.</p>
+        </div>
+        <div class="alumni-stats">
+          <div class="stat-item">
+            <span class="stat-num">850+</span>
+            <span class="stat-label">Doctors Graduated</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">14</span>
+            <span class="stat-label">Countries Practicing</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">₦12M+</span>
+            <span class="stat-label">Scholarships Awarded</span>
+          </div>
+        </div>
+      </div>
+      <!-- Alumni Cards Grid -->
+      <div class="alumni-grid">
+        <!-- Alumnus 1 -->
+        <article class="alumnus-card">
+          <div class="alumnus-top">
+            <img alt="Dr. Hadiza Suleiman" class="alumnus-thumb"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP1HuKhgAWRbWw8zo_q6XW5FnZrq-WvaBIOWmoHdjffYm3j-N_bhPl_R9nKG1elYb2bl7FUzSv3mGWlMygaKU39xx4_92yOsqgl7_2V9sYws1hVayNWwxJz03LXcLYzqxrIo-QZIaueS3DaAhahHbKL3moe0Fz2vk_6Fwnf9G8_NKafw517VOv45aai9YWoYclv78mft_4lzQmHYB4jfXhXl0-Vm5yjTKFaXWW8SYI4bvpUoZ2Cl29" />
+            <div class="alumnus-meta">
+              <h4>Dr. Hadiza Suleiman</h4>
+              <div class="alumnus-year">Class of 2015</div>
+            </div>
+          </div>
+          <div class="alumnus-specialty">Consultant Cardiologist | Imperial College Trust, UK</div>
+          <p class="alumnus-desc">Leading cardiovascular interventionist and clinical researcher with over 18
+            peer-reviewed publications. Founded the Diaspora Clinical Webinar Series for NANMS members.</p>
+        </article>
+        <!-- Alumnus 2 -->
+        <article class="alumnus-card">
+          <div class="alumnus-top">
+            <img alt="Dr. Usman Shehu Garba" class="alumnus-thumb"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNfKG3f7-RS41AP53SU1a1h7moFABM4OB6iEMMuyQJI5zq2WIxn4t81MLGdhQZjCctWSydmX4p7IOiYJntSG6_NGrCVx7swwez1xWVAMFxzXhPwgReG2rW_3k1AkhpQaM7_3SXZKpEA0l3Uo8Gwwp_vGEu0T4_P9rNPWIHzH5Jn3fpf775RMtT3LRJoWLnbc8UTu2Fakhc9d51kHNra-8xxi6Um531ppxiwoyfLDE1hqA3gFu7VQ28" />
+            <div class="alumnus-meta">
+              <h4>Dr. Usman Shehu Garba</h4>
+              <div class="alumnus-year">Class of 2017</div>
+            </div>
+          </div>
+          <div class="alumnus-specialty">Senior Registrar, Orthopaedic &amp; Trauma Surgery</div>
+          <p class="alumnus-desc">Specializing in reconstructive bone surgery at National Hospital Abuja. Frequent lead
+            surgeon on voluntary surgical camps in underserved Niger State districts.</p>
+        </article>
+        <!-- Alumnus 3 -->
+        <article class="alumnus-card">
+          <div class="alumnus-top">
+            <img alt="Dr. Aisha Kontagora" class="alumnus-thumb"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8IxSmkjpy9w8E0PoVH89MYQgBh4UlKa16t_FC17drpffVv339thimClBw9ONqASRhNkuUKYQcmM2BvOCNLczwzOgYzITQNbG_KLmnk0AG2o6l_g89wzxyQkYVy9i2CVfLSWtGhFSRk2JiAwjMRzaMkOogubMiLWzt7ZLxKL3lvfNR5ltiyO-6VHEBIoe5kjiHoJi5tvRWwp353Hi8sZCAnaTy4_C7unm9r-JYz3Kc0gNLSDKtszlg" />
+            <div class="alumnus-meta">
+              <h4>Dr. Aisha Kontagora</h4>
+              <div class="alumnus-year">Class of 2018</div>
+            </div>
+          </div>
+          <div class="alumnus-specialty">Global Health Scientist | WHO Country Office</div>
+          <p class="alumnus-desc">Expert in infectious disease surveillance and outbreak response policy. Coordinates
+            national epidemic preparedness frameworks across sub-Saharan Africa.</p>
+        </article>
+        <!-- Alumnus 4 -->
+        <article class="alumnus-card">
+          <div class="alumnus-top">
+            <img alt="Dr. David K. Tsado" class="alumnus-thumb"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKYbmJz4beN5C0YxzJN6-T3vg_dE09qY2uqhQ_vf7vTsddUHkstYwPY8ePP4WIkjN0mOsY486ZqdKYDmkbvdzJhIccUwojS4eMBsA7TCtMcoH_UK6HzC_CvFvKnMq8AgycB8qDOE_dtTriLAmXAVUBlDvLJtj1mSJWvE0p3q_GWyp2BqwZPr65CqaxTyhTIcBxaoposN2GYv-C0kjmX49pcrozXIOtNoh_SFlxj97CMhhOfGN_slHn" />
+            <div class="alumnus-meta">
+              <h4>Dr. David K. Tsado</h4>
+              <div class="alumnus-year">Class of 2016</div>
+            </div>
+          </div>
+          <div class="alumnus-specialty">Emergency &amp; Critical Care Physician | Lagos State EMS</div>
+          <p class="alumnus-desc">Pioneered pre-hospital trauma response protocols in metropolitan emergency systems.
+            Facilitates advanced BLS/ACLS life-support simulations for clinical students.</p>
+        </article>
+      </div>
+    </section>
+    <!-- Section 4: Call to Action -->
+    <div class="connect-banner">
+      <h2>Are You a NANMS Graduate?</h2>
+      <p>Stay connected with your alma mater, mentor aspiring medical practitioners, and contribute to our annual
+        scholarship and medical outreach funds.</p>
+      <div class="connect-actions">
+        <a class="btn-cta-white" href="#">Join Alumni Directory</a>
+        <a class="btn-cta-outline" href="#">Sponsor a Medical Student</a>
+      </div>
+    </div>
+  </main>
+  <!-- Section 5: Standard Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-brand-text">NANMS</span>
+      </div>
+      <div class="footer-copy">
+        © 2024 National Association of Niger State Medical Students (NANMS). All rights reserved.
+      </div>
+      <ul class="footer-links">
+        <li><a class="footer-link" href="#">Privacy Policy</a></li>
+        <li><a class="footer-link" href="#">Terms of Service</a></li>
+        <li><a class="footer-link" href="#">Constitution</a></li>
+        <li><a class="footer-link" href="#">FAQ</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

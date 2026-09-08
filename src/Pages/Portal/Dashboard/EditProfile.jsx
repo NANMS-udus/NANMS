@@ -6,7 +6,7 @@ import { LGAs } from '../../../Utils/data';
 import { AuthContext } from '../../../MyContexts/AuthContext';
 import Footer from '../../../Shared/Footer';
 import Nav from '../../../Shared/Nav';
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate, useNavigation } from 'react-router';
 import { UiContext } from '../../../MyContexts/UiContext';
 
 export default function EditProfile() {
@@ -53,6 +53,8 @@ export default function EditProfile() {
     research_interests: resInts
   } = myDetails
 
+  const navigate = useNavigation()
+
   useEffect(() => {
     (() => {
       if (recPos) {
@@ -64,6 +66,18 @@ export default function EditProfile() {
       }
     })()
   }, [recPos])
+
+  useEffect(() => {
+
+    if (editState.success) {
+      showPopup('success', `${editState.message}. You will be redirected to the dashboard in 5 seconds.`)
+      navigate('/members/dashboard')
+    }
+
+    if (editState.success === false) {
+      showPopup('err', `${editState.message}. Please wait a few minutes and try again.`)
+    }
+  }, [editState.success])
 
   function addPstng(prev, input) {
     const enteries = Object.fromEntries(input)
@@ -135,7 +149,7 @@ export default function EditProfile() {
                   }}
                   onChange={(e) => {
                     console.log(e.target.files[0]);
-                    
+
                     if (e.target.files[0].size) {
                       setAvatar(e.target.files[0])
                     }

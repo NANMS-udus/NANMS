@@ -37,6 +37,12 @@ export default function Nav({ currentPage }) {
             Executives
           </Link>
           <Link
+            to={'/patrons-alumni'}
+            className={currentPage === 'p&a' ? 'active' : ''}
+          >
+            Patrons & Alumni
+          </Link>
+          <Link
             to={'/news'}
             className={currentPage === 'news' ? 'active' : ''}
           >

@@ -15,7 +15,7 @@ export default function Login() {
   } = useContext(AuthContext)
 
   const {
-    setPopup
+    showPopup,
   } = useContext(UiContext)
 
   const [showFrgtnPswd, setShowFrgtnPswd] = useState(false)
@@ -27,26 +27,8 @@ export default function Login() {
   ] = useActionState(signIn, { success: null, message: '' })
 
   useEffect(() => {
-    if (signInResp.success === false) {
-      setPopup({
-        show: true,
-        hide: false,
-        autoHide: true,
-        msg: signInResp.message,
-        msgType: 'err'
-      })
-    }
-  }, [signInResp.success])
-
-  useEffect(() => {
     if (isSigningIn) {
-      setPopup({
-        show: true,
-        hide: false,
-        autoHide: false,
-        msg: 'signing in',
-        msgType: 'pending'
-      })
+      showPopup('pending', 'Signing in', false)
     }
   }, [isSigningIn])
 

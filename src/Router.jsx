@@ -10,6 +10,8 @@ import RegSuccess from "./Pages/Portal/Authentication/RegSuccess";
 import Dashboard from "./Pages/Portal/Dashboard/Dashboard";
 import Login from "./Pages/Portal/Authentication/Login";
 import EditProfile from "./Pages/Portal/Dashboard/EditProfile";
+import Payments from "./Pages/Portal/Dashboard/Payments/PayDues";
+import PastMembers from "./Pages/PastMembers/PastMembers";
 
 export const myRouter = createBrowserRouter([
  {
@@ -31,6 +33,10 @@ export const myRouter = createBrowserRouter([
  {
   path: 'news',
   Component: News
+ },
+ {
+  path: 'patrons-alumni',
+  Component: PastMembers
  },
  {
   path: 'members',
@@ -61,7 +67,11 @@ export const myRouter = createBrowserRouter([
      {
       path: 'edit-profile',
       Component: EditProfile
-     }
+     },
+     {
+      path: 'payments',
+      Component: Payments
+     },
     ]
    },
   ]

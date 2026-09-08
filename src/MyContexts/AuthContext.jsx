@@ -178,6 +178,8 @@ useEffect(() => {
       const { data, error } = await supabase.auth.signInWithPassword(entries)
 
       if (error) {
+        showPopup('err', error.message)
+
         throw new Error(error.message);
       }
 
@@ -188,7 +190,7 @@ useEffect(() => {
 
         setSession(data.session)
 
-        return { success: true, message: 'signed in successfuly' }
+        return
       }
 
     } catch (error) {
@@ -297,8 +299,6 @@ async function editProfile(prev, input) {
 
   try {
     const {data, error} = await supabase.from('member').update({
-      avatar_url,
-      avatar_path,
       fullname,
       phone,
       date_admitted,
@@ -309,14 +309,19 @@ async function editProfile(prev, input) {
       recent_postings
     })
     .eq('id', session.user.id)
+    .select()
+    .single()
 
     if (error) {
       throw new Error(error.message);
-      
     }
 
     if (!error && data) {
       console.log(data);
+
+      setDetails(data)
+
+      return {success: true, message: 'Your profile details have been updated successfuly'}
       
     }
   } catch (error) {

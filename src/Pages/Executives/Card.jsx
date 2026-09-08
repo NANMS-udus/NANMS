@@ -8,11 +8,15 @@ export default function Card({ details, pos }) {
   const {members} = useContext(GenContext)
 
   const {
+    id,
     position,
     holder_name,
     custom_caption,
     default_caption
   } = details || {}
+
+  console.log(members);
+  
 
   return (
     <div class={`exec-card card-${position === 'President' ? 'president' : position === 'Vice-President 1' || position === 'Vice-President 2' ? 'medium' : 'small'}`}
@@ -20,7 +24,9 @@ export default function Card({ details, pos }) {
       <div class="exec-card-img-container">
         <img class="exec-card-img"
           data-alt=''
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgxtjHJro4ZGgnSVeOpMRGIA9ZjNmYZ-axTJBq8_m8ZYVSrkHzmIMY9oVwouSlDkXkcvmiOL6eK7UfxoDpKLYrsKP93rWwzlQNUQmNDzAIR77oWI_xllKBC1yYpzrK4xID2Kby9u-2dDaf3oBkizyiJnMEXn_o6pwTTSuE-WJ8F6w47Lo1oScQeIAaK-NvN5t2eWCBYzdveG3TNGtMK0NuTYAQT_S2AJGDlZxG36JHt2ifkNqvKzM6" />
+          src={members.all.find((m) => {
+            return m.id === id
+          })?.avatar_url} />
       </div>
       {
         position === 'President'

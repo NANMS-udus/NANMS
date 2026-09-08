@@ -1,6 +1,8 @@
 :root {
   /* Colors */
-  --primary: #004d27;
+  --primary: #006837;
+  --primary-dark: #004d28;
+  --primary-light: #e8f5e9;
   --primary-container: #006837;
   --on-primary-container: #8ee4a6;
   --on-primary-fixed-variant: #065043;
@@ -11,6 +13,8 @@
   --surface: #f7f9ff;
   --surface-dim: #d7dadf;
   --surface-variant: #e0e3e8;
+  --surface-container: #edeeef;
+  --surface-container-low: #f3f4f5;
   --surface-container-lowest: #ffffff;
   --surface-container-high: #e5e8ee;
   --surface-container-highest: #e0e3e8;
@@ -21,6 +25,7 @@
   --on-secondary-fixed: #071e27;
   --secondary-container: #cfe6f2;
   --on-secondary-container: #526772;
+  --border: #e1e8ed;
   --outline: #6f7a70;
   --outline-variant: #bec9be;
   --on-primary: #ffffff;
@@ -29,6 +34,9 @@
   --tertiary-container: #765400;
   --on-tertiary-container: #ffc961;
   --text-secondary: #4c616c;
+  --error: #ba1a1a;
+  --forest: #004d40;
+  --gold-accent: #d4af37;
 
   /* Typography */
   --font-body: 'Inter', sans-serif;
@@ -42,10 +50,12 @@
   --font-label-sm: 'Inter', sans-serif;
   --font-family: 'Georgia', serif;
   --font-sans: 'Arial', sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
   --font-inter: 'Inter', sans-serif;
   --font-playfair: 'Playfair Display', serif;
   --text-light: #666;
   --text-main: #333;
+  --text-muted: #536471;
 
 
   /* Spacing */
@@ -65,6 +75,11 @@
   --radius-xl: 0.5rem;
   --radius-full: 0.75rem;
   --radius-md: 0.25rem;
+
+  /* shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 24px -4px rgba(0, 0, 0, 0.08);
 }
 
 #root {
@@ -248,6 +263,6 @@ button {
 
 @media (max-width: 500px) {
   main {
-   padding: 12px; 
+    padding: 12px;
   }
 }

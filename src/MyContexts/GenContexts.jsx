@@ -15,7 +15,16 @@ export default function GenCntxt({ children }) {
 
   const [news, setNews] = useState([])
 
+  const [ptrns, setPtrns] = useState([])
+
+  const [presidents, setPresidents] = useState([])
+
+  const [alumni, setAlumni] = useState([])
+
   const sideNavElem = useRef(null)
+
+
+
   /* GET MEMBERS CONTEXT */
 
   useEffect(() => {
@@ -131,11 +140,87 @@ export default function GenCntxt({ children }) {
     getNews()
   }, [])
 
+  /* GET PATRONS, ALUMNI AND PRESIDENTS */
+
+  useEffect(() => {
+    async function getPtrns() {
+      try {
+        const {data, error} = supabase.from('patrons').select('*')
+
+        if (error) {
+          throw new Error(error.message);
+          
+        }
+
+        if (!error && data) {
+          console.log(data);
+          
+          setPtrns(data)
+        }
+
+
+      } catch (error) {
+        console.log(error.message);
+        
+      }
+    }
+
+    async function getPresidents() {
+      try {
+        const {data, error} = supabase.from('Presidents').select('*')
+
+        if (error) {
+          throw new Error(error.message);
+        }
+
+        if (!error && data) {
+          console.log(data);
+          
+          setPresidents(data)
+        }
+
+
+      } catch (error) {
+        console.log(error.message);
+        
+      }
+    }
+
+    async function getAlumni() {
+      try {
+        const {data, error} = supabase.from('alumni').select('*')
+
+        if (error) {
+          throw new Error(error.message);
+          
+        }
+
+        if (!error && data) {
+          console.log(data);
+          
+          setAlumni(data)
+        }
+
+
+      } catch (error) {
+        console.log(error.message);
+        
+      }
+    }
+
+    getPtrns()
+    getPresidents()
+    getAlumni()
+  }, [])
+
   return (
     <GenContext.Provider value={{
       members,
       setMembers,
       excos,
+      ptrns,
+      presidents,
+      alumni,
       news,
       showSideNav,
       setShowSideNav,
