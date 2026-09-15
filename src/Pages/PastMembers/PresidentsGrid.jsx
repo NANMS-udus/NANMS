@@ -1,8 +1,9 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import PaginationSection from './PaginationSection';
 import './PresidentsGrid.css';
 import { GenContext } from '../../MyContexts/GenContexts';
 import PresidentCard from './PresidentCard';
+import UtilsSection from './UtilsSection';
 
 export default function PresidentsGrid({ arrayByPage }) {
 
@@ -10,11 +11,17 @@ export default function PresidentsGrid({ arrayByPage }) {
 
   const [pageNo, setPageNo] = useState(1)
 
-  console.log(presidents);
+  const [displayed, setDisplayed] = useState(presidents)
 
-  const presByPage = arrayByPage(presidents, 4)
+  useEffect(() => {
+    function updateDisplayed() {
+      setDisplayed(presidents)
+    }
 
-  console.log(presByPage);
+    updateDisplayed()
+  }, [presidents])
+
+  const presByPage = arrayByPage(displayed, 6)
 
   return (
     <section class="section-block">
@@ -23,11 +30,17 @@ export default function PresidentsGrid({ arrayByPage }) {
         <p class="section-desc">Honoring the visionary leadership of past student executives who shaped NANMS across
           successive academic sessions.</p>
       </div>
+      <UtilsSection
+        def={presidents}
+        setterFun={setDisplayed}
+        filterParams={['tenure']}
+        target={displayed}
+      />
       {
         presidents.length
           ? <div class="presidents-grid">
             {
-              presByPage[pageNo - 1].map((p) => {
+              presByPage[pageNo - 1]?.map((p) => {
                 return <PresidentCard details={p} />
               })
             }

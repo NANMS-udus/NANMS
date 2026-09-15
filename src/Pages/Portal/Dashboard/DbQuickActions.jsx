@@ -10,15 +10,18 @@ export default function DbQuickActions() {
     <section class="quick-actions">
       <Link
         class="action-card"
-        to={'/members/dashboard/edit-profile'}
+        to={'edit-profile'}
       >
         <img style={{width: '28px', marginBottom: '14px'}} src={edit} alt="" />
         <span class="font-label-md text-on-surface">Update Profile</span>
       </Link>
-      <button class="action-card">
+      <Link 
+      class="action-card"
+      to={'payments'}
+      >
       <img style={{width: '28px', marginBottom: '14px'}} src={wallet} alt="" />
         <span class="font-label-md text-on-surface">Pay Dues</span>
-      </button>
+      </Link>
       <button class="action-card">
       <img style={{width: '28px', marginBottom: '14px'}} src={idCard} alt="" />
         <span class="font-label-md text-on-surface">Download ID</span>

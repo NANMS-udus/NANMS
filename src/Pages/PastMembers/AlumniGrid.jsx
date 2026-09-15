@@ -1,8 +1,9 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './AlumniGrid.css';
 import PaginationSection from './PaginationSection';
 import { GenContext } from '../../MyContexts/GenContexts';
 import AlumniCard from './AlumniCard';
+import UtilsSection from './UtilsSection';
 
 export default function AlumniGrid({ arrayByPage }) {
 
@@ -10,11 +11,17 @@ export default function AlumniGrid({ arrayByPage }) {
 
   const [pageNo, setPageNo] = useState(1)
 
-  console.log(alumni);
+  const [displayed, setDisplayed] = useState(alumni)
 
-  const alumniByPage = arrayByPage(alumni, 6)
+  useEffect(() => {
+    function updateDisplayed() {
+      setDisplayed(alumni)
+    }
 
-  console.log(alumniByPage);
+    updateDisplayed()
+  }, [alumni])
+
+  const alumniByPage = arrayByPage(displayed, 6)
 
   return (
     <section class="section-block">
@@ -35,21 +42,54 @@ export default function AlumniGrid({ arrayByPage }) {
             <span class="stat-num">850+</span>
             <span class="stat-label">Doctors Graduated</span>
           </div>
-          {/* <div class="stat-item">
-            <span class="stat-num">14</span>
-            <span class="stat-label">Countries Practicing</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-num">₦12M+</span>
-            <span class="stat-label">Scholarships Awarded</span>
-          </div> */}
         </div>
       </div>
+      <UtilsSection target={[
+        {
+          name: 'name 5',
+          class: '2026',
+          specialty: 'Physiology'
+        },
+        {
+          name: 'name 4',
+          class: '2021',
+          specialty: 'Endocrinology'
+        },
+        {
+          name: 'name 3',
+          class: '2020',
+          specialty: 'Cardiology'
+        },
+        {
+          name: 'name 2',
+          class: '2023',
+          specialty: 'Microbiology'
+        },
+        {
+          name: 'name 1',
+          class: '2026',
+          specialty: 'Pathology'
+        },
+        {
+          name: 'name 6',
+          class: '2026',
+          specialty: 'Gastroenterology'
+        },
+        {
+          name: 'name 7',
+          class: '2026',
+          specialty: 'Opthalmology'
+        }
+      ]} 
+      setterFun={setDisplayed} 
+      filterParams={['class', 'specialty']}
+      def={alumni}
+      />
       {
         alumni.length
           ? <div class="alumni-grid">
             {
-              alumniByPage[pageNo - 1].map((a) => {
+              alumniByPage[pageNo - 1]?.map((a) => {
 
                 return <AlumniCard details={a} />
               })

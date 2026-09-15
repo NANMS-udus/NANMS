@@ -8,6 +8,7 @@ import Footer from '../../../Shared/Footer';
 import Nav from '../../../Shared/Nav';
 import { Link, useNavigate, useNavigation } from 'react-router';
 import { UiContext } from '../../../MyContexts/UiContext';
+import Redirect from '../../../Redirect';
 
 export default function EditProfile() {
 
@@ -114,7 +115,7 @@ export default function EditProfile() {
   }
 
   return (
-    <>
+    <Redirect>
       <Nav currentPage={'db'} />
       <main class="container db-main">
         <Link to={'/members/dashboard'}>
@@ -385,6 +386,6 @@ export default function EditProfile() {
         </div>
       </main>
       <Footer />
-    </>
+    </Redirect>
   );
 };

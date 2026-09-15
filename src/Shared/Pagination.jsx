@@ -20,8 +20,6 @@ export default function Pagination({ target, pageNo, setPageNo }) {
         target?.map((pg) => {
           const no = target.indexOf(pg) + 1
 
-          console.log(no);
-
           return (
             <Fragment key={crypto.randomUUID()}>
               {

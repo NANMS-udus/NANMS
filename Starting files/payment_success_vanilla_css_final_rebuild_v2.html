@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>NANSM - Payment Successful</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NANSM - Payment Successful</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
         :root {
             /* Colors */
             --primary: #00342b;
@@ -21,11 +29,11 @@
             --success: #0a8451;
             --on-secondary-fixed: #071e27;
             --primary-fixed: #afefdd;
-            
+
             /* Typography */
             --font-headline: 'Playfair Display', serif;
             --font-body: 'Inter', sans-serif;
-            
+
             /* Spacing */
             --spacing-xs: 8px;
             --spacing-sm: 16px;
@@ -34,7 +42,7 @@
             --spacing-xl: 80px;
             --gutter: 24px;
             --container-max: 1200px;
-            
+
             /* Radius */
             --radius-md: 4px;
             --radius-lg: 8px;
@@ -57,7 +65,7 @@
         }
 
         /* Nav & Footer - Specific Rules overridden as per prompt (No Tailwind) */
-        
+
         .main-content {
             flex: 1;
             display: flex;
@@ -74,7 +82,7 @@
             max-width: 600px;
             width: 100%;
             text-align: center;
-            box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .success-icon {
@@ -113,7 +121,7 @@
             padding: var(--spacing-xs) 0;
             border-bottom: 1px solid #e0e0e0;
         }
-        
+
         .summary-row:last-child {
             border-bottom: none;
         }
@@ -171,21 +179,21 @@
         }
 
         .btn-secondary:hover {
-            background-color: rgba(0,0,0,0.05);
+            background-color: rgba(0, 0, 0, 0.05);
         }
 
         .footer-note {
             font-size: 12px;
             color: var(--secondary);
         }
-        
+
         /* Shared Components Styles */
         .top-nav {
             background-color: var(--surface-container-lowest);
             border-bottom: 1px solid var(--primary);
             width: 100%;
         }
-        
+
         .top-nav-container {
             display: flex;
             justify-content: space-between;
@@ -194,20 +202,20 @@
             margin: 0 auto;
             padding: var(--spacing-sm) var(--gutter);
         }
-        
+
         .brand-logo {
             font-family: var(--font-headline);
             font-size: 24px;
             font-weight: 700;
             color: var(--primary);
         }
-        
+
         .nav-links {
             display: flex;
             gap: var(--spacing-md);
             list-style: none;
         }
-        
+
         .nav-link {
             font-family: var(--font-body);
             font-size: 14px;
@@ -217,17 +225,17 @@
             text-decoration: none;
             cursor: pointer;
         }
-        
+
         .nav-link:hover {
             color: var(--primary);
         }
-        
+
         .footer-area {
             background-color: var(--on-secondary-fixed);
             width: 100%;
             color: var(--surface-container-lowest);
         }
-        
+
         .footer-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -236,75 +244,80 @@
             margin: 0 auto;
             padding: var(--spacing-xl) var(--gutter);
         }
-        
+
         .footer-logo {
             font-family: var(--font-headline);
             font-size: 24px;
             color: #ffffff;
             margin-bottom: var(--spacing-sm);
         }
-        
+
         .footer-text {
             font-family: var(--font-body);
             font-size: 16px;
         }
-        
+
         .footer-link {
             color: var(--surface-variant);
             text-decoration: none;
             display: block;
             margin-bottom: 8px;
         }
-        
+
         .footer-link:hover {
             color: var(--primary-fixed);
         }
-        
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
+
             .footer-container {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
-<!-- Suppressed navigation shell for transactional page (Top Nav normally here, but suppressed by rule) -->
-<main class="main-content">
-<div class="success-card">
-<span class="material-symbols-outlined success-icon" data-icon="check_circle" data-weight="fill">check_circle</span>
-<h1 class="success-heading">Payment Successful</h1>
-<p class="success-message">Your payment for the 2023 Annual Association Dues has been received and is being processed.</p>
-<div class="transaction-summary">
-<div class="summary-row">
-<span class="summary-label">Transaction ID:</span>
-<span class="summary-value">#NANS-8293-XP</span>
-</div>
-<div class="summary-row">
-<span class="summary-label">Date:</span>
-<span class="summary-value">October 24, 2023</span>
-</div>
-<div class="summary-row">
-<span class="summary-label">Amount Paid:</span>
-<span class="summary-value">₦45,000.00</span>
-</div>
-<div class="summary-row">
-<span class="summary-label">Payment Method:</span>
-<span class="summary-value">Online (Paystack)</span>
-</div>
-<div class="summary-row">
-<span class="summary-label">Status:</span>
-<span class="summary-value">Completed</span>
-</div>
-</div>
-<div class="action-buttons">
-<a class="btn btn-primary" href="#">Download Receipt</a>
-<a class="btn btn-secondary" href="#">Return to Dashboard</a>
-</div>
-<p class="footer-note">A copy of this receipt has also been sent to your registered email address.</p>
-</div>
-</main>
-<!-- Suppressed footer for transactional page -->
-</body></html>
+    <!-- Suppressed navigation shell for transactional page (Top Nav normally here, but suppressed by rule) -->
+    <main class="main-content">
+        <div class="success-card">
+            <span class="material-symbols-outlined success-icon" data-icon="check_circle"
+                data-weight="fill">check_circle</span>
+            <h1 class="success-heading">Payment Successful</h1>
+            <p class="success-message">Your payment for the 2023 Annual Association Dues has been received and is being
+                processed.</p>
+            <div class="transaction-summary">
+                <div class="summary-row">
+                    <span class="summary-label">Transaction ID:</span>
+                    <span class="summary-value">#NANS-8293-XP</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Date:</span>
+                    <span class="summary-value">October 24, 2023</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Amount Paid:</span>
+                    <span class="summary-value">₦45,000.00</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Payment Method:</span>
+                    <span class="summary-value">Online (Paystack)</span>
+                </div>
+                    <span class="summary-label">Status:</span>
+                    <span class="summary-value">Completed</span>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <a class="btn btn-primary" href="#">Download Receipt</a>
+                <a class="btn btn-secondary" href="#">Return to Dashboard</a>
+            </div>
+            <p class="footer-note">A copy of this receipt has also been sent to your registered email address.</p>
+        </div>
+    </main>
+    <!-- Suppressed footer for transactional page -->
+</body>
+
+</html>

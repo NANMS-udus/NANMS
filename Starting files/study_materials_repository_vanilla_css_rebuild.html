@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>NANSM - Study Materials</title>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NANSM - Study Materials</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
         :root {
             /* Colors based on Tailwind Config */
-            --primary: #00342b; /* primary */
-            --primary-container: #004d40; /* primary-container - requested as primary in prompt, using config closest match */
+            --primary: #00342b;
+            /* primary */
+            --primary-container: #004d40;
+            /* primary-container - requested as primary in prompt, using config closest match */
             --on-primary: #ffffff;
             --surface-container-lowest: #ffffff;
-            --surface-bright: #f8f9fa; /* background */
+            --surface-bright: #f8f9fa;
+            /* background */
             --on-surface: #191c1d;
             --secondary: #4c616c;
             --outline: #707975;
             --outline-variant: #bfc9c4;
-            --on-secondary-fixed: #071e27; /* Footer BG */
-            
+            --on-secondary-fixed: #071e27;
+            /* Footer BG */
+
             /* Typography */
             --font-headline: 'Playfair Display', serif;
             --font-body: 'Inter', sans-serif;
-            
+
             /* Spacing (approximations from config) */
             --spacing-xs: 8px;
             --spacing-sm: 16px;
@@ -32,9 +44,10 @@
             --spacing-lg: 48px;
             --spacing-xl: 80px;
             --gutter: 24px;
-            
+
             /* Borders */
-            --border-radius: 4px; /* lg from config */
+            --border-radius: 4px;
+            /* lg from config */
         }
 
         body {
@@ -89,7 +102,7 @@
             text-decoration: none;
             transition: color 0.2s;
         }
-        
+
         .nav-link:hover {
             color: var(--primary);
         }
@@ -101,7 +114,8 @@
             color: var(--primary);
             border-bottom: 2px solid var(--primary);
             font-weight: bold;
-            padding-bottom: 4px; /* pb-1 */
+            padding-bottom: 4px;
+            /* pb-1 */
         }
 
         .primary-action {
@@ -131,7 +145,8 @@
 
         .hero-title {
             font-family: var(--font-headline);
-            font-size: 48px; /* display-lg */
+            font-size: 48px;
+            /* display-lg */
             font-weight: 700;
             color: var(--primary);
             margin: 0 0 var(--spacing-sm) 0;
@@ -139,7 +154,8 @@
         }
 
         .hero-subtitle {
-            font-size: 18px; /* body-lg */
+            font-size: 18px;
+            /* body-lg */
             color: var(--secondary);
             max-width: 600px;
             margin: 0 auto;
@@ -154,7 +170,7 @@
             border: 1px solid var(--outline-variant);
             border-radius: var(--border-radius);
             margin-bottom: var(--spacing-lg);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
 
         .search-group {
@@ -179,11 +195,12 @@
             font-size: 16px;
             box-sizing: border-box;
         }
-        
+
         .search-input:focus {
             outline: none;
             border: 2px solid var(--primary-container);
-            padding: 11px 11px 11px 39px; /* compensate for thicker border */
+            padding: 11px 11px 11px 39px;
+            /* compensate for thicker border */
         }
 
         .select-group {
@@ -227,7 +244,7 @@
         }
 
         .resource-card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .card-header {
@@ -244,7 +261,8 @@
 
         .resource-title {
             font-family: var(--font-headline);
-            font-size: 24px; /* headline-md */
+            font-size: 24px;
+            /* headline-md */
             font-weight: 600;
             margin: 0;
             color: var(--primary);
@@ -264,7 +282,7 @@
             gap: 4px;
             margin-right: 12px;
         }
-        
+
         .meta-item .material-symbols-outlined {
             font-size: 16px;
         }
@@ -349,7 +367,7 @@
             text-decoration: none;
             font-weight: 600;
         }
-        
+
         .sidebar-item-text:hover {
             color: var(--primary-container);
         }
@@ -397,9 +415,10 @@
         }
 
         .footer-link:hover {
-            color: #afefdd; /* primary-fixed */
+            color: #afefdd;
+            /* primary-fixed */
         }
-        
+
         .footer-bottom {
             max-width: 1200px;
             margin: var(--spacing-lg) auto 0;
@@ -416,204 +435,216 @@
         }
     </style>
 </head>
+
 <body>
-<!-- TopNavBar -->
-<header class="top-nav">
-<div class="nav-container">
-<a class="brand-logo" href="#">NANSM</a>
-<ul class="nav-links">
-<li><a class="nav-link active" href="#">Home</a></li>
-<li><a class="nav-link" href="#">About</a></li>
-<li><a class="nav-link" href="#">Executives</a></li>
-<li><a class="nav-link" href="#">Projects</a></li>
-<li><a class="nav-link" href="#">News</a></li>
-<li><a class="nav-link" href="#">Members</a></li>
-<li><a class="nav-link" href="#">Contact</a></li>
-</ul>
-<button class="primary-action">Portal Login</button>
-</div>
-</header>
-<main class="main-container">
-<!-- Hero Section -->
-<section class="hero-section">
-<h1 class="hero-title">Study Materials</h1>
-<p class="hero-subtitle">Access a comprehensive repository of lecture notes, past questions, and academic resources curated for medical excellence.</p>
-</section>
-<!-- Search & Filter Bar -->
-<div class="filter-bar">
-<div class="search-group">
-<span class="material-symbols-outlined search-icon">search</span>
-<input class="search-input" placeholder="Search by course code, topic, or author..." type="text"/>
-</div>
-<div class="select-group">
-<select class="filter-select">
-<option value="">All Levels</option>
-<option value="100L">100 Level</option>
-<option value="200L">200 Level</option>
-<option value="300L">300 Level</option>
-<option value="400L">400 Level (Clinical)</option>
-<option value="500L">500 Level (Clinical)</option>
-<option value="600L">600 Level (Clinical)</option>
-</select>
-</div>
-<div class="select-group">
-<select class="filter-select">
-<option value="">Department</option>
-<option value="anatomy">Anatomy</option>
-<option value="physiology">Physiology</option>
-<option value="biochemistry">Biochemistry</option>
-<option value="pathology">Pathology</option>
-<option value="pharmacology">Pharmacology</option>
-</select>
-</div>
-<div class="select-group">
-<select class="filter-select">
-<option value="">Category</option>
-<option value="notes">Lecture Notes</option>
-<option value="past_questions">Past Questions</option>
-<option value="textbooks">Textbooks</option>
-<option value="slides">Presentation Slides</option>
-</select>
-</div>
-</div>
-<!-- Content Area -->
-<div class="content-grid">
-<!-- Resource Grid -->
-<div class="resource-grid">
-<!-- Card 1 -->
-<div class="resource-card">
-<div class="card-header">
-<span class="material-symbols-outlined resource-icon" style="font-variation-settings: 'FILL' 1;">description</span>
-<h3 class="resource-title">Principles of Clinical Surgery Notes</h3>
-</div>
-<div class="resource-meta">
-<span class="meta-item"><span class="material-symbols-outlined">school</span> 400L</span>
-<span class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Oct 12, 2023</span>
-<span class="meta-item"><span class="material-symbols-outlined">save</span> 2.4 MB PDF</span>
-</div>
-<div class="card-actions">
-<button class="btn-primary">Download</button>
-<button class="btn-secondary">View Online</button>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="resource-card">
-<div class="card-header">
-<span class="material-symbols-outlined resource-icon" style="font-variation-settings: 'FILL' 1;">folder_open</span>
-<h3 class="resource-title">Anatomy Past Questions 2018-2022</h3>
-</div>
-<div class="resource-meta">
-<span class="meta-item"><span class="material-symbols-outlined">school</span> 200L</span>
-<span class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Sep 05, 2023</span>
-<span class="meta-item"><span class="material-symbols-outlined">save</span> 1.1 MB ZIP</span>
-</div>
-<div class="card-actions">
-<button class="btn-primary">Download</button>
-<button class="btn-secondary">View Online</button>
-</div>
-</div>
-<!-- Card 3 -->
-<div class="resource-card">
-<div class="card-header">
-<span class="material-symbols-outlined resource-icon" style="font-variation-settings: 'FILL' 1;">menu_book</span>
-<h3 class="resource-title">Cardiovascular Physiology Slides</h3>
-</div>
-<div class="resource-meta">
-<span class="meta-item"><span class="material-symbols-outlined">school</span> 300L</span>
-<span class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Nov 20, 2023</span>
-<span class="meta-item"><span class="material-symbols-outlined">save</span> 5.7 MB PPTX</span>
-</div>
-<div class="card-actions">
-<button class="btn-primary">Download</button>
-<button class="btn-secondary">View Online</button>
-</div>
-</div>
-<!-- Card 4 -->
-<div class="resource-card">
-<div class="card-header">
-<span class="material-symbols-outlined resource-icon" style="font-variation-settings: 'FILL' 1;">description</span>
-<h3 class="resource-title">Pharmacology Drug Mechanisms Summary</h3>
-</div>
-<div class="resource-meta">
-<span class="meta-item"><span class="material-symbols-outlined">school</span> 400L</span>
-<span class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Jan 15, 2024</span>
-<span class="meta-item"><span class="material-symbols-outlined">save</span> 850 KB PDF</span>
-</div>
-<div class="card-actions">
-<button class="btn-primary">Download</button>
-<button class="btn-secondary">View Online</button>
-</div>
-</div>
-</div>
-<!-- Sidebar -->
-<aside class="sidebar">
-<h3 class="sidebar-title">Most Downloaded</h3>
-<ul class="sidebar-list">
-<li class="sidebar-item">
-<span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
-<a class="sidebar-item-text" href="#">Gross Anatomy Dissection Guide</a>
-</li>
-<li class="sidebar-item">
-<span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
-<a class="sidebar-item-text" href="#">Pathology Specimen Image Bank</a>
-</li>
-<li class="sidebar-item">
-<span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
-<a class="sidebar-item-text" href="#">Biochemistry Metabolic Pathways Map</a>
-</li>
-<li class="sidebar-item">
-<span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
-<a class="sidebar-item-text" href="#">Clinical Examination OSCE Checklist</a>
-</li>
-<li class="sidebar-item">
-<span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
-<a class="sidebar-item-text" href="#">Microbiology Lab Manual</a>
-</li>
-</ul>
-</aside>
-</div>
-</main>
-<!-- Footer -->
-<footer class="footer">
-<div class="footer-container">
-<div>
-<h4 class="footer-heading">Association Links</h4>
-<ul class="footer-links">
-<li><a class="footer-link">About NANSM</a></li>
-<li><a class="footer-link">Constitution</a></li>
-<li><a class="footer-link">Membership</a></li>
-<li><a class="footer-link">Events Calendar</a></li>
-</ul>
-</div>
-<div>
-<h4 class="footer-heading">Contact Details</h4>
-<ul class="footer-links">
-<li style="display: flex; gap: 8px; align-items: center;">
-<span class="material-symbols-outlined" style="font-size: 18px;">location_on</span>
-<a class="footer-link">Secretariat, Minna, Niger State</a>
-</li>
-<li style="display: flex; gap: 8px; align-items: center;">
-<span class="material-symbols-outlined" style="font-size: 18px;">mail</span>
-<a class="footer-link">contact@nansm.org</a>
-</li>
-<li style="display: flex; gap: 8px; align-items: center;">
-<span class="material-symbols-outlined" style="font-size: 18px;">phone</span>
-<a class="footer-link">+234 (0) 800 MEDICAL</a>
-</li>
-</ul>
-</div>
-<div>
-<h4 class="footer-heading">Social Media</h4>
-<ul class="footer-links">
-<li><a class="footer-link">Twitter / X</a></li>
-<li><a class="footer-link">LinkedIn</a></li>
-<li><a class="footer-link">Facebook</a></li>
-<li><a class="footer-link">Instagram</a></li>
-</ul>
-</div>
-</div>
-<div class="footer-bottom">
+    <!-- TopNavBar -->
+    <header class="top-nav">
+        <div class="nav-container">
+            <a class="brand-logo" href="#">NANSM</a>
+            <ul class="nav-links">
+                <li><a class="nav-link active" href="#">Home</a></li>
+                <li><a class="nav-link" href="#">About</a></li>
+                <li><a class="nav-link" href="#">Executives</a></li>
+                <li><a class="nav-link" href="#">Projects</a></li>
+                <li><a class="nav-link" href="#">News</a></li>
+                <li><a class="nav-link" href="#">Members</a></li>
+                <li><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+            <button class="primary-action">Portal Login</button>
+        </div>
+    </header>
+    <main class="main-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">Study Materials</h1>
+            <p class="hero-subtitle">Access a comprehensive repository of lecture notes, past questions, and academic
+                resources curated for medical excellence.</p>
+        </section>
+        <!-- Search & Filter Bar -->
+        <div class="filter-bar">
+            <div class="search-group">
+                <span class="material-symbols-outlined search-icon">search</span>
+                <input class="search-input" placeholder="Search by course code, topic, or author..." type="text" />
+            </div>
+            <div class="select-group">
+                <select class="filter-select">
+                    <option value="">All Levels</option>
+                    <option value="100L">100 Level</option>
+                    <option value="200L">200 Level</option>
+                    <option value="300L">300 Level</option>
+                    <option value="400L">400 Level (Clinical)</option>
+                    <option value="500L">500 Level (Clinical)</option>
+                    <option value="600L">600 Level (Clinical)</option>
+                </select>
+            </div>
+            <div class="select-group">
+                <select class="filter-select">
+                    <option value="">Department</option>
+                    <option value="anatomy">Anatomy</option>
+                    <option value="physiology">Physiology</option>
+                    <option value="biochemistry">Biochemistry</option>
+                    <option value="pathology">Pathology</option>
+                    <option value="pharmacology">Pharmacology</option>
+                </select>
+            </div>
+            <div class="select-group">
+                <select class="filter-select">
+                    <option value="">Category</option>
+                    <option value="notes">Lecture Notes</option>
+                    <option value="past_questions">Past Questions</option>
+                    <option value="textbooks">Textbooks</option>
+                    <option value="slides">Presentation Slides</option>
+                </select>
+            </div>
+        </div>
+        <!-- Content Area -->
+        <div class="content-grid">
+            <!-- Resource Grid -->
+            <div class="resource-grid">
+                <!-- Card 1 -->
+                <div class="resource-card">
+                    <div class="card-header">
+                        <span class="material-symbols-outlined resource-icon"
+                            style="font-variation-settings: 'FILL' 1;">description</span>
+                        <h3 class="resource-title">Principles of Clinical Surgery Notes</h3>
+                    </div>
+                    <div class="resource-meta">
+                        <span class="meta-item"><span class="material-symbols-outlined">school</span> 400L</span>
+                        <span class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Oct 12,
+                            2023</span>
+                        <span class="meta-item"><span class="material-symbols-outlined">save</span> 2.4 MB PDF</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-primary">Download</button>
+                        <button class="btn-secondary">View Online</button>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="resource-card">
+                    <div class="card-header">
+                        <span class="material-symbols-outlined resource-icon"
+                            style="font-variation-settings: 'FILL' 1;">folder_open</span>
+                        <h3 class="resource-title">Anatomy Past Questions 2018-2022</h3>
+                    </div>
+                    <div class="resource-meta">
+                        <span class="meta-item"><span class="material-symbols-outlined">school</span> 200L</span>
+                        <span class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Sep 05,
+                            2023</span>
+                        <span class="meta-item"><span class="material-symbols-outlined">save</span> 1.1 MB ZIP</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-primary">Download</button>
+                        <button class="btn-secondary">View Online</button>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="resource-card">
+                    <div class="card-header">
+                        <span class="material-symbols-outlined resource-icon"
+                            style="font-variation-settings: 'FILL' 1;">menu_book</span>
+                        <h3 class="resource-title">Cardiovascular Physiology Slides</h3>
+                    </div>
+                    <div class="resource-meta">
+                        <span class="meta-item"><span class="material-symbols-outlined">school</span> 300L</span>
+                        <span class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Nov 20,
+                            2023</span>
+                        <span class="meta-item"><span class="material-symbols-outlined">save</span> 5.7 MB PPTX</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-primary">Download</button>
+                        <button class="btn-secondary">View Online</button>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="resource-card">
+                    <div class="card-header">
+                        <span class="material-symbols-outlined resource-icon"
+                            style="font-variation-settings: 'FILL' 1;">description</span>
+                        <h3 class="resource-title">Pharmacology Drug Mechanisms Summary</h3>
+                    </div>
+                    <div class="resource-meta">
+                        <span class="meta-item"><span class="material-symbols-outlined">school</span> 400L</span>
+                        <span class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Jan 15,
+                            2024</span>
+                        <span class="meta-item"><span class="material-symbols-outlined">save</span> 850 KB PDF</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-primary">Download</button>
+                        <button class="btn-secondary">View Online</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3 class="sidebar-title">Most Downloaded</h3>
+                <ul class="sidebar-list">
+                    <li class="sidebar-item">
+                        <span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
+                        <a class="sidebar-item-text" href="#">Gross Anatomy Dissection Guide</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
+                        <a class="sidebar-item-text" href="#">Pathology Specimen Image Bank</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
+                        <a class="sidebar-item-text" href="#">Biochemistry Metabolic Pathways Map</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
+                        <a class="sidebar-item-text" href="#">Clinical Examination OSCE Checklist</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <span class="material-symbols-outlined sidebar-item-icon">trending_up</span>
+                        <a class="sidebar-item-text" href="#">Microbiology Lab Manual</a>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <h4 class="footer-heading">Association Links</h4>
+                <ul class="footer-links">
+                    <li><a class="footer-link">About NANSM</a></li>
+                    <li><a class="footer-link">Constitution</a></li>
+                    <li><a class="footer-link">Membership</a></li>
+                    <li><a class="footer-link">Events Calendar</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-heading">Contact Details</h4>
+                <ul class="footer-links">
+                    <li style="display: flex; gap: 8px; align-items: center;">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">location_on</span>
+                        <a class="footer-link">Secretariat, Minna, Niger State</a>
+                    </li>
+                    <li style="display: flex; gap: 8px; align-items: center;">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">mail</span>
+                        <a class="footer-link">contact@nansm.org</a>
+                    </li>
+                    <li style="display: flex; gap: 8px; align-items: center;">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">phone</span>
+                        <a class="footer-link">+234 (0) 800 MEDICAL</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-heading">Social Media</h4>
+                <ul class="footer-links">
+                    <li><a class="footer-link">Twitter / X</a></li>
+                    <li><a class="footer-link">LinkedIn</a></li>
+                    <li><a class="footer-link">Facebook</a></li>
+                    <li><a class="footer-link">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
             © 2024 National Association of Niger State Medical Students. All rights reserved.
         </div>
-</footer>
-</body></html>
+    </footer>
+</body>
+
+</html>

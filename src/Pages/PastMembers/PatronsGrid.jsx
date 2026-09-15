@@ -1,8 +1,9 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { GenContext } from '../../MyContexts/GenContexts';
 import PaginationSection from './PaginationSection';
 import './PatronsGrid.css';
 import PatronCard from './PatronCard';
+import UtilsSection from './UtilsSection';
 
 export default function PatronsGrid({ arrayByPage }) {
 
@@ -10,11 +11,17 @@ export default function PatronsGrid({ arrayByPage }) {
 
   const [pageNo, setPageNo] = useState(1)
 
-  console.log(ptrns);
+  const [displayed, setDisplayed] = useState(ptrns)
 
-  const ptrnsByPage = arrayByPage(ptrns, 6)
+  useEffect(() => {
+    function updateDisplayed() {
+      setDisplayed(ptrns)
+    }
 
-  console.log(ptrnsByPage);
+    updateDisplayed()
+  }, [ptrns])
+
+  const ptrnsByPage = arrayByPage(displayed, 6)
 
 
   return (
@@ -24,11 +31,17 @@ export default function PatronsGrid({ arrayByPage }) {
         <p class="section-desc">Distinguished leaders providing institutional guidance, advocacy, and philanthropic
           support to Niger State medical scholars.</p>
       </div>
+      <UtilsSection 
+        def={ptrns}
+        setterFun={setDisplayed}
+        filterParams={['badge']}
+        target={displayed}
+      />
       {
         ptrns.length
           ? <div class="patrons-grid">
             {
-              ptrnsByPage[pageNo - 1].map((p) => {
+              ptrnsByPage[pageNo - 1]?.map((p) => {
                 return <PatronCard details={p} />
               })
             }

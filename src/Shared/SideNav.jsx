@@ -10,8 +10,9 @@ import news from '../assets/icons/news.svg'
 import members from '../assets/icons/members.svg'
 import contact from '../assets/icons/contact.svg'
 import start from '../assets/icons/start.svg'
-import login from '../assets/icons/login.svg'
+import login from '../assets/icons/login-3.svg'
 import help from '../assets/icons/help.svg'
+import premium from '../assets/icons/premium-1.svg'
 
 
 export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
@@ -21,13 +22,13 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
   return (
     <nav className={`side-nav ${showSideNav ? 'show' : ''}`} >
       <div className='close-icon-container'>
-        <img 
-        className='close-icon' 
-        src={close} 
-        alt="" 
-        onClick={() => {
-          setShowSideNav(false)
-        }}
+        <img
+          className='close-icon'
+          src={close}
+          alt=""
+          onClick={() => {
+            setShowSideNav(false)
+          }}
         />
       </div>
       <div className="side-nav-links-container">
@@ -51,6 +52,13 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
         >
           <img src={exec} alt="" />
           <span>Executives</span>
+        </Link>
+        <Link
+          to={'/patrons-alumni'}
+          className={`side-nav-link ${currentPage === 'p&a' ? 'current' : ''}`}
+        >
+          <img src={premium} alt="" />
+          <span>Patrons & Alumni</span>
         </Link>
         <Link
           to={'/news'}
@@ -89,13 +97,13 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
             >
               <img src={
                 currentPage === 'reg'
-                ? login
-                : currentPage === 'login'
-                  ? help
-                  : start
-              } 
-              alt="" 
-              style={{width: '20px'}}
+                  ? login
+                  : currentPage === 'login'
+                    ? help
+                    : start
+              }
+                alt=""
+                style={{ width: '20px' }}
               />
               <span>
                 {
@@ -116,11 +124,11 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
             </button>
         }
       </div>
-      <div  
-      className={showSideNav ? 'sidenav-underlay' : ''}
-      onClick={() => {
-        setShowSideNav(false)
-      }}
+      <div
+        className={showSideNav ? 'sidenav-underlay' : ''}
+        onClick={() => {
+          setShowSideNav(false)
+        }}
       ></div>
     </nav>
   );
