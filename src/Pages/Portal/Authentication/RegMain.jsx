@@ -17,6 +17,9 @@ export default function RegMain() {
 
   const [pstngStatus, setPstngStatus] = useState('completed')
 
+  console.log('hurray');
+  
+
   const {
     signUp,
     positions_held,
