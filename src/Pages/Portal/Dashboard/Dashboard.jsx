@@ -6,7 +6,7 @@ import DbMain from './DbMain';
 
 export default function Dashboard() {
   return (
-    <Redirect>
+    <Redirect >
       <Nav currentPage={'db'} />
       <DbMain />
       <Footer />

@@ -6,7 +6,7 @@ import './PayDues.css';
 
 export default function Payments() {
   return (
-    <Redirect>
+    <Redirect pathName={'payments'}>
       <Nav />
       <Main />
       <Footer />

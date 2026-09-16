@@ -115,7 +115,7 @@ export default function EditProfile() {
   }
 
   return (
-    <Redirect>
+    <Redirect pathName={'edit-profile'}>
       <Nav currentPage={'db'} />
       <main class="container db-main">
         <Link to={'/members/dashboard'}>

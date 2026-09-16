@@ -28,7 +28,7 @@ export default function RegMain() {
   } = useContext(AuthContext)
 
   const {
-    setPopup
+    showPopup
   } = useContext(UiContext)
 
   const [
@@ -61,36 +61,18 @@ export default function RegMain() {
 
   useEffect(() => {
     if (signUpResp.success) {
-      setPopup({
-        show: true,
-        hide: false,
-        autoHide: true,
-        msg: 'signed up successfully',
-        msgType: 'success'
-      })
+      showPopup('success', 'signed up successfully')
       navigate('/members/reg-success')
     }
 
     if (signUpResp.success === false) {
-      setPopup({
-        show: true,
-        hide: false,
-        autoHide: true,
-        msg: signUpResp.message,
-        msgType: 'err'
-      })
+      showPopup('error', signUpResp.message)
     }
   }, [signUpResp])
 
   useEffect(() => {
     if (isSigningUp) {
-      setPopup({
-        show: true,
-        hide: false,
-        autoHide: false,
-        msg: 'signing in',
-        msgType: 'pending'
-      })
+      showPopup('pending', 'signing in')
     }
   }, [isSigningUp])
 

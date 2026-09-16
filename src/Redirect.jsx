@@ -3,7 +3,7 @@ import { AuthContext } from "./MyContexts/AuthContext"
 import { useNavigate } from "react-router"
 
 
-export default function Redirect({children}) {
+export default function Redirect({children, pathName}) {
 
  const {session} = useContext(AuthContext)
 
@@ -18,7 +18,12 @@ export default function Redirect({children}) {
    }
 
    if (session) {
-    navigate('/members/dashboard')
+    if (!pathName) {
+     navigate('/members/dashboard')
+    } else {
+     navigate(`/members/dashboard/${pathName}`)
+    }
+    
    }
   }
 
