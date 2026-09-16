@@ -267,13 +267,7 @@ export default function RegMain() {
                   if (!admDate) {
                     e.target.value = e.target.value = ''
 
-                    setPopup({
-                      show: true,
-                      hide: false,
-                      autoHide: true,
-                      msg: 'please input your admission date',
-                      msgType: 'err'
-                    })
+                    showPopup('err', 'please input your admission date')
                   }
 
                   const admNo = admNoElem.current.value
