@@ -16,10 +16,6 @@ export default function Redirect({children}) {
    if (!session) {
     navigate('/members/login')
    }
-
-   if (session) {
-    navigate('/members/dashboard')
-   }
   }
 
   redirect()
