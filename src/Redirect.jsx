@@ -18,12 +18,7 @@ export default function Redirect({children, pathName}) {
    }
 
    if (session) {
-    if (!pathName) {
-     navigate('/members/dashboard')
-    } else {
-     navigate(`/members/dashboard/${pathName}`)
-    }
-    
+    navigate('/members/dashboard')
    }
   }
 
