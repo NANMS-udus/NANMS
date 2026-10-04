@@ -1,17 +1,11 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { supabase } from "../Utils/supabase";
-import { AuthContext } from "./AuthContext";
-import { UiContext } from "./UiContext";
 
 
 
 export const GenContext = createContext(null)
 
 export default function GenCntxt({ children }) {
-
-  const { session } = useContext(AuthContext)
-
-  const { showPopup } = useContext(UiContext)
 
   const [members, setMembers] = useState({ all: [], displayed: [] })
 
@@ -26,8 +20,6 @@ export default function GenCntxt({ children }) {
   const [presidents, setPresidents] = useState([])
 
   const [alumni, setAlumni] = useState([])
-
-  const [pymntDet, setPymntDet] = useState({ paid: [], notPaid: [], payment_history: [] })
 
   const sideNavElem = useRef(null)
 
@@ -221,102 +213,6 @@ export default function GenCntxt({ children }) {
     getAlumni()
   }, [])
 
-  /* GET PAYMENT DETAILS */
-
-  useEffect(() => {
-    function getPymntDet() {
-
-      try {
-
-        const { data, error } = supabase
-          .from('ass_dues')
-          .select('*')
-          .eq('id', session?.user?.id)
-          .single()
-
-        if (error) {
-          throw new Error(error.message);
-        }
-
-        if (!error && data) {
-          setPymntDet(data)
-        }
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-
-    if (session) {
-      getPymntDet()
-    }
-  }, [session])
-
-
-  async function verifyPymnt(year, evidence, pymntType, amount) {
-    try {
-
-      const inputIsValid = evidence?.size && year.length && pymntType && amount
-      console.log(inputIsValid);
-      
-      let evidence_path;
-
-      if (!inputIsValid) {
-        console.log('here');
-        
-        showPopup('err', 'You are not allowed to carry out this operation, please input the nessesary details.')
-
-        return
-      }
-
-      if (evidence?.size) {
-        const {data: uploadData, error: uploadError} = await supabase.storage.from('evidences').upload(`${session?.user?.id}-${year.join('-')}-ass-dues`)
-
-        if (uploadError) {
-          throw new Error(uploadError.message);
-          
-        }
-
-        if (!uploadError && uploadData) {
-          evidence_path = uploadData.path
-        }
-      }
-
-
-      console.log(year, evidence, evidence_path,  amount);
-
-      const payload = {
-        payment_method: 'Bank Transfer',
-        status: 'Pending',
-        year,
-        evidence_path,
-        pymntType,
-        amount,
-      }
-
-      const { data, error } = await supabase.rpc('add pending payment', payload)
-
-      if (error) {
-        const resp = supabase.storage.from('evidences').remove(evidence_path)
-
-        if (resp.error) {
-          return
-        }
-
-        throw new Error(error.message);
-      }
-
-      if (!error && data) {
-        showPopup('success', 'your payment details have been sent successfuly. You will be notified when your payment is verified or rejected')
-
-        return true
-      }
-
-    } catch (error) {
-
-      showPopup('err', error.message)
-    }
-  }
-
 
   return (
     <GenContext.Provider value={{
@@ -327,8 +223,6 @@ export default function GenCntxt({ children }) {
       presidents,
       alumni,
       news,
-      pymntDet,
-      verifyPymnt,
       showSideNav,
       setShowSideNav,
       sideNavElem

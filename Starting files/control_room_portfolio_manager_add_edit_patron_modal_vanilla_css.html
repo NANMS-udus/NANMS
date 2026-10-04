@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portfolio Manager - Patrons &amp; Alumni Network | NANMS Control Room</title>
+<!-- BEGIN: Custom Styling Architecture -->
+<style data-purpose="css-variables">
+    :root {
+      --primary: #002d4b;
+      --primary-dark: #001e33;
+      --primary-light: #0b3d60;
+      --accent-green: #0a5c36;
+      --accent-green-hover: #08492b;
+      --accent-green-light: #e8f5ee;
+      --accent-gold: #b45309;
+      --accent-gold-light: #fef3c7;
+      --surface: #f8fafc;
+      --surface-subtle: #f1f5f9;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      --badge-blue: #e0f2fe;
+      --badge-blue-text: #0369a1;
+      --danger: #dc2626;
+      --danger-light: #fef2f2;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-modal: 0 20px 45px rgba(0, 0, 0, 0.25);
+      --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+  </style>
+<style data-purpose="base-layout">
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      background-color: var(--surface);
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background: none;
+    }
+  </style>
+<style data-purpose="sidebar-layout">
+    /* Navigation Sidebar */
+    .admin-sidebar {
+      width: 260px;
+      background-color: var(--primary);
+      color: #ffffff;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 50;
+    }
+
+    .sidebar-brand {
+      padding: 24px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .brand-title {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-title span {
+      background: #10b981;
+      font-size: 10px;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-top: 4px;
+    }
+
+    .nav-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: rgba(255, 255, 255, 0.45);
+      padding: 20px 20px 8px 20px;
+    }
+
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 0 12px;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 6px;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .nav-link.active {
+      background-color: #0284c7;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .nav-link-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .sidebar-footer {
+      padding: 16px 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background-color: var(--primary-dark);
+    }
+  </style>
+<style data-purpose="header-layout">
+    /* Top Navigation & Workspace Header */
+    .app-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      background: var(--surface);
+    }
+
+    .top-navbar {
+      height: 64px;
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .breadcrumb-area {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .breadcrumb-current {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .global-search-wrapper {
+      position: relative;
+      width: 320px;
+    }
+
+    .global-search-input {
+      width: 100%;
+      height: 36px;
+      padding: 0 12px 0 34px;
+      background-color: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--text-main);
+    }
+
+    .global-search-input:focus {
+      outline: 2px solid var(--primary);
+      border-color: transparent;
+      background: #fff;
+    }
+
+    .search-icon-svg {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .user-profile-summary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 12px;
+      border-left: 1px solid var(--border);
+    }
+
+    .user-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .header-banner {
+      background: var(--card-bg);
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-banner h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .header-banner p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
+<style data-purpose="workspace-components">
+    /* 2-Column Content Layout */
+    .workspace-layout {
+      padding: 24px 28px;
+      display: grid;
+      grid-template-columns: 270px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Sub-nav column */
+    .subnav-card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .subnav-header {
+      padding: 14px 16px;
+      background: var(--surface-subtle);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+    }
+
+    .subnav-list {
+      list-style: none;
+      padding: 8px 0;
+    }
+
+    .subnav-item a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      font-size: 13.5px;
+      color: var(--text-main);
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .subnav-item a:hover {
+      background: var(--surface-subtle);
+    }
+
+    .subnav-item.active a {
+      background: var(--accent-green-light);
+      color: var(--accent-green);
+      font-weight: 600;
+      border-left: 3px solid var(--accent-green);
+    }
+
+    .subnav-badge {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--surface-subtle);
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .subnav-item.active .subnav-badge {
+      background: var(--accent-green);
+      color: #fff;
+    }
+
+    .sync-card {
+      margin-top: 16px;
+      padding: 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .sync-title {
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sync-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #10b981;
+      display: inline-block;
+    }
+
+    /* Workspace Main Area */
+    .workspace-main {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Metric Cards */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .metric-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 6px 0 4px 0;
+    }
+
+    .metric-meta {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Section Content Card */
+    .content-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .panel-top-bar {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .panel-tabs {
+      display: flex;
+      gap: 4px;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--border);
+      background-color: #fafbfc;
+    }
+
+    .panel-tab-btn {
+      padding: 12px 16px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s ease;
+    }
+
+    .panel-tab-btn:hover {
+      color: var(--text-main);
+    }
+
+    .panel-tab-btn.active {
+      color: var(--accent-green);
+      font-weight: 600;
+      border-bottom-color: var(--accent-green);
+      background-color: #fff;
+    }
+
+    .filter-toolbar {
+      padding: 14px 20px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .filter-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: var(--surface-subtle);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      font-weight: 500;
+      transition: all 0.1s ease;
+    }
+
+    .filter-pill.active {
+      background: var(--accent-green);
+      color: #fff;
+      border-color: var(--accent-green);
+    }
+
+    /* Data Table */
+    .data-table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .data-table th {
+      background: var(--surface);
+      padding: 12px 20px;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      vertical-align: middle;
+    }
+
+    .data-table tr:hover {
+      background-color: #fbfcfe;
+    }
+
+    .entity-cell {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .entity-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+
+    .entity-title {
+      font-weight: 600;
+      color: var(--text-main);
+      font-size: 14px;
+    }
+
+    .entity-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+
+    .pill-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+
+    .badge-gold {
+      background: var(--accent-gold-light);
+      color: var(--accent-gold);
+    }
+
+    .badge-teal {
+      background: #ccfbf1;
+      color: #0f766e;
+    }
+
+    .badge-blue {
+      background: var(--badge-blue);
+      color: var(--badge-blue-text);
+    }
+
+    .badge-live {
+      background: #ecfdf5;
+      color: #059669;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-green);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-green-hover);
+    }
+
+    .btn-outline {
+      background-color: #fff;
+      border: 1px solid var(--border-strong);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--surface-subtle);
+    }
+
+    .btn-sm {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+
+    /* Call to action live preview block */
+    .cta-preview-box {
+      margin: 20px;
+      background: linear-gradient(135deg, #023922 0%, #064e3b 100%);
+      border-radius: 8px;
+      padding: 20px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cta-preview-info h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .cta-preview-info p {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Pagination */
+    .pagination-bar {
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    .pagination-controls {
+      display: flex;
+      gap: 4px;
+    }
+
+    .page-btn {
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 12px;
+      color: var(--text-main);
+      background: #fff;
+    }
+
+    .page-btn.active {
+      background: var(--accent-green);
+      color: #fff;
+      border-color: var(--accent-green);
+    }
+  </style>
+<!-- BEGIN: Modal Custom Styles -->
+<style data-purpose="modal-styles">
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 20, 35, 0.65);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 24px;
+  }
+
+  .modal-dialog {
+    background: #ffffff;
+    width: 100%;
+    max-width: 820px;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    position: relative;
+    animation: modalSlideIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .modal-header {
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    z-index: 10;
+  }
+
+  .modal-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+
+  .modal-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+  }
+
+  .modal-id-badge {
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--surface-subtle);
+    color: var(--text-muted);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    letter-spacing: 0.3px;
+  }
+
+  .modal-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .modal-close-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-size: 18px;
+    transition: all 0.15s ease;
+    background: var(--surface-subtle);
+  }
+
+  .modal-close-btn:hover {
+    background: var(--border);
+    color: var(--text-main);
+  }
+
+  .modal-switcher-tabs {
+    display: flex;
+    padding: 0 24px;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+  }
+
+  .modal-subtab {
+    padding: 10px 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  .modal-subtab.active {
+    color: var(--accent-green);
+    border-bottom-color: var(--accent-green);
+  }
+
+  .modal-body {
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .section-heading-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .section-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .form-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .form-label span.required {
+    color: var(--danger);
+    margin-left: 2px;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--text-main);
+    background: #ffffff;
+    font-family: inherit;
+    transition: all 0.15s ease;
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 45, 75, 0.12);
+  }
+
+  .avatar-upload-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    background: var(--surface-subtle);
+    border-radius: 8px;
+    border: 1px dashed var(--border-strong);
+  }
+
+  .avatar-preview-circle {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #002d4b;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+  }
+
+  .quote-preview-box {
+    background: #f0fdf4;
+    border-left: 3px solid var(--accent-green);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 12px;
+    font-style: italic;
+    color: #166534;
+    margin-top: -2px;
+  }
+
+  .checkbox-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .checkbox-card:hover {
+    background: var(--surface-subtle);
+    border-color: var(--border-strong);
+  }
+
+  .checkbox-card input[type="checkbox"] {
+    margin-top: 3px;
+    accent-color: var(--accent-green);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
+
+  .modal-footer {
+    position: sticky;
+    bottom: 0;
+    background: #fafafa;
+    border-top: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+  }
+
+  .btn-danger-ghost {
+    color: #dc2626;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+  }
+
+  .btn-danger-ghost:hover {
+    background-color: #fee2e2;
+  }
+</style>
+<!-- END: Custom Styling Architecture -->
+</head>
+<body>
+<!-- BEGIN: NavigationSidebar -->
+<aside class="admin-sidebar" data-purpose="primary-sidebar">
+<div class="sidebar-brand">
+<div class="brand-title">
+        NANMS Control <span>Admin</span>
+</div>
+<div class="brand-subtitle">Secure Admin Room</div>
+</div>
+<div class="nav-section-label">Association Management</div>
+<nav class="nav-menu">
+<a class="nav-link" href="#">
+<span class="nav-link-content">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Dashboard
+        </span>
+</a>
+<a class="nav-link" href="#">
+<span class="nav-link-content">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Association Hub
+        </span>
+</a>
+<a class="nav-link active" href="#">
+<span class="nav-link-content">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Portfolio Manager
+        </span>
+<span class="nav-badge">Active</span>
+</a>
+<a class="nav-link" href="#">
+<span class="nav-link-content">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          News Control
+        </span>
+</a>
+<a class="nav-link" href="#">
+<span class="nav-link-content">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Quizzer Admin
+        </span>
+</a>
+<a class="nav-link" href="#">
+<span class="nav-link-content">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Member Monitoring
+        </span>
+</a>
+<div class="nav-section-label" style="padding-top:14px;">System Management</div>
+<a class="nav-link" href="#">
+<span class="nav-link-content">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          System Settings
+        </span>
+</a>
+</nav>
+<div class="sidebar-footer">
+<a class="nav-link" href="#" style="padding: 6px 8px;">
+<span class="nav-link-content">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Support Desk
+        </span>
+</a>
+<a class="nav-link" href="#" style="padding: 6px 8px; color: #f87171;">
+<span class="nav-link-content">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Secure Logout
+        </span>
+</a>
+</div>
+</aside>
+<!-- END: NavigationSidebar -->
+<!-- BEGIN: MainContentArea -->
+<main class="app-main">
+<!-- Top Navbar -->
+<header class="top-navbar" data-purpose="top-navigation">
+<div class="breadcrumb-area">
+<span>Control Room</span>
+<span>/</span>
+<span class="breadcrumb-current">Portfolio Manager</span>
+</div>
+<div class="top-actions">
+<div class="global-search-wrapper">
+<svg class="search-icon-svg" fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<input class="global-search-input" placeholder="Search portal assets, records, or inquiries..." type="text"/>
+</div>
+<!-- Notification Bell -->
+<button style="position:relative; padding:6px;" title="Notifications">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span style="position:absolute; top:2px; right:2px; background:#dc2626; color:#fff; font-size:10px; font-weight:700; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center;">3</span>
+</button>
+<!-- Security Guard Icon -->
+<div style="color: var(--accent-green);" title="System Protected">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<!-- Super Administrator Badge -->
+<div class="user-profile-summary">
+<div class="user-avatar">AB</div>
+<div>
+<div style="font-size: 13px; font-weight: 600; line-height: 1.2;">Dr. Aminu Bello</div>
+<div style="font-size: 11px; color: var(--text-muted);">Super Administrator</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Header Banner -->
+<section class="header-banner" data-purpose="page-title-banner">
+<div>
+<h1>Portfolio Manager: Association Digital Assets &amp; Pages</h1>
+<p>Manage public-facing association portal contents, stakeholder directories, and communication touchpoints.</p>
+</div>
+<div class="action-group">
+<a class="btn btn-outline" href="https://nanms.org.ng/patrons-alumni" target="_blank">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          View Live Portal
+        </a>
+<button class="btn btn-primary">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Save Changes
+        </button>
+</div>
+</section>
+<!-- Workspace Layout (Two-Column) -->
+<div class="workspace-layout">
+<!-- Sub-Navigation Left Column -->
+<aside data-purpose="portfolio-sections-sidebar">
+<div class="subnav-card">
+<div class="subnav-header">Portfolio Controls</div>
+<ul class="subnav-list">
+<li class="subnav-item">
+<a href="#">
+<span>Home Hero &amp; Vision</span>
+<span class="subnav-badge" style="background:#dcfce7; color:#15803d;">Live</span>
+</a>
+</li>
+<li class="subnav-item">
+<a href="#">
+<span>News &amp; Press</span>
+<span class="subnav-badge">142</span>
+</a>
+</li>
+<li class="subnav-item active">
+<a href="#">
+<div>
+<div>Patrons &amp; Alumni</div>
+<div style="font-size: 11px; font-weight: normal; color: var(--accent-green); opacity: 0.85;">Eminent mentors, presidents &amp; alumni</div>
+</div>
+<span class="subnav-badge">1,438</span>
+</a>
+</li>
+<li class="subnav-item">
+<a href="#">
+<span>Contact &amp; Inquiries</span>
+<span class="subnav-badge" style="background:#fee2e2; color:#b91c1c;">12 unread</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="sync-card">
+<div class="sync-title">
+<span class="sync-indicator"></span>
+            Portal Sync Status: 100% Live
+          </div>
+<div style="color: var(--text-muted); margin-top: 6px;">
+            Last updated: 10 mins ago by Dr. Bello
+          </div>
+</div>
+</aside>
+<!-- Workspace Main Content Area -->
+<section class="workspace-main" data-purpose="registry-management-view">
+<!-- Metrics Row -->
+<div class="metrics-grid">
+<div class="metric-card">
+<div class="metric-label">Eminent Patrons &amp; Mentors</div>
+<div class="metric-value">18 Listed</div>
+<div class="metric-meta">3 Grand Patrons • 6 Clinical Advisors</div>
+</div>
+<div class="metric-card">
+<div class="metric-label">Past Administrations</div>
+<div class="metric-value">12 Tenures</div>
+<div class="metric-meta">2019 - 2023 Executive Archives</div>
+</div>
+<div class="metric-card">
+<div class="metric-label">Notable Alumni Network</div>
+<div class="metric-value">1,420 Doctors</div>
+<div class="metric-meta">850+ Graduated • 14 Countries</div>
+</div>
+<div class="metric-card">
+<div class="metric-label">Alumni Endowments</div>
+<div class="metric-value">₦12M+</div>
+<div class="metric-meta">Disbursed for Student Welfare</div>
+</div>
+</div>
+<!-- Main Panel -->
+<div class="content-panel">
+<!-- Panel Header -->
+<div class="panel-top-bar">
+<div>
+<h2 style="font-size: 17px; font-weight: 700; color: var(--text-main);">Patrons &amp; Alumni Network Directory</h2>
+<p style="font-size: 13px; color: var(--text-muted);">Manage eminent healthcare leaders, past presidents, and alumni practitioners synced directly with the public directory.</p>
+</div>
+<div class="action-group">
+<button class="btn btn-outline btn-sm">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                Reorder Display Order
+              </button>
+<button class="btn btn-outline btn-sm">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                Export Registry (CSV)
+              </button>
+<button class="btn btn-primary btn-sm">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                + Add Member / Entry
+              </button>
+</div>
+</div>
+<!-- Section Switcher Tabs -->
+<div class="panel-tabs">
+<button class="panel-tab-btn active">Eminent Patrons &amp; Mentors (18)</button>
+<button class="panel-tab-btn">Past Presidents &amp; Administrations (12)</button>
+<button class="panel-tab-btn">Notable Alumni Network (1,420)</button>
+<button class="panel-tab-btn">Call-to-Action &amp; Settings</button>
+</div>
+<!-- Filters Bar -->
+<div class="filter-toolbar">
+<div class="filter-pills">
+<button class="filter-pill active">All Roles</button>
+<button class="filter-pill">Grand Patron</button>
+<button class="filter-pill">Health Advisors</button>
+<button class="filter-pill">Clinical Benefactors</button>
+<button class="filter-pill">Past Presidents</button>
+<button class="filter-pill">Notable Alumni</button>
+</div>
+<div style="width: 260px;">
+<input class="global-search-input" placeholder="Filter by name or specialty..." style="height:32px; font-size:12.5px;" type="text"/>
+</div>
+</div>
+<!-- Data Table View -->
+<div class="data-table-container">
+<table class="data-table">
+<thead>
+<tr>
+<th style="width: 320px;">Member / Profile</th>
+<th>Designation / Practice Status</th>
+<th>Category Tier</th>
+<th>Portal Status</th>
+<th style="text-align: right;">Actions</th>
+</tr>
+</thead>
+<tbody>
+<!-- Row 1: Prof Mohammed K. Bello -->
+<tr>
+<td>
+<div class="entity-cell">
+<div class="entity-avatar">MB</div>
+<div>
+<div class="entity-title">Prof. Mohammed K. Bello</div>
+<div class="entity-desc">"The measure of our medical legacy is found in the integrity, empathy..."</div>
+</div>
+</div>
+</td>
+<td>
+<div style="font-weight: 500;">FWACS, Consultant Neurosurgeon</div>
+<div class="entity-desc">Former Provost, College of Health Sciences</div>
+</td>
+<td>
+<span class="pill-badge badge-gold">★ Grand Patron</span>
+</td>
+<td>
+<span class="pill-badge badge-live">Active &amp; Featured</span>
+</td>
+<td style="text-align: right;">
+<div class="action-group" style="justify-content: flex-end;">
+<button class="btn btn-outline btn-sm">Edit</button>
+<button class="btn btn-outline btn-sm" title="View Citation">Citation</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Dr Zainab Aliyu Tanko -->
+<tr>
+<td>
+<div class="entity-cell">
+<div class="entity-avatar">ZT</div>
+<div>
+<div class="entity-title">Dr. Zainab Aliyu Tanko</div>
+<div class="entity-desc">"Every underserved village reached by our students is a testament..."</div>
+</div>
+</div>
+</td>
+<td>
+<div style="font-weight: 500;">FMCOG, Maternal Health Specialist</div>
+<div class="entity-desc">Senior Healthcare Policy Consultant</div>
+</td>
+<td>
+<span class="pill-badge badge-gold">★ Patron &amp; Health Advisor</span>
+</td>
+<td>
+<span class="pill-badge badge-live">Active &amp; Featured</span>
+</td>
+<td style="text-align: right;">
+<div class="action-group" style="justify-content: flex-end;">
+<button class="btn btn-outline btn-sm">Edit</button>
+<button class="btn btn-outline btn-sm">Visibility</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Dr Ibrahim Ndagi -->
+<tr>
+<td>
+<div class="entity-cell">
+<div class="entity-avatar">IN</div>
+<div>
+<div class="entity-title">Dr. Ibrahim Ndagi</div>
+<div class="entity-desc">"Academic excellence without moral courage is incomplete..."</div>
+</div>
+</div>
+</td>
+<td>
+<div style="font-weight: 500;">FACP, Chief Medical Consultant</div>
+<div class="entity-desc">Minna Specialist Medical Services</div>
+</td>
+<td>
+<span class="pill-badge badge-gold">★ Patron &amp; Benefactor</span>
+</td>
+<td>
+<span class="pill-badge badge-live">Active &amp; Featured</span>
+</td>
+<td style="text-align: right;">
+<div class="action-group" style="justify-content: flex-end;">
+<button class="btn btn-outline btn-sm">Edit</button>
+<button class="btn btn-outline btn-sm">Visibility</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Dr. Umar Farooq Sani -->
+<tr>
+<td>
+<div class="entity-cell">
+<div class="entity-avatar">US</div>
+<div>
+<div class="entity-title">Dr. Umar Farooq Sani</div>
+<div class="entity-desc">Tenure: 2022 - 2023 Administration</div>
+</div>
+</div>
+</td>
+<td>
+<div style="font-weight: 500;">Resident Doctor (Internal Medicine)</div>
+<div class="entity-desc">Ahmadu Bello University Teaching Hospital (ABUTH), Zaria</div>
+</td>
+<td>
+<span class="pill-badge badge-teal">Past President</span>
+</td>
+<td>
+<span class="pill-badge badge-live">Archived &amp; Public</span>
+</td>
+<td style="text-align: right;">
+<div class="action-group" style="justify-content: flex-end;">
+<button class="btn btn-outline btn-sm">Edit Tenure</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Dr Hadiza Suleiman -->
+<tr>
+<td>
+<div class="entity-cell">
+<div class="entity-avatar">HS</div>
+<div>
+<div class="entity-title">Dr. Hadiza Suleiman</div>
+<div class="entity-desc">Class of 2015</div>
+</div>
+</div>
+</td>
+<td>
+<div style="font-weight: 500;">Consultant Cardiologist</div>
+<div class="entity-desc">Imperial College Trust, UK</div>
+</td>
+<td>
+<span class="pill-badge badge-blue">Notable Alumni</span>
+</td>
+<td>
+<span class="pill-badge badge-live">Verified Alumni</span>
+</td>
+<td style="text-align: right;">
+<div class="action-group" style="justify-content: flex-end;">
+<button class="btn btn-outline btn-sm">Edit Profile</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Live CTA Preview Section -->
+<div class="cta-preview-box" data-purpose="call-to-action-settings-preview">
+<div class="cta-preview-info">
+<h4>Public Call-to-Action: "Are You a NANMS Graduate?"</h4>
+<p>Stay connected with your alma mater, mentor aspiring medical practitioners, and contribute to our annual scholarship and medical outreach funds.</p>
+</div>
+<div class="action-group">
+<span class="pill-badge badge-live" style="background:#065f46; color:#a7f3d0; border: 1px solid #047857;">Live on Portal</span>
+<button class="btn btn-outline btn-sm" style="color: #ffffff; border-color: rgba(255,255,255,0.4);">Edit CTA Banner</button>
+</div>
+</div>
+<!-- Pagination Bar -->
+<div class="pagination-bar">
+<div>Showing <strong>1 - 5</strong> of <strong>1,438</strong> records across Patrons &amp; Alumni</div>
+<div class="pagination-controls">
+<button class="page-btn" disabled="">Previous</button>
+<button class="page-btn active">1</button>
+<button class="page-btn">2</button>
+<button class="page-btn">3</button>
+<span style="padding: 4px 6px; color: var(--text-muted);">...</span>
+<button class="page-btn">288</button>
+<button class="page-btn">Next</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- END: MainContentArea -->
+<!-- BEGIN: Edit Patron Modal Overlay -->
+<div class="modal-backdrop" data-purpose="patron-edit-modal-overlay">
+<div aria-labelledby="modal-patron-title" aria-modal="true" class="modal-dialog" role="dialog">
+<!-- Modal Header -->
+<header class="modal-header">
+<div>
+<div class="modal-title-row">
+<h3 class="modal-title" id="modal-patron-title">Edit Patron / Advisory Profile</h3>
+<span class="pill-badge badge-live">Active Patron</span>
+<span class="modal-id-badge">#PAT-001</span>
+</div>
+<p class="modal-subtitle">Modify public records, designation, council affiliation, and public display preferences.</p>
+</div>
+<button aria-label="Close modal" class="modal-close-btn" title="Close modal">✕</button>
+</header>
+<!-- Sub-tabs / Switcher -->
+<div class="modal-switcher-tabs">
+<div class="modal-subtab active">Edit Existing Patron (Prof. Mohammed K. Bello)</div>
+<div class="modal-subtab">+ Add New Patron</div>
+</div>
+<!-- Modal Body -->
+<div class="modal-body">
+<!-- Section 1: Basic Credentials & Identity -->
+<section class="form-section">
+<div class="section-heading-bar">
+<span class="section-num">1</span>
+<span class="section-title">Basic Credentials &amp; Identity</span>
+</div>
+<!-- Avatar upload row -->
+<div class="avatar-upload-row">
+<div class="avatar-preview-circle">MB</div>
+<div style="flex: 1;">
+<div style="font-weight: 600; font-size: 13.5px; color: var(--text-main);">Profile Headshot / Portrait</div>
+<div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Supported formats: JPG, PNG, WEBP (Square ratio recommended, min 400x400px).</div>
+</div>
+<div style="display: flex; gap: 8px;">
+<button class="btn btn-outline btn-sm" type="button">Upload Headshot</button>
+<button class="btn btn-sm" style="color: var(--danger); background: var(--danger-light); border: 1px solid #fca5a5;" type="button">Remove</button>
+</div>
+</div>
+<div class="form-grid-2">
+<div class="form-field">
+<label class="form-label">Honorific &amp; Full Name <span class="required">*</span></label>
+<input class="form-input" type="text" value="Prof. Mohammed K. Bello"/>
+</div>
+<div class="form-field">
+<label class="form-label">Medical Postnominal</label>
+<input class="form-input" type="text" value="FWACS"/>
+</div>
+</div>
+<div class="form-grid-2">
+<div class="form-field">
+<label class="form-label">Advisory Category Tier <span class="required">*</span></label>
+<select class="form-select">
+<option selected="">Grand Patron (Eminent)</option>
+<option>Patron &amp; Health Advisor</option>
+<option>Patron &amp; Clinical Benefactor</option>
+<option>Royal Grand Patron</option>
+<option>Board of Trustees</option>
+<option>Distinguished Life Patron</option>
+</select>
+</div>
+<div class="form-field">
+<label class="form-label">Association Chapter</label>
+<input class="form-input" type="text" value="Niger State Chapter / Central Council"/>
+</div>
+</div>
+</section>
+<!-- Section 2: Clinical Practice & Official Designation -->
+<section class="form-section">
+<div class="section-heading-bar">
+<span class="section-num">2</span>
+<span class="section-title">Clinical Practice &amp; Official Designation</span>
+</div>
+<div class="form-grid-2">
+<div class="form-field">
+<label class="form-label">Specialty &amp; Practice Status <span class="required">*</span></label>
+<input class="form-input" type="text" value="FWACS, Consultant Neurosurgeon"/>
+</div>
+<div class="form-field">
+<label class="form-label">Institutional Role &amp; Hospital</label>
+<input class="form-input" type="text" value="Former Provost, College of Health Sciences / IBB Specialized Hospital, Minna"/>
+</div>
+</div>
+<div class="form-grid-2">
+<div class="form-field">
+<label class="form-label">Council Tenure</label>
+<input class="form-input" type="text" value="2023 - 2027 (Active Term)"/>
+</div>
+<div class="form-field">
+<label class="form-label">Endorsement &amp; Ratification Status</label>
+<input class="form-input" type="text" value="Full Charter Certified"/>
+</div>
+</div>
+</section>
+<!-- Section 3: Official Citation & Public Testimonial Quote -->
+<section class="form-section">
+<div class="section-heading-bar">
+<span class="section-num">3</span>
+<span class="section-title">Official Citation &amp; Public Testimonial Quote</span>
+</div>
+<div class="form-field">
+<label class="form-label">Key Guiding Quote / Philosophy</label>
+<textarea class="form-textarea" rows="2">The measure of our medical legacy is found in the integrity, empathy, and scientific competence of the younger generation we nurture.</textarea>
+<div class="quote-preview-box">
+            "The measure of our medical legacy is found in the integrity, empathy, and scientific competence of the younger generation we nurture."
+          </div>
+</div>
+<div class="form-field">
+<label class="form-label">Biographical Citation &amp; Philanthropic Impact</label>
+<textarea class="form-textarea" rows="3">An icon in surgical neurology and pioneering medical education administrator in Niger State. Prof. Bello has consistently championed scholarship endowments and clinical laboratory modernization for medical trainees.</textarea>
+</div>
+</section>
+<!-- Section 4: Portal Placement & Display Preferences -->
+<section class="form-section">
+<div class="section-heading-bar">
+<span class="section-num">4</span>
+<span class="section-title">Portal Placement &amp; Display Preferences</span>
+</div>
+<div class="form-grid-2">
+<label class="checkbox-card">
+<input checked="" type="checkbox"/>
+<div>
+<div style="font-weight: 600; font-size: 13px; color: var(--text-main);">Feature on Homepage &amp; Patrons Directory</div>
+<div style="font-size: 11.5px; color: var(--text-muted); margin-top: 1px;">Displays in the premier spotlight tier of the public portal.</div>
+</div>
+</label>
+<label class="checkbox-card">
+<input checked="" type="checkbox"/>
+<div>
+<div style="font-weight: 600; font-size: 13px; color: var(--text-main);">Show in Eminent Patrons Carousel</div>
+<div style="font-size: 11.5px; color: var(--text-muted); margin-top: 1px;">Enables top-header rotation banner placement.</div>
+</div>
+</label>
+</div>
+<div class="form-grid-2" style="align-items: center;">
+<div class="form-field">
+<label class="form-label">Display Priority Order</label>
+<input class="form-input" style="max-width: 140px;" type="number" value="1"/>
+<span style="font-size: 11px; color: var(--text-muted);">Lower numbers appear first on the public landing page.</span>
+</div>
+<div style="padding-top: 8px;">
+<div style="font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">Live Portal Sync State</div>
+<div style="display: flex; align-items: center; gap: 8px;">
+<span class="pill-badge badge-live" style="padding: 5px 10px;">Active &amp; Featured (Synced to Live CDN)</span>
+<span style="font-size: 11px; color: var(--text-muted);">Instant Edge propagation</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Modal Footer -->
+<footer class="modal-footer">
+<div>
+<button class="btn-danger-ghost" type="button">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Delete Patron
+        </button>
+</div>
+<div style="display: flex; align-items: center; gap: 10px;">
+<button class="btn btn-outline" type="button">Cancel &amp; Discard</button>
+<button class="btn btn-primary" style="padding: 8px 18px;" type="button">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Save &amp; Update Profile
+        </button>
+</div>
+</footer>
+</div>
+</div>
+<!-- END: Edit Patron Modal Overlay -->
+</body></html>

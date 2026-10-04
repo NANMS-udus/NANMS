@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "tertiary-fixed-dim": "#68dba9",
+        "inverse-surface": "#213145",
+        "surface-container": "#e5eeff",
+        "on-secondary-container": "#00476e",
+        "on-error-container": "#93000a",
+        "on-surface-variant": "#45464d",
+        "on-tertiary-fixed-variant": "#005137",
+        "tertiary-fixed": "#85f8c4",
+        "on-error": "#ffffff",
+        "on-secondary-fixed-variant": "#004b73",
+        "inverse-primary": "#bec6e0",
+        "on-tertiary-fixed": "#002114",
+        "secondary-container": "#5bb8fe",
+        "tertiary": "#000000",
+        "on-tertiary-container": "#069669",
+        "surface-bright": "#f8f9ff",
+        "on-background": "#0b1c30",
+        "on-primary": "#ffffff",
+        "error-container": "#ffdad6",
+        "secondary-fixed-dim": "#93ccff",
+        "secondary": "#006398",
+        "outline-variant": "#c6c6cd",
+        "error": "#ba1a1a",
+        "primary-fixed": "#dae2fd",
+        "on-secondary-fixed": "#001d31",
+        "surface-container-lowest": "#ffffff",
+        "primary": "#000000",
+        "surface-tint": "#565e74",
+        "primary-container": "#131b2e",
+        "on-surface": "#0b1c30",
+        "surface": "#f8f9ff",
+        "secondary-fixed": "#cce5ff",
+        "surface-variant": "#d3e4fe",
+        "inverse-on-surface": "#eaf1ff",
+        "tertiary-container": "#002114",
+        "on-primary-container": "#7c839b",
+        "primary-fixed-dim": "#bec6e0",
+        "surface-container-low": "#eff4ff",
+        "surface-container-high": "#dce9ff",
+        "surface-dim": "#cbdbf5",
+        "on-primary-fixed-variant": "#3f465c",
+        "surface-container-highest": "#d3e4fe",
+        "background": "#f8f9ff",
+        "outline": "#76777d",
+        "on-primary-fixed": "#131b2e",
+        "on-tertiary": "#ffffff",
+        "on-secondary": "#ffffff"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "gutter-mobile": "0.75rem",
+        "space-xs": "0.25rem",
+        "space-lg": "1.5rem",
+        "margin": "2rem",
+        "gutter": "1.5rem",
+        "margin-mobile": "1rem",
+        "space-sm": "0.5rem",
+        "space-md": "1rem",
+        "space-xl": "2rem"
+      },
+      "fontFamily": {
+        "body-lg": ["Inter"],
+        "headline-sm": ["Plus Jakarta Sans"],
+        "headline-xl-mobile": ["Plus Jakarta Sans"],
+        "body-sm": ["Inter"],
+        "headline-lg": ["Plus Jakarta Sans"],
+        "label-md": ["Inter"],
+        "body-md": ["Inter"],
+        "label-lg": ["Inter"],
+        "headline-xl": ["Plus Jakarta Sans"],
+        "label-sm": ["Inter"],
+        "headline-md": ["Plus Jakarta Sans"]
+      },
+      "fontSize": {
+        "body-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "400"}],
+        "headline-sm": ["15px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-xl-mobile": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+        "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+        "headline-lg": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+        "label-md": ["11px", {"lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600"}],
+        "body-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400"}],
+        "label-lg": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+        "headline-xl": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+        "label-sm": ["10px", {"lineHeight": "12px", "letterSpacing": "0.06em", "fontWeight": "700"}],
+        "headline-md": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background text-on-surface font-body-md antialiased selection:bg-secondary selection:text-on-secondary"><aside class="fixed left-0 top-0 h-screen w-64 bg-primary-container text-on-primary-container z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-space-md flex items-center gap-space-sm bg-inverse-surface/40"><div class="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-on-secondary shadow-sm"><span class="material-symbols-outlined text-[20px]">local_hospital</span></div><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-primary truncate tracking-tight">NANMS Control</span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary-fixed">Secure Admin Room</span></div></div><div class="p-space-md flex flex-col gap-space-lg"><div class="flex flex-col gap-space-xs"><span class="px-space-sm font-label-sm text-label-sm uppercase tracking-wider text-on-primary-fixed-variant">Association Management</span><nav class="flex flex-col gap-1" data-active-classes="bg-secondary text-on-secondary font-label-lg rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-primary-container font-label-lg text-label-lg hover:bg-inverse-surface hover:text-on-primary transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">dashboard</span><span>Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-primary-container font-label-lg text-label-lg hover:bg-inverse-surface hover:text-on-primary transition-colors" data-path="association-hub" href="#"><span class="material-symbols-outlined text-[18px]">corporate_fare</span><span>Association Hub</span></a><a aria-current="page" class="flex items-center justify-between px-space-sm py-2 transition-colors bg-secondary text-on-secondary font-label-lg rounded-lg" data-path="portfolio-manager" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">badge</span><span>Portfolio Manager</span></div><span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-secondary text-on-secondary tracking-wide uppercase">Active</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-primary-container font-label-lg text-label-lg hover:bg-inverse-surface hover:text-on-primary transition-colors" data-path="news-control" href="#"><span class="material-symbols-outlined text-[18px]">newspaper</span><span>News Control</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-primary-container font-label-lg text-label-lg hover:bg-inverse-surface hover:text-on-primary transition-colors" data-path="quizzer-admin" href="#"><span class="material-symbols-outlined text-[18px]">psychology</span><span>Quizzer Admin</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-primary-container font-label-lg text-label-lg hover:bg-inverse-surface hover:text-on-primary transition-colors" data-path="member-monitoring" href="#"><span class="material-symbols-outlined text-[18px]">supervised_user_circle</span><span>Member Monitoring</span></a></nav></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm font-label-sm text-label-sm uppercase tracking-wider text-on-primary-fixed-variant">System Management</span><nav class="flex flex-col gap-1" data-active-classes="bg-secondary text-on-secondary font-label-lg rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-primary-container font-label-lg text-label-lg hover:bg-inverse-surface hover:text-on-primary transition-colors" data-path="system-settings" href="#"><span class="material-symbols-outlined text-[18px]">settings</span><span>System Settings</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-primary-container font-label-lg text-label-lg hover:bg-inverse-surface hover:text-on-primary transition-colors" data-path="support-desk" href="#"><span class="material-symbols-outlined text-[18px]">headset_mic</span><span>Support Desk</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-error hover:bg-inverse-surface hover:text-on-error transition-colors font-label-lg text-label-lg" data-path="login" href="#"><span class="material-symbols-outlined text-[18px]">lock</span><span>Secure Logout</span></a></nav></div></div></div><div class="p-space-md bg-inverse-surface/30 m-space-sm rounded-lg flex items-center justify-between"><div class="flex items-center gap-space-xs text-tertiary-fixed"><span class="material-symbols-outlined text-[16px]">verified_user</span><span class="font-label-sm text-label-sm tracking-wide uppercase">Audit Shield Active</span></div><span class="w-2 h-2 rounded-full bg-tertiary-fixed animate-pulse"></span></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-gutter"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface-variant"><span class="font-label-md text-label-md text-secondary">Portal Room</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="text-on-surface font-label-lg text-label-lg">Admin Console</span></div><div class="relative w-80"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-outline">search</span><input class="w-full pl-9 pr-4 py-1.5 rounded-lg bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:bg-surface-container transition-all" placeholder="Search portal assets, records, or inquiries..." type="text"/></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><div class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors cursor-pointer"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-4 h-4 rounded-full bg-error text-on-error font-label-sm text-[9px] flex items-center justify-center font-bold">3</span></div><div class="p-2 rounded-lg text-secondary hover:bg-surface-container transition-colors cursor-pointer" title="System Clearance Verified"><span class="material-symbols-outlined text-[20px]">gshield</span></div></div><div class="flex items-center gap-space-sm pl-space-md cursor-pointer"><div class="flex flex-col text-right hidden sm:flex"><span class="font-label-lg text-label-lg text-on-surface leading-tight">Dr. Aminu Bello</span><span class="font-label-sm text-label-sm text-on-surface-variant">Super Administrator</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="p-space-lg max-w-[1600px] w-full mx-auto flex flex-col gap-space-lg">
+<!-- Screen Title & Top Actions Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
+<div class="flex flex-col gap-space-xs">
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Portfolio Manager: Association Digital Assets &amp; Pages</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage public-facing association portal contents, stakeholder directories, and communication touchpoints.</p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="inline-flex items-center gap-space-xs px-space-md py-2 bg-surface-container-lowest text-on-surface font-label-lg text-label-lg rounded-lg shadow-sm hover:bg-surface-container-low transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">open_in_new</span>
+<span>View Live Portal</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-2 bg-on-tertiary-container text-on-primary font-label-lg text-label-lg rounded-lg shadow-sm hover:opacity-95 transition-opacity" type="button">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>Save Changes</span>
+</button>
+</div>
+</div>
+<!-- Main Workspace Grid: Master-Detail Architecture -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- Left Column: Portfolio Controls Panel (fixed-width desktop scope) -->
+<aside class="xl:col-span-3 flex flex-col gap-space-md">
+<!-- Controls Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<div class="px-space-sm pt-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">Portfolio Controls</span>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center justify-between px-space-sm py-2.5 rounded-lg text-on-surface hover:bg-surface-container-low transition-colors group" href="#">
+<span class="font-label-lg text-label-lg group-hover:text-secondary">Home Hero &amp; Vision</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-tertiary-fixed text-on-tertiary-fixed tracking-wide uppercase">Live</span>
+</a>
+<a class="flex items-center justify-between px-space-sm py-2.5 rounded-lg text-on-surface hover:bg-surface-container-low transition-colors group" href="#">
+<span class="font-label-lg text-label-lg group-hover:text-secondary">News &amp; Press</span>
+<span class="px-2 py-0.5 rounded text-label-sm font-body-sm text-on-surface-variant bg-surface-container-high">142</span>
+</a>
+<!-- Active Selection: Patrons & Alumni -->
+<div class="flex flex-col gap-0.5 px-space-sm py-3 rounded-lg bg-surface-container text-on-surface">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-secondary font-bold">Patrons &amp; Alumni</span>
+<span class="px-2 py-0.5 rounded text-label-sm font-bold bg-secondary text-on-secondary">1,438</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-secondary-container">Eminent mentors, presidents &amp; alumni</span>
+</div>
+<a class="flex items-center justify-between px-space-sm py-2.5 rounded-lg text-on-surface hover:bg-surface-container-low transition-colors group" href="#">
+<span class="font-label-lg text-label-lg group-hover:text-secondary">Contact &amp; Inquiries</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-error-container text-on-error-container">12 unread</span>
+</a>
+</nav>
+</div>
+<!-- Sync Telemetry Panel -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-on-tertiary-container">
+<span class="w-2.5 h-2.5 rounded-full bg-on-tertiary-container animate-ping shrink-0"></span>
+<span class="font-label-lg text-label-lg font-bold">Portal Sync Status: 100% Live</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pl-4">Last updated: 10 mins ago by Dr. Bello</p>
+</div>
+<!-- Micro Analytical Widget: Alumni Density -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Global Reach Telemetry</span>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface">14 Countries</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Overseas fellowship posts</span>
+</div>
+<!-- Sparkline visualization -->
+<svg class="w-20 h-9 text-secondary" fill="none" stroke="currentColor" viewbox="0 0 100 40">
+<path d="M0 32 Q 25 15, 45 28 T 80 10 T 100 5" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="100" cy="5" fill="currentColor" r="3.5"></circle>
+</svg>
+</div>
+</div>
+</aside>
+<!-- Right Column: Primary Records & Metric Displays -->
+<main class="xl:col-span-9 flex flex-col gap-space-lg">
+<!-- 4 Stat Metric Cards Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Stat 1 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between h-32 hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Eminent Patrons &amp; Mentors</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">verified</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-xl text-headline-xl text-on-surface">18 Listed</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">3 Grand Patrons • 6 Clinical Advisors</span>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between h-32 hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Past Administrations</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">account_balance</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-xl text-headline-xl text-on-surface">12 Tenures</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">2019 - 2023 Executive Archives</span>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between h-32 hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Notable Alumni Network</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">school</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-xl text-headline-xl text-on-surface">1,420 Doctors</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">850+ Graduated • 14 Countries</span>
+</div>
+</div>
+<!-- Stat 4 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between h-32 hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Alumni Endowments</span>
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">payments</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-xl text-headline-xl text-on-tertiary-container font-bold">₦12M+</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Disbursed for Student Welfare</span>
+</div>
+</div>
+</div>
+<!-- Directory Container Panel -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<!-- Section Head & Action Bar -->
+<div class="p-space-lg flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Patrons &amp; Alumni Network Directory</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Manage eminent healthcare leaders, past presidents, and alumni practitioners synced directly with the public directory.</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs shrink-0">
+<button class="inline-flex items-center gap-space-xs px-3 py-1.5 bg-surface-container-low text-on-surface font-label-md text-label-md rounded-lg hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">swap_vert</span>
+<span>Reorder Display Order</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-3 py-1.5 bg-surface-container-low text-on-surface font-label-md text-label-md rounded-lg hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Export Registry (CSV)</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-3.5 py-1.5 bg-primary-container text-on-primary font-label-md text-label-md rounded-lg hover:bg-inverse-surface transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add Member / Entry</span>
+</button>
+</div>
+</div>
+<!-- Segmented Sub-navigation Tabs -->
+<div class="px-space-lg flex items-center gap-space-sm overflow-x-auto bg-surface-container-low/50 py-1">
+<button class="px-space-md py-2 font-label-lg text-label-lg text-secondary bg-surface-container-lowest rounded-lg shadow-sm whitespace-nowrap" type="button">
+              Eminent Patrons &amp; Mentors (18)
+            </button>
+<button class="px-space-md py-2 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface whitespace-nowrap" type="button">
+              Past Presidents &amp; Administrations (12)
+            </button>
+<button class="px-space-md py-2 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface whitespace-nowrap" type="button">
+              Notable Alumni Network (1,420)
+            </button>
+<button class="px-space-md py-2 font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface whitespace-nowrap" type="button">
+              Call-to-Action &amp; Settings
+            </button>
+</div>
+<!-- Filter Chips & Search Context Row -->
+<div class="p-space-md flex flex-col md:flex-row items-center justify-between gap-space-md bg-surface-container-lowest">
+<div class="flex flex-wrap items-center gap-1.5 w-full md:w-auto">
+<button class="px-3 py-1 rounded-full text-label-md font-semibold bg-primary-container text-on-primary" type="button">All Roles</button>
+<button class="px-3 py-1 rounded-full text-label-md font-medium bg-surface-container-low text-on-surface-variant hover:bg-surface-container" type="button">Grand Patron</button>
+<button class="px-3 py-1 rounded-full text-label-md font-medium bg-surface-container-low text-on-surface-variant hover:bg-surface-container" type="button">Health Advisors</button>
+<button class="px-3 py-1 rounded-full text-label-md font-medium bg-surface-container-low text-on-surface-variant hover:bg-surface-container" type="button">Clinical Benefactors</button>
+<button class="px-3 py-1 rounded-full text-label-md font-medium bg-surface-container-low text-on-surface-variant hover:bg-surface-container" type="button">Past Presidents</button>
+<button class="px-3 py-1 rounded-full text-label-md font-medium bg-surface-container-low text-on-surface-variant hover:bg-surface-container" type="button">Notable Alumni</button>
+</div>
+<div class="relative w-full md:w-64 shrink-0">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-[16px] text-outline">search</span>
+<input class="w-full pl-8 pr-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:bg-surface-container" placeholder="Filter by name or specialty..." type="text"/>
+</div>
+</div>
+<!-- Tabular Directory Content -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left min-w-[840px]">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-3 px-space-md font-semibold">Member / Profile</th>
+<th class="py-3 px-space-md font-semibold">Designation / Practice Status</th>
+<th class="py-3 px-space-md font-semibold">Category Tier</th>
+<th class="py-3 px-space-md font-semibold">Portal Status</th>
+<th class="py-3 px-space-md font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-on-surface font-body-md text-body-md">
+<!-- Row 1: Prof. Mohammed K. Bello -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-start gap-space-sm max-w-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed font-headline-sm text-headline-sm flex items-center justify-center shrink-0">MB</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface">Prof. Mohammed K. Bello</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic line-clamp-2 mt-0.5">“The measure of our medical legacy is found in the integrity, empathy...”</p>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md max-w-xs">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">FWACS, Consultant Neurosurgeon</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Former Provost, College of Health Sciences</span>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-800 tracking-wide uppercase">
+<span class="material-symbols-outlined text-[13px]">star</span>
+<span>Grand Patron</span>
+</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-md font-semibold bg-tertiary-fixed text-on-tertiary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+<span>Active &amp; Featured</span>
+</span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors" type="button">Edit</button>
+<button class="px-2.5 py-1 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors" type="button">Citation</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Dr. Zainab Aliyu Tanko -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-start gap-space-sm max-w-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed font-headline-sm text-headline-sm flex items-center justify-center shrink-0">ZT</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface">Dr. Zainab Aliyu Tanko</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic line-clamp-2 mt-0.5">“Every underserved village reached by our students is a testament...”</p>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md max-w-xs">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">FMCOG, Maternal Health Specialist</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Senior Healthcare Policy Consultant</span>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-800 tracking-wide uppercase">
+<span class="material-symbols-outlined text-[13px]">star</span>
+<span>Patron &amp; Health Advisor</span>
+</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-md font-semibold bg-tertiary-fixed text-on-tertiary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+<span>Active &amp; Featured</span>
+</span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors" type="button">Edit</button>
+<button class="px-2.5 py-1 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors" type="button">Visibility</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Dr. Ibrahim Ndagi -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-start gap-space-sm max-w-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed font-headline-sm text-headline-sm flex items-center justify-center shrink-0">IN</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface">Dr. Ibrahim Ndagi</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic line-clamp-2 mt-0.5">“Academic excellence without moral courage is incomplete...”</p>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md max-w-xs">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">FACP, Chief Medical Consultant</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Minna Specialist Medical Services</span>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-800 tracking-wide uppercase">
+<span class="material-symbols-outlined text-[13px]">star</span>
+<span>Patron &amp; Benefactor</span>
+</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-md font-semibold bg-tertiary-fixed text-on-tertiary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+<span>Active &amp; Featured</span>
+</span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors" type="button">Edit</button>
+<button class="px-2.5 py-1 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors" type="button">Visibility</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Dr. Umar Farooq Sani -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-start gap-space-sm max-w-sm">
+<div class="w-10 h-10 rounded-full bg-primary-fixed text-on-primary-fixed font-headline-sm text-headline-sm flex items-center justify-center shrink-0">US</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface">Dr. Umar Farooq Sani</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Tenure: 2022 - 2023 Administration</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md max-w-xs">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Resident Doctor (Internal Medicine)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ahmadu Bello University Teaching Hospital (ABUTH), Zaria</span>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-surface-container text-secondary tracking-wide uppercase">
+                      Past President
+                    </span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-md font-semibold bg-surface-container-high text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>Archived &amp; Public</span>
+</span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors" type="button">Edit Tenure</button>
+</td>
+</tr>
+<!-- Row 5: Dr. Hadiza Suleiman -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-start gap-space-sm max-w-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed font-headline-sm text-headline-sm flex items-center justify-center shrink-0">HS</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface">Dr. Hadiza Suleiman</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Class of 2015</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md max-w-xs">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Consultant Cardiologist</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Imperial College Trust, UK</span>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-secondary-fixed text-on-secondary-fixed-variant tracking-wide uppercase">
+                      Notable Alumni
+                    </span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-md font-semibold bg-tertiary-fixed text-on-tertiary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+<span>Verified Alumni</span>
+</span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors" type="button">Edit Profile</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Public Call-to-Action Banner at Bottom -->
+<div class="m-space-md p-space-md bg-tertiary-container rounded-xl text-on-primary flex flex-col md:flex-row items-center justify-between gap-space-md shadow-sm">
+<div class="flex items-start gap-space-sm">
+<div class="p-2 rounded-lg bg-inverse-surface/60 text-tertiary-fixed shrink-0">
+<span class="material-symbols-outlined text-[24px]">campaign</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-primary">Public Call-to-Action: “Are You a NANMS Graduate?”</span>
+<p class="font-body-sm text-body-sm text-on-primary-container max-w-2xl">
+                  Stay connected with your alma mater, mentor aspiring medical practitioners, and contribute to our annual scholarship and medical outreach funds.
+                </p>
+</div>
+</div>
+<div class="flex items-center gap-space-md shrink-0">
+<div class="flex flex-col text-right">
+<span class="font-label-sm text-label-sm font-bold uppercase text-tertiary-fixed tracking-wider">Live on Portal</span>
+<span class="font-body-sm text-body-sm text-on-primary-container">Interactive Banner</span>
+</div>
+<!-- Interactive Switch/Toggle -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-inverse-surface peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface peer-checked:bg-on-tertiary-container after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:border-surface-container after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+</div>
+</div>
+<!-- Pagination Bar -->
+<div class="p-space-md bg-surface-container-lowest flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant font-body-sm text-body-sm">
+<span>Showing <strong class="text-on-surface font-semibold">1 - 5</strong> of <strong class="text-on-surface font-semibold">1,438</strong> records across Patrons &amp; Alumni</span>
+<div class="inline-flex items-center gap-1 font-label-md text-label-md">
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors disabled:opacity-50" type="button">Previous</button>
+<button class="w-8 h-8 rounded-lg bg-primary-container text-on-primary font-bold flex items-center justify-center" type="button">1</button>
+<button class="w-8 h-8 rounded-lg text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors" type="button">2</button>
+<button class="w-8 h-8 rounded-lg text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors" type="button">3</button>
+<span class="px-1 text-outline">...</span>
+<button class="w-8 h-8 rounded-lg text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors" type="button">288</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface hover:bg-surface-container transition-colors" type="button">Next</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div></main></div></body></html>

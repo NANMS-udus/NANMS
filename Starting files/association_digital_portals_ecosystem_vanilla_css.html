@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NANMS Control - Association Hub</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --bg: #f8f9ff;
+      --surface: #f8f9ff;
+      --surface-lowest: #ffffff;
+      --surface-low: #eff4ff;
+      --surface-container: #e5eeff;
+      --surface-highest: #d3e4fe;
+      --primary: #000000;
+      --primary-container: #131b2e;
+      --on-primary: #ffffff;
+      --on-primary-container: #7c839b;
+      --on-primary-muted: #3f465c;
+      --secondary: #006398;
+      --secondary-fixed: #cce5ff;
+      --secondary-fixed-dim: #93ccff;
+      --on-secondary: #ffffff;
+      --on-secondary-container: #00476e;
+      --on-surface: #0b1c30;
+      --on-surface-variant: #45464d;
+      --outline: #76777d;
+      --outline-variant: #c6c6cd;
+      --inverse-surface: #213145;
+      --tertiary-fixed: #85f8c4;
+      --on-tertiary-container: #069669;
+      --on-tertiary-fixed-variant: #005137;
+      --amber-bg: #fef3c7;
+      --amber-text: #92400e;
+      --amber-dot: #f59e0b;
+      --error: #ba1a1a;
+      --error-container: #ffdad6;
+      --on-error-container: #93000a;
+      --font-body: 'Inter', sans-serif;
+      --font-heading: 'Plus Jakarta Sans', sans-serif;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-full: 9999px;
+      --sidebar-width: 256px;
+      --header-height: 64px;
+      --shadow-sm: 0 1px 3px rgba(11, 28, 48, 0.05);
+      --shadow-md: 0 4px 12px rgba(11, 28, 48, 0.08);
+      --shadow-subtle: 0 1px 8px rgba(0,0,0,0.04);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--on-surface);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      border: none;
+      background: none;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    /* Layout Shell */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: var(--sidebar-width);
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .sidebar-inner {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .sidebar-brand {
+      height: var(--header-height);
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background-color: rgba(33, 49, 69, 0.4);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .brand-icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      background-color: var(--secondary);
+      color: var(--on-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 600;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-subtitle {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--secondary-fixed);
+    }
+
+    .sidebar-sections {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .group-title {
+      padding: 0 0.5rem;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-primary-muted);
+    }
+
+    .nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0.65rem;
+      border-radius: var(--radius-md);
+      color: var(--on-primary-container);
+      font-size: 13px;
+      font-weight: 600;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .nav-item:hover {
+      background-color: var(--inverse-surface);
+      color: #ffffff;
+    }
+
+    .nav-item.active {
+      background-color: var(--secondary);
+      color: var(--on-secondary);
+    }
+
+    .nav-item-badge-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .badge-pill {
+      font-size: 10px;
+      font-weight: 700;
+      background-color: var(--secondary);
+      color: #ffffff;
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-item.logout {
+      color: #ff897d;
+    }
+
+    .nav-item.logout:hover {
+      background-color: var(--inverse-surface);
+      color: #ffffff;
+    }
+
+    .sidebar-status-card {
+      padding: 0.75rem 1rem;
+      background-color: rgba(33, 49, 69, 0.4);
+      margin: 0.75rem;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .status-badge-text {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--tertiary-fixed);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--tertiary-fixed);
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.9); }
+    }
+
+    /* Main Container */
+    .main-wrapper {
+      margin-left: var(--sidebar-width);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navbar */
+    .top-header {
+      position: fixed;
+      top: 0;
+      left: var(--sidebar-width);
+      right: 0;
+      height: var(--header-height);
+      background-color: rgba(248, 249, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-subtle);
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 12px;
+      color: var(--on-surface-variant);
+    }
+
+    .breadcrumb .bc-parent {
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    .breadcrumb .bc-active {
+      color: var(--on-surface);
+      font-weight: 600;
+    }
+
+    .search-container {
+      position: relative;
+      width: 320px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: var(--outline);
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 6px 12px 6px 36px;
+      background-color: var(--surface-low);
+      border: 1px solid transparent;
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      font-family: inherit;
+      color: var(--on-surface);
+      outline: none;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .search-input:focus {
+      background-color: var(--surface-container);
+      border-color: var(--secondary-fixed-dim);
+    }
+
+    .search-input::placeholder {
+      color: var(--outline);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .action-icons {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .icon-btn {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--on-surface-variant);
+      transition: background-color 0.2s;
+    }
+
+    .icon-btn:hover {
+      background-color: var(--surface-container);
+    }
+
+    .icon-btn.active-shield {
+      color: var(--secondary);
+    }
+
+    .badge-count {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: var(--error);
+      color: #ffffff;
+      font-size: 9px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding-left: 0.5rem;
+      border-left: 1px solid var(--outline-variant);
+      cursor: pointer;
+    }
+
+    .user-meta {
+      display: flex;
+      flex-direction: column;
+      text-align: right;
+    }
+
+    .user-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1.2;
+    }
+
+    .user-role {
+      font-size: 10px;
+      color: var(--on-surface-variant);
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Main Content Area */
+    .content-area {
+      padding-top: var(--header-height);
+      padding-bottom: 2.5rem;
+      flex: 1;
+    }
+
+    .content-inner {
+      max-width: 1520px;
+      margin: 0 auto;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Governance Hero Card */
+    .governance-card {
+      background-color: var(--surface-lowest);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem 2rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(198, 198, 205, 0.3);
+    }
+
+    .governance-card::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 384px;
+      background: linear-gradient(270deg, rgba(229, 238, 255, 0.6) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .hero-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      max-width: 780px;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--secondary);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-tag span {
+      font-size: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--on-surface);
+      line-height: 1.25;
+    }
+
+    .hero-desc {
+      font-size: 13px;
+      color: var(--on-surface-variant);
+      line-height: 1.6;
+      margin-top: 0.2rem;
+    }
+
+    .access-pill-box {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background-color: var(--surface-low);
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius-lg);
+      flex-shrink: 0;
+      z-index: 2;
+      border: 1px solid rgba(198, 198, 205, 0.4);
+    }
+
+    .access-stat {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 12px;
+      color: var(--on-surface-variant);
+    }
+
+    .stat-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .stat-indicator.green {
+      background-color: var(--on-tertiary-container);
+      animation: pulse 2s infinite;
+    }
+
+    .stat-indicator.amber {
+      background-color: var(--amber-dot);
+    }
+
+    .stat-indicator.red {
+      background-color: var(--error);
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 16px;
+      background-color: rgba(198, 198, 205, 0.6);
+    }
+
+    /* Filters Bar */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-pills {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .tab-btn {
+      padding: 6px 14px;
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      font-weight: 600;
+      background-color: var(--surface-low);
+      color: var(--on-surface-variant);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      background-color: var(--surface-container);
+      color: var(--on-surface);
+    }
+
+    .tab-btn.active {
+      background-color: var(--surface-highest);
+      color: var(--on-surface);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .session-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background-color: var(--surface-lowest);
+      padding: 6px 12px;
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      color: var(--on-surface-variant);
+      border: 1px solid rgba(198, 198, 205, 0.4);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .session-badge .material-symbols-outlined {
+      color: var(--secondary);
+      font-size: 16px;
+    }
+
+    .session-id {
+      color: var(--outline);
+      font-size: 10px;
+    }
+
+    /* Portals Grid */
+    .portals-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .portal-card {
+      background-color: var(--surface-lowest);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(198, 198, 205, 0.35);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+    .portal-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .portal-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .portal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .icon-badge-box {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-badge-box.mint {
+      background-color: rgba(104, 219, 169, 0.3);
+      color: var(--on-tertiary-fixed-variant);
+    }
+
+    .icon-badge-box.blue {
+      background-color: rgba(204, 229, 255, 0.6);
+      color: var(--secondary);
+    }
+
+    .icon-badge-box.navy {
+      background-color: rgba(218, 226, 253, 0.7);
+      color: #131b2e;
+    }
+
+    .icon-badge-box.cyan {
+      background-color: var(--surface-container-high);
+      color: var(--secondary);
+    }
+
+    .icon-badge-box.amber {
+      background-color: var(--amber-bg);
+      color: var(--amber-text);
+    }
+
+    .icon-badge-box.red {
+      background-color: var(--error-container);
+      color: var(--error);
+    }
+
+    .access-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .access-status-pill.full {
+      background-color: rgba(133, 248, 196, 0.3);
+      color: var(--on-tertiary-fixed-variant);
+    }
+
+    .access-status-pill.readonly {
+      background-color: #fef3c7;
+      color: var(--amber-text);
+    }
+
+    .access-status-pill.none {
+      background-color: var(--error-container);
+      color: var(--on-error-container);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .status-dot.green { background-color: var(--on-tertiary-container); }
+    .status-dot.amber { background-color: var(--amber-dot); }
+
+    .portal-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .portal-title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .portal-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--on-surface);
+      transition: color 0.2s;
+    }
+
+    .portal-card:hover .portal-title {
+      color: var(--secondary);
+    }
+
+    .portal-card.restricted:hover .portal-title {
+      color: var(--error);
+    }
+
+    .lock-mini-icon {
+      font-size: 16px;
+      color: var(--error);
+    }
+
+    .portal-desc {
+      font-size: 13px;
+      color: var(--on-surface-variant);
+      line-height: 1.5;
+    }
+
+    .portal-meta-tags {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      padding-top: 0.25rem;
+      font-size: 12px;
+      color: var(--on-surface-variant);
+    }
+
+    .meta-tag {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      background-color: var(--surface-low);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(198, 198, 205, 0.3);
+    }
+
+    .meta-tag .material-symbols-outlined {
+      font-size: 15px;
+    }
+
+    .portal-footer {
+      margin: 1.25rem -1.5rem -1.5rem -1.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: rgba(239, 244, 255, 0.45);
+      border-top: 1px solid rgba(198, 198, 205, 0.3);
+      border-bottom-left-radius: var(--radius-xl);
+      border-bottom-right-radius: var(--radius-xl);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .privilege-label {
+      font-size: 11px;
+      color: var(--on-surface-variant);
+    }
+
+    .privilege-value {
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    .privilege-value.alert {
+      color: var(--error);
+    }
+
+    .portal-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--secondary);
+      font-size: 13px;
+      font-weight: 600;
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .portal-card:hover .portal-action-btn {
+      transform: translateX(2px);
+      color: var(--on-secondary-container);
+    }
+
+    .portal-action-btn.unauth-btn {
+      color: var(--on-surface-variant);
+    }
+
+    .portal-action-btn.unauth-btn:hover {
+      color: var(--error);
+    }
+
+    /* Elevated Clearance Banner */
+    .clearance-banner {
+      background: linear-gradient(90deg, #eff4ff 0%, #ffffff 50%, #eff4ff 100%);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem 2rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      border: 1px solid rgba(198, 198, 205, 0.3);
+    }
+
+    .banner-left {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      max-width: 820px;
+    }
+
+    .banner-icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-md);
+      background-color: var(--surface-container);
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .banner-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .banner-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    .banner-desc {
+      font-size: 13px;
+      color: var(--on-surface-variant);
+      line-height: 1.5;
+    }
+
+    .banner-action-btn {
+      flex-shrink: 0;
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      transition: background-color 0.2s;
+    }
+
+    .banner-action-btn:hover {
+      background-color: var(--primary-container);
+    }
+
+    /* Mobile / Responsive Media Queries */
+    @media (max-width: 1080px) {
+      .portals-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .main-wrapper {
+        margin-left: 0;
+      }
+      .top-header {
+        left: 0;
+      }
+      .search-container {
+        display: none;
+      }
+      .governance-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .clearance-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .banner-action-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .content-inner {
+        padding: 1rem;
+      }
+      .user-meta {
+        display: none;
+      }
+      .hero-title {
+        font-size: 22px;
+      }
+      .access-pill-box {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .filter-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Navigation Sidebar -->
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-inner">
+<div class="sidebar-brand">
+<div class="brand-icon-box">
+<span class="material-symbols-outlined" style="font-size: 20px;">local_hospital</span>
+</div>
+<div class="brand-text">
+<span class="brand-title">NANMS Control</span>
+<span class="brand-subtitle">Secure Admin Room</span>
+</div>
+</div>
+<div class="sidebar-sections">
+<!-- Association Management -->
+<div class="nav-group">
+<span class="group-title">Association Management</span>
+<ul class="nav-list">
+<li>
+<a class="nav-item" data-path="dashboard" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a aria-current="page" class="nav-item active" data-path="association-hub" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">corporate_fare</span>
+<span>Association Hub</span>
+</a>
+</li>
+<li>
+<a class="nav-item" data-path="portfolio-manager" href="#">
+<div class="nav-item-badge-wrap">
+<div style="display: flex; align-items: center; gap: 0.75rem;">
+<span class="material-symbols-outlined" style="font-size: 18px;">badge</span>
+<span>Portfolio Manager</span>
+</div>
+<span class="badge-pill">Active</span>
+</div>
+</a>
+</li>
+<li>
+<a class="nav-item" data-path="news-control" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">newspaper</span>
+<span>News Control</span>
+</a>
+</li>
+<li>
+<a class="nav-item" data-path="quizzer-admin" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">psychology</span>
+<span>Quizzer Admin</span>
+</a>
+</li>
+<li>
+<a class="nav-item" data-path="member-monitoring" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">supervised_user_circle</span>
+<span>Member Monitoring</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- System Management -->
+<div class="nav-group">
+<span class="group-title">System Management</span>
+<ul class="nav-list">
+<li>
+<a class="nav-item" data-path="system-settings" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">settings</span>
+<span>System Settings</span>
+</a>
+</li>
+<li>
+<a class="nav-item" data-path="support-desk" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">headset_mic</span>
+<span>Support Desk</span>
+</a>
+</li>
+<li>
+<a class="nav-item logout" data-path="login" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">lock</span>
+<span>Secure Logout</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Audit Shield Status -->
+<div class="sidebar-status-card">
+<div class="status-badge-text">
+<span class="material-symbols-outlined" style="font-size: 16px;">verified_user</span>
+<span>Audit Shield Active</span>
+</div>
+<span class="pulse-dot"></span>
+</div>
+</aside>
+<!-- Page Content Shell -->
+<div class="main-wrapper">
+<!-- Header -->
+<header class="top-header">
+<div class="header-left">
+<div class="breadcrumb">
+<span class="bc-parent">Portal Room</span>
+<span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span>
+<span class="bc-active">Admin Console</span>
+</div>
+<div class="search-container">
+<span class="material-symbols-outlined search-icon">search</span>
+<input class="search-input" placeholder="Search portal assets, records, or inquiries..." type="text"/>
+</div>
+</div>
+<div class="header-right">
+<div class="action-icons">
+<button class="icon-btn" title="Notifications">
+<span class="material-symbols-outlined" style="font-size: 20px;">notifications</span>
+<span class="badge-count">3</span>
+</button>
+<button class="icon-btn active-shield" title="System Clearance Verified">
+<span class="material-symbols-outlined" style="font-size: 20px;">gshield</span>
+</button>
+</div>
+<div class="user-profile">
+<div class="user-meta">
+<span class="user-name">Dr. Aminu Bello</span>
+<span class="user-role">Super Administrator</span>
+</div>
+<div class="user-avatar">
+<span class="material-symbols-outlined" style="font-size: 18px;">person</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Section -->
+<main class="content-area">
+<div class="content-inner">
+<!-- Header Governance Card -->
+<section class="governance-card">
+<div class="hero-info">
+<div class="hero-tag">
+<span class="material-symbols-outlined">corporate_fare</span>
+<span>Institutional Ecosystem Control</span>
+</div>
+<h1 class="hero-title">Association Digital Portals &amp; Ecosystem</h1>
+<p class="hero-desc">
+              Launch administrative workspaces across the National Association of Niger State Medical Students. Review your active credentials and access tiers for each live platform.
+            </p>
+</div>
+<div class="access-pill-box">
+<div class="access-stat">
+<span class="stat-indicator green"></span>
+<span><strong style="color: var(--on-surface);">4</strong> Authorized</span>
+</div>
+<div class="stat-divider"></div>
+<div class="access-stat">
+<span class="stat-indicator amber"></span>
+<span><strong style="color: var(--on-surface);">1</strong> Read-Only</span>
+</div>
+<div class="stat-divider"></div>
+<div class="access-stat">
+<span class="stat-indicator red"></span>
+<span><strong style="color: var(--on-surface);">1</strong> Restricted</span>
+</div>
+</div>
+</section>
+<!-- Filter Pills & Metadata Bar -->
+<div class="filter-bar">
+<div class="tab-pills" id="filter-tabs">
+<button class="tab-btn active portal-tab" data-filter="all">All Sites (6)</button>
+<button class="tab-btn portal-tab" data-filter="authorized">Authorized (4)</button>
+<button class="tab-btn portal-tab" data-filter="restricted">Restricted (2)</button>
+<button class="tab-btn portal-tab" data-filter="public">Public Facing (3)</button>
+<button class="tab-btn portal-tab" data-filter="internal">Internal Portals (3)</button>
+</div>
+<div class="session-badge">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span>Active Role: <strong style="color: var(--on-surface);">Super Administrator</strong> <span class="session-id">(Session: #NANMS-SEC-8902)</span></span>
+</div>
+</div>
+<!-- Portals Grid -->
+<div class="portals-grid" id="portal-cards-grid">
+<!-- Card 1: Main Association Website -->
+<article class="portal-card" data-category="authorized public">
+<div class="portal-card-body">
+<div class="portal-header">
+<div class="icon-badge-box mint">
+<span class="material-symbols-outlined" style="font-size: 26px;">public</span>
+</div>
+<span class="access-status-pill full">
+<span class="status-dot green"></span>
+                  FULL ACCESS
+                </span>
+</div>
+<div class="portal-info">
+<h2 class="portal-title">Main Association Website</h2>
+<p class="portal-desc">
+                  Public flagship portal featuring legacy statements, executive council roasters, hero sections, and official public releases.
+                </p>
+</div>
+<div class="portal-meta-tags">
+<div class="meta-tag">
+<span class="material-symbols-outlined" style="color: var(--secondary);">domain</span>
+<span>nanms.org.ng</span>
+</div>
+<div class="meta-tag">
+<span class="material-symbols-outlined" style="color: var(--on-tertiary-container);">bolt</span>
+<span>Live Production</span>
+</div>
+</div>
+</div>
+<div class="portal-footer">
+<div class="privilege-label">
+<span>Privilege:</span>
+<span class="privilege-value">Owner / Architect</span>
+</div>
+<button class="portal-action-btn">
+<span>Launch Portal</span>
+<span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 2: NANMS Quizzer Platform -->
+<article class="portal-card" data-category="authorized internal">
+<div class="portal-card-body">
+<div class="portal-header">
+<div class="icon-badge-box blue">
+<span class="material-symbols-outlined" style="font-size: 26px;">psychology_alt</span>
+</div>
+<span class="access-status-pill full">
+<span class="status-dot green"></span>
+                  FULL ACCESS
+                </span>
+</div>
+<div class="portal-info">
+<h2 class="portal-title">NANMS Quizzer Platform</h2>
+<p class="portal-desc">
+                  Student academic examination hub, question banks, category management, and automated certification grading systems.
+                </p>
+</div>
+<div class="portal-meta-tags">
+<div class="meta-tag">
+<span class="material-symbols-outlined" style="color: var(--secondary);">quiz</span>
+<span>quiz.nanms.org.ng</span>
+</div>
+<div class="meta-tag">
+<span class="material-symbols-outlined" style="color: var(--secondary);">group</span>
+<span>1.2k Active Users</span>
+</div>
+</div>
+</div>
+<div class="portal-footer">
+<div class="privilege-label">
+<span>Privilege:</span>
+<span class="privilege-value">Lead Examiner</span>
+</div>
+<button class="portal-action-btn">
+<span>Open Quizzer</span>
+<span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 3: Member Verification & Roster -->
+<article class="portal-card" data-category="authorized internal">
+<div class="portal-card-body">
+<div class="portal-header">
+<div class="icon-badge-box navy">
+<span class="material-symbols-outlined" style="font-size: 26px;">badge</span>
+</div>
+<span class="access-status-pill full">
+<span class="status-dot green"></span>
+                  FULL ACCESS
+                </span>
+</div>
+<div class="portal-info">
+<h2 class="portal-title">Member Verification &amp; Roster</h2>
+<p class="portal-desc">
+                  Student verification portal, credential validation, clinical rotation tracking, and pending onboarding approvals.
+                </p>
+</div>
+<div class="portal-meta-tags">
+<div class="meta-tag">
+<span class="material-symbols-outlined" style="color: var(--secondary);">verified</span>
+<span>members.nanms.org.ng</span>
+</div>
+<div class="meta-tag">
+<span class="material-symbols-outlined" style="color: var(--secondary);">pending_actions</span>
+<span>14 Pending Reviews</span>
+</div>
+</div>
+</div>
+<div class="portal-footer">
+<div class="privilege-label">
+<span>Privilege:</span>
+<span class="privilege-value">Registrar Authority</span>
+</div>
+<button class="portal-action-btn">
+<span>Manage Roster</span>
+<span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 4: News & Health Outreach Feed -->
+<article class="portal-card" data-category="authorized public">
+<div class="portal-card-body">
+<div class="portal-header">
+<div class="icon-badge-box cyan">
+<span class="material-symbols-outlined" style="font-size: 26px;">feed</span>
+</div>
+<span class="access-status-pill full">
+<span class="status-dot green"></span>
+                  FULL ACCESS
+                </span>
+</div>
+<div class="portal-info">
+<h2 class="portal-title">News &amp; Health Outreach Feed</h2>
+<p class="portal-desc">
+                  Public health articles, community outreach bulletins, press releases, and medical journal publication feeds.
+                </p>
+</div>
+<div class="portal-meta-tags">
+<div class="meta-tag">
+<span class="material-symbols-outlined" style="color: var(--secondary);">rss_feed</span>
+<span>news.nanms.org.ng</span>
+</div>
+<div class="meta-tag">
+<span class="material-symbols-outlined" style="color: var(--secondary);">article</span>
+<span>142 Published</span>
+</div>
+</div>
+</div>
+<div class="portal-footer">
+<div class="privilege-label">
+<span>Privilege:</span>
+<span class="privilege-value">Editor-in-Chief</span>
+</div>
+<button class="portal-action-btn">
+<span>Review Articles</span>
+<span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 5: Association Treasury & Grants -->
+<article class="portal-card" data-category="restricted internal">
+<div class="portal-card-body">
+<div class="portal-header">
+<div class="icon-badge-box amber">
+<span class="material-symbols-outlined" style="font-size: 26px;">account_balance_wallet</span>
+</div>
+<span class="access-status-pill readonly">
+<span class="status-dot amber"></span>
+                  READ-ONLY
+                </span>
+</div>
+<div class="portal-info">
+<h2 class="portal-title">Association Treasury &amp; Grants</h2>
+<p class="portal-desc">
+                  Financial audit logs, student research grant disbursement ledger, and association operational budgets.
+                </p>
+</div>
+<div class="portal-meta-tags">
+<div class="meta-tag">
+<span class="material-symbols-outlined" style="color: var(--amber-text);">lock_clock</span>
+<span>finance.nanms.org.ng</span>
+</div>
+<div class="meta-tag">
+<span class="material-symbols-outlined" style="color: var(--secondary);">visibility</span>
+<span>Auditor View Only</span>
+</div>
+</div>
+</div>
+<div class="portal-footer">
+<div class="privilege-label">
+<span>Privilege:</span>
+<span class="privilege-value">Executive Observer</span>
+</div>
+<button class="portal-action-btn">
+<span>View Ledger</span>
+<span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 6: Electoral Commission Balloting -->
+<article class="portal-card restricted" data-category="restricted public">
+<div class="portal-card-body">
+<div class="portal-header">
+<div class="icon-badge-box red">
+<span class="material-symbols-outlined" style="font-size: 26px;">how_to_vote</span>
+</div>
+<span class="access-status-pill none">
+<span class="material-symbols-outlined" style="font-size: 13px;">lock</span>
+                  NO ACCESS
+                </span>
+</div>
+<div class="portal-info">
+<div class="portal-title-row">
+<h2 class="portal-title">Electoral Commission Balloting</h2>
+<span class="material-symbols-outlined lock-mini-icon">lock</span>
+</div>
+<p class="portal-desc">
+                  Cryptographic voting terminal for executive council elections, ballot audit chains, and verified delegate accreditation.
+                </p>
+</div>
+<div class="portal-meta-tags">
+<div class="meta-tag">
+<span class="material-symbols-outlined" style="color: var(--outline);">shield</span>
+<span>vote.nanms.org.ng</span>
+</div>
+<div class="meta-tag">
+<span class="material-symbols-outlined" style="color: var(--error);">gpp_maybe</span>
+<span>Elevated Clearance Req.</span>
+</div>
+</div>
+</div>
+<div class="portal-footer">
+<div class="privilege-label">
+<span>Privilege:</span>
+<span class="privilege-value alert">Unauthorized</span>
+</div>
+<button class="portal-action-btn unauth-btn">
+<span>Request Approval</span>
+<span class="material-symbols-outlined" style="font-size: 15px;">lock_reset</span>
+</button>
+</div>
+</article>
+</div>
+<!-- Clearance Request Banner -->
+<section class="clearance-banner">
+<div class="banner-left">
+<div class="banner-icon-box">
+<span class="material-symbols-outlined" style="font-size: 22px;">admin_panel_settings</span>
+</div>
+<div class="banner-content">
+<h3 class="banner-title">Need elevated clearance or additional association modules?</h3>
+<p class="banner-desc">
+                Clearance policies are governed by the NANMS Central Executive Council. You can submit an access tier request or token regeneration ticket directly to the Secretariat.
+              </p>
+</div>
+</div>
+<button class="banner-action-btn">
+<span class="material-symbols-outlined" style="font-size: 18px;">key</span>
+<span>Request Portal Clearance</span>
+</button>
+</section>
+</div>
+</main>
+</div>
+<script>
+    (function() {
+      const tabs = document.querySelectorAll('.portal-tab');
+      const cards = document.querySelectorAll('.portal-card');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          const filter = tab.getAttribute('data-filter');
+          cards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (filter === 'all' || (category && category.includes(filter))) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    })();
+  </script>
+</body></html>

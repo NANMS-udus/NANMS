@@ -12,24 +12,27 @@ export default function DbQuickActions() {
         class="action-card"
         to={'edit-profile'}
       >
-        <img style={{width: '28px', marginBottom: '14px'}} src={edit} alt="" />
+        <img style={{ width: '28px', marginBottom: '14px' }} src={edit} alt="" />
         <span class="font-label-md text-on-surface">Update Profile</span>
       </Link>
-      <Link 
-      class="action-card"
-      to={'payments'}
+      <Link
+        class="action-card"
+        to={'payments'}
       >
-      <img style={{width: '28px', marginBottom: '14px'}} src={wallet} alt="" />
+        <img style={{ width: '28px', marginBottom: '14px' }} src={wallet} alt="" />
         <span class="font-label-md text-on-surface">Pay Dues</span>
       </Link>
       <button class="action-card">
-      <img style={{width: '28px', marginBottom: '14px'}} src={idCard} alt="" />
+        <img style={{ width: '28px', marginBottom: '14px' }} src={idCard} alt="" />
         <span class="font-label-md text-on-surface">Download ID</span>
       </button>
-      <button class="action-card">
-      <img style={{width: '28px', marginBottom: '14px'}} src={book} alt="" />
+      <Link
+        to={'study-directory'}
+        class="action-card"
+      >
+        <img style={{ width: '28px', marginBottom: '14px' }} src={book} alt="" />
         <span class="font-label-md text-on-surface">Study Materials</span>
-      </button>
+      </Link>
     </section>
   );
 };

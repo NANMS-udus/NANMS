@@ -3,7 +3,7 @@ import search from '../../assets/icons/search.svg'
 
 export default function UtilsSection({ def, target, filterParams, setterFun }) {
  return (
-  <div class="filter-panel" id="patrons-filter-panel">
+  <div class="filter-panel">
    <div class="filter-search-row">
     <div class="search-input-wrap">
      <img class="search-icon-2" src={search} alt="" />
@@ -40,7 +40,6 @@ export default function UtilsSection({ def, target, filterParams, setterFun }) {
 
        <select
         class="filter-input"
-        id="patrons-pills"
         onChange={(e) => {
          const newVal = e.target.value
          const result = target.filter(itm => {

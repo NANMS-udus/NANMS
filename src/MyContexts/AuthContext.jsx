@@ -79,10 +79,6 @@ useEffect(() => {
       NANMS_uid
     } = entries
 
-    const id = crypto.randomUUID()
-
-    console.log(entries);
-
     console.log(recent_postings, research_interests, positions_held);
 
     try {
@@ -104,7 +100,7 @@ useEffect(() => {
         if (!uploadError && uploadData) {
           console.log(uploadData);
 
-          avatar_url = await supabase.storage.from(`avatars/${id}`).getPublicUrl(uploadData.path).data.publicUrl
+          avatar_url = await supabase.storage.from(`avatars`).getPublicUrl(uploadData.path).data.publicUrl
 
           avatarPath = uploadData.path
         }
@@ -119,7 +115,6 @@ useEffect(() => {
       const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
-        id,
         phone,
         options: {
           data: {

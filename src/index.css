@@ -93,6 +93,7 @@
   margin: 0;
   padding: 0;
   scrollbar-width: none;
+  min-width: 0;
 }
 
 html {

@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>NANSM - View All Announcements</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NANSM - View All Announcements</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
         :root {
             /* Colors */
             --primary: #00342b;
@@ -270,12 +276,15 @@
             width: 100%;
             overflow-x: auto;
             padding-bottom: 8px;
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
         }
 
         .category-filters::-webkit-scrollbar {
-            display: none; /* Chrome, Safari and Opera */
+            display: none;
+            /* Chrome, Safari and Opera */
         }
 
         @media (min-width: 768px) {
@@ -341,7 +350,7 @@
         }
 
         .card:hover {
-            box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .card-header {
@@ -368,17 +377,20 @@
 
         .tag-academic {
             color: var(--primary-container);
-            background-color: rgba(148, 211, 193, 0.2); /* inverse-primary/20 */
+            background-color: rgba(148, 211, 193, 0.2);
+            /* inverse-primary/20 */
         }
 
         .tag-welfare {
             color: var(--on-tertiary-container);
-            background-color: rgba(141, 0, 13, 0.1); /* tertiary-container/10 */
+            background-color: rgba(141, 0, 13, 0.1);
+            /* tertiary-container/10 */
         }
 
         .tag-events {
             color: var(--on-secondary-container);
-            background-color: rgba(82, 103, 114, 0.1); /* on-secondary-container/10 */
+            background-color: rgba(82, 103, 114, 0.1);
+            /* on-secondary-container/10 */
         }
 
         .card-date {
@@ -532,7 +544,8 @@
         .footer-heading {
             font-size: 14px;
             font-weight: bold;
-            color: var(--inverse-primary); /* primary-fixed fallback */
+            color: var(--inverse-primary);
+            /* primary-fixed fallback */
             margin-bottom: var(--spacing-sm);
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -563,150 +576,168 @@
         }
     </style>
 </head>
+
 <body>
-<!-- TopNavBar (Shared Component) -->
-<nav class="navbar">
-<div class="container navbar-content">
-<div class="navbar-brand">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_hospital</span>
+    <!-- TopNavBar (Shared Component) -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <div class="navbar-brand">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_hospital</span>
                 NANSM
             </div>
-<div class="navbar-links">
-<a class="nav-link" href="#">Home</a>
-<a class="nav-link" href="#">About</a>
-<a class="nav-link" href="#">Executives</a>
-<a class="nav-link" href="#">Projects</a>
-<a class="nav-link active" href="#">News</a>
-<a class="nav-link" href="#">Members</a>
-<a class="nav-link" href="#">Contact</a>
-</div>
-<button class="btn-primary">
+            <div class="navbar-links">
+                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="#">Executives</a>
+                <a class="nav-link" href="#">Projects</a>
+                <a class="nav-link active" href="#">News</a>
+                <a class="nav-link" href="#">Members</a>
+                <a class="nav-link" href="#">Contact</a>
+            </div>
+            <button class="btn-primary">
                 Portal Login
             </button>
-</div>
-</nav>
-<!-- Main Content Canvas -->
-<main class="main-content container">
-<!-- Page Header & Filtering -->
-<header class="page-header">
-<h1 class="page-title">Announcements &amp; Notices</h1>
-<p class="page-description">Stay updated with the latest academic schedules, welfare initiatives, and official communications from the National Association of Niger State Medical Students.</p>
-<div class="filter-bar">
-<!-- Search -->
-<div class="search-container">
-<span class="material-symbols-outlined search-icon">search</span>
-<input class="search-input" placeholder="Search announcements..." type="text"/>
-</div>
-<!-- Category Filters -->
-<div class="category-filters">
-<button class="filter-btn active">All</button>
-<button class="filter-btn">Academic</button>
-<button class="filter-btn">Welfare</button>
-<button class="filter-btn">Events</button>
-</div>
-</div>
-</header>
-<!-- Announcements Grid -->
-<div class="announcements-grid">
-<!-- Card 1 -->
-<article class="card">
-<div class="card-header">
-<span class="tag tag-academic">
-<span class="material-symbols-outlined">menu_book</span> Academic
+        </div>
+    </nav>
+    <!-- Main Content Canvas -->
+    <main class="main-content container">
+        <!-- Page Header & Filtering -->
+        <header class="page-header">
+            <h1 class="page-title">Announcements &amp; Notices</h1>
+            <p class="page-description">Stay updated with the latest academic schedules, welfare initiatives, and
+                official communications from the National Association of Niger State Medical Students.</p>
+            <div class="filter-bar">
+                <!-- Search -->
+                <div class="search-container">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <input class="search-input" placeholder="Search announcements..." type="text" />
+                </div>
+                <!-- Category Filters -->
+                <div class="category-filters">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Academic</button>
+                    <button class="filter-btn">Welfare</button>
+                    <button class="filter-btn">Events</button>
+                </div>
+            </div>
+        </header>
+        <!-- Announcements Grid -->
+        <div class="announcements-grid">
+            <!-- Card 1 -->
+            <article class="card">
+                <div class="card-header">
+                    <span class="tag tag-academic">
+                        <span class="material-symbols-outlined">menu_book</span> Academic
                     </span>
-<time class="card-date">Oct 24, 2024</time>
-</div>
-<h2 class="card-title">Revised Clinical Rotation Schedule for Final Year Students</h2>
-<p class="card-excerpt">Please be advised that the clinical rotation schedule for the upcoming semester has been revised to accommodate the new consultant rounds at the teaching hospital. Review the attached document for your specific grouping.</p>
-<div class="card-footer">
+                    <time class="card-date">Oct 24, 2024</time>
+                </div>
+                <h2 class="card-title">Revised Clinical Rotation Schedule for Final Year Students</h2>
+                <p class="card-excerpt">Please be advised that the clinical rotation schedule for the upcoming semester
+                    has been revised to accommodate the new consultant rounds at the teaching hospital. Review the
+                    attached document for your specific grouping.</p>
+                <div class="card-footer">
                     Read Full Notice <span class="material-symbols-outlined">arrow_forward</span>
-</div>
-</article>
-<!-- Card 2 -->
-<article class="card">
-<div class="card-header">
-<span class="tag tag-welfare">
-<span class="material-symbols-outlined">volunteer_activism</span> Welfare
+                </div>
+            </article>
+            <!-- Card 2 -->
+            <article class="card">
+                <div class="card-header">
+                    <span class="tag tag-welfare">
+                        <span class="material-symbols-outlined">volunteer_activism</span> Welfare
                     </span>
-<time class="card-date">Oct 20, 2024</time>
-</div>
-<h2 class="card-title">Call for Applications: Annual Bursary Disbursement</h2>
-<p class="card-excerpt">The portal for the annual Niger State Medical Students bursary is now open. Eligible students are required to submit their current academic standing forms and indigene letters before the deadline.</p>
-<div class="card-footer">
+                    <time class="card-date">Oct 20, 2024</time>
+                </div>
+                <h2 class="card-title">Call for Applications: Annual Bursary Disbursement</h2>
+                <p class="card-excerpt">The portal for the annual Niger State Medical Students bursary is now open.
+                    Eligible students are required to submit their current academic standing forms and indigene letters
+                    before the deadline.</p>
+                <div class="card-footer">
                     Read Full Notice <span class="material-symbols-outlined">arrow_forward</span>
-</div>
-</article>
-<!-- Card 3 -->
-<article class="card">
-<div class="card-header">
-<span class="tag tag-events">
-<span class="material-symbols-outlined">event</span> Events
+                </div>
+            </article>
+            <!-- Card 3 -->
+            <article class="card">
+                <div class="card-header">
+                    <span class="tag tag-events">
+                        <span class="material-symbols-outlined">event</span> Events
                     </span>
-<time class="card-date">Oct 15, 2024</time>
-</div>
-<h2 class="card-title">Upcoming Medical Outreach in Minna Suburbs</h2>
-<p class="card-excerpt">We are calling for student volunteers across all clinical levels to participate in the upcoming free medical outreach program focusing on maternal health and basic hygiene in local communities.</p>
-<div class="card-footer">
+                    <time class="card-date">Oct 15, 2024</time>
+                </div>
+                <h2 class="card-title">Upcoming Medical Outreach in Minna Suburbs</h2>
+                <p class="card-excerpt">We are calling for student volunteers across all clinical levels to participate
+                    in the upcoming free medical outreach program focusing on maternal health and basic hygiene in local
+                    communities.</p>
+                <div class="card-footer">
                     Read Full Notice <span class="material-symbols-outlined">arrow_forward</span>
-</div>
-</article>
-<!-- Card 4 -->
-<article class="card">
-<div class="card-header">
-<span class="tag tag-academic">
-<span class="material-symbols-outlined">menu_book</span> Academic
+                </div>
+            </article>
+            <!-- Card 4 -->
+            <article class="card">
+                <div class="card-header">
+                    <span class="tag tag-academic">
+                        <span class="material-symbols-outlined">menu_book</span> Academic
                     </span>
-<time class="card-date">Oct 10, 2024</time>
-</div>
-<h2 class="card-title">Notice on Continuous Assessment Examinations</h2>
-<p class="card-excerpt">The timetable for the mid-semester continuous assessment examinations has been published on the faculty notice board. Students are advised to verify their seating arrangements.</p>
-<div class="card-footer">
+                    <time class="card-date">Oct 10, 2024</time>
+                </div>
+                <h2 class="card-title">Notice on Continuous Assessment Examinations</h2>
+                <p class="card-excerpt">The timetable for the mid-semester continuous assessment examinations has been
+                    published on the faculty notice board. Students are advised to verify their seating arrangements.
+                </p>
+                <div class="card-footer">
                     Read Full Notice <span class="material-symbols-outlined">arrow_forward</span>
-</div>
-</article>
-</div>
-<!-- Pagination -->
-<div class="pagination">
-<button class="page-btn" disabled="">
-<span class="material-symbols-outlined">chevron_left</span>
-</button>
-<span class="page-num active">1</span>
-<button class="page-num inactive">2</button>
-<button class="page-num inactive">3</button>
-<span class="page-dots">...</span>
-<button class="page-btn">
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
-</div>
-</main>
-<!-- Footer (Shared Component) -->
-<footer class="footer">
-<div class="container footer-content">
-<div>
-<div class="footer-brand">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_hospital</span>
+                </div>
+            </article>
+        </div>
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="page-btn" disabled="">
+                <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <span class="page-num active">1</span>
+            <button class="page-num inactive">2</button>
+            <button class="page-num inactive">3</button>
+            <span class="page-dots">...</span>
+            <button class="page-btn">
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+        </div>
+    </main>
+    <!-- Footer (Shared Component) -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div>
+                <div class="footer-brand">
+                    <span class="material-symbols-outlined"
+                        style="font-variation-settings: 'FILL' 1;">local_hospital</span>
                     NANSM
                 </div>
-<p class="footer-desc">Dedicated to the academic excellence and welfare of medical students originating from Niger State.</p>
-<p class="footer-copyright">© 2024 National Association of Niger State Medical Students. All rights reserved.</p>
-</div>
-<div>
-<h3 class="footer-heading">Association Links</h3>
-<ul class="footer-links">
-<li><a class="footer-link" href="#">About Us</a></li>
-<li><a class="footer-link" href="#">Constitution</a></li>
-<li><a class="footer-link" href="#">Executive Council</a></li>
-<li><a class="footer-link" href="#">Alumni Network</a></li>
-</ul>
-</div>
-<div>
-<h3 class="footer-heading">Contact Details</h3>
-<ul class="footer-links">
-<li class="footer-contact-item"><span class="material-symbols-outlined">location_on</span> Secretariat, Minna, Niger State</li>
-<li class="footer-contact-item"><span class="material-symbols-outlined">mail</span> contact@nansm.org.ng</li>
-<li class="footer-contact-item"><span class="material-symbols-outlined">call</span> +234 (0) 800 000 0000</li>
-</ul>
-</div>
-</div>
-</footer>
-</body></html>
+                <p class="footer-desc">Dedicated to the academic excellence and welfare of medical students originating
+                    from Niger State.</p>
+                <p class="footer-copyright">© 2024 National Association of Niger State Medical Students. All rights
+                    reserved.</p>
+            </div>
+            <div>
+                <h3 class="footer-heading">Association Links</h3>
+                <ul class="footer-links">
+                    <li><a class="footer-link" href="#">About Us</a></li>
+                    <li><a class="footer-link" href="#">Constitution</a></li>
+                    <li><a class="footer-link" href="#">Executive Council</a></li>
+                    <li><a class="footer-link" href="#">Alumni Network</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-heading">Contact Details</h3>
+                <ul class="footer-links">
+                    <li class="footer-contact-item"><span class="material-symbols-outlined">location_on</span>
+                        Secretariat, Minna, Niger State</li>
+                    <li class="footer-contact-item"><span class="material-symbols-outlined">mail</span>
+                        contact@nansm.org.ng</li>
+                    <li class="footer-contact-item"><span class="material-symbols-outlined">call</span> +234 (0) 800 000
+                        0000</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

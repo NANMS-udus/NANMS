@@ -12,6 +12,8 @@ import Login from "./Pages/Portal/Authentication/Login";
 import EditProfile from "./Pages/Portal/Dashboard/EditProfile";
 import Payments from "./Pages/Portal/Dashboard/Payments/PayDues";
 import PastMembers from "./Pages/PastMembers/PastMembers";
+import Announcements from "./Pages/Portal/Dashboard/Announcements/Announcements";
+import StudyDir from "./Pages/Portal/Dashboard/StudyDir/StudyDir";
 
 export const myRouter = createBrowserRouter([
  {
@@ -71,6 +73,14 @@ export const myRouter = createBrowserRouter([
      {
       path: 'payments',
       Component: Payments
+     },
+     {
+      path: 'announcements',
+      Component: Announcements
+     },
+     {
+      path: 'study-directory',
+      Component: StudyDir
      },
     ]
    },

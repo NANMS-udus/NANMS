@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control Room: Portfolio Manager - Contact & Inquiries Control</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #f4f6f9;
+      --sidebar-bg: #002238;
+      --sidebar-hover: #003354;
+      --sidebar-active: #004570;
+      --surface: #ffffff;
+      --surface-dim: #f8fafc;
+      --border: #e2e8f0;
+      --border-subtle: #edf2f7;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --primary-green: #005a36;
+      --primary-green-hover: #004529;
+      --primary-green-light: #e8f5ec;
+      --primary-green-border: #b7e4c7;
+      --accent-blue: #0284c7;
+      --accent-amber: #d97706;
+      --accent-amber-light: #fef3c7;
+      --accent-amber-border: #fde68a;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+
+    /* Main Left Primary Sidebar */
+    .app-sidebar {
+      width: 240px;
+      background-color: var(--sidebar-bg);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      border-right: 1px solid #001827;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      z-index: 20;
+    }
+
+    .sidebar-brand {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon-box {
+      width: 36px;
+      height: 36px;
+      background: #004269;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6ee7b7;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .brand-text-block h1 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-tag {
+      font-size: 9px;
+      background: #10b981;
+      color: #064e3b;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .brand-subtext {
+      font-size: 10.5px;
+      color: #94a3b8;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .sidebar-section-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 18px 20px 8px;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      padding: 0 10px;
+      flex: 1;
+    }
+
+    .sidebar-item {
+      margin-bottom: 2px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 12px;
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 13px;
+      border-radius: var(--radius-sm);
+      transition: all 0.15s ease;
+    }
+
+    .sidebar-link:hover {
+      background-color: var(--sidebar-hover);
+      color: #ffffff;
+    }
+
+    .sidebar-link.active {
+      background-color: var(--sidebar-active);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .sidebar-link svg {
+      width: 17px;
+      height: 17px;
+      opacity: 0.8;
+      flex-shrink: 0;
+    }
+
+    .sidebar-link.active svg {
+      opacity: 1;
+      color: #34d399;
+    }
+
+    .sidebar-footer {
+      padding: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .footer-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 12.5px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s ease;
+    }
+
+    .footer-link:hover {
+      background: var(--sidebar-hover);
+      color: #ffffff;
+    }
+
+    /* Master Container */
+    .app-main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    /* Top Navigation Bar */
+    .app-topbar {
+      height: 60px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .breadcrumbs span.current {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--surface-dim);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      gap: 8px;
+      width: 260px;
+    }
+
+    .search-box input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 12.5px;
+      color: var(--text-main);
+      width: 100%;
+    }
+
+    .icon-badge-btn {
+      position: relative;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .badge-dot {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: #ef4444;
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 8px 4px 4px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface-dim);
+    }
+
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #002238;
+      color: #34d399;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    .user-info {
+      line-height: 1.2;
+    }
+
+    .user-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .user-role {
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+
+    /* Page Canvas Body */
+    .page-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Page Header */
+    .page-title-bar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .page-title-bar h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.3px;
+    }
+
+    .page-title-bar p {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-dim);
+    }
+
+    .btn-primary {
+      background: var(--primary-green);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-green-hover);
+    }
+
+    /* Two-Column Grid: Subnav vs Working Pane */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* Left Column: Sub-navigation & Settings */
+    .subnav-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .subnav-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .subnav-header {
+      padding: 12px 16px;
+      background: var(--surface-dim);
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .subnav-list {
+      list-style: none;
+      padding: 8px;
+    }
+
+    .subnav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+
+    .subnav-link:hover {
+      background: var(--surface-dim);
+    }
+
+    .subnav-link.active {
+      background: #e8f3ee;
+      color: var(--primary-green);
+      font-weight: 600;
+    }
+
+    .subnav-link .badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .badge-live {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .badge-count {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .badge-alert {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .sync-status-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+      font-size: 12px;
+    }
+
+    .sync-badge-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #166534;
+      margin-bottom: 6px;
+    }
+
+    .sync-dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25);
+    }
+
+    .sync-meta {
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .sync-meta code {
+      background: var(--surface-dim);
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-size: 11px;
+      color: #0369a1;
+    }
+
+    /* Public Association Details Card */
+    .meta-config-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .meta-config-card h4 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .info-item {
+      margin-bottom: 10px;
+    }
+
+    .info-label {
+      font-size: 10.5px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 2px;
+    }
+
+    .info-val {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-main);
+      word-break: break-word;
+    }
+
+    /* Right Main Working Pane */
+    .workspace-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Executive Metrics Strip */
+    .metrics-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .metric-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .metric-label {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .metric-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 4px 0 2px;
+    }
+
+    .metric-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .metric-sub.positive {
+      color: #15803d;
+      font-weight: 600;
+    }
+
+    .metric-sub.alert {
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
+    /* Two-Pane Inbox & Reply Hub */
+    .inbox-hub {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      min-height: 720px;
+      overflow: hidden;
+    }
+
+    /* Left Pane: Inbox Feed */
+    .inbox-feed {
+      border-right: 1px solid var(--border);
+      background: #fafbfc;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .inbox-feed-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .inbox-search {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .inbox-search input {
+      width: 100%;
+      padding: 7px 10px 7px 30px;
+      font-size: 12.5px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      outline: none;
+      background: var(--surface-dim);
+    }
+
+    .inbox-search svg {
+      position: absolute;
+      left: 9px;
+      top: 8px;
+      color: var(--text-light);
+      width: 14px;
+      height: 14px;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .filter-pill {
+      font-size: 11.5px;
+      padding: 3px 9px;
+      border-radius: 12px;
+      background: var(--surface-dim);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .filter-pill.active {
+      background: var(--sidebar-bg);
+      color: #ffffff;
+      border-color: var(--sidebar-bg);
+    }
+
+    .inbox-list {
+      list-style: none;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .inbox-entry {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: background 0.15s ease;
+      background: var(--surface);
+      position: relative;
+    }
+
+    .inbox-entry:hover {
+      background: #f1f5f9;
+    }
+
+    .inbox-entry.active {
+      background: #eff6ff;
+      border-left: 4px solid #0284c7;
+    }
+
+    .entry-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .entry-sender {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .entry-time {
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    .entry-subject {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #1e293b;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .entry-snippet {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .entry-tags {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .tag-pill {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .tag-unread {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .tag-resolved {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .tag-priority {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .tag-partnership {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    /* Right Pane: Selected Message & Reply Console */
+    .message-view-console {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      overflow-y: auto;
+    }
+
+    /* Message Header Bar */
+    .msg-header-bar {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      background: #ffffff;
+    }
+
+    .msg-subject-wrap h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .msg-source-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .source-badge {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #475569;
+    }
+
+    .msg-action-icons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .action-icon-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+
+    .action-icon-btn:hover {
+      background: var(--surface-dim);
+      color: var(--text-main);
+    }
+
+    /* Sender Details Strip */
+    .sender-details-strip {
+      padding: 14px 24px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sender-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sender-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: #ffffff;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .sender-title-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .sender-email-line {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .sender-phone {
+      font-size: 12px;
+      color: #0369a1;
+      font-weight: 500;
+    }
+
+    /* Message Body Box */
+    .msg-body-content {
+      padding: 22px 24px;
+      color: #334155;
+      font-size: 13.5px;
+      line-height: 1.6;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .msg-body-content p {
+      margin-bottom: 12px;
+    }
+
+    .quote-box {
+      background: #f1f5f9;
+      border-left: 4px solid #005a36;
+      padding: 12px 16px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 12px 0;
+      font-size: 13px;
+      color: #1e293b;
+    }
+
+    /* DEDICATED REPLY COMPOSER SECTION */
+    .reply-composer-section {
+      padding: 20px 24px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .composer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .composer-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .gateway-pill {
+      font-size: 11px;
+      font-weight: 500;
+      color: #005a36;
+      background: var(--primary-green-light);
+      border: 1px solid var(--primary-green-border);
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    .template-selector select {
+      padding: 5px 10px;
+      font-size: 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      outline: none;
+      background: var(--surface-dim);
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    /* Composer Fields */
+    .composer-form {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .composer-row {
+      display: flex;
+      align-items: center;
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: #fafbfc;
+      font-size: 12.5px;
+    }
+
+    .composer-label {
+      width: 65px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .composer-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 12.5px;
+      color: var(--text-main);
+    }
+
+    .composer-input:read-only {
+      color: #475569;
+    }
+
+    .composer-toolbar {
+      padding: 6px 12px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .tool-btn {
+      background: none;
+      border: 1px solid transparent;
+      padding: 4px 7px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+    }
+
+    .tool-btn:hover {
+      background: #e2e8f0;
+      color: var(--text-main);
+    }
+
+    .composer-textarea {
+      width: 100%;
+      height: 160px;
+      padding: 14px;
+      border: none;
+      outline: none;
+      font-family: inherit;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-main);
+      resize: vertical;
+      background: #ffffff;
+    }
+
+    .attachments-strip {
+      padding: 8px 14px;
+      background: #f8fafc;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .attachment-chip {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #334155;
+    }
+
+    .attachment-chip svg {
+      color: #0284c7;
+      width: 13px;
+      height: 13px;
+    }
+
+    .composer-footer-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .footer-left-options {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .footer-left-options label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .footer-right-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-send {
+      background: #005a36;
+      color: #ffffff;
+      border: none;
+      padding: 9px 18px;
+      font-weight: 600;
+      font-size: 13px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      transition: background 0.15s ease;
+    }
+
+    .btn-send:hover {
+      background: #004529;
+    }
+
+    .btn-draft {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 9px 14px;
+      font-weight: 600;
+      font-size: 13px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+
+    .btn-draft:hover {
+      background: var(--surface-dim);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Primary Left Dark Sidebar -->
+  <aside class="app-sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon-box">N</div>
+      <div class="brand-text-block">
+        <h1>NANMS <span class="brand-tag">Admin</span></h1>
+        <div class="brand-subtext">Secure Control Room</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section-title">Association Management</div>
+    <ul class="sidebar-nav">
+      <li class="sidebar-item">
+        <a href="#dashboard" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+          Dashboard
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="#hub" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+          Association Hub
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="#portfolio" class="sidebar-link active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          Portfolio Manager
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="#news" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path><path d="M18 14h-8"></path><path d="M15 18h-5"></path><path d="M10 6h8v4h-8V6Z"></path></svg>
+          News Control
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="#quizzer" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+          Quizzer Admin
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="#members" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          Member Monitoring
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="#settings" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          System Settings
+        </a>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <a href="#support" class="footer-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+        Support Desk
+      </a>
+      <a href="#logout" class="footer-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        Secure Logout
+      </a>
+    </div>
+  </aside>
+
+  <!-- 2. Master Main Working Canvas -->
+  <div class="app-main-content">
+    
+    <!-- Topbar Header -->
+    <header class="app-topbar">
+      <div class="topbar-left">
+        <nav class="breadcrumbs">
+          <span>Control Room</span>
+          <span>/</span>
+          <span>Portfolio Manager</span>
+          <span>/</span>
+          <span class="current">Contact & Inquiries</span>
+        </nav>
+      </div>
+
+      <div class="topbar-right">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" placeholder="Search inquiries, senders, tickets...">
+        </div>
+
+        <button class="icon-badge-btn" title="Pending notifications">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span class="badge-dot">3</span>
+        </button>
+
+        <div class="user-pill">
+          <div class="user-avatar">AB</div>
+          <div class="user-info">
+            <div class="user-name">Dr. Aminu Bello</div>
+            <div class="user-role">Super Administrator</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Body Content -->
+    <main class="page-body">
+      
+      <!-- Title & Actions Bar -->
+      <div class="page-title-bar">
+        <div>
+          <h2>Portfolio Manager: Contact & Inquiries Control</h2>
+          <p>Directly monitor public feedback from <strong>nanms.org.ng/contact</strong>, update portal contact info, and dispatch official email replies.</p>
+        </div>
+        <div class="header-actions">
+          <a href="#preview" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            Preview Live Contact Page
+          </a>
+          <button class="btn btn-primary">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            Save Gateway Settings
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Two-Column Layout -->
+      <div class="portfolio-grid">
+        
+        <!-- Left Column: Portfolio Sub-navigation & Live Sync -->
+        <div class="subnav-column">
+          
+          <div class="subnav-card">
+            <div class="subnav-header">Portfolio Controls</div>
+            <ul class="subnav-list">
+              <li>
+                <a href="#hero" class="subnav-link">
+                  <span>Home Hero & Vision</span>
+                  <span class="badge badge-live">Live</span>
+                </a>
+              </li>
+              <li>
+                <a href="#news-press" class="subnav-link">
+                  <span>News & Press</span>
+                  <span class="badge badge-count">142</span>
+                </a>
+              </li>
+              <li>
+                <a href="#patrons-alumni" class="subnav-link">
+                  <span>Patrons & Alumni</span>
+                  <span class="badge badge-count">1,438</span>
+                </a>
+              </li>
+              <li>
+                <a href="#contact-inquiries" class="subnav-link active">
+                  <span>Contact & Inquiries</span>
+                  <span class="badge badge-alert">12 unread</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Live Form Sync Card -->
+          <div class="sync-status-card">
+            <div class="sync-badge-line">
+              <div class="sync-dot"></div>
+              <span>Portal Sync: 100% Active</span>
+            </div>
+            <div class="sync-meta">
+              Endpoint: <code>nanms.org.ng/contact</code><br>
+              Inquiries stream connected to database & secretariat dispatch.
+            </div>
+          </div>
+
+          <!-- Public Details Configuration Widget -->
+          <div class="meta-config-card">
+            <h4>
+              Public Contact Info
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+            </h4>
+            <div class="info-item">
+              <div class="info-label">Office Address</div>
+              <div class="info-val">Minna General Hospital Campus, Minna, Niger State</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Secretariat Email</div>
+              <div class="info-val">info@nanms.org.ng</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Public Phone</div>
+              <div class="info-val">+234 800 000 0000</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Map Coordinates</div>
+              <div class="info-val">9.6200° N, 6.5400° E (Minna)</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Working Pane: Inquiries & Direct Reply Hub -->
+        <div class="workspace-pane">
+          
+          <!-- Metrics Overview Strip -->
+          <div class="metrics-strip">
+            <div class="metric-box">
+              <div class="metric-label">Total Inquiries Received</div>
+              <div class="metric-value">148</div>
+              <div class="metric-sub positive">+14 this week from portal</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-label">Unread Inquiries</div>
+              <div class="metric-value" style="color: #b91c1c;">12</div>
+              <div class="metric-sub alert">Requires Secretariat reply</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-label">Avg Response Time</div>
+              <div class="metric-value">2.4 hrs</div>
+              <div class="metric-sub positive">Target SLA: &lt; 6.0 hrs</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-label">Resolution Rate</div>
+              <div class="metric-value">94.6%</div>
+              <div class="metric-sub">136 inquiries closed</div>
+            </div>
+          </div>
+
+          <!-- Split Two-Pane Inbox & Reply Console -->
+          <div class="inbox-hub">
+            
+            <!-- Left Pane: Message List -->
+            <div class="inbox-feed">
+              <div class="inbox-feed-header">
+                <div class="inbox-search">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                  <input type="text" placeholder="Filter messages...">
+                </div>
+                <div class="filter-pills">
+                  <div class="filter-pill active">All (148)</div>
+                  <div class="filter-pill">Unread (12)</div>
+                  <div class="filter-pill">Partnerships (5)</div>
+                  <div class="filter-pill">Support (18)</div>
+                </div>
+              </div>
+
+              <ul class="inbox-list">
+                <!-- Item 1: Selected / Active -->
+                <li class="inbox-entry active">
+                  <div class="entry-top">
+                    <span class="entry-sender">Dr. John Doe</span>
+                    <span class="entry-time">10:42 AM</span>
+                  </div>
+                  <div class="entry-subject">Inquiry about membership registration</div>
+                  <div class="entry-snippet">How can Niger State indigenous medical students studying outside the state submit their clinical rotation logbooks...</div>
+                  <div class="entry-tags">
+                    <span class="tag-pill tag-unread">Unread</span>
+                    <span class="tag-pill tag-priority">High Priority</span>
+                  </div>
+                </li>
+
+                <!-- Item 2 -->
+                <li class="inbox-entry">
+                  <div class="entry-top">
+                    <span class="entry-sender">Aisha Bello (FMC Bida)</span>
+                    <span class="entry-time">Yesterday</span>
+                  </div>
+                  <div class="entry-subject">Partnership Proposal for Health Drive</div>
+                  <div class="entry-snippet">We are an NGO looking to collaborate with NANMS for the maternal healthcare outreach scheduled for Bida community...</div>
+                  <div class="entry-tags">
+                    <span class="tag-pill tag-partnership">Partnership</span>
+                  </div>
+                </li>
+
+                <!-- Item 3 -->
+                <li class="inbox-entry">
+                  <div class="entry-top">
+                    <span class="entry-sender">Student Affairs Office</span>
+                    <span class="entry-time">Oct 12</span>
+                  </div>
+                  <div class="entry-subject">Venue confirmation for Annual Symposium</div>
+                  <div class="entry-snippet">Please confirm if the clinical simulation auditorium is still required for the scheduled dates next month...</div>
+                  <div class="entry-tags">
+                    <span class="tag-pill tag-resolved">Replied</span>
+                  </div>
+                </li>
+
+                <!-- Item 4 -->
+                <li class="inbox-entry">
+                  <div class="entry-top">
+                    <span class="entry-sender">Dr. Usman Shehu Garba</span>
+                    <span class="entry-time">Oct 10</span>
+                  </div>
+                  <div class="entry-subject">Sponsorship & Scholarship Endowment</div>
+                  <div class="entry-snippet">Forwarding the endowment guidelines from our clinical alumni network for student welfare disbursement...</div>
+                  <div class="entry-tags">
+                    <span class="tag-pill tag-resolved">Resolved</span>
+                  </div>
+                </li>
+
+                <!-- Item 5 -->
+                <li class="inbox-entry">
+                  <div class="entry-top">
+                    <span class="entry-sender">Bilkisu Mohammed</span>
+                    <span class="entry-time">Oct 08</span>
+                  </div>
+                  <div class="entry-subject">Quizzer registration fee clarification</div>
+                  <div class="entry-snippet">Kindly advise on whether the quizzer mock exams require a renewed chapter registration token...</div>
+                  <div class="entry-tags">
+                    <span class="tag-pill tag-resolved">Closed</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Right Pane: Selected Message View & Dedicated Reply Console -->
+            <div class="message-view-console">
+              
+              <!-- Message Top Header Bar -->
+              <div class="msg-header-bar">
+                <div class="msg-subject-wrap">
+                  <h3>Inquiry about membership registration & rotation eligibility</h3>
+                  <div class="msg-source-meta">
+                    <span class="source-badge">Submitted via: Public Contact Portal</span>
+                    <span>Received: Oct 24, 2024, 10:42 AM</span>
+                    <span style="color: #b91c1c; font-weight: 600;">• Status: Unread (Awaiting Reply)</span>
+                  </div>
+                </div>
+
+                <div class="msg-action-icons">
+                  <button class="action-icon-btn" title="Mark as resolved">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Mark Done
+                  </button>
+                  <button class="action-icon-btn" title="Archive message">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                    Archive
+                  </button>
+                </div>
+              </div>
+
+              <!-- Sender Identity Strip -->
+              <div class="sender-details-strip">
+                <div class="sender-card">
+                  <div class="sender-avatar">JD</div>
+                  <div>
+                    <div class="sender-title-name">Dr. John Doe</div>
+                    <div class="sender-email-line">Email: <strong>john@example.com</strong></div>
+                  </div>
+                </div>
+                <div>
+                  <span class="sender-phone">Phone: +234 800 000 0000</span>
+                </div>
+              </div>
+
+              <!-- Full Received Message Body -->
+              <div class="msg-body-content">
+                <p>Hello NANMS Secretariat,</p>
+                <p>I am reaching out regarding the registration process and guidelines for Niger State indigenous medical students studying across Nigerian institutions. How do we ensure our student clinical logbooks and membership status are fully ratified before the state-wide rural medical outreach and clinical rotations begin this November?</p>
+                <div class="quote-box">
+                  <strong>Original Form Submission Inquiry:</strong> "How can we help you? I would like to know the process for ratifying external clinical logbooks and membership status before the November outreach begins."
+                </div>
+                <p>Kindly advise on the required verification documents and the designated submission portal. Thank you for your continued service to medical education in Niger State.</p>
+                <p>Warm regards,<br><strong>Dr. John Doe</strong><br><span style="color: #64748b; font-size: 12px;">MBBS Candidate / Niger State Indigene</span></p>
+              </div>
+
+              <!-- DEDICATED REPLY COMPOSER SECTION (Requested by User) -->
+              <div class="reply-composer-section">
+                
+                <div class="composer-header">
+                  <div class="composer-title">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#005a36" stroke-width="2"><polyline points="9 17 4 12 9 7"></polyline><path d="M20 18v-2a4 4 0 0 0-4-4H4"></path></svg>
+                    Send Official Administrative Reply
+                    <span class="gateway-pill">From: info@nanms.org.ng</span>
+                  </div>
+
+                  <div class="template-selector">
+                    <select>
+                      <option selected>Template: Membership & Clinical Rotation Verification</option>
+                      <option>Template: Medical Outreach Collaboration Guide</option>
+                      <option>Template: General Acknowledgement & Intake</option>
+                      <option>Template: Student Endowment & Welfare FAQ</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="composer-form">
+                  <div class="composer-row">
+                    <span class="composer-label">To:</span>
+                    <input type="text" class="composer-input" value="Dr. John Doe <john@example.com>" readonly>
+                  </div>
+                  <div class="composer-row">
+                    <span class="composer-label">Cc:</span>
+                    <input type="text" class="composer-input" value="secretariat@nanms.org.ng, verification@nanms.org.ng">
+                  </div>
+                  <div class="composer-row">
+                    <span class="composer-label">Subject:</span>
+                    <input type="text" class="composer-input" value="Re: Inquiry about membership registration & rotation eligibility">
+                  </div>
+
+                  <div class="composer-toolbar">
+                    <button type="button" class="tool-btn" title="Bold">B</button>
+                    <button type="button" class="tool-btn" title="Italic"><i>I</i></button>
+                    <button type="button" class="tool-btn" title="Bulleted List">• List</button>
+                    <button type="button" class="tool-btn" title="Insert Link">Link</button>
+                    <span style="border-left: 1px solid #cbd5e1; height: 16px; margin: 0 4px;"></span>
+                    <button type="button" class="tool-btn" style="color: #0369a1;">+ Attach Official PDF Letterhead</button>
+                  </div>
+
+                  <textarea class="composer-textarea">Dear Dr. John Doe,
+
+Thank you for reaching out to the National Association of Niger State Medical Students (NANMS) Secretariat.
+
+In response to your inquiry regarding clinical rotation eligibility and external logbook ratification:
+
+1. Submission Portal: Please log into the NANMS Member Portal (nanms.org.ng/members) and navigate to the 'Clinical Verification' tab.
+2. Required Documentation: Upload a scanned copy of your current university student identity card and your state indigene verification slip.
+3. Ratification Timeline: The Academic and Clinical Committee verifies submissions within 48 business hours and issues your stamped digital clearance certificate.
+
+For further assistance, our Secretariat Desk at Minna General Hospital Campus is open weekdays from 8:00 AM to 4:00 PM.
+
+Sincerely,
+Office of the General Secretary
+National Association of Niger State Medical Students (NANMS)
+Minna General Hospital Campus, Niger State, Nigeria
+info@nanms.org.ng | +234 800 000 0000</textarea>
+
+                  <div class="attachments-strip">
+                    <span style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Attachments:</span>
+                    <div class="attachment-chip">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                      NANMS_Clinical_Rotation_Guidelines_2024.pdf (420 KB)
+                    </div>
+                  </div>
+                </div>
+
+                <div class="composer-footer-actions">
+                  <div class="footer-left-options">
+                    <label>
+                      <input type="checkbox" checked>
+                      <span>Mark inquiry as resolved upon sending</span>
+                    </label>
+                    <label>
+                      <input type="checkbox" checked>
+                      <span>Log transaction to audit records</span>
+                    </label>
+                  </div>
+
+                  <div class="footer-right-buttons">
+                    <button type="button" class="btn-draft">Save Draft</button>
+                    <button type="button" class="btn-send">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                      Send Official Reply & Mark Done
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

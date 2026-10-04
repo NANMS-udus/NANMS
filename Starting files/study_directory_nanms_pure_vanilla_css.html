@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Directory & Academic Hub - NANMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    /* Reset & Base Variables */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --color-primary: #006837;
+      --color-primary-dark: #004d28;
+      --color-primary-light: #e6f4ed;
+      --color-primary-hover: #00562e;
+      --color-accent-gold: #b3820a;
+      --color-accent-gold-light: #fef8e7;
+      --color-text-main: #1e293b;
+      --color-text-muted: #64748b;
+      --color-bg-body: #f8fafc;
+      --color-bg-surface: #ffffff;
+      --color-border: #e2e8f0;
+      --color-border-light: #f1f5f9;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+      --font-serif: 'Source Serif 4', Georgia, serif;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg-body);
+      color: var(--color-text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Top Navigation Header */
+    .nanms-header {
+      background-color: var(--color-bg-surface);
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .nanms-header-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo-img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .brand-name {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--color-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .brand-tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      font-weight: 600;
+      display: block;
+      margin-top: -3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      transition: color 0.15s ease;
+      position: relative;
+      padding: 0.4rem 0;
+    }
+
+    .nav-link:hover {
+      color: var(--color-primary);
+    }
+
+    .nav-link.active {
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2.5px;
+      background-color: var(--color-primary);
+      border-radius: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn-register {
+      background-color: var(--color-primary);
+      color: #ffffff;
+      padding: 0.6rem 1.3rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: background-color 0.15s ease, transform 0.1s ease;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-register:hover {
+      background-color: var(--color-primary-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Hero / Banner Header */
+    .hero-section {
+      background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+      border-bottom: 1px solid var(--color-border);
+      padding: 3.5rem 0 3rem;
+      text-align: center;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background-color: var(--color-primary-light);
+      color: var(--color-primary-dark);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 1.25rem;
+      border: 1px solid rgba(0, 104, 55, 0.15);
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      color: var(--color-primary-dark);
+      margin-bottom: 0.85rem;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--color-text-muted);
+      max-width: 740px;
+      margin: 0 auto 2.25rem;
+      line-height: 1.6;
+    }
+
+    /* Quick Stats Bar */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background-color: #ffffff;
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 1.25rem 1rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* Main Hub Layout: Filters + Resource Content */
+    .hub-content {
+      padding: 3rem 0 5rem;
+    }
+
+    /* Filter & Search Bar Toolbar */
+    .search-filter-panel {
+      background-color: #ffffff;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2.5rem;
+    }
+
+    .search-input-wrapper {
+      position: relative;
+      margin-bottom: 1.25rem;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-text-muted);
+      width: 18px;
+      height: 18px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 2.75rem;
+      border: 1.5px solid var(--color-border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: var(--font-sans);
+      color: var(--color-text-main);
+      background-color: #fcfcfd;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(0, 104, 55, 0.12);
+      background-color: #ffffff;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.25rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--color-border);
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-right: 0.35rem;
+    }
+
+    .pill-btn {
+      background-color: #f1f5f9;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-main);
+      font-size: 0.84rem;
+      font-weight: 500;
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .pill-btn:hover {
+      background-color: #e2e8f0;
+    }
+
+    .pill-btn.active {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Section Headers */
+    .section-header-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--color-primary-light);
+      padding-bottom: 0.75rem;
+    }
+
+    .section-header-title {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      color: var(--color-primary-dark);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .section-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-outline-sm {
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      background: #ffffff;
+      color: var(--color-text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-outline-sm:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    /* Study Resource Cards Grid */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .resource-card {
+      background-color: #ffffff;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(0, 104, 55, 0.35);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .category-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .tag-basic {
+      background-color: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .tag-clinical {
+      background-color: var(--color-primary-light);
+      color: var(--color-primary-dark);
+    }
+
+    .tag-exam {
+      background-color: var(--color-accent-gold-light);
+      color: var(--color-accent-gold);
+    }
+
+    .tag-research {
+      background-color: #f3e8ff;
+      color: #7e22ce;
+    }
+
+    .format-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      background-color: #f1f5f9;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: var(--color-text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Metadata details inside card */
+    .card-meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 0.85rem;
+      background-color: #f8fafc;
+      border-radius: 8px;
+      margin-bottom: 1.25rem;
+      border: 1px solid var(--color-border-light);
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+    }
+
+    .meta-key {
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+
+    .meta-val {
+      font-weight: 600;
+      color: var(--color-text-main);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--color-border-light);
+    }
+
+    .contributor-box {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contributor-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .contributor-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-text-main);
+    }
+
+    .btn-download-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--color-primary);
+      font-size: 0.84rem;
+      font-weight: 700;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, color 0.15s ease;
+    }
+
+    .btn-download-trigger:hover {
+      color: var(--color-primary-dark);
+      transform: translateX(2px);
+    }
+
+    /* Study Groups & Mentorship Section */
+    .groups-section {
+      background-color: #ffffff;
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 2.25rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 3.5rem;
+    }
+
+    .groups-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .group-item {
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #fbfcfe;
+      transition: all 0.2s ease;
+    }
+
+    .group-item:hover {
+      border-color: var(--color-primary);
+      background-color: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .group-badge-active {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #166534;
+      background-color: #dcfce7;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      width: fit-content;
+      margin-bottom: 0.5rem;
+    }
+
+    .group-pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #22c55e;
+    }
+
+    .group-name {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-text-main);
+      margin-bottom: 0.4rem;
+    }
+
+    .group-schedule {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .group-members-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--color-border-light);
+    }
+
+    .btn-join-group {
+      background-color: var(--color-primary-light);
+      color: var(--color-primary-dark);
+      border: 1px solid rgba(0, 104, 55, 0.2);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-join-group:hover {
+      background-color: var(--color-primary);
+      color: #ffffff;
+    }
+
+    /* Dedicated Section Pagination */
+    .pagination-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0 0.5rem;
+      border-top: 1px solid var(--color-border);
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .pagination-info {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+    }
+
+    .pagination-info strong {
+      color: var(--color-text-main);
+    }
+
+    .pagination-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .page-btn {
+      min-width: 38px;
+      height: 38px;
+      padding: 0 0.6rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--color-border);
+      background-color: #ffffff;
+      color: var(--color-text-main);
+      font-size: 0.88rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .page-btn:hover:not(:disabled) {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      background-color: #f8fafc;
+    }
+
+    .page-btn.active {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #ffffff;
+    }
+
+    .page-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* Call to Action Contribution Banner */
+    .cta-banner {
+      background: linear-gradient(135deg, #006837 0%, #004d28 100%);
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-bottom: 4rem;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .cta-banner h3 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-banner p {
+      font-size: 1.05rem;
+      color: #d1fae5;
+      max-width: 680px;
+      margin: 0 auto 1.75rem;
+      line-height: 1.6;
+    }
+
+    .cta-btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-banner-primary {
+      background-color: #ffffff;
+      color: var(--color-primary-dark);
+      font-weight: 700;
+      padding: 0.75rem 1.6rem;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-banner-primary:hover {
+      background-color: #f1f5f9;
+      transform: translateY(-1px);
+    }
+
+    .btn-banner-secondary {
+      background: transparent;
+      color: #ffffff;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      font-weight: 600;
+      padding: 0.75rem 1.6rem;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-banner-secondary:hover {
+      border-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Modal System */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-card {
+      background-color: #ffffff;
+      border-radius: 14px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      position: relative;
+      transform: scale(0.96);
+      transition: transform 0.2s ease;
+    }
+
+    .modal-overlay.open .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      padding: 1.5rem 1.75rem;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: sticky;
+      top: 0;
+      background: #ffffff;
+      z-index: 5;
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.25rem;
+      border-radius: 4px;
+    }
+
+    .modal-close-btn:hover {
+      color: var(--color-text-main);
+      background-color: #f1f5f9;
+    }
+
+    .modal-body {
+      padding: 1.75rem;
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--color-text-main);
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .modal-meta-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .modal-section-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin: 1.25rem 0 0.5rem;
+    }
+
+    .modal-desc {
+      font-size: 0.92rem;
+      color: #334155;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .modal-syllabus-box {
+      background-color: #f8fafc;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-syllabus-list {
+      list-style-type: none;
+      font-size: 0.88rem;
+      color: #475569;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .modal-syllabus-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .modal-footer {
+      padding: 1.25rem 1.75rem;
+      background-color: #f8fafc;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+    }
+
+    /* Footer */
+    .nanms-footer {
+      background-color: #ffffff;
+      border-top: 1px solid var(--color-border);
+      padding: 3.5rem 0 2rem;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border-light);
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .resource-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .groups-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nanms-header-inner {
+        height: auto;
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero-title {
+        font-size: 2.1rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .pagination-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation Header -->
+  <header class="nanms-header">
+    <div class="nanms-header-inner">
+      <div class="brand-group">
+        <img
+          src="https://lh3.googleusercontent.com/aida/AEtjO1X_qlJ7KUQU8whWf_X6CZk3jIwK9rVNqpiOvkTOtCv0MjRwOlGUc7Yozv4EL1-LHTgtCSnVXsgNXhYjk3tQiSkLSViUTrjZyTNiECgpbSdqDZSjPAhxN_jzat5jWNfW5UN52MonkLyUXQzhA3Wv-t-5tYlYP0wFt5Io3v4UpNCIXxWVvAmPnu7AC2d4qGtH9w2E2ILKVxCJK2NCJ9sBtYjt9JSiboa-cwBzww8ydESwSsGij6ru09e0qQ"
+          alt="NANMS Crest" class="brand-logo-img">
+        <div>
+          <span class="brand-name">NANMS</span>
+          <span class="brand-tag">Niger State Medical Students</span>
+        </div>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#" class="nav-link">Home</a></li>
+          <li><a href="#" class="nav-link">About Us</a></li>
+          <li><a href="#" class="nav-link">Executives</a></li>
+          <li><a href="#" class="nav-link">Projects</a></li>
+          <li><a href="#" class="nav-link">News</a></li>
+          <li><a href="#" class="nav-link">Patrons & Alumni</a></li>
+          <li><a href="#" class="nav-link active">Study Directory</a></li>
+          <li><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn-register" onclick="alert('Member Registration Portal open for 2024 academic session.')">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path
+              d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+          </svg>
+          Register
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="badge-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+        ACADEMIC REPOSITORY & PEER LEARNING
+      </div>
+      <h1 class="hero-title">Medical Study Directory & Archive</h1>
+      <p class="hero-subtitle">
+        Curated high-yield study materials, past professional exam questions, clinical OSCE checklists, and active peer
+        study circles for Niger State medical trainees across pre-clinical and clinical disciplines.
+      </p>
+
+      <!-- Stats Bar -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number">450+</span>
+          <span class="stat-label">Verified Handouts</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">12 Yrs</span>
+          <span class="stat-label">Past MBBS Papers</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">28</span>
+          <span class="stat-label">Active Peer Circles</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Free Member Access</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Directory Workspace -->
+  <main class="hub-content">
+    <div class="container">
+
+      <!-- Interactive Search & Filtering Toolbar -->
+      <div class="search-filter-panel">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="resourceSearchInput" class="search-input"
+            placeholder="Search by topic, course title, lecturer, or keyword (e.g., 'Cardiovascular Pathology', 'OSCE', 'Pharmacology')...">
+        </div>
+
+        <div class="filter-row">
+          <div class="filter-group">
+            <span class="filter-label">Phase:</span>
+            <button class="pill-btn active" data-filter-phase="all">All Phases</button>
+            <button class="pill-btn" data-filter-phase="pre-clinical">Pre-Clinical (200L–300L)</button>
+            <button class="pill-btn" data-filter-phase="clinical">Clinical (400L–600L)</button>
+          </div>
+
+          <div class="filter-group">
+            <span class="filter-label">Subject:</span>
+            <button class="pill-btn active" data-filter-subject="all">All Subjects</button>
+            <button class="pill-btn" data-filter-subject="anatomy">Anatomy</button>
+            <button class="pill-btn" data-filter-subject="pathology">Pathology</button>
+            <button class="pill-btn" data-filter-subject="medicine">Internal Medicine</button>
+            <button class="pill-btn" data-filter-subject="surgery">Surgery</button>
+            <button class="pill-btn" data-filter-subject="pediatrics">Pediatrics & O&G</button>
+          </div>
+
+          <div class="filter-group">
+            <span class="filter-label">Type:</span>
+            <button class="pill-btn active" data-filter-type="all">All Types</button>
+            <button class="pill-btn" data-filter-type="lecture">Lectures & Notes</button>
+            <button class="pill-btn" data-filter-type="past-questions">MBBS Past Questions</button>
+            <button class="pill-btn" data-filter-type="osce">OSCE Guides</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Curated Resources Section -->
+      <div class="section-header-block">
+        <div>
+          <h2 class="section-header-title">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Academic Materials & Clinical Repertoire
+          </h2>
+          <p class="section-subtitle">Showing verified student handouts, departmental lecture summaries, and board
+            review slides.</p>
+        </div>
+        <div class="section-actions">
+          <button class="btn-outline-sm"
+            onclick="alert('Submitting a resource requires executive verification.')">Upload Contribution</button>
+        </div>
+      </div>
+
+      <!-- Resources Grid -->
+      <div class="resource-grid" id="resourceCardsGrid">
+
+        <!-- Card 1 -->
+        <article class="resource-card" data-title="Comprehensive Cardiology Clinical Examination & OSCE Checklist"
+          data-phase="clinical" data-subject="medicine" data-type="osce" onclick="openResourceModal(1)">
+          <div>
+            <div class="card-top">
+              <span class="category-tag tag-clinical">Clinical Medicine</span>
+              <span class="format-badge">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                  <path
+                    d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+                </svg>
+                PDF (8.4 MB)
+              </span>
+            </div>
+            <h3 class="card-title">Comprehensive Cardiology Clinical Examination & OSCE Checklist</h3>
+            <p class="card-desc">Step-by-step bedside examination handbook covering jugular venous pulse assessment,
+              cardiac murmurs localization, and bedside electrocardiogram interpretation.</p>
+
+            <div class="card-meta-list">
+              <div class="meta-row">
+                <span class="meta-key">Department:</span>
+                <span class="meta-val">Internal Medicine (ABUTH / FMC)</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Target Year:</span>
+                <span class="meta-val">500L & 600L Final MBBS</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Updated:</span>
+                <span class="meta-val">January 2024</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div class="contributor-box">
+              <div class="contributor-avatar">US</div>
+              <span class="contributor-name">Dr. Umar Farooq Sani (Alumni)</span>
+            </div>
+            <button class="btn-download-trigger" onclick="event.stopPropagation(); openResourceModal(1)">
+              View Details →
+            </button>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="resource-card" data-title="Systemic & General Pathology High-Yield Board Compendium"
+          data-phase="pre-clinical" data-subject="pathology" data-type="lecture" onclick="openResourceModal(2)">
+          <div>
+            <div class="card-top">
+              <span class="category-tag tag-basic">Pathology</span>
+              <span class="format-badge">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                  <path
+                    d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+                </svg>
+                PDF (14.2 MB)
+              </span>
+            </div>
+            <h3 class="card-title">Systemic & General Pathology High-Yield Board Compendium</h3>
+            <p class="card-desc">Cell injury mechanisms, acute and chronic inflammation cascades, neoplasia hallmarks,
+              and histopathological specimen slides with differential diagnoses.</p>
+
+            <div class="card-meta-list">
+              <div class="meta-row">
+                <span class="meta-key">Department:</span>
+                <span class="meta-val">Morbid Anatomy & Histopathology</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Target Year:</span>
+                <span class="meta-val">300L & 400L 2nd MBBS</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Updated:</span>
+                <span class="meta-val">November 2023</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div class="contributor-box">
+              <div class="contributor-avatar">MK</div>
+              <span class="contributor-name">Dr. Maryam Mustapha</span>
+            </div>
+            <button class="btn-download-trigger" onclick="event.stopPropagation(); openResourceModal(2)">
+              View Details →
+            </button>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="resource-card" data-title="Decade of 2nd MBBS Professional Examination Questions (2012–2023)"
+          data-phase="pre-clinical" data-subject="anatomy" data-type="past-questions" onclick="openResourceModal(3)">
+          <div>
+            <div class="card-top">
+              <span class="category-tag tag-exam">Past Exam Archive</span>
+              <span class="format-badge">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                  <path
+                    d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+                </svg>
+                PDF (22.5 MB)
+              </span>
+            </div>
+            <h3 class="card-title">Decade of 2nd MBBS Professional Examination Questions (2012–2023)</h3>
+            <p class="card-desc">Compiled theory essay prompts, multiple-choice questions, and viva voce key rubrics
+              covering Gross Anatomy, Neuroanatomy, and Medical Embryology.</p>
+
+            <div class="card-meta-list">
+              <div class="meta-row">
+                <span class="meta-key">Department:</span>
+                <span class="meta-val">Human Anatomy & Embryology</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Target Year:</span>
+                <span class="meta-val">300L Professional MBBS</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Updated:</span>
+                <span class="meta-val">October 2023</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div class="contributor-box">
+              <div class="contributor-avatar">AA</div>
+              <span class="contributor-name">Dr. Ahmad Bida (Registrar)</span>
+            </div>
+            <button class="btn-download-trigger" onclick="event.stopPropagation(); openResourceModal(3)">
+              View Details →
+            </button>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="resource-card" data-title="Pediatric Fluid Management & Emergency Neonatal Resuscitation"
+          data-phase="clinical" data-subject="pediatrics" data-type="lecture" onclick="openResourceModal(4)">
+          <div>
+            <div class="card-top">
+              <span class="category-tag tag-clinical">Pediatrics</span>
+              <span class="format-badge">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                  <path
+                    d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+                </svg>
+                PDF (6.8 MB)
+              </span>
+            </div>
+            <h3 class="card-title">Pediatric Fluid Management & Emergency Neonatal Resuscitation</h3>
+            <p class="card-desc">Dosage calculations, severe dehydration management protocols, APGAR scoring tables, and
+              acute severe malaria management guidelines in children.</p>
+
+            <div class="card-meta-list">
+              <div class="meta-row">
+                <span class="meta-key">Department:</span>
+                <span class="meta-val">Pediatrics & Child Health</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Target Year:</span>
+                <span class="meta-val">500L Clinical Rotation</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Updated:</span>
+                <span class="meta-val">February 2024</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div class="contributor-box">
+              <div class="contributor-avatar">HS</div>
+              <span class="contributor-name">Dr. Hadiza Suleiman</span>
+            </div>
+            <button class="btn-download-trigger" onclick="event.stopPropagation(); openResourceModal(4)">
+              View Details →
+            </button>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="resource-card" data-title="Surgical Skills, Knot Tying & Suture Mastery Handbook"
+          data-phase="clinical" data-subject="surgery" data-type="osce" onclick="openResourceModal(5)">
+          <div>
+            <div class="card-top">
+              <span class="category-tag tag-clinical">Surgery</span>
+              <span class="format-badge">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                  <path
+                    d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+                </svg>
+                PDF (11.0 MB)
+              </span>
+            </div>
+            <h3 class="card-title">Surgical Skills, Knot Tying & Suture Mastery Handbook</h3>
+            <p class="card-desc">Aseptic theatre discipline, scrubbing and gloving techniques, wound closure principles,
+              basic instrument identification, and emergency laparotomy prep.</p>
+
+            <div class="card-meta-list">
+              <div class="meta-row">
+                <span class="meta-key">Department:</span>
+                <span class="meta-val">General & Minimal Access Surgery</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Target Year:</span>
+                <span class="meta-val">400L & 600L Surgery Posting</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Updated:</span>
+                <span class="meta-val">December 2023</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div class="contributor-box">
+              <div class="contributor-avatar">UG</div>
+              <span class="contributor-name">Dr. Usman Shehu Garba</span>
+            </div>
+            <button class="btn-download-trigger" onclick="event.stopPropagation(); openResourceModal(5)">
+              View Details →
+            </button>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="resource-card" data-title="Obstetrics & Gynaecology Part 1 & 2 OSCE Station Checklists"
+          data-phase="clinical" data-subject="pediatrics" data-type="osce" onclick="openResourceModal(6)">
+          <div>
+            <div class="card-top">
+              <span class="category-tag tag-exam">OSCE Examination</span>
+              <span class="format-badge">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                  <path
+                    d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+                </svg>
+                PDF (9.2 MB)
+              </span>
+            </div>
+            <h3 class="card-title">Obstetrics & Gynaecology Part 1 & 2 OSCE Station Checklists</h3>
+            <p class="card-desc">Antenatal abdominal examination rubrics, partograph plotting drills, postpartum
+              hemorrhage emergency drills, and speculum exam procedures.</p>
+
+            <div class="card-meta-list">
+              <div class="meta-row">
+                <span class="meta-key">Department:</span>
+                <span class="meta-val">Obstetrics & Gynaecology</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Target Year:</span>
+                <span class="meta-val">Final MBBS Clinical</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Updated:</span>
+                <span class="meta-val">January 2024</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div class="contributor-box">
+              <div class="contributor-avatar">ZT</div>
+              <span class="contributor-name">Dr. Zainab Aliyu Tanko (Patron)</span>
+            </div>
+            <button class="btn-download-trigger" onclick="event.stopPropagation(); openResourceModal(6)">
+              View Details →
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Pagination for Resource Grid -->
+      <div class="pagination-container">
+        <div class="pagination-info">
+          Showing <strong>1–6</strong> of <strong>36</strong> curated medical materials
+        </div>
+        <div class="pagination-controls">
+          <button class="page-btn" disabled>&laquo; Prev</button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">4</button>
+          <button class="page-btn">5</button>
+          <button class="page-btn">Next &raquo;</button>
+        </div>
+      </div>
+
+      <!-- Collaborative Study Circles Section -->
+      <section class="groups-section">
+        <div class="section-header-block" style="border-bottom:none; margin-bottom: 0;">
+          <div>
+            <h2 class="section-header-title">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              Active NANMS Clinical Study Circles
+            </h2>
+            <p class="section-subtitle">Join peer-led tutorial cohorts moderated by resident doctors and senior clinical
+              colleagues.</p>
+          </div>
+          <button class="btn-outline-sm" onclick="alert('Applications to launch a new study circle are open!')">Form a
+            Study Circle</button>
+        </div>
+
+        <div class="groups-grid">
+          <!-- Group 1 -->
+          <div class="group-item">
+            <div>
+              <div class="group-badge-active">
+                <span class="group-pulse-dot"></span>
+                Active Cohort • Bi-Weekly
+              </div>
+              <h4 class="group-name">Final MBBS High-Yield OSCE Mock Circle</h4>
+              <p style="font-size:0.88rem; color:#475569; margin-bottom:0.75rem;">
+                Intensive clinical stations, real-time patient presentation critiques, and diagnostic imaging drills led
+                by resident registrars.
+              </p>
+              <div class="group-schedule">
+                <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                Every Saturday & Tuesday • 7:30 PM (Google Meet & Ward Rounds)
+              </div>
+            </div>
+            <div class="group-members-row">
+              <span style="font-size:0.82rem; color:var(--color-text-muted); font-weight:600;">42 Active Members • Minna
+                Hub</span>
+              <button class="btn-join-group"
+                onclick="alert('You have registered interest for the Final MBBS OSCE Mock Circle.')">Join
+                Circle</button>
+            </div>
+          </div>
+
+          <!-- Group 2 -->
+          <div class="group-item">
+            <div>
+              <div class="group-badge-active">
+                <span class="group-pulse-dot"></span>
+                Active Cohort • Weekly
+              </div>
+              <h4 class="group-name">Pre-Clinical Anatomy & Physiology Mastery</h4>
+              <p style="font-size:0.88rem; color:#475569; margin-bottom:0.75rem;">
+                Peer tutoring focused on cadaveric dissection terminology, neuroanatomy pathways, and cardiovascular
+                physiology for 200L & 300L students.
+              </p>
+              <div class="group-schedule">
+                <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                Every Thursday • 6:00 PM (College of Health Sciences Library)
+              </div>
+            </div>
+            <div class="group-members-row">
+              <span style="font-size:0.82rem; color:var(--color-text-muted); font-weight:600;">68 Active Members • Bida
+                / Zaria</span>
+              <button class="btn-join-group"
+                onclick="alert('You have registered interest for Pre-Clinical Anatomy Mastery.')">Join Circle</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contribution CTA -->
+      <section class="cta-banner">
+        <h3>Have Quality Study Summaries or Past Questions?</h3>
+        <p>
+          Contribute to the collective academic success of Niger State medical scholars. Your verified lecture notes,
+          diagrams, and ward flashcards help junior colleagues excel.
+        </p>
+        <div class="cta-btn-group">
+          <button class="btn-banner-primary"
+            onclick="alert('Resource submission portal opened. Please attach PDF or DOCX file.')">Submit Study
+            Material</button>
+          <button class="btn-banner-secondary"
+            onclick="alert('NANMS Academic Directorate will connect with you via email.')">Volunteer as a Peer
+            Tutor</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Detail Modal Dialog -->
+  <div class="modal-overlay" id="resourceModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span id="modalCategoryTag" class="category-tag tag-clinical">Clinical Resource</span>
+          <h3 id="modalResourceTitle" class="modal-title">Resource Title</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeResourceModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-meta-bar">
+          <span class="format-badge" id="modalFormat">PDF File</span>
+          <span style="font-size:0.82rem; color:var(--color-text-muted);" id="modalFileSize">• 8.4 MB</span>
+          <span style="font-size:0.82rem; color:var(--color-text-muted);" id="modalYear">• Academic Session
+            2023/2024</span>
+        </div>
+
+        <h4 class="modal-section-title">Overview & Curriculum Coverage</h4>
+        <p class="modal-desc" id="modalDescription">
+          Detailed overview text describing what topics are covered, key learning outcomes, and practical exam tips.
+        </p>
+
+        <h4 class="modal-section-title">Table of Contents & Core Modules</h4>
+        <div class="modal-syllabus-box">
+          <ul class="modal-syllabus-list" id="modalSyllabus">
+            <li>✓ Module 1: Patient History and Symptom Triage</li>
+            <li>✓ Module 2: Systemic Clinical Examination Protocol</li>
+            <li>✓ Module 3: Differential Diagnosis Matrix & Scoring Criteria</li>
+          </ul>
+        </div>
+
+        <h4 class="modal-section-title">Contributed & Peer Reviewed By</h4>
+        <div
+          style="display:flex; align-items:center; gap:0.75rem; padding: 0.75rem; background:#f8fafc; border-radius:8px; border:1px solid var(--color-border-light);">
+          <div class="contributor-avatar" id="modalAuthorInitials">US</div>
+          <div>
+            <div style="font-weight:700; font-size:0.9rem;" id="modalAuthorName">Dr. Umar Farooq Sani</div>
+            <div style="font-size:0.8rem; color:var(--color-text-muted);" id="modalAuthorRole">Resident Doctor • ABUTH
+              Zaria • Former NANMS President</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-outline-sm" onclick="closeResourceModal()">Close</button>
+        <button class="btn-register" onclick="simulateDownload()">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          Download Verified Resource
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="nanms-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div class="brand-group">
+          <span class="brand-name" style="font-size:1.15rem;">NANMS</span>
+          <span style="font-size:0.82rem; color:var(--color-text-muted);">© 2024 National Association of Niger State
+            Medical Students. All rights reserved.</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="#">Academic Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Constitution</a></li>
+          <li><a href="#">Help & FAQs</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript for Interactivity, Search, Filters & Modals -->
+  <script>
+    // Data directory for detailed modal views
+    const resourceData = {
+      1: {
+        title: "Comprehensive Cardiology Clinical Examination & OSCE Checklist",
+        category: "Clinical Medicine",
+        categoryClass: "tag-clinical",
+        format: "PDF Document (8.4 MB)",
+        fileSize: "8.4 MB",
+        year: "Session 2023/2024",
+        desc: "An exhaustive clinical examination checklist curated specifically for final MBBS students and senior clinical clerks. Provides high-yield techniques for identifying murmurs, inspecting peripheral signs of infective endocarditis, estimating jugular venous pressure (JVP), and mastering bedside telemetry.",
+        syllabus: [
+          "Pre-examination etiquette, consent, and patient positioning",
+          "Inspection of hands, nails (splinter hemorrhages, clubbing), and eyes (xanthelasma, arcus)",
+          "Precordial inspection: thrills, heaves, surgical scars, and apex beat localization",
+          "Auscultation map: Mitral, Tricuspid, Aortic, and Pulmonary areas with dynamic maneuvers",
+          "Rapid diagnosis algorithms for Heart Failure, Aortic Stenosis, and Mitral Regurgitation"
+        ],
+        author: "Dr. Umar Farooq Sani",
+        authorInitials: "US",
+        role: "Resident Doctor (Internal Medicine), ABUTH Zaria • Former NANMS President"
+      },
+      2: {
+        title: "Systemic & General Pathology High-Yield Board Compendium",
+        category: "Pathology",
+        categoryClass: "tag-basic",
+        format: "PDF Document (14.2 MB)",
+        fileSize: "14.2 MB",
+        year: "2nd MBBS Curriculum",
+        desc: "Covers the fundamental principles of cellular adaptations, apoptosis vs necrosis, hemodynamic disorders, granulomatous diseases (including Tuberculosis and Leprosy), and key microscopic slide hallmarks commonly examined in viva exams.",
+        syllabus: [
+          "Mechanisms of cellular injury, oxidative stress, and free radical pathology",
+          "Acute versus Chronic inflammation cellular mediators (Histamine, Prostaglandins, Cytokines)",
+          "Neoplasia: Oncogenes, Tumor suppressor genes (TP53, RB), and TNM Staging",
+          "Cardiovascular pathology: Atherosclerosis formation and Myocardial Infarction histology",
+          "High-definition histology slide photo gallery with labeled pointers"
+        ],
+        author: "Dr. Maryam K. Mustapha",
+        authorInitials: "MM",
+        role: "Senior Medical Officer & Fellow in Paediatrics • Former NANMS President"
+      },
+      3: {
+        title: "Decade of 2nd MBBS Professional Examination Questions (2012–2023)",
+        category: "Past Exam Archive",
+        categoryClass: "tag-exam",
+        format: "PDF Document (22.5 MB)",
+        fileSize: "22.5 MB",
+        year: "10-Year Compilation",
+        desc: "Comprehensive question bank of past 2nd MBBS exams across accredited medical schools in northern Nigeria (including ABU Zaria, UDUS, and UniAbuja), featuring verified answer schematics and lecturer grading keys.",
+        syllabus: [
+          "Upper and Lower Limb Gross Anatomy essay topics with typical nerve injury clinical vignettes",
+          "Head & Neck, Cranial Nerves, and Pharyngeal Arches comprehensive past questions",
+          "Neuroanatomy: Spinal cord tracts, Circle of Willis, and Brainstem cross-sections",
+          "Medical Embryology: Cardiac development, neural crest migration, and teratology",
+          "Sample viva voce rapid-fire questions and high-yield scoring guides"
+        ],
+        author: "Dr. Ahmad Abubakar Bida",
+        authorInitials: "AA",
+        role: "Resident Surgeon (Senior Registrar), FMC Bida • Former NANMS President"
+      },
+      4: {
+        title: "Pediatric Fluid Management & Emergency Neonatal Resuscitation",
+        category: "Pediatrics",
+        categoryClass: "tag-clinical",
+        format: "PDF Document (6.8 MB)",
+        fileSize: "6.8 MB",
+        year: "Clinical Posting Guide",
+        desc: "Practical ward handbook detailing Hollidays-Segar fluid calculation formulas, resuscitation algorithms for birth asphyxia according to NRP standards, and management of pediatric status epilepticus.",
+        syllabus: [
+          "Maintenance fluid calculations and replacement therapy for gastroenteritis",
+          "Step-by-step Neonatal Resuscitation Program (NRP) 2020 protocol flowchart",
+          "Acute management of severe neonatal jaundice and phototherapy thresholds",
+          "Pediatric drug dosage formulas based on weight and body surface area",
+          "Malnutrition management: WHO 10-step protocol for SAM (Severe Acute Malnutrition)"
+        ],
+        author: "Dr. Hadiza Suleiman",
+        authorInitials: "HS",
+        role: "Consultant Cardiologist & Fellow • Notable Alumni (Class of 2015)"
+      },
+      5: {
+        title: "Surgical Skills, Knot Tying & Suture Mastery Handbook",
+        category: "Surgery",
+        categoryClass: "tag-clinical",
+        format: "PDF Document (11.0 MB)",
+        fileSize: "11.0 MB",
+        year: "Surgery Posting Guide",
+        desc: "Visual guide to theatre etiquette, instrument handling, one-handed and two-handed surgical knot tying, and closure techniques using various suture materials (vicryl, nylon, prolene).",
+        syllabus: [
+          "Operating room zoning, surgical scrub techniques, and sterile gowning",
+          "Instrument recognition: Artery forceps, needle holders, retractors, and scalpels",
+          "Simple interrupted, continuous, horizontal and vertical mattress suturing",
+          "Basic trauma life support (ATLS) initial assessment and triage principles",
+          "Drain management, postoperative wound care, and suture removal timetables"
+        ],
+        author: "Dr. Usman Shehu Garba",
+        authorInitials: "UG",
+        role: "Senior Registrar (Orthopaedic & Trauma Surgery) • Notable Alumni (Class of 2017)"
+      },
+      6: {
+        title: "Obstetrics & Gynaecology Part 1 & 2 OSCE Station Checklists",
+        category: "OSCE Examination",
+        categoryClass: "tag-exam",
+        format: "PDF Document (9.2 MB)",
+        fileSize: "9.2 MB",
+        year: "Final MBBS Handbook",
+        desc: "Structured OSCE station drills for labor ward rotations, Leopold maneuvers, interpreting cardiotocography (CTG), and emergency protocol execution during eclampsia and postpartum hemorrhage.",
+        syllabus: [
+          "Antenatal care assessment: fundal height estimation and presentation identification",
+          "Partograph interpretation: alert line, action line, and cervical dilation plotting",
+          "Active management of the third stage of labor (AMTSL)",
+          "Eclampsia emergency bundle: Magnesium Sulfate Pritchard regimen dosing",
+          "Family planning counseling stations and contraceptive device demonstrations"
+        ],
+        author: "Dr. Zainab Aliyu Tanko",
+        authorInitials: "ZT",
+        role: "Maternal Health Specialist & Consultant • Patron & Health Advisor"
+      }
+    };
+
+    // Modal Control Functions
+    function openResourceModal(id) {
+      const data = resourceData[id];
+      if (!data) return;
+
+      document.getElementById('modalResourceTitle').textContent = data.title;
+      const catEl = document.getElementById('modalCategoryTag');
+      catEl.textContent = data.category;
+      catEl.className = 'category-tag ' + data.categoryClass;
+
+      document.getElementById('modalFormat').textContent = data.format;
+      document.getElementById('modalFileSize').textContent = '• ' + data.fileSize;
+      document.getElementById('modalYear').textContent = '• ' + data.year;
+      document.getElementById('modalDescription').textContent = data.desc;
+
+      const syllabusList = document.getElementById('modalSyllabus');
+      syllabusList.innerHTML = '';
+      data.syllabus.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span style="color:var(--color-primary); font-weight:bold;">✓</span> ${item}`;
+        syllabusList.appendChild(li);
+      });
+
+      document.getElementById('modalAuthorName').textContent = data.author;
+      document.getElementById('modalAuthorInitials').textContent = data.authorInitials;
+      document.getElementById('modalAuthorRole').textContent = data.role;
+
+      const overlay = document.getElementById('resourceModal');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeResourceModal() {
+      const overlay = document.getElementById('resourceModal');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function simulateDownload() {
+      alert('Downloading verified study file. Thank you for utilizing the NANMS Academic Repository!');
+      closeResourceModal();
+    }
+
+    // Close modal on Escape or backdrop click
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeResourceModal();
+    });
+
+    document.getElementById('resourceModal').addEventListener('click', function (e) {
+      if (e.target === this) closeResourceModal();
+    });
+
+    // Real-time Search and Filtering Logic
+    const searchInput = document.getElementById('resourceSearchInput');
+    const phaseButtons = document.querySelectorAll('[data-filter-phase]');
+    const subjectButtons = document.querySelectorAll('[data-filter-subject]');
+    const typeButtons = document.querySelectorAll('[data-filter-type]');
+    const cards = document.querySelectorAll('.resource-card');
+
+    let currentPhase = 'all';
+    let currentSubject = 'all';
+    let currentType = 'all';
+    let searchQuery = '';
+
+    function filterCards() {
+      cards.forEach(card => {
+        const cardTitle = card.getAttribute('data-title').toLowerCase();
+        const cardPhase = card.getAttribute('data-phase');
+        const cardSubject = card.getAttribute('data-subject');
+        const cardType = card.getAttribute('data-type');
+        const textContent = card.innerText.toLowerCase();
+
+        const matchesSearch = searchQuery === '' || cardTitle.includes(searchQuery) || textContent.includes(searchQuery);
+        const matchesPhase = currentPhase === 'all' || cardPhase === currentPhase;
+        const matchesSubject = currentSubject === 'all' || cardSubject === currentSubject;
+        const matchesType = currentType === 'all' || cardType === currentType;
+
+        if (matchesSearch && matchesPhase && matchesSubject && matchesType) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', function (e) {
+      searchQuery = e.target.value.toLowerCase().trim();
+      filterCards();
+    });
+
+    function setupFilterButtons(buttons, callback) {
+      buttons.forEach(btn => {
+        btn.addEventListener('click', function () {
+          buttons.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          callback(this);
+          filterCards();
+        });
+      });
+    }
+
+    setupFilterButtons(phaseButtons, (btn) => {
+      currentPhase = btn.getAttribute('data-filter-phase');
+    });
+
+    setupFilterButtons(subjectButtons, (btn) => {
+      currentSubject = btn.getAttribute('data-filter-subject');
+    });
+
+    setupFilterButtons(typeButtons, (btn) => {
+      currentType = btn.getAttribute('data-filter-type');
+    });
+  </script>
+</body>
+
+</html>

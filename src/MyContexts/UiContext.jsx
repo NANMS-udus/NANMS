@@ -16,6 +16,8 @@ export function UiCntxt({ children }) {
     closeBtnText: ''
   })
 
+  const [detModal, setDetModal] = useState({show: false, details: {}})
+
   function showPopup(msgType, msg, autoHide = true) {
     setPopup({
       show: true,
@@ -58,7 +60,9 @@ export function UiCntxt({ children }) {
       removePopup,
       modal,
       setModal,
-      hideModal
+      hideModal,
+      detModal,
+      setDetModal
     }}>
       {children}
     </UiContext.Provider>

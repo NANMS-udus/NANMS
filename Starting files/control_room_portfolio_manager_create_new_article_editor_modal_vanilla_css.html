@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NANMS Control Room - Portfolio Manager</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    /* Global Reset & Base Variables */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --color-navy: #001f3f;
+      --color-navy-dark: #00162e;
+      --color-navy-light: #0a2d52;
+      --color-navy-border: rgba(255, 255, 255, 0.08);
+
+      --color-primary: #0284c7;
+      --color-primary-hover: #0369a1;
+      --color-primary-light: #e0f2fe;
+
+      --bg-body: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-subtle: #f1f5f9;
+      --bg-input: #ffffff;
+
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-subtle: #94a3b8;
+      --text-inverse: #ffffff;
+
+      --border-color: #e2e8f0;
+      --border-darker: #cbd5e1;
+
+      --badge-green-bg: #ecfdf5;
+      --badge-green-text: #047857;
+      --badge-green-border: #a7f3d0;
+
+      --badge-amber-bg: #fffbeb;
+      --badge-amber-text: #b45309;
+      --badge-amber-border: #fde68a;
+
+      --badge-blue-bg: #eff6ff;
+      --badge-blue-text: #1d4ed8;
+      --badge-blue-border: #bfdbfe;
+
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+      --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.03);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+
+      --sidebar-width: 250px;
+      --header-height: 64px;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: var(--bg-body);
+      font-family: var(--font-main);
+      color: var(--text-main);
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 450, 'GRAD' 0, 'opsz' 20;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+      font-size: 20px;
+    }
+
+    /* Outer Layout Structure */
+    .master-sidebar {
+      width: var(--sidebar-width);
+      min-width: var(--sidebar-width);
+      background: var(--color-navy);
+      color: var(--text-inverse);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 16px;
+      border-right: 1px solid var(--color-navy-border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 50;
+    }
+
+    .main-canvas {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      min-width: 0;
+    }
+
+    /* Master Sidebar Components */
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--color-navy-border);
+      margin-bottom: 20px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+      flex-shrink: 0;
+    }
+
+    .brand-text h1 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .brand-text p {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: #7dd3fc;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .menu-item a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: all 0.15s ease;
+      position: relative;
+    }
+
+    .menu-item a:hover {
+      background: var(--color-navy-light);
+      color: #ffffff;
+    }
+
+    .menu-item.active a {
+      background: var(--color-primary);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    }
+
+    .menu-item.active a::before {
+      content: '';
+      position: absolute;
+      left: -16px;
+      top: 6px;
+      bottom: 6px;
+      width: 4px;
+      border-radius: 0 4px 4px 0;
+      background: #38bdf8;
+    }
+
+    .menu-item.active .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1;
+    }
+
+    .sidebar-footer-menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      border-top: 1px solid var(--color-navy-border);
+      padding-top: 16px;
+      margin-top: 16px;
+    }
+
+    .sidebar-footer-menu a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .sidebar-footer-menu a:hover {
+      color: #ffffff;
+      background: var(--color-navy-light);
+    }
+
+    /* Top Header Bar */
+    .top-header {
+      height: var(--header-height);
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex: 1;
+      max-width: 650px;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .breadcrumb-separator {
+      color: var(--text-subtle);
+      font-size: 14px;
+    }
+
+    .breadcrumb-current {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .header-search {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .header-search input {
+      width: 100%;
+      background: var(--bg-subtle);
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 8px 14px 8px 36px;
+      font-size: 13px;
+      color: var(--text-main);
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .header-search input:focus {
+      background: #ffffff;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    .header-search .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 18px;
+      pointer-events: none;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-action-btn {
+      position: relative;
+      background: none;
+      border: 1px solid var(--border-color);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .header-action-btn:hover {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      border-color: var(--border-darker);
+    }
+
+    .header-badge-count {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: #ef4444;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 700;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #ffffff;
+    }
+
+    .user-profile-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 8px 4px 6px;
+      border-radius: 30px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .user-profile-btn:hover {
+      border-color: var(--border-darker);
+      background: var(--bg-subtle);
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.05em;
+    }
+
+    .user-info {
+      text-align: left;
+      line-height: 1.2;
+    }
+
+    .user-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: block;
+    }
+
+    .user-role {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .user-dropdown-icon {
+      color: var(--text-muted);
+      font-size: 18px;
+    }
+
+    /* Body Workspace Area */
+    .workspace-area {
+      padding: 28px 32px 40px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Page Title Bar */
+    .page-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .page-headline h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+    }
+
+    .page-headline p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .page-action-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      border-color: var(--border-color);
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-outline:hover {
+      background: var(--bg-subtle);
+      border-color: var(--border-darker);
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #ffffff;
+      box-shadow: 0 1px 2px rgba(2, 132, 199, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    }
+
+    .btn-sm {
+      padding: 7px 12px;
+      font-size: 12.5px;
+      border-radius: 6px;
+    }
+
+    .btn-xs {
+      padding: 5px 10px;
+      font-size: 11.5px;
+      border-radius: 6px;
+    }
+
+    .btn-danger-ghost {
+      background: transparent;
+      color: #dc2626;
+      border-color: transparent;
+    }
+
+    .btn-danger-ghost:hover {
+      background: #fee2e2;
+    }
+
+    /* Two-Column Workspace Layout */
+    .workspace-split {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Left Sub-Navigation Sidebar */
+    .subnav-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: var(--shadow-card);
+      position: sticky;
+      top: 88px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .subnav-header-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      padding: 0 8px;
+    }
+
+    .subnav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .subnav-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: transparent;
+      border: 1px solid transparent;
+      text-align: left;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.15s ease;
+      font-family: var(--font-main);
+    }
+
+    .subnav-btn:hover {
+      background: var(--bg-subtle);
+    }
+
+    .subnav-btn.active {
+      background: var(--color-primary-light);
+      border-color: #bae6fd;
+    }
+
+    .subnav-btn-icon {
+      font-size: 18px;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .subnav-btn-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .subnav-btn-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .subnav-btn-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .subnav-btn.active .subnav-btn-title {
+      color: var(--color-primary-hover);
+    }
+
+    .subnav-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 12px;
+      background: #e2e8f0;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .subnav-badge.live-tag {
+      background: var(--badge-green-bg);
+      color: var(--badge-green-text);
+      border: 1px solid var(--badge-green-border);
+    }
+
+    .subnav-badge.unread-tag {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }
+
+    .subnav-badge.accent-tag {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+
+    .subnav-btn-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Sub-nav Stats Card at bottom */
+    .subnav-status-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #047857;
+    }
+
+    .live-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 2px #a7f3d0;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+    }
+
+    .status-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Right Column: Active Workspace Cards */
+    .tab-content {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .tab-content.active {
+      display: flex;
+    }
+
+    .section-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: #ffffff;
+    }
+
+    .section-header-title h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .section-header-title p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .section-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    /* Data Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .clean-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .clean-table th {
+      background: #f8fafc;
+      padding: 12px 18px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .clean-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    .clean-table tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    .clean-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .font-mono {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .title-primary {
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    .title-secondary {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.3;
+      max-width: 440px;
+    }
+
+    /* Badges & Pills */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 600;
+      line-height: 1;
+      width: fit-content;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .badge-live {
+      background: var(--badge-green-bg);
+      color: var(--badge-green-text);
+      border: 1px solid var(--badge-green-border);
+    }
+    .badge-live .badge-dot { background: #059669; }
+
+    .badge-draft {
+      background: var(--badge-amber-bg);
+      color: var(--badge-amber-text);
+      border: 1px solid var(--badge-amber-border);
+    }
+    .badge-draft .badge-dot { background: #d97706; }
+
+    .cohort-pill {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 11.5px;
+      font-weight: 600;
+      border: 1px solid #e2e8f0;
+    }
+
+    .author-pill {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: #f8fafc;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      display: inline-block;
+    }
+
+    /* Custom Switch Toggle */
+    .visibility-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .toggle-track {
+      position: relative;
+      width: 36px;
+      height: 20px;
+      background: #cbd5e1;
+      border-radius: 20px;
+      transition: background 0.2s;
+    }
+
+    .toggle-thumb {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: #ffffff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .visibility-toggle input {
+      display: none;
+    }
+
+    .visibility-toggle input:checked + .toggle-track {
+      background: #0284c7;
+    }
+
+    .visibility-toggle input:checked + .toggle-track .toggle-thumb {
+      transform: translateX(16px);
+    }
+
+    .toggle-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    /* Table & Section Footer */
+    .section-footer {
+      padding: 14px 24px;
+      border-top: 1px solid var(--border-color);
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    .pager-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    /* Form Controls */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-row-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 13px;
+      color: var(--text-main);
+      font-family: var(--font-main);
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    .form-textarea {
+      resize: vertical;
+    }
+
+    /* Tag Chips & Distribution in Modal */
+    .tag-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: #f1f5f9;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+
+    .tag-chip .remove-tag {
+      cursor: pointer;
+      color: #64748b;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .tag-chip .remove-tag:hover {
+      color: #dc2626;
+    }
+
+    .add-tag-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      background: #ffffff;
+      color: var(--color-primary);
+      border: 1px dashed #0284c7;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .add-tag-btn:hover {
+      background: var(--color-primary-light);
+    }
+
+    .distribution-checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .distribution-checkbox-label input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      border-radius: 4px;
+      accent-color: var(--color-primary);
+      cursor: pointer;
+    }
+
+    /* Editor Modal Dedicated Styles */
+    #article-editor-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(10, 25, 47, 0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .editor-modal-container {
+      background: #ffffff;
+      width: 100%;
+      max-width: 900px;
+      max-height: 94vh;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+      border: 1px solid #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.97) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .editor-modal-header {
+      padding: 16px 24px;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .editor-modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: #faf9fc;
+    }
+
+    .editor-modal-footer {
+      padding: 14px 24px;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .editor-section-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .editor-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #002d4b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .editor-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 7px 10px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      flex-wrap: wrap;
+    }
+
+    .toolbar-btn {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      background: transparent;
+      border-radius: 4px;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .toolbar-btn:hover {
+      background: #e2e8f0;
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+
+    .toolbar-btn.active {
+      background: #e0f2fe;
+      border-color: #bae6fd;
+      color: #0284c7;
+    }
+
+    .toolbar-btn .material-symbols-outlined {
+      font-size: 18px;
+    }
+
+    .toolbar-select {
+      height: 28px;
+      padding: 0 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      background: #ffffff;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .toolbar-divider {
+      height: 18px;
+      width: 1px;
+      background: #cbd5e1;
+      margin: 0 3px;
+    }
+
+    .segmented-control {
+      display: flex;
+      background: #f1f5f9;
+      padding: 3px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      width: 100%;
+    }
+
+    .segmented-btn {
+      flex: 1;
+      border: none;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 6px;
+      background: transparent;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .segmented-btn.active {
+      background: #002d4b;
+      color: #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+<body>
+<!-- LEFT MASTER SIDEBAR (Fixed 250px, Navy Theme) -->
+<aside class="master-sidebar" id="master-sidebar">
+<div>
+<!-- Brand Logo & App Label -->
+<div class="sidebar-brand">
+<div class="brand-icon">
+<span class="material-symbols-outlined">local_hospital</span>
+</div>
+<div class="brand-text">
+<h1>NANMS Control</h1>
+<p>SECURE ADMIN ROOM</p>
+</div>
+</div>
+<!-- Navigation Menu -->
+<nav>
+<ul class="sidebar-menu">
+<li class="menu-item">
+<a href="#">
+<span class="material-symbols-outlined">hub</span>
+<span>Association Hub</span>
+</a>
+</li>
+<li class="menu-item">
+<a href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<!-- Active Portfolio Nav -->
+<li class="menu-item active">
+<a href="#">
+<span class="material-symbols-outlined">work</span>
+<span>Portfolio</span>
+</a>
+</li>
+<li class="menu-item">
+<a href="#">
+<span class="material-symbols-outlined">newspaper</span>
+<span>News Control</span>
+</a>
+</li>
+<li class="menu-item">
+<a href="#">
+<span class="material-symbols-outlined">quiz</span>
+<span>Quizzer Admin</span>
+</a>
+</li>
+<li class="menu-item">
+<a href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Member Monitoring</span>
+</a>
+</li>
+<li class="menu-item">
+<a href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>System Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+<!-- Sidebar Footer Nav -->
+<ul class="sidebar-footer-menu">
+<li class="menu-item">
+<a href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Support</span>
+</a>
+</li>
+<li class="menu-item">
+<a href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</li>
+</ul>
+</aside>
+<!-- RIGHT MAIN CONTENT AREA -->
+<div class="main-canvas">
+<!-- Top Header Bar -->
+<header class="top-header">
+<div class="header-left">
+<div class="breadcrumb">
+<span>Control Room</span>
+<span class="breadcrumb-separator">&gt;</span>
+<span class="breadcrumb-current">Portfolio Manager</span>
+</div>
+<div class="header-search">
+<span class="material-symbols-outlined search-icon">search</span>
+<input placeholder="Search portal assets, records, or inquiries..." type="text"/>
+</div>
+</div>
+<div class="header-right">
+<button class="header-action-btn" title="System Notifications">
+<span class="material-symbols-outlined">notifications</span>
+<span class="header-badge-count">3</span>
+</button>
+<button class="header-action-btn" title="Security &amp; Compliance Shield">
+<span class="material-symbols-outlined">shield</span>
+</button>
+<!-- User Profile Dropdown Badge -->
+<div class="user-profile-btn">
+<div class="user-avatar">AB</div>
+<div class="user-info">
+<span class="user-name">Dr. Aminu Bello</span>
+<span class="user-role">Super Administrator</span>
+</div>
+<span class="material-symbols-outlined user-dropdown-icon">expand_more</span>
+</div>
+</div>
+</header>
+<!-- Page Body Workspace -->
+<main class="workspace-area">
+<!-- Page Headline Row -->
+<div class="page-header-row">
+<div class="page-headline">
+<h2>Portfolio Manager: Association Digital Assets &amp; Pages</h2>
+<p>Manage public-facing association portal contents, stakeholder directories, and communication touchpoints.</p>
+</div>
+<div class="page-action-group">
+<button class="btn btn-outline" onclick="alert('Opening live preview portal in modal...')">
+<span class="material-symbols-outlined">open_in_new</span>
+<span>View Live Portal</span>
+</button>
+<button class="btn btn-primary" onclick="alert('All changes successfully synchronized across the portal.')">
+<span class="material-symbols-outlined">save</span>
+<span>Save Changes</span>
+</button>
+</div>
+</div>
+<!-- Two-Column Layout (280px Sub-nav + Active Section Workspace) -->
+<div class="workspace-split">
+<!-- A. LEFT SUB-NAVIGATION SIDEBAR -->
+<div class="subnav-card">
+<div class="subnav-header-label">Portfolio Controls</div>
+<div class="subnav-list">
+<!-- Tab Link 1: News -->
+<button class="subnav-btn active" onclick="switchTab('news', this)">
+<span class="subnav-btn-icon">📰</span>
+<div class="subnav-btn-body">
+<div class="subnav-btn-head">
+<span class="subnav-btn-title">News &amp; Press</span>
+<span class="subnav-badge">142</span>
+</div>
+<div class="subnav-btn-desc">Articles, editorial feeds</div>
+</div>
+</button>
+<!-- Tab Link 2: Patrons -->
+<button class="subnav-btn" onclick="switchTab('patrons', this)">
+<span class="subnav-btn-icon">🎖️</span>
+<div class="subnav-btn-body">
+<div class="subnav-btn-head">
+<span class="subnav-btn-title">Patrons &amp; Board</span>
+<span class="subnav-badge accent-tag">18</span>
+</div>
+<div class="subnav-btn-desc">Executive &amp; Royal patrons</div>
+</div>
+</button>
+<!-- Tab Link 3: Alumni -->
+<button class="subnav-btn" onclick="switchTab('alumni', this)">
+<span class="subnav-btn-icon">🎓</span>
+<div class="subnav-btn-body">
+<div class="subnav-btn-head">
+<span class="subnav-btn-title">Alumni Directory</span>
+<span class="subnav-badge">1,420</span>
+</div>
+<div class="subnav-btn-desc">Graduates, mentors, doctors</div>
+</div>
+</button>
+<!-- Tab Link 4: Contact -->
+<button class="subnav-btn" onclick="switchTab('contact', this)">
+<span class="subnav-btn-icon">✉️</span>
+<div class="subnav-btn-body">
+<div class="subnav-btn-head">
+<span class="subnav-btn-title">Contact &amp; Inquiries</span>
+<span class="subnav-badge unread-tag">12 unread</span>
+</div>
+<div class="subnav-btn-desc">Secretariat info &amp; dispatch</div>
+</div>
+</button>
+<!-- Tab Link 5: Home Hero -->
+<button class="subnav-btn" onclick="switchTab('hero', this)">
+<span class="subnav-btn-icon">🌐</span>
+<div class="subnav-btn-body">
+<div class="subnav-btn-head">
+<span class="subnav-btn-title">Home Hero &amp; Vision</span>
+<span class="subnav-badge live-tag">Live</span>
+</div>
+<div class="subnav-btn-desc">Tagline &amp; hero banners</div>
+</div>
+</button>
+</div>
+<!-- Quick Sync Stats Box -->
+<div class="subnav-status-box">
+<div class="status-row">
+<span class="live-pulse"></span>
+<span>Portal Sync Status: 100% Live</span>
+</div>
+<div class="status-meta">Last updated: 14 mins ago by Dr. Bello</div>
+</div>
+</div>
+<!-- B. RIGHT COLUMN (Tab-switched Interactive Workspace) -->
+<div class="workspace-views">
+<!-- TAB 1: News & Press Releases Control -->
+<div class="tab-content active" id="tab-news"><div class="section-card"><div class="section-header" style="flex-wrap: wrap; gap: 16px;"><div class="section-header-title"><h3>News &amp; Editorial Content Manager</h3><p>Curate and publish articles, manage categories, featured feeds, and live search for the public News &amp; Updates portal</p></div><div class="section-header-actions"><button class="btn btn-sm btn-outline"><span class="material-symbols-outlined">tune</span><span>Category &amp; Tag Manager</span></button><button class="btn btn-sm btn-primary" onclick="document.getElementById('article-editor-modal').style.display = 'flex'"><span class="material-symbols-outlined">add_circle</span><span>+ Create New Article</span></button></div></div><div style="padding: 20px 24px; background: #fafbfc; border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 16px;"><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;"><div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;"><div><div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">Portal Endpoint</div><div style="font-weight: 700; font-size: 13.5px; color: var(--color-primary); margin-top: 2px;">nanms.org.ng/news</div></div><span class="badge badge-live"><span class="badge-dot"></span>Live Sync</span></div><div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;"><div><div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">Published Articles</div><div style="font-weight: 800; font-size: 20px; color: var(--text-main); margin-top: 2px;">142</div></div><span class="material-symbols-outlined" style="color: #059669; font-size: 24px;">article</span></div><div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;"><div><div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">Drafts &amp; In Review</div><div style="font-weight: 800; font-size: 20px; color: #b45309; margin-top: 2px;">4</div></div><span class="material-symbols-outlined" style="color: #d97706; font-size: 24px;">edit_note</span></div><div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;"><div><div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">Active Categories</div><div style="font-weight: 800; font-size: 20px; color: var(--text-main); margin-top: 2px;">8</div></div><span class="material-symbols-outlined" style="color: var(--color-primary); font-size: 24px;">label</span></div><div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;"><div><div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">Public Search</div><div style="font-size: 12.5px; font-weight: 600; color: var(--text-main); margin-top: 2px;">Live Enabled</div></div><label class="visibility-toggle"><input checked="" type="checkbox"/><span class="toggle-track"><span class="toggle-thumb"></span></span></label></div></div><div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: space-between;"><div class="header-search" style="flex: 1; max-width: 440px;"><span class="material-symbols-outlined search-icon">search</span><input placeholder="Filter articles by title, author, category..." style="width: 100%; background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 14px 8px 36px; font-size: 13px; color: var(--text-main); outline: none;" type="text"/></div><div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;"><button class="cohort-pill" style="background: var(--color-primary-light); color: var(--color-primary-hover); border-color: #bae6fd; cursor: pointer;">All Categories</button><button class="cohort-pill" style="background: #ffffff; cursor: pointer;">Health Initiative (5)</button><button class="cohort-pill" style="background: #ffffff; cursor: pointer;">Campus News (14)</button><button class="cohort-pill" style="background: #ffffff; cursor: pointer;">Academic Briefings (3)</button><button class="cohort-pill" style="background: #ffffff; cursor: pointer;">Announcements (6)</button><div style="height: 20px; width: 1px; background: var(--border-color); margin: 0 4px;"></div><button class="cohort-pill" style="background: #f1f5f9; color: var(--text-muted); cursor: pointer;">Status: All (146)</button></div></div></div><div class="table-container"><table class="clean-table"><thead><tr><th style="width: 60px;">ID</th><th>Article Title &amp; Excerpt</th><th>Category Taxonomy</th><th>Publish Date</th><th>Author Desk</th><th>Grid / Widget Status</th><th>Status</th><th style="text-align: right;">Actions</th></tr></thead><tbody><tr><td class="font-mono">#A-2401</td><td><div class="title-primary">Annual Medical Outreach 2024</div><div class="title-secondary">Empowering local healthcare clinics through medical screenings, diagnostic checks, and essential drug distribution...</div></td><td><span class="cohort-pill" style="background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe;">Health Initiative</span></td><td class="font-mono">Oct 12, 2024</td><td><span class="author-pill">Secretariat Press Desk</span></td><td><span class="badge" style="background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0;"><span class="material-symbols-outlined" style="font-size: 14px; margin-right: 3px;">view_compact</span>Featured Grid (Pos 1)</span></td><td><span class="badge badge-live"><span class="badge-dot"></span>Live</span></td><td style="text-align: right; white-space: nowrap;"><button class="btn btn-xs btn-outline" title="Edit Article"><span class="material-symbols-outlined">edit</span> Edit</button><button class="btn btn-xs btn-outline" title="Preview Live on nanms.org.ng"><span class="material-symbols-outlined">visibility</span></button><button class="btn btn-xs btn-danger-ghost" title="Unpublish"><span class="material-symbols-outlined">archive</span></button></td></tr><tr><td class="font-mono">#A-2402</td><td><div class="title-primary">Senior-Junior Mentorship Program Opening</div><div class="title-secondary">Bridging the transition from pre-clinical to bedside medicine through structured peer guidance and clerkship coaching...</div></td><td><span class="cohort-pill" style="background: #fdf2f8; color: #9d174d; border-color: #fbcfe8;">Campus News</span></td><td class="font-mono">Oct 08, 2024</td><td><span class="author-pill">Academic Committee</span></td><td><span class="badge" style="background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0;"><span class="material-symbols-outlined" style="font-size: 14px; margin-right: 3px;">view_compact</span>Featured Grid (Pos 2)</span></td><td><span class="badge badge-live"><span class="badge-dot"></span>Live</span></td><td style="text-align: right; white-space: nowrap;"><button class="btn btn-xs btn-outline" title="Edit Article"><span class="material-symbols-outlined">edit</span> Edit</button><button class="btn btn-xs btn-outline" title="Preview Live"><span class="material-symbols-outlined">visibility</span></button><button class="btn btn-xs btn-danger-ghost" title="Unpublish"><span class="material-symbols-outlined">archive</span></button></td></tr><tr><td class="font-mono">#A-2403</td><td><div class="title-primary">Partnership with State Ministry of Health</div><div class="title-secondary">A breakthrough bilateral alliance establishing direct fellowship training pipelines and subsidized clinical elective rotations...</div></td><td><span class="cohort-pill" style="background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe;">Health Initiative</span></td><td class="font-mono">Oct 12, 2024</td><td><span class="author-pill">Public Relations</span></td><td><span class="badge" style="background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0;"><span class="material-symbols-outlined" style="font-size: 14px; margin-right: 3px;">view_compact</span>Featured Grid (Pos 3)</span></td><td><span class="badge badge-live"><span class="badge-dot"></span>Live</span></td><td style="text-align: right; white-space: nowrap;"><button class="btn btn-xs btn-outline" title="Edit Article"><span class="material-symbols-outlined">edit</span> Edit</button><button class="btn btn-xs btn-outline" title="Preview Live"><span class="material-symbols-outlined">visibility</span></button><button class="btn btn-xs btn-danger-ghost" title="Unpublish"><span class="material-symbols-outlined">archive</span></button></td></tr><tr><td class="font-mono">#A-2404</td><td><div class="title-primary">Renovation of Clinical Skills Laboratory</div><div class="title-secondary">Upgraded simulation manikins, modernized surgical OSCE suites, and interactive anatomy telemetry unveiled at main campus...</div></td><td><span class="cohort-pill" style="background: #fdf2f8; color: #9d174d; border-color: #fbcfe8;">Campus News</span></td><td class="font-mono">Oct 05, 2024</td><td><span class="author-pill">Facilities Desk</span></td><td><span class="badge" style="background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0;"><span class="material-symbols-outlined" style="font-size: 14px; margin-right: 3px;">view_compact</span>Featured Grid (Pos 4)</span></td><td><span class="badge badge-live"><span class="badge-dot"></span>Live</span></td><td style="text-align: right; white-space: nowrap;"><button class="btn btn-xs btn-outline" title="Edit Article"><span class="material-symbols-outlined">edit</span> Edit</button><button class="btn btn-xs btn-outline" title="Preview Live"><span class="material-symbols-outlined">visibility</span></button><button class="btn btn-xs btn-danger-ghost" title="Unpublish"><span class="material-symbols-outlined">archive</span></button></td></tr><tr><td class="font-mono">#A-2398</td><td><div class="title-primary">Exam Schedules Released for Clinical Years</div><div class="title-secondary">Official MB Part II &amp; Part III rotation timetables, invigilation guidelines, and registration verification deadlines...</div></td><td><span class="cohort-pill" style="background: #f8fafc; color: #475569; border-color: #cbd5e1;">Recent Posts / Bulletin</span></td><td class="font-mono">Oct 20, 2024</td><td><span class="author-pill">Exam Board</span></td><td><span class="badge" style="background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe;"><span class="material-symbols-outlined" style="font-size: 14px; margin-right: 3px;">vertical_split</span>Sidebar Widget (Pos 1)</span></td><td><span class="badge badge-live"><span class="badge-dot"></span>Live</span></td><td style="text-align: right; white-space: nowrap;"><button class="btn btn-xs btn-outline" title="Edit Article"><span class="material-symbols-outlined">edit</span> Edit</button><button class="btn btn-xs btn-outline" title="Preview Live"><span class="material-symbols-outlined">visibility</span></button><button class="btn btn-xs btn-danger-ghost" title="Unpublish"><span class="material-symbols-outlined">archive</span></button></td></tr><tr><td class="font-mono">#A-2395</td><td><div class="title-primary">Executive Council Meeting Summary</div><div class="title-secondary">Resolutions passed on welfare grants, hostel renovation subvention, and preparations for annual medical dinner banquet...</div></td><td><span class="cohort-pill" style="background: #f8fafc; color: #475569; border-color: #cbd5e1;">Recent Posts / Bulletin</span></td><td class="font-mono">Oct 15, 2024</td><td><span class="author-pill">General Secretary</span></td><td><span class="badge" style="background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe;"><span class="material-symbols-outlined" style="font-size: 14px; margin-right: 3px;">vertical_split</span>Sidebar Widget (Pos 2)</span></td><td><span class="badge badge-live"><span class="badge-dot"></span>Live</span></td><td style="text-align: right; white-space: nowrap;"><button class="btn btn-xs btn-outline" title="Edit Article"><span class="material-symbols-outlined">edit</span> Edit</button><button class="btn btn-xs btn-outline" title="Preview Live"><span class="material-symbols-outlined">visibility</span></button><button class="btn btn-xs btn-danger-ghost" title="Unpublish"><span class="material-symbols-outlined">archive</span></button></td></tr><tr><td class="font-mono">#A-2390</td><td><div class="title-primary">Inter-University Medical Quizzer Call for Papers &amp; Delegates</div><div class="title-secondary">Official notification for northern regional medical schools competition taking place in Minna this November...</div></td><td><span class="cohort-pill" style="background: #fef3c7; color: #92400e; border-color: #fde68a;">Academic</span></td><td class="font-mono">Pending</td><td><span class="author-pill">Quizzer Committee</span></td><td><span style="font-size: 11px; color: var(--text-muted); font-style: italic;">Draft — Not Displayed</span></td><td><span class="badge badge-draft"><span class="badge-dot"></span>Draft</span></td><td style="text-align: right; white-space: nowrap;"><button class="btn btn-xs btn-primary" title="Review Draft"><span class="material-symbols-outlined">publish</span> Review</button><button class="btn btn-xs btn-outline" title="Edit Draft"><span class="material-symbols-outlined">edit</span></button><button class="btn btn-xs btn-danger-ghost" title="Delete"><span class="material-symbols-outlined">delete</span></button></td></tr></tbody></table></div><div style="padding: 20px 24px; background: #fafbfc; border-top: 1px solid var(--border-color); display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"><div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 14px 16px;"><div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;"><span style="font-size: 13px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px;"><span class="material-symbols-outlined" style="font-size: 18px; color: var(--color-primary);">view_sidebar</span> Public Sidebar Configurator</span><span class="badge badge-live" style="font-size: 10.5px;">Active</span></div><div style="font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px;">Synchronizes categories taxonomy counter &amp; recent posts ticker on nanms.org.ng/news</div><div style="display: flex; gap: 10px; flex-wrap: wrap;"><div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 10px; font-size: 12px; display: flex; align-items: center; gap: 6px;"><span style="font-weight: 600;">Health Initiative:</span><span class="font-mono" style="color: var(--color-primary); font-weight: 700;">5 articles</span></div><div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 10px; font-size: 12px; display: flex; align-items: center; gap: 6px;"><span style="font-weight: 600;">Campus News:</span><span class="font-mono" style="color: var(--color-primary); font-weight: 700;">14 articles</span></div><div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 10px; font-size: 12px; display: flex; align-items: center; gap: 6px;"><span style="font-weight: 600;">Recent Ticker:</span><span style="color: #059669; font-weight: 600;">2 items</span></div></div></div><div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 14px 16px;"><div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;"><span style="font-size: 13px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px;"><span class="material-symbols-outlined" style="font-size: 18px; color: var(--color-primary);">grid_view</span> Pagination &amp; Public Grid Layout</span><button class="btn btn-xs btn-outline" style="font-size: 11.5px;">Configure</button></div><div style="font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px;">Controls public news portal pagination bounds and cards distribution</div><div style="display: flex; gap: 10px; align-items: center; font-size: 12px;"><div style="display: flex; align-items: center; gap: 6px;"><span style="color: var(--text-muted);">Display per page:</span><span style="font-weight: 700; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-color);">4 items</span></div><div style="display: flex; align-items: center; gap: 6px;"><span style="color: var(--text-muted);">Layout pattern:</span><span style="font-weight: 700; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-color);">2-Column Grid</span></div><div style="display: flex; align-items: center; gap: 6px;"><span style="color: var(--text-muted);">Total pages:</span><span style="font-weight: 700;">36 pages</span></div></div></div></div><div class="section-footer"><span>Showing 1 – 7 of 142 published articles (Page 1 of 36)</span><div class="pager-group"><button class="btn btn-xs btn-outline" disabled="">Previous</button><button class="btn btn-xs btn-primary" style="padding: 5px 9px;">1</button><button class="btn btn-xs btn-outline" style="padding: 5px 9px;">2</button><button class="btn btn-xs btn-outline" style="padding: 5px 9px;">3</button><button class="btn btn-xs btn-outline">Next</button></div></div></div></div>
+<!-- TAB 2: Patrons & Advisory Board Control -->
+<div class="tab-content" id="tab-patrons">
+<div class="section-card"><div class="section-header" style="flex-wrap: wrap; gap: 14px;"><div class="section-header-title"><h3>Patrons &amp; Advisory Board Directory</h3><p>Manage executive grand patrons, chief medical directors, royal dignitaries, and institutional advisory council profiles.</p></div><div class="section-header-actions"><button class="btn btn-sm btn-outline"><span class="material-symbols-outlined">low_priority</span><span>Reorder Hierarchy</span></button><button class="btn btn-sm btn-primary"><span class="material-symbols-outlined">person_add</span><span>+ Appoint Patron</span></button></div></div><div style="padding: 16px 24px; background: #fafbfc; border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 12px;"><div style="display: flex; gap: 12px; align-items: center;"><div class="header-search" style="max-width: 420px; flex: 1;"><span class="material-symbols-outlined search-icon">search</span><input placeholder="Search patrons by name, title, or council..." style="width: 100%; background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 14px 8px 36px; font-size: 13px; color: var(--text-main); outline: none;" type="text"/></div></div><div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;"><button class="cohort-pill" style="background: var(--color-primary-light); color: var(--color-primary-hover); border-color: #bae6fd; cursor: pointer;">All Patrons (18)</button><button class="cohort-pill" style="background: #ffffff; cursor: pointer;">Grand Patrons (3)</button><button class="cohort-pill" style="background: #ffffff; cursor: pointer;">Board of Trustees (5)</button><button class="cohort-pill" style="background: #ffffff; cursor: pointer;">Royal Custodians (4)</button><button class="cohort-pill" style="background: #ffffff; cursor: pointer;">Clinical Advisors (6)</button></div></div><div class="patron-cards-grid"><div class="patron-card"><div class="patron-card-header"><div class="patron-avatar-initials">HB</div><span class="badge badge-live"><span class="badge-dot"></span>Active Patron</span></div><div class="patron-info"><h4>His Excellency, Mohammed Umar Bago</h4><div class="patron-role-tag">Grand Patron &amp; State Executive</div><p class="patron-institution">Executive Governor, Niger State Government</p></div><div class="patron-meta-box"><div class="meta-row"><span class="meta-lbl">Council Tenure:</span><span class="meta-val">2023 - 2027</span></div><div class="meta-row"><span class="meta-lbl">Official Status:</span><span class="meta-val endorsed">Full Charter Certified</span></div></div><div class="patron-actions-row"><button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">edit</span> Edit Profile</button><button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">visibility</span> View Citation</button></div></div><div class="patron-card"><div class="patron-card-header"><div class="patron-avatar-initials">MA</div><span class="badge badge-live"><span class="badge-dot"></span>Active Patron</span></div><div class="patron-info"><h4>Prof. Muhammad Sanusi Abubakar</h4><div class="patron-role-tag">Chief Medical Director &amp; Senior Fellow</div><p class="patron-institution">Federal Medical Centre / Teaching Hospital, Bida</p></div><div class="patron-meta-box"><div class="meta-row"><span class="meta-lbl">Council Tenure:</span><span class="meta-val">2021 - Present</span></div><div class="meta-row"><span class="meta-lbl">Official Status:</span><span class="meta-val endorsed">Honorary Council Fellow</span></div></div><div class="patron-actions-row"><button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">edit</span> Edit Profile</button><button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">visibility</span> View Citation</button></div></div><div class="patron-card"><div class="patron-card-header"><div class="patron-avatar-initials">YA</div><span class="badge badge-live"><span class="badge-dot"></span>Active Patron</span></div><div class="patron-info"><h4>His Royal Highness, Dr. Yahaya Abubakar CFR</h4><div class="patron-role-tag">Royal Grand Patron (Etsu Nupe)</div><p class="patron-institution">Chairman, Niger State Council of Traditional Rulers</p></div><div class="patron-meta-box"><div class="meta-row"><span class="meta-lbl">Council Tenure:</span><span class="meta-val">Life Patron</span></div><div class="meta-row"><span class="meta-lbl">Official Status:</span><span class="meta-val endorsed">Permanent Royal Custodian</span></div></div><div class="patron-actions-row"><button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">edit</span> Edit Profile</button><button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">visibility</span> View Citation</button></div></div><div class="patron-card"><div class="patron-card-header"><div class="patron-avatar-initials">FK</div><span class="badge badge-draft"><span class="badge-dot"></span>Pending Ratification</span></div><div class="patron-info"><h4>Dr. Fatima Ibrahim Kontagora</h4><div class="patron-role-tag">Clinical Advisory Chairperson</div><p class="patron-institution">National Hospital Abuja / Pediatric Surgery Division</p></div><div class="patron-meta-box"><div class="meta-row"><span class="meta-lbl">Council Tenure:</span><span class="meta-val">Nominated (2024)</span></div><div class="meta-row"><span class="meta-lbl">Official Status:</span><span class="meta-val">Awaiting Ratification</span></div></div><div class="patron-actions-row"><button class="btn btn-xs btn-primary"><span class="material-symbols-outlined">check_circle</span> Review &amp; Confirm</button><button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">edit</span> Edit</button></div></div><div class="patron-card"><div class="patron-card-header"><div class="patron-avatar-initials">AA</div><span class="badge badge-live"><span class="badge-dot"></span>Active Patron</span></div><div class="patron-info"><h4>Gen. (Dr.) Abdulsalami Abubakar GCFR (Rtd.)</h4><div class="patron-role-tag">Distinguished Life Patron</div><p class="patron-institution">Former Head of State, Federal Republic of Nigeria</p></div><div class="patron-meta-box"><div class="meta-row"><span class="meta-lbl">Council Tenure:</span><span class="meta-val">Life Patron</span></div><div class="meta-row"><span class="meta-lbl">Official Status:</span><span class="meta-val endorsed">Honorary Patron</span></div></div><div class="patron-actions-row"><button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">edit</span> Edit Profile</button><button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">visibility</span> View Citation</button></div></div></div><div class="section-footer"><span>Showing 5 of 18 patron records</span><div class="pager-group"><button class="btn btn-xs btn-outline" disabled="">Previous</button><button class="btn btn-xs btn-outline">Next</button></div></div></div>
+</div>
+<!-- TAB 3: Alumni Directory & Network Control -->
+<div class="tab-content" id="tab-alumni">
+<div class="section-card">
+<div class="section-header">
+<div class="section-header-title">
+<h3>Alumni Directory &amp; Network Registry</h3>
+<p>Distinguished medical alumni, specialty fellowship records, and portal public registry visibility.</p>
+</div>
+<div class="section-header-actions">
+<button class="btn btn-sm btn-outline">
+<span class="material-symbols-outlined">download</span>
+<span>Export CSV</span>
+</button>
+<button class="btn btn-sm btn-outline">
+<span class="material-symbols-outlined">tune</span>
+<span>Cohort Filter</span>
+</button>
+<button class="btn btn-sm btn-primary">
+<span class="material-symbols-outlined">person_add</span>
+<span>Add Alumni Member</span>
+</button>
+</div>
+</div>
+<div class="table-container">
+<table class="clean-table">
+<thead>
+<tr>
+<th>Doctor Name</th>
+<th>MBBS Cohort</th>
+<th>Specialization</th>
+<th>Current Practice Hospital</th>
+<th>Portal Visibility</th>
+<th style="text-align: right;">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<div class="title-primary">Dr. Aliyu Musa Suleiman, FWACS</div>
+<div class="font-mono">Reg: ALUM-2015-084</div>
+</td>
+<td><span class="cohort-pill">Class of 2015</span></td>
+<td>Consultant Cardiothoracic Surgeon</td>
+<td>Ahmadu Bello Univ. Teaching Hosp. (ABUTH)</td>
+<td>
+<label class="visibility-toggle">
+<input checked="" type="checkbox"/>
+<span class="toggle-track"><span class="toggle-thumb"></span></span>
+<span class="toggle-label">Public</span>
+</label>
+</td>
+<td style="text-align: right;">
+<button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">badge</span> Profile</button>
+</td>
+</tr>
+<tr>
+<td>
+<div class="title-primary">Dr. Zainab Kolo Mohammed</div>
+<div class="font-mono">Reg: ALUM-2018-129</div>
+</td>
+<td><span class="cohort-pill">Class of 2018</span></td>
+<td>Senior Registrar (Obstetrics &amp; Gynaecology)</td>
+<td>National Hospital Abuja</td>
+<td>
+<label class="visibility-toggle">
+<input checked="" type="checkbox"/>
+<span class="toggle-track"><span class="toggle-thumb"></span></span>
+<span class="toggle-label">Public</span>
+</label>
+</td>
+<td style="text-align: right;">
+<button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">badge</span> Profile</button>
+</td>
+</tr>
+<tr>
+<td>
+<div class="title-primary">Dr. Victor Chukwuemeka Ofor</div>
+<div class="font-mono">Reg: ALUM-2019-041</div>
+</td>
+<td><span class="cohort-pill">Class of 2019</span></td>
+<td>Neurosurgery Fellow (ST4 Specialist)</td>
+<td>Imperial College Healthcare NHS, London</td>
+<td>
+<label class="visibility-toggle">
+<input checked="" type="checkbox"/>
+<span class="toggle-track"><span class="toggle-thumb"></span></span>
+<span class="toggle-label">Public</span>
+</label>
+</td>
+<td style="text-align: right;">
+<button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">badge</span> Profile</button>
+</td>
+</tr>
+<tr>
+<td>
+<div class="title-primary">Dr. Aisha Haruna Tanko</div>
+<div class="font-mono">Reg: ALUM-2021-017</div>
+</td>
+<td><span class="cohort-pill">Class of 2021</span></td>
+<td>Internal Medicine Resident</td>
+<td>IBB Specialist Hospital, Minna</td>
+<td>
+<label class="visibility-toggle">
+<input type="checkbox"/>
+<span class="toggle-track"><span class="toggle-thumb"></span></span>
+<span class="toggle-label">Hidden</span>
+</label>
+</td>
+<td style="text-align: right;">
+<button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">badge</span> Profile</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section-footer">
+<span>Displaying 4 distinguished doctors of 1,420 registered alumni</span>
+<div class="pager-group">
+<button class="btn btn-xs btn-outline" disabled="">Previous</button>
+<button class="btn btn-xs btn-outline">Next</button>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB 4: Contact & Inquiries Control -->
+<div class="tab-content" id="tab-contact">
+<div class="contact-split-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+<!-- Left Panel: Secretariat Info Form -->
+<div class="section-card">
+<div class="section-header">
+<div class="section-header-title">
+<h3>Secretariat Office &amp; Dispatch Channels</h3>
+<p>Official public contact points, physical registry, hotline SLA</p>
+</div>
+<span class="material-symbols-outlined" style="color: var(--color-primary);">corporate_fare</span>
+</div>
+<div class="form-pane" style="padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+<div class="form-group">
+<label class="form-label">National Secretariat Physical Address</label>
+<input class="form-input" type="text" value="Plot 14, Paiko Road, Doctors Quarters Complex, Minna, Niger State, Nigeria"/>
+</div>
+<div class="form-row-2col">
+<div class="form-group">
+<label class="form-label">Official Email</label>
+<input class="form-input" type="email" value="secretariat@nanms.org.ng"/>
+</div>
+<div class="form-group">
+<label class="form-label">Hotline Telephone</label>
+<input class="form-input" type="text" value="+234 (0) 803 892 4190"/>
+</div>
+</div>
+<div class="form-group">
+<label class="form-label">Working Hours &amp; Operations Desk</label>
+<input class="form-input" type="text" value="Monday – Friday: 08:00 AM – 05:00 PM (WAT)"/>
+</div>
+<div class="form-group">
+<label class="form-label">Response SLA Protocol</label>
+<input class="form-input" type="text" value="Official inquiry response within 24 to 48 business hours"/>
+</div>
+<div style="padding-top: 8px;">
+<button class="btn btn-primary" onclick="alert('Secretariat contact coordinates saved successfully.')">
+<span class="material-symbols-outlined">save</span>
+<span>Update Office Info</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Panel: Incoming Inquiries Inbox -->
+<div class="section-card">
+<div class="section-header">
+<div class="section-header-title">
+<h3>Incoming Public Inquiries &amp; Feedback</h3>
+<p>Live messages submitted through public portal form</p>
+</div>
+<span class="badge unread-tag">12 Unread</span>
+</div>
+<div class="inbox-list" style="display: flex; flex-direction: column;">
+<!-- Inquiry 1 -->
+<div class="inbox-item unread" style="padding: 16px 20px; border-bottom: 1px solid var(--border-color); background: #f0f9ff; border-left: 3px solid #0284c7;">
+<div class="inbox-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+<span class="inbox-sender" style="font-size: 13.5px; font-weight: 700; color: var(--text-main);">Dr. Ibrahim Tanko (Zaria Chapter)</span>
+<span class="inbox-time" style="font-size: 11.5px; color: var(--text-muted);">18 mins ago</span>
+</div>
+<div class="inbox-subject" style="font-size: 13px; font-weight: 600; color: #0369a1; margin-bottom: 4px;">Request for Verification of MBBS Certificate &amp; Good Standing</div>
+<p class="inbox-preview" style="font-size: 12.5px; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px;">We are currently processing an urgent residency application for Dr. Aminu and require verified registrar verification stamp by Friday...</p>
+<div class="inbox-actions-row" style="display: flex; gap: 8px;">
+<button class="btn btn-xs btn-primary"><span class="material-symbols-outlined">reply</span> Reply</button>
+<button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">archive</span> Archive</button>
+</div>
+</div>
+<!-- Inquiry 2 -->
+<div class="inbox-item unread" style="padding: 16px 20px; border-bottom: 1px solid var(--border-color); background: #f0f9ff; border-left: 3px solid #0284c7;">
+<div class="inbox-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+<span class="inbox-sender" style="font-size: 13.5px; font-weight: 700; color: var(--text-main);">Malam Kabir Ndaliman</span>
+<span class="inbox-time" style="font-size: 11.5px; color: var(--text-muted);">2 hours ago</span>
+</div>
+<div class="inbox-subject" style="font-size: 13px; font-weight: 600; color: #0369a1; margin-bottom: 4px;">Sponsorship &amp; Host Community for Bida Health Outreach</div>
+<p class="inbox-preview" style="font-size: 12.5px; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px;">The community development association has officially approved logistical support and accommodation for 30 volunteer clinical officers...</p>
+<div class="inbox-actions-row" style="display: flex; gap: 8px;">
+<button class="btn btn-xs btn-primary"><span class="material-symbols-outlined">reply</span> Reply</button>
+<button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">archive</span> Archive</button>
+</div>
+</div>
+<!-- Inquiry 3 -->
+<div class="inbox-item" style="padding: 16px 20px;">
+<div class="inbox-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+<span class="inbox-sender" style="font-size: 13.5px; font-weight: 700; color: var(--text-main);">Federal Ministry of Health Liaison Desk</span>
+<span class="inbox-time" style="font-size: 11.5px; color: var(--text-muted);">Yesterday</span>
+</div>
+<div class="inbox-subject" style="font-size: 13px; font-weight: 600; color: #0369a1; margin-bottom: 4px;">Official Delegate Accreditation for 64th National Council on Health</div>
+<p class="inbox-preview" style="font-size: 12.5px; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px;">Forwarding formal accreditation documents for the upcoming 64th delegate convention session in Abuja...</p>
+<div class="inbox-actions-row" style="display: flex; gap: 8px;">
+<button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">visibility</span> View Message</button>
+<button class="btn btn-xs btn-outline"><span class="material-symbols-outlined">archive</span> Archive</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB 5: Home Hero & Vision Control -->
+<div class="tab-content" id="tab-hero">
+<div class="section-card">
+<div class="section-header">
+<div class="section-header-title">
+<h3>Home Hero &amp; Brand Vision Banner</h3>
+<p>Customize primary greeting, strategic taglines, background photography, and main portal CTAs.</p>
+</div>
+<button class="btn btn-sm btn-primary" onclick="alert('Homepage hero changes published live to public portal!')">
+<span class="material-symbols-outlined">publish</span>
+<span>Publish Hero Banner</span>
+</button>
+</div>
+<div class="hero-editor-pane" style="padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+<!-- Live Preview Banner Box -->
+<div class="live-preview-box" style="border: 1px solid #cbd5e1; border-radius: 10px; overflow: hidden; position: relative;">
+<span style="position: absolute; top: 12px; left: 12px; background: rgba(15, 23, 42, 0.85); color: #fff; font-size: 10.5px; font-weight: 700; padding: 4px 10px; border-radius: 6px; z-index: 10;">LIVE HERO PREVIEW</span>
+<div style="position: relative; height: 200px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #001f3f 0%, #002d5a 50%, #0369a1 100%); color: #ffffff; text-align: center; padding: 24px 32px;">
+<div style="position: relative; z-index: 5; max-width: 600px;">
+<div class="preview-headline" id="preview-title-display" style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">Strategic Global Oversight &amp; Excellence in Medicine</div>
+<div class="preview-subtext" id="preview-sub-display" style="font-size: 13px; color: #bae6fd; margin-bottom: 16px;">Fostering clinical distinction, ethical leadership, and healthcare equity across Niger State and Nigeria.</div>
+<div style="display: flex; gap: 10px; justify-content: center;">
+<a href="#" style="padding: 7px 16px; font-size: 12px; font-weight: 600; border-radius: 6px; background: #0284c7; color: #ffffff; text-decoration: none;">Explore Association Hub</a>
+<a href="#" style="padding: 7px 16px; font-size: 12px; font-weight: 600; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.4); color: #ffffff; background: rgba(255, 255, 255, 0.08); text-decoration: none;">View Alumni Registry</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Form Controls -->
+<div class="form-group">
+<label class="form-label">Hero Primary Headline</label>
+<input class="form-input" id="input-hero-title" oninput="updateHeroPreview()" type="text" value="Strategic Global Oversight &amp; Excellence in Medicine"/>
+</div>
+<div class="form-group">
+<label class="form-label">Hero Vision Subtext &amp; Mission Statement</label>
+<textarea class="form-textarea" id="input-hero-sub" oninput="updateHeroPreview()" rows="3">Fostering clinical distinction, ethical leadership, and healthcare equity across Niger State and Nigeria.</textarea>
+</div>
+<div class="form-group">
+<label class="form-label">Background Imagery Manager &amp; Asset Reference</label>
+<div style="display: flex; gap: 8px;">
+<input class="form-input font-mono" readonly="" style="flex: 1;" type="text" value="IMG_REF_9942_NET_MED_HERO.webp"/>
+<button class="btn btn-outline"><span class="material-symbols-outlined">upload</span> Upload New</button>
+<button class="btn btn-outline"><span class="material-symbols-outlined">photo_library</span> Media Library</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- FULLY VISIBLE & UNCLIPPED 'CREATE NEW ARTICLE' EDITOR MODAL -->
+<div id="article-editor-modal">
+<div class="editor-modal-container">
+<!-- Modal Header -->
+<div class="editor-modal-header">
+<div style="display: flex; align-items: center; gap: 14px;">
+<div style="width: 42px; height: 42px; border-radius: 8px; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 6px rgba(2, 132, 199, 0.15);">
+<span class="material-symbols-outlined" style="font-size: 24px;">post_add</span>
+</div>
+<div>
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+<h3 style="font-size: 17px; font-weight: 700; color: #002d4b; letter-spacing: -0.01em;">Create New Article</h3>
+<span class="badge badge-draft"><span class="badge-dot"></span>Draft Mode</span>
+<span style="font-size: 11px; font-family: var(--font-mono); background: #f1f5f9; color: #475569; padding: 2px 8px; border-radius: 12px; border: 1px solid #e2e8f0;">ID: #A-2405</span>
+</div>
+<div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+<p style="font-size: 12px; color: #64748b;">Draft and publish editorial communiqués, medical outreach bulletins, or campus announcements</p>
+<span style="color: #cbd5e1;">•</span>
+<span style="font-size: 11.5px; color: #059669; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
+<span class="badge-dot" style="background: #10b981;"></span> Autosaved 1 min ago
+            </span>
+</div>
+</div>
+</div>
+<button class="header-action-btn" onclick="document.getElementById('article-editor-modal').style.display='none'" style="width: 32px; height: 32px; border-radius: 6px;" title="Close Modal">
+<span class="material-symbols-outlined" style="font-size: 20px;">close</span>
+</button>
+</div>
+<!-- Scrollable Modal Content Body -->
+<div class="editor-modal-body">
+<!-- SECTION 1: Article Metadata & Placement -->
+<div class="editor-section-box">
+<div class="editor-section-title">
+<span class="material-symbols-outlined" style="color: #0284c7; font-size: 19px;">tune</span>
+<span>Section 1: Article Metadata &amp; Placement</span>
+</div>
+<div class="form-group">
+<label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+<span>Article Title <span style="color: #ef4444;">*</span></span>
+<span style="font-size: 11.5px; color: #64748b; font-weight: 500;">Max 120 chars</span>
+</label>
+<input class="form-input" style="font-size: 14.5px; font-weight: 600; color: #002d4b;" type="text" value="Annual General Assembly &amp; Clinical Symposium 2024"/>
+</div>
+<div class="form-row-2col">
+<div class="form-group">
+<label class="form-label">Category Taxonomy <span style="color: #ef4444;">*</span></label>
+<select class="form-input" style="cursor: pointer;">
+<option selected="">Health Initiative (Outreach &amp; Public Health)</option>
+<option>Campus News &amp; Student Affairs</option>
+<option>Academic Briefings &amp; Exam Bulletins</option>
+<option>Executive Council &amp; Resolutions</option>
+<option>Alumni &amp; Professional Fellowship</option>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label">Author Desk / Attribution <span style="color: #ef4444;">*</span></label>
+<select class="form-input" style="cursor: pointer;">
+<option selected="">Secretariat Press Desk</option>
+<option>Public Relations Directorate</option>
+<option>Academic &amp; Quizzer Board</option>
+<option>Office of the President</option>
+<option>Alumni Relations Unit</option>
+</select>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; align-items: end;">
+<div class="form-group">
+<label class="form-label">Public Endpoint Slug URL</label>
+<div style="display: flex; align-items: center; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden;">
+<span style="padding: 8px 12px; background: #e2e8f0; font-family: var(--font-mono); font-size: 11.5px; color: #475569; border-right: 1px solid #cbd5e1; white-space: nowrap;">nanms.org.ng/news/</span>
+<input style="flex: 1; border: none; background: transparent; padding: 8px 12px; font-family: var(--font-mono); font-size: 12px; color: #0284c7; outline: none; font-weight: 600;" type="text" value="annual-general-assembly-symposium-2024"/>
+</div>
+</div>
+<div class="form-group">
+<label class="form-label">Publication Mode</label>
+<div class="segmented-control">
+<button class="segmented-btn active" type="button">Draft</button>
+<button class="segmented-btn" type="button">Publish Now</button>
+<button class="segmented-btn" type="button">Schedule</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: Featured Cover Image & Media Assets -->
+<div class="editor-section-box">
+<div class="editor-section-title">
+<span class="material-symbols-outlined" style="color: #0284c7; font-size: 19px;">image</span>
+<span>Section 2: Featured Cover Image &amp; Media Assets</span>
+</div>
+<div style="display: grid; grid-template-columns: 240px 1fr; gap: 18px; align-items: start;">
+<div style="border: 1px solid #bae6fd; border-radius: 8px; background: #f0f9ff; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+<div style="position: relative; width: 100%; height: 118px; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1); background: #001f3f;">
+<svg height="100%" preserveaspectratio="xMidYMid slice" viewbox="0 0 400 225" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="gradMed" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#002d4b"></stop>
+<stop offset="60%" stop-color="#0284c7"></stop>
+<stop offset="100%" stop-color="#0369a1"></stop>
+</lineargradient>
+</defs>
+<rect fill="url(#gradMed)" height="225" width="400"></rect>
+<circle cx="80" cy="180" fill="rgba(255,255,255,0.08)" r="90"></circle>
+<circle cx="340" cy="40" fill="rgba(255,255,255,0.12)" r="70"></circle>
+<!-- Stylized Medical Hall & Lectern Iconography -->
+<path d="M190 75 L210 75 L210 145 L190 145 Z M160 100 L240 100 L240 120 L160 120 Z" fill="#ffffff" opacity="0.9"></path>
+<circle cx="200" cy="50" fill="#38bdf8" r="14"></circle>
+<text fill="#ffffff" font-family="Inter, sans-serif" font-size="12" font-weight="700" letter-spacing="1" text-anchor="middle" x="200" y="180">CLINICAL SYMPOSIUM 2024</text>
+</svg>
+<span style="position: absolute; bottom: 6px; right: 6px; background: rgba(15, 23, 42, 0.85); color: #bae6fd; font-family: var(--font-mono); font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2);">1200×630px</span>
+</div>
+<div style="display: flex; gap: 8px;">
+<button class="btn btn-xs btn-outline" style="flex: 1;" type="button">
+<span class="material-symbols-outlined" style="font-size: 15px;">upload</span> Replace
+              </button>
+<button class="btn btn-xs btn-outline" style="flex: 1;" type="button">
+<span class="material-symbols-outlined" style="font-size: 15px;">photo_library</span> Media Library
+              </button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px;">
+<div class="form-group">
+<label class="form-label">Image Caption (Visible under banner)</label>
+<input class="form-input" type="text" value="Medical delegates convened at the Niger State Clinical Simulation Auditorium, Minna"/>
+</div>
+<div class="form-group">
+<label class="form-label">Accessibility Alt Text</label>
+<input class="form-input" type="text" value="Medical doctors and students discussing healthcare policies during the symposium opening"/>
+</div>
+<div style="font-size: 11.5px; color: #64748b; line-height: 1.4;">
+<strong style="color: #0f172a;">Recommended:</strong> High-resolution JPEG or WebP, minimum 1200×630px, optimized for social open-graph cards and public news thumbnails.
+            </div>
+</div>
+</div>
+</div>
+<!-- SECTION 3: Article Content & Complete Rich Text Editor -->
+<div class="editor-section-box">
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+<div class="editor-section-title">
+<span class="material-symbols-outlined" style="color: #0284c7; font-size: 19px;">edit_document</span>
+<span>Section 3: Article Content &amp; Rich Text Body</span>
+</div>
+<!-- Live Metrics Bar -->
+<div style="display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 11.5px; color: #475569; background: #f1f5f9; padding: 4px 10px; border-radius: 6px; border: 1px solid #e2e8f0;">
+<span>Words: <strong style="color: #002d4b;">342</strong></span>
+<span style="color: #cbd5e1;">|</span>
+<span>Characters: <strong style="color: #002d4b;">2,180</strong></span>
+<span style="color: #cbd5e1;">|</span>
+<span>Est. Reading: <strong style="color: #002d4b;">2 mins</strong></span>
+<span style="color: #cbd5e1;">|</span>
+<span style="color: #047857; font-weight: 700;">SEO Score: 94/100 Good</span>
+</div>
+</div>
+<!-- Excerpt Summary -->
+<div class="form-group">
+<label class="form-label" style="display: flex; justify-content: space-between;">
+<span>Excerpt Summary <span style="font-weight: 400; color: #64748b;">(Displays on portal article cards and search snippets)</span></span>
+<span style="font-size: 11px; color: #64748b;">Max 240 chars</span>
+</label>
+<textarea class="form-textarea" rows="2">The National Association of Niger State Medical Students cordially invites stakeholders, alumni, and clinical fellows to the landmark 2024 Annual General Assembly &amp; Scientific Symposium slated for November in Minna.</textarea>
+</div>
+<!-- Full Article Body with Complete Rich Editor Toolbar -->
+<div class="form-group">
+<label class="form-label">Main Article Body (Rich Text)</label>
+<div style="border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; background: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
+<!-- Full Toolbar -->
+<div class="editor-toolbar">
+<button class="toolbar-btn active" title="Bold [B]" type="button">B</button>
+<button class="toolbar-btn" style="font-style: italic;" title="Italic [I]" type="button">I</button>
+<button class="toolbar-btn" style="text-decoration: underline;" title="Underline [U]" type="button">U</button>
+<button class="toolbar-btn" style="text-decoration: line-through;" title="Strikethrough [S]" type="button">S</button>
+<div class="toolbar-divider"></div>
+<select class="toolbar-select" title="Text Heading Selector">
+<option>Paragraph</option>
+<option>Heading 1</option>
+<option selected="">Heading 2</option>
+<option>Heading 3</option>
+</select>
+<div class="toolbar-divider"></div>
+<button class="toolbar-btn active" title="Align Left" type="button"><span class="material-symbols-outlined">format_align_left</span></button>
+<button class="toolbar-btn" title="Align Center" type="button"><span class="material-symbols-outlined">format_align_center</span></button>
+<button class="toolbar-btn" title="Align Right" type="button"><span class="material-symbols-outlined">format_align_right</span></button>
+<div class="toolbar-divider"></div>
+<button class="toolbar-btn" title="Bulleted List" type="button"><span class="material-symbols-outlined">format_list_bulleted</span></button>
+<button class="toolbar-btn" title="Numbered List" type="button"><span class="material-symbols-outlined">format_list_numbered</span></button>
+<button class="toolbar-btn" title="Blockquote" type="button"><span class="material-symbols-outlined">format_quote</span></button>
+<button class="toolbar-btn" title="Insert Hyperlink" type="button"><span class="material-symbols-outlined">link</span></button>
+<button class="toolbar-btn" title="Insert Image" type="button"><span class="material-symbols-outlined">add_photo_alternate</span></button>
+<button class="toolbar-btn" title="Code Snippet" type="button"><span class="material-symbols-outlined">code</span></button>
+</div>
+<!-- Structured Draft Content Area -->
+<div contenteditable="true" style="padding: 16px; font-size: 13.5px; line-height: 1.65; color: #1e293b; min-height: 200px; outline: none;">
+<h3 style="font-size: 16px; font-weight: 700; color: #002d4b; margin-bottom: 10px;">Advancing Healthcare Leadership Across Niger State</h3>
+<p style="margin-bottom: 12px;">Under the overarching theme of <strong>'Bridging Healthcare Gaps: The Role of Future Physicians in Rural Community Health Initiatives'</strong>, this year's symposium brings together over 400 clinical students, distinguished patrons, and residency coordinators across FMC Bida, IBB Specialist Hospital, and international health missions.</p>
+<p style="margin-bottom: 10px;">Key session tracks scheduled for the plenary convention include:</p>
+<ul style="margin-left: 20px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 6px;">
+<li><strong>Clinical Skills Workshops:</strong> Hands-on trauma resuscitation, FAST ultrasound simulation, and bedside procedural OSCE masterclasses.</li>
+<li><strong>Poster Presentations &amp; Scientific Review:</strong> Peer-reviewed epidemiology papers and community public health survey dissemination.</li>
+<li><strong>Keynote Plenary Address:</strong> Delivered by the State Commissioner for Health and senior academic consultants.</li>
+</ul>
+<p style="color: #475569; font-style: italic;">All registered delegates are required to confirm chapter delegate badges at the secretariat accreditation desk prior to the keynote address.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 4: Tags & Distribution Channels -->
+<div class="editor-section-box">
+<div class="editor-section-title">
+<span class="material-symbols-outlined" style="color: #0284c7; font-size: 19px;">share</span>
+<span>Section 4: Tags &amp; Distribution Channels</span>
+</div>
+<div class="form-group">
+<label class="form-label">Taxonomy Tags</label>
+<div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+<span class="tag-chip">Health Initiative <span class="remove-tag" onclick="this.parentElement.remove()">✕</span></span>
+<span class="tag-chip">Symposium 2024 <span class="remove-tag" onclick="this.parentElement.remove()">✕</span></span>
+<span class="tag-chip">Minna Assembly <span class="remove-tag" onclick="this.parentElement.remove()">✕</span></span>
+<button class="add-tag-btn" onclick="alert('Add custom tag prompt')" type="button">
+<span class="material-symbols-outlined" style="font-size: 16px;">add</span> Add Tag
+            </button>
+</div>
+</div>
+<div style="padding-top: 4px; border-top: 1px dashed #e2e8f0; display: flex; flex-direction: column; gap: 10px;">
+<span style="font-size: 12px; font-weight: 700; color: #002d4b; text-transform: uppercase; letter-spacing: 0.04em;">Broadcast &amp; Notification Triggers</span>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+<label class="distribution-checkbox-label">
+<input checked="" type="checkbox"/>
+<span>Feature in Homepage Ticker</span>
+</label>
+<label class="distribution-checkbox-label">
+<input checked="" type="checkbox"/>
+<span>Broadcast to Association Telegram Channel</span>
+</label>
+<label class="distribution-checkbox-label">
+<input checked="" type="checkbox"/>
+<span>Push to Alumni Network (1,420 registered)</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Bottom Modal Footer -->
+<div class="editor-modal-footer">
+<div style="display: flex; align-items: center; gap: 10px;">
+<button class="btn btn-outline" onclick="document.getElementById('article-editor-modal').style.display='none'" type="button">
+          Discard &amp; Exit
+        </button>
+<button class="btn btn-outline" onclick="alert('Opening responsive public draft preview in sandbox tab...')" type="button">
+<span class="material-symbols-outlined">visibility</span>
+<span>Preview Draft</span>
+</button>
+</div>
+<div style="display: flex; align-items: center; gap: 10px;">
+<button class="btn btn-outline" onclick="alert('Draft progress saved to NANMS database.')" type="button">
+<span class="material-symbols-outlined">save</span>
+<span>Save Draft</span>
+</button>
+<button class="btn btn-primary" onclick="alert('Article #A-2405 successfully published live to nanms.org.ng/news!'); document.getElementById('article-editor-modal').style.display='none';" style="background: #002d4b;" type="button">
+<span class="material-symbols-outlined">send</span>
+<span>Publish Article to Live Portal</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Vanilla JS Logic -->
+<script>
+    function switchTab(tabId, clickedBtn) {
+      // 1. Remove active state from all subnav buttons
+      const subnavButtons = document.querySelectorAll('.subnav-btn');
+      subnavButtons.forEach(btn => btn.classList.remove('active'));
+
+      // 2. Set active button
+      if (clickedBtn) {
+        clickedBtn.classList.add('active');
+      }
+
+      // 3. Hide all tab panels
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => tab.classList.remove('active'));
+
+      // 4. Show active tab panel
+      const activeTab = document.getElementById('tab-' + tabId);
+      if (activeTab) {
+        activeTab.classList.add('active');
+      }
+    }
+
+    // Dynamic Live Preview Synchronizer for TAB 5
+    function updateHeroPreview() {
+      const titleVal = document.getElementById('input-hero-title').value;
+      const subVal = document.getElementById('input-hero-sub').value;
+      
+      const titleDisplay = document.getElementById('preview-title-display');
+      const subDisplay = document.getElementById('preview-sub-display');
+      
+      if (titleDisplay) titleDisplay.textContent = titleVal;
+      if (subDisplay) subDisplay.textContent = subVal;
+    }
+  </script>
+</body></html>

@@ -15,10 +15,10 @@ export default function RegMain() {
 
   const [posStatus, setPosStatus] = useState('past')
 
-  const [pstngStatus, setPstngStatus] = useState('completed')
+  const [pstngStatus, setPstngStatus] = useState('Completed')
 
   console.log('hurray');
-  
+
 
   const {
     signUp,
@@ -429,7 +429,7 @@ export default function RegMain() {
                   >
                     <input name='pstngStatus' id="completed" defaultChecked value='Completed' type="radio"
                       onChange={(e) => {
-                        setPosStatus(e.target.value)
+                        setPstngStatus(e.target.value)
                       }}
                     />
                     <img className='check' src={check} alt="" />
@@ -441,7 +441,13 @@ export default function RegMain() {
                     htmlFor="ongoing"
                     className='costom-radio'
                   >
-                    <input name='pstngStatus' value='Ongoing' id="ongoing" type="radio" />
+                    <input name='pstngStatus' value='Ongoing' id="ongoing" type="radio"
+                      onChange={(e) => {
+                        console.log(posStatus);
+                        
+                        setPstngStatus(e.target.value)
+                      }}
+                    />
                     <img className='check' src={check} alt="" />
                   </label>
                   <label htmlFor="ongoing">Ongoing</label>
@@ -451,7 +457,11 @@ export default function RegMain() {
                     htmlFor="pending"
                     className='costom-radio'
                   >
-                    <input name='pstngStatus' value='Upcoming' id="pending" type="radio" />
+                    <input name='pstngStatus' value='Upcoming' id="pending" type="radio"
+                      onChange={(e) => {
+                        setPstngStatus(e.target.value)
+                      }}
+                    />
                     <img className='check' src={check} alt="" />
                   </label>
                   <label htmlFor="ongoing">Upcoming</label>

@@ -137,7 +137,7 @@ export default function PymntCard({ type, notPaid, verifyPymnt }) {
                     </label>
                     <div className='pymnt-info'>
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '14px' }}>
-                        <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
+                        <div className='sel-mult-wrap'>
                           <label className='radio' htmlFor="multiple">
                             <input style={{ position: 'relative', display: 'none' }} type="checkbox" name="multiple" id="multiple" onChange={(e) => {
                               if (!e.target.checked) {
@@ -161,12 +161,18 @@ export default function PymntCard({ type, notPaid, verifyPymnt }) {
                           name="year"
                           id=""
                           onChange={(e) => {
-                            if (selectMult && !years.includes(e.target.value)) {
+                            if (selectMult && !years.includes(e.target.value)) { 
                               setYears((p) => {
                                 return [e.target.value, ...p]
                               })
-                            } else {
+                            }
+                            
+                            if (!selectMult) {
                               setYears([e.target.value])
+                            }
+
+                            if (years.includes(e.target.value)) {
+                              e.target.value = years[0]
                             }
                           }}
                         >
@@ -174,7 +180,7 @@ export default function PymntCard({ type, notPaid, verifyPymnt }) {
                             Select the year you are paying for.
                           </option>
                           <option value="2020">2020</option>
-                          <option value="2022">2023</option>
+                          <option value="2023">2023</option>
                           <option value="2021">2021</option>
                           {
                             notPaid?.map((d) => {
