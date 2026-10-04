@@ -7,12 +7,12 @@ import DbMain from './DbMain';
 
 export default function Dashboard() {
   return (
-    <>
+    <Redirect pathName="dashboard">
       <PortalCntxt>
         <Nav currentPage={'db'} />
         <DbMain />
         <Footer />
       </PortalCntxt>
-    </>
+    </Redirect>
   );
 };

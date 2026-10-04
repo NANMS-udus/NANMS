@@ -14,6 +14,7 @@ export default function Redirect({children, pathName}) {
    console.log(session);
    
    if (!session) {
+    console.log('no session');
     navigate('/members/login')
    }
 

@@ -201,7 +201,7 @@ useEffect(() => {
   async function signOut() {
     try {
 
-      const { data, error } = await supabase.auth.signOut()
+      const { error } = await supabase.auth.signOut()
 
       if (error) {
         throw new Error(error.message);
@@ -209,8 +209,6 @@ useEffect(() => {
       }
 
       if (!error) {
-        console.log(data);
-
         setSession(null)
 
       }

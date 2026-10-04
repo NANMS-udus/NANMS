@@ -5,18 +5,21 @@ import './Announcements.css';
 import Main from './Main';
 import DetMain from './DetMain';
 import PortalCntxt from '../../../../MyContexts/PortalContext';
+import Redirect from '../../../../Redirect';
 
 export default function Announcements() {
-  const [showAnndet, setShowAnnDet] = useState({show: false, details: {}})
+  const [showAnndet, setShowAnnDet] = useState({ show: false, details: {} })
   return (
     <PortalCntxt>
-      <Nav />
-      {
-        !showAnndet.show
-        ? <Main setShowAnnDet={setShowAnnDet} />
-        : <DetMain details={showAnndet.details} setShowAnnDet={setShowAnnDet} />
-      }
-      <Footer />
-    </PortalCntxt>
+      <Redirect pathName={'announcements'} >
+        <Nav />
+        {
+          !showAnndet.show
+            ? <Main setShowAnnDet={setShowAnnDet} />
+            : <DetMain details={showAnndet.details} setShowAnnDet={setShowAnnDet} />
+        }
+        <Footer />
+      </Redirect>
+    </PortalCntxt >
   );
 };
