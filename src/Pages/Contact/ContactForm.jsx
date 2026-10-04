@@ -7,17 +7,11 @@ import { UiContext } from '../../MyContexts/UiContext';
 export default function ContactForm() {
  const [fbResp, fbAction, isSending] = useActionState(sendFeedback, { success: false, message: '' })
 
- const { setPopup } = useContext(UiContext)
+ const { showPopup } = useContext(UiContext)
 
  useEffect(() => {
   if (isSending) {
-   setPopup({
-    show: true,
-     hide: false,
-     autoHide: true,
-     msg: 'sending',
-     msgType: 'pending'
-   })
+   showPopup('pending', 'Sending your message...', false)
   }
  }, [isSending])
 
@@ -40,23 +34,11 @@ export default function ContactForm() {
    if (!error && data) {
     console.log(data);
     
-    setPopup({
-     show: true,
-     hide: false,
-     autoHide: true,
-     msg: 'Your message has been sent successfuly. You will recieve a response via email soon',
-     msgType: 'success'
-    })
+    showPopup('success', 'Your message has been sent successfuly. You will recieve a response via email soon')
    }
 
   } catch (error) {
-   setPopup({
-    show: true,
-    hide: false,
-    autoHide: true,
-    msg: error.message,
-    msgType: 'err'
-   })
+   showPopup('err', error.message)
   }
  }
 

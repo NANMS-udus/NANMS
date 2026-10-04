@@ -1,3 +1,4 @@
+import PortalCntxt from '../../../../MyContexts/PortalContext';
 import Redirect from '../../../../Redirect';
 import Footer from '../../../../Shared/Footer';
 import Nav from '../../../../Shared/Nav';
@@ -6,10 +7,12 @@ import './PayDues.css';
 
 export default function Payments() {
   return (
-    <Redirect pathName={'payments'}>
-      <Nav />
-      <Main />
-      <Footer />
-    </Redirect>
+    <PortalCntxt>
+      <Redirect pathName={'payments'}>
+        <Nav />
+        <Main />
+        <Footer />
+      </Redirect>
+    </PortalCntxt>
   );
 };

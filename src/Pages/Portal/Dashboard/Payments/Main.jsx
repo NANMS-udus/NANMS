@@ -2,13 +2,13 @@ import { useContext } from 'react';
 import './Main.css';
 import PymntCard from './PymntCard';
 import PymntHistTable from './PymntHistTable';
-import { GenContext } from '../../../../MyContexts/GenContexts';
 import { Link } from 'react-router';
 import arrowBack from '../../../../assets/icons/left-arrow.svg'
+import { PortalContext } from '../../../../MyContexts/PortalContext';
 
 export default function Main() {
 
- const { pymntDet, verifyPymnt } = useContext(GenContext)
+ const { pymntDet, verifyPymnt } = useContext(PortalContext)
 
  console.log(pymntDet);
 
