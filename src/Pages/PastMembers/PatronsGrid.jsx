@@ -4,8 +4,9 @@ import PaginationSection from './PaginationSection';
 import './PatronsGrid.css';
 import PatronCard from './PatronCard';
 import UtilsSection from './UtilsSection';
+import useArrayByPage from '../../Utils/useArrayByPage';
 
-export default function PatronsGrid({ arrayByPage }) {
+export default function PatronsGrid() {
 
   const { ptrns } = useContext(GenContext)
 
@@ -21,7 +22,7 @@ export default function PatronsGrid({ arrayByPage }) {
     updateDisplayed()
   }, [ptrns])
 
-  const ptrnsByPage = arrayByPage(displayed, 6)
+  const [ptrnsByPage] = useArrayByPage(displayed, 6, [])
 
 
   return (

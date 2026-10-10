@@ -25,7 +25,7 @@ export default function StudyCard({details}) {
      </div>
      <div class="meta-row">
       <span class="meta-key">Target Year:</span>
-      <span class="meta-val">{details.levels}</span>
+      <span class="meta-val">{details.level}</span>
      </div>
      <div class="meta-row">
       <span class="meta-key">Updated:</span>

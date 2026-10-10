@@ -32,38 +32,39 @@ export default function Auth({ children }) {
     getSession()
   }, [])
 
-useEffect(() => {
-  async function getMyDetails() {
-    
-    const {data, error} = await supabase.from('members').select('*').eq('id', session.user.id).single()
+  useEffect(() => {
+    async function getMyDetails() {
 
-    if (error) {
-      console.log(error.message);
-      
+      const { data, error } = await supabase.from('members').select('*').eq('id', session.user.id).single()
+
+      if (error) {
+        console.log(error.message);
+
+      }
+
+      if (!error && data) {
+        console.log('here');
+
+        console.log(data);
+
+        setDetails(data)
+        console.log(myDetails);
+
+      }
     }
 
-    if (!error && data) {
-      console.log('here');
-      
-      console.log(data);
-      
-      setDetails(data)
+    if (session?.user?.id) {
+      getMyDetails()
       console.log(myDetails);
-      
-    }
-  }
 
-  if (session?.user?.id) {
-    getMyDetails()
-    console.log(myDetails);
-    
-  }
-}, [session])
+    }
+  }, [session])
 
   async function signUp(prev, input) {
     const entries = Object.fromEntries(input);
 
     const {
+      gender,
       avatar,
       fullname,
       password,
@@ -82,31 +83,9 @@ useEffect(() => {
     console.log(recent_postings, research_interests, positions_held);
 
     try {
-      let avatar_url;
+      let avatar_url = 'placeholder Url'
 
-      let avatarPath;
-
-      if (avatar.size && avatar.name) {
-        console.log('uploading data');
-
-
-        const { data: uploadData, error: uploadError } = await supabase.storage.from('avatars').upload(`${fullname}-${Date.now()}`, avatar)
-
-        if (uploadError) {
-          throw new Error(uploadError.message);
-
-        }
-
-        if (!uploadError && uploadData) {
-          console.log(uploadData);
-
-          avatar_url = await supabase.storage.from(`avatars`).getPublicUrl(uploadData.path).data.publicUrl
-
-          avatarPath = uploadData.path
-        }
-      }
-
-      console.log(avatar_url);
+      let avatarPath = 'placeholder path'
 
       if (password !== password2) {
         throw new Error("Passwords do not match");
@@ -119,6 +98,7 @@ useEffect(() => {
         options: {
           data: {
             fullname,
+            gender,
             avatar_url,
             avatar_path: avatarPath,
             date_admitted,
@@ -150,6 +130,36 @@ useEffect(() => {
 
       if (!signUpError && signUpData) {
         console.log(signUpData);
+
+        if (avatar.size && avatar.name) {
+          console.log('uploading data');
+
+
+          const { data: uploadData, error: uploadError } = await supabase.storage.from(`avatars`).upload(`${signUpData.user.id}/${fullname}-${Date.now()}`, avatar)
+
+          if (uploadError) {
+            throw new Error(uploadError.message);
+
+          }
+
+          if (!uploadError && uploadData) {
+            console.log(uploadData);
+
+            avatar_url = await supabase.storage.from(`avatars`).getPublicUrl(uploadData.path).data.publicUrl
+
+            avatarPath = uploadData.path
+
+            const { data, error } = await supabase.from('members').update({ avatar_url, avatar_path: avatarPath }).select('*')
+
+            if (error) {
+              showPopup('err', 'Your profile picture could not be uploaded')
+            }
+
+            if (!error && data) {
+              setDetails(data)
+            }
+          }
+        }
 
         return { success: true, message: 'your account has been successfuly created' }
       }
@@ -225,7 +235,7 @@ useEffect(() => {
         avatar_path: 'f1e559ba-1567-4697-9a5e-3592c7e2dcc2/Muhammad-Mukhtar Muslim-1787699199665'
       }
     }) */
-    const {avatar} = Object.fromEntries(input)
+    const { avatar } = Object.fromEntries(input)
 
     console.log(avatar);
 
@@ -235,30 +245,30 @@ useEffect(() => {
 
     try {
       if (avatar.size) {
-        const {data: updtData, error: updtError} = await supabase.storage.from('avatars').update(myDetails.avatar_path, avatar, {contentType: avatar.type})
-  
+        const { data: updtData, error: updtError } = await supabase.storage.from('avatars').update(myDetails.avatar_path, avatar, { contentType: avatar.type })
+
         if (updtError) {
           throw new Error(updtError.message);
         }
-  
+
         if (!updtError && updtData) {
           console.log(updtData);
-          
+
           avatar_path = updtData.path
-  
+
           avatar_url = supabase.storage.from('avatars').getPublicUrl(updtData.path).data.publicUrl
-          
+
         }
-  
+
         console.log(avatar_path, avatar_url);
-  
-        const {data, error} = await supabase.from('members').update({
+
+        const { data, error } = await supabase.from('members').update({
           avatar_url,
           avatar_path
         })
-        .eq('id', session?.user?.id)
-        .select()
-        .single()
+          .eq('id', session?.user?.id)
+          .select()
+          .single()
 
         if (error) {
           throw new Error(error.message);
@@ -269,62 +279,62 @@ useEffect(() => {
 
           setDetails(data)
         }
-        
+
       }
     } catch (error) {
       console.log(error.message);
-      
+
     }
-    
-    
+
+
   }
 
-async function editProfile(prev, input) {
+  async function editProfile(prev, input) {
 
-  const entries = Object.fromEntries(input)
-  
-  console.log(entries);
-  
-  const {
-    fullname,
-    phone,
-    date_admitted,
-    bio,
-    level,
-    LGA,
-  } = entries
+    const entries = Object.fromEntries(input)
 
-  try {
-    const {data, error} = await supabase.from('member').update({
+    console.log(entries);
+
+    const {
       fullname,
       phone,
       date_admitted,
       bio,
       level,
       LGA,
-      research_interests,
-      recent_postings
-    })
-    .eq('id', session.user.id)
-    .select()
-    .single()
+    } = entries
 
-    if (error) {
-      throw new Error(error.message);
+    try {
+      const { data, error } = await supabase.from('members').update({
+        fullname,
+        phone,
+        date_admitted,
+        bio,
+        level,
+        LGA,
+        research_interests,
+        recent_postings
+      })
+        .eq('id', session.user.id)
+        .select()
+        .single()
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      if (!error && data) {
+        console.log(data);
+
+        setDetails(data)
+
+        return { success: true, message: 'Your profile details have been updated successfuly' }
+
+      }
+    } catch (error) {
+      return { success: false, message: error.message }
     }
-
-    if (!error && data) {
-      console.log(data);
-
-      setDetails(data)
-
-      return {success: true, message: 'Your profile details have been updated successfuly'}
-      
-    }
-  } catch (error) {
-    return {success: false, message: error.message}
   }
-}
 
 
   return (

@@ -11,7 +11,7 @@ export default function Announcements() {
   const [showAnndet, setShowAnnDet] = useState({ show: false, details: {} })
   return (
     <PortalCntxt>
-      <Redirect pathName={'announcements'} >
+      {/* <Redirect pathName={'announcements'} > */}
         <Nav />
         {
           !showAnndet.show
@@ -19,7 +19,7 @@ export default function Announcements() {
             : <DetMain details={showAnndet.details} setShowAnnDet={setShowAnnDet} />
         }
         <Footer />
-      </Redirect>
+      {/* </Redirect> */}
     </PortalCntxt >
   );
 };

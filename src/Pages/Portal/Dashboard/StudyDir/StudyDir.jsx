@@ -8,13 +8,13 @@ import './StudyDir.css';
 
 export default function StudyDir() {
   return (
-    <Redirect pathName={'study-directory'}>
+    /* <Redirect pathName={'study-directory'}> */
       <PortalCntxt>
         <Nav />
         <Hero />
         <Main />
         <Footer />
       </PortalCntxt>
-    </Redirect>
+    /* </Redirect> */
   );
 };

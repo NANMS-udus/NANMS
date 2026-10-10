@@ -1,10 +1,7 @@
-import { useContext } from 'react';
 import StudyCard from './StudyCard';
 import './StudyGrid.css';
-import { PortalContext } from '../../../../MyContexts/PortalContext';
 
-export default function StudyGrid() {
-  const {studyMats} = useContext(PortalContext)
+export default function StudyGrid({studyMats}) {
   return (
    <div class="resource-grid" id="resourceCardsGrid">
     {

@@ -108,7 +108,7 @@ h1 {
  border-radius: 0.25rem;
  padding: 24px;
  display: flex;
- align-items: flex-start;
+ align-items: center;
  gap: 16px;
 }
 
@@ -164,3 +164,25 @@ h1 {
 
 
  */
+
+
+ @media (max-width: 600px) {
+
+  .reg-main-content {
+   padding: 48px 14px;
+  }
+
+  .success-container {
+   padding: 48px 12px;
+
+  }
+
+  .next-steps h2 {
+   text-align: center;
+  }
+
+  .step-list {
+   display: flex;
+   flex-direction: column;
+  }
+ }

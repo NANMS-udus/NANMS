@@ -3,7 +3,6 @@ import './UtilityBar.css';
 import { GenContext } from '../../MyContexts/GenContexts';
 import { LGAs } from '../../Utils/data';
 import search from '../../assets/icons/search.svg'
-import useSearchByParams from '../../Utils/useSearchByParams';
 
 export default function UtilityBar() {
 

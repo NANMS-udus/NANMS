@@ -254,4 +254,8 @@
  .profile-header {
   text-align: center;
  }
+
+ .registration-form select {
+  width: 100%;
+ }
 }

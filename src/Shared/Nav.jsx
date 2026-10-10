@@ -19,42 +19,49 @@ export default function Nav({ currentPage }) {
         <Link className="nav-brand" to={'/'}> <img src={logo} style={{ width: '20px' }} alt="" /> <span>NANMS-UDUS </span> </Link>
         <div className="nav-links">
           <Link
+            title="Home"
             to={'/'}
             className={currentPage === 'home' ? 'active' : ''}
           >
             Home
           </Link>
           <Link
+            title="About"
             to={'/about'}
             className={currentPage === 'about' ? 'active' : ''}
           >
             About Us
           </Link>
           <Link
+            title="EXCO"
             to={'/executives'}
             className={currentPage === 'exec' ? 'active' : ''}
           >
             Executives
           </Link>
           <Link
+            title="Patrons & Alumni"
             to={'/patrons-alumni'}
             className={currentPage === 'p&a' ? 'active' : ''}
           >
             Patrons & Alumni
           </Link>
           <Link
+            title="News"
             to={'/news'}
             className={currentPage === 'news' ? 'active' : ''}
           >
             News
           </Link>
           <Link
+            title="Members"
             to={'/members'}
             className={currentPage === 'members' ? 'active' : ''}
           >
             Members
           </Link>
           <Link
+            title="Contact"
             to={'/contact'}
             className={currentPage === 'contact' ? 'active' : ''}
           >
@@ -72,6 +79,13 @@ export default function Nav({ currentPage }) {
                     : '/members/registration'
               }
               className="btn btn-primary nav-btn"
+              title={
+                currentPage === 'login'
+                  ? 'Contact'
+                  : currentPage === 'reg'
+                    ? 'Login'
+                    : 'Registration'
+              }
             >
               {
                 currentPage === 'reg'
@@ -84,6 +98,7 @@ export default function Nav({ currentPage }) {
             : <button
               className="btn btn-primary nav-btn"
               onClick={signOut}
+              title="Logout"
             >
               Logout
             </button>
@@ -100,6 +115,7 @@ export default function Nav({ currentPage }) {
             onClick={() => {
               setShowSideNav((prev) => !prev)
             }}
+            title="Menu"
           />
         </button>
       </nav>

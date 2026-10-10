@@ -191,6 +191,20 @@ export default function RegMain() {
               <input name='email' id="email" placeholder="jane.doe@university.edu" required type="email" />
             </div>
             <div class="form-group">
+              <label for="email">Gender</label>
+              <select name="gender" id="gender">
+                <option value="">
+                  None
+                </option>
+                <option value="Male">
+                  Male
+                </option>
+                <option value="Female">
+                  Female
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
               <label for="phone">Phone Number</label>
               <input name='phone' id="phone" placeholder="+234 000 000 000" type="tel" required />
             </div>

@@ -61,9 +61,13 @@ export default function DbLftCol({ myDetails }) {
             <div class="progress-circle">
               <div class="progress-circle-fill"></div>
               <span class="font-headline-md text-primary font-bold">
-                {
+                {/* {
                   Math.round(((dayjs().valueOf() - dayjs(date_admitted).valueOf()) / (dayjs(date_admitted).add(6, 'years').valueOf() - dayjs(date_admitted).valueOf())) * 100)
-                }%
+                }% */}
+
+                {
+                  Math.round(parseInt(level) / 600)
+                }
               </span>
             </div>
           </div>

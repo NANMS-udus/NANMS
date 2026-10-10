@@ -19,14 +19,14 @@ export default function RegSuccess() {
        <img style={{width: '60%', aspectRatio: '1/1'}} src={check} alt="" />
      </div>
      <h1>Registration Successful!</h1>
-     <p class="subtitle">Welcome to the association, <strong>Dr. Jane Doe</strong>. Your application has been
-      received and is currently being processed by our administrative team.</p>
+     <p class="subtitle">Welcome to the association. Your application has been
+      received and is currently being processed by the executive comittee.</p>
      <div class="next-steps">
       <h2>Next Steps</h2>
       <ul class="step-list">
        <li class="step-item">
         <div class="step-number">1</div>
-        <div class="step-text">Check your email for a confirmation link to verify your contact address.
+        <div class="step-text">Check your email for a confirmation link to verify your email address.
         </div>
        </li>
        <li class="step-item">
@@ -36,8 +36,7 @@ export default function RegSuccess() {
        </li>
        <li class="step-item">
         <div class="step-number">3</div>
-        <div class="step-text">Join our official community forum to connect with fellow Niger State
-         medical students.</div>
+        <div class="step-text">Wait for a reply email from the executives containing your aplication approval status.</div>
        </li>
       </ul>
      </div>

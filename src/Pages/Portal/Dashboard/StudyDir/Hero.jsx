@@ -5,7 +5,7 @@ export default function Hero() {
    <section class="stu-hero-section">
     <div class="container">
       <div class="badge-pill">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
         </svg>
@@ -13,8 +13,8 @@ export default function Hero() {
       </div>
       <h1 class="hero-title">Medical Study Directory & Archive</h1>
       <p class="hero-subtitle">
-        Curated high-yield study materials, past professional exam questions, clinical OSCE checklists, and active peer
-        study circles for Niger State medical trainees across pre-clinical and clinical disciplines.
+        Curated high-yield study materials, past exam questions, and active peer
+        study groups for Niger State medical students across pre-clinical and clinical disciplines.
       </p>
 
       <div class="stats-grid">

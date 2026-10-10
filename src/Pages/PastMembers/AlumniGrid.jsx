@@ -4,8 +4,9 @@ import PaginationSection from './PaginationSection';
 import { GenContext } from '../../MyContexts/GenContexts';
 import AlumniCard from './AlumniCard';
 import UtilsSection from './UtilsSection';
+import useArrayByPage from '../../Utils/useArrayByPage';
 
-export default function AlumniGrid({ arrayByPage }) {
+export default function AlumniGrid() {
 
   const { alumni } = useContext(GenContext)
 
@@ -21,7 +22,7 @@ export default function AlumniGrid({ arrayByPage }) {
     updateDisplayed()
   }, [alumni])
 
-  const alumniByPage = arrayByPage(displayed, 6)
+  const [alumniByPage] = useArrayByPage(displayed, 6, [])
 
   return (
     <section class="section-block">

@@ -4,8 +4,9 @@ import './PresidentsGrid.css';
 import { GenContext } from '../../MyContexts/GenContexts';
 import PresidentCard from './PresidentCard';
 import UtilsSection from './UtilsSection';
+import useArrayByPage from '../../Utils/useArrayByPage';
 
-export default function PresidentsGrid({ arrayByPage }) {
+export default function PresidentsGrid() {
 
   const { presidents } = useContext(GenContext)
 
@@ -21,7 +22,7 @@ export default function PresidentsGrid({ arrayByPage }) {
     updateDisplayed()
   }, [presidents])
 
-  const presByPage = arrayByPage(displayed, 6)
+  const [presByPage] = useArrayByPage(displayed, 6, [])
 
   return (
     <section class="section-block">

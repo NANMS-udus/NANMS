@@ -29,10 +29,12 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
           onClick={() => {
             setShowSideNav(false)
           }}
+          title='Close'
         />
       </div>
       <div className="side-nav-links-container">
         <Link
+          title='Home'
           to={'/'}
           className={`side-nav-link ${currentPage === 'home' ? 'current' : ''}`}
         >
@@ -40,6 +42,7 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
           <span>Home</span>
         </Link>
         <Link
+          title='About'
           to={'/about'}
           className={`side-nav-link ${currentPage === 'about' ? 'current' : ''}`}
         >
@@ -47,6 +50,7 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
           <span>About Us</span>
         </Link>
         <Link
+          title='EXCO'
           to={'/executives'}
           className={`side-nav-link ${currentPage === 'exec' ? 'current' : ''}`}
         >
@@ -54,6 +58,7 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
           <span>Executives</span>
         </Link>
         <Link
+          title='Patrons & Alumni'
           to={'/patrons-alumni'}
           className={`side-nav-link ${currentPage === 'p&a' ? 'current' : ''}`}
         >
@@ -61,6 +66,7 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
           <span>Patrons & Alumni</span>
         </Link>
         <Link
+          title='News'
           to={'/news'}
           className={`side-nav-link ${currentPage === 'news' ? 'current' : ''}`}
         >
@@ -68,6 +74,7 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
           <span>News</span>
         </Link>
         <Link
+          title='Members'
           to={'/members'}
           className={`side-nav-link ${currentPage === 'members' ? 'current' : ''}`}
         >
@@ -75,6 +82,7 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
           <span>Members</span>
         </Link>
         <Link
+          title='Contact'
           to={'/contact'}
           className={`side-nav-link ${currentPage === 'contact' ? 'current' : ''}`}
         >
@@ -94,6 +102,13 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
                     : '/members/registration'
               }
               className="side-nav-btn"
+              title={
+                currentPage === 'login'
+                  ? 'Contact'
+                  : currentPage === 'reg'
+                    ? 'Login'
+                    : 'Registration'
+              }
             >
               <img src={
                 currentPage === 'reg'
@@ -119,6 +134,7 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
             : <button
               className="side-nav-btn"
               onClick={signOut}
+              title='Logout'
             >
               Logout
             </button>
