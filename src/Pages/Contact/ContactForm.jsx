@@ -22,9 +22,9 @@ export default function ContactForm() {
 
    const { data, error } = await supabase
     .from('feedback')
-    .insert({
+    .insert(
      feedback
-    })
+     )
 
    if (error) {
     throw new Error(error.message);
