@@ -227,7 +227,7 @@ export default function Auth({ children }) {
       if (!error && data) {
         console.log(data);
 
-        const { data: data2, error: error2 } = studyDirBase.auth.signInWithPassword(entries)
+        const { data: data2, error: error2 } = await studyDirBase.auth.signInWithPassword(entries)
 
         if (error2) {
           showPopup('err', error.message)
