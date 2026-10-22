@@ -78,7 +78,7 @@ export default function Nav({ currentPage }) {
                     ? '/members/login'
                     : '/members/registration'
               }
-              className="btn btn-primary nav-btn"
+              className="btn-primary nav-btn"
               title={
                 currentPage === 'login'
                   ? 'Contact'
@@ -96,7 +96,7 @@ export default function Nav({ currentPage }) {
               }
             </Link>
             : <button
-              className="btn btn-primary nav-btn"
+              className="btn-primary nav-btn"
               onClick={signOut}
               title="Logout"
             >

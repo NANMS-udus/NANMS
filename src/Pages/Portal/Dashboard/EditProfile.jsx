@@ -9,6 +9,7 @@ import Nav from '../../../Shared/Nav';
 import { Link, useNavigate, useNavigation } from 'react-router';
 import { UiContext } from '../../../MyContexts/UiContext';
 import Redirect from '../../../Redirect';
+import dayjs from 'dayjs';
 
 export default function EditProfile() {
 
@@ -54,7 +55,19 @@ export default function EditProfile() {
     research_interests: resInts
   } = myDetails
 
-  const navigate = useNavigation()
+  //const navigate = useNavigation()
+
+  useEffect(() => {
+    if (isUpdating) {
+      showPopup('pending', 'updating your avatar')
+    }
+  }, [isUpdating])
+
+  useEffect(() => {
+    if (isEditing) {
+      showPopup('pending', 'Editing details')
+    }
+  }, [isEditing])
 
   useEffect(() => {
     (() => {
@@ -72,7 +85,10 @@ export default function EditProfile() {
 
     if (editState.success) {
       showPopup('success', `${editState.message}. You will be redirected to the dashboard in 5 seconds.`)
-      navigate('/members/dashboard')
+      setTimeout(() => {
+        nav('/members/dashboard')
+      }, 5000);
+      
     }
 
     if (editState.success === false) {
@@ -115,7 +131,7 @@ export default function EditProfile() {
   }
 
   return (
-    <Redirect pathName={'edit-profile'}>
+   </* Redirect pathName={'edit-profile'} */>
       <Nav currentPage={'db'} />
       <main class="container db-main">
         <Link to={'/members/dashboard'}>
@@ -149,8 +165,6 @@ export default function EditProfile() {
                     display: 'none'
                   }}
                   onChange={(e) => {
-                    console.log(e.target.files[0]);
-
                     if (e.target.files[0].size) {
                       setAvatar(e.target.files[0])
                     }
@@ -203,7 +217,7 @@ export default function EditProfile() {
                 </div>
                 <div class="edit-prfl-form-group">
                   <label class="edit-prfl-form-label" for="admissionYear">Admission Date</label>
-                  <input class="edit-prfl-form-input" name='date_admitted' id="admissionYear" type="date" defaultValue={date_admited} />
+                  <input class="edit-prfl-form-input" name='date_admitted' id="admissionYear" type="date" defaultValue={dayjs(date_admited).format('YYYY-MM-DD')} />
                 </div>
                 <div class="edit-prfl-form-group">
                   <label class="edit-prfl-form-label" for="level">Current Level</label>
@@ -244,8 +258,6 @@ export default function EditProfile() {
                                   const newPost = prev
                                   newPost.splice(index, 1)
 
-                                  console.log(newPost);
-
                                   return [...newPost]
                                 })
                               }}
@@ -266,7 +278,6 @@ export default function EditProfile() {
                   }}
                   type='button'
                   onClick={() => {
-                    console.log(setModal);
 
                     setModal({
                       show: true,
@@ -284,6 +295,19 @@ export default function EditProfile() {
                         <div class="form-group">
                           <label for="duration">Duration</label>
                           <input style={{ height: '30px' }} name='postingDuration' id="duration" placeholder="e.g. 12 Weeks" type="text" required />
+                        </div>
+                        <div class="form-group">
+                          <label for="status">Status</label>
+                          <select 
+                          style={{ height: '30px' }} 
+                          name='postingStatus' 
+                          id="status"  
+                          defaultValue={'Competed'}
+                          >
+                            <option value="Completed">Completed</option>
+                            <option value="Onging">Ongoing</option>
+                            <option value="Upcoming">Upcoming</option>
+                          </select>
                         </div>
                       </form>, action: null, actionBtnText: 'Add'
                     })
@@ -386,6 +410,6 @@ export default function EditProfile() {
         </div>
       </main>
       <Footer />
-    </Redirect>
+    </ /* Redirect */>
   );
 };

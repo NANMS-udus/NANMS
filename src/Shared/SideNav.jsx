@@ -90,7 +90,7 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
           <span>Contact</span>
         </Link>
       </div>
-      <div className='nav-btn-container'>
+      {/* <div className='nav-btn-container'>
         {
           currentPage !== 'db' ?
             <Link
@@ -139,7 +139,7 @@ export default function SideNav({ currentPage, showSideNav, setShowSideNav }) {
               Logout
             </button>
         }
-      </div>
+      </div> */}
       <div
         className={showSideNav ? 'sidenav-underlay' : ''}
         onClick={() => {

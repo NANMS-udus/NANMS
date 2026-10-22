@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import { UiContext } from "./UiContext";
+import { studyDirBase } from "../Utils/StudyDirBase";
 import { supabase } from "../Utils/supabase";
 
 
@@ -24,15 +25,13 @@ export default function PortalCntxt({ children }) {
  /* GET PAYMENT DETAILS */
 
  useEffect(() => {
-  function getPymntDet() {
+  async function getPymntDet() {
 
    try {
 
-    const { data, error } = supabase
-     .from('ass_dues')
+    const { data, error } = await supabase.from('ass_dues')
      .select('*')
      .eq('id', session?.user?.id)
-     .single()
 
     if (error) {
      throw new Error(error.message);
@@ -58,7 +57,7 @@ export default function PortalCntxt({ children }) {
    
    try {
     
-    const {data, error} = supabase.from('announcements').select('*')
+    const {data, error} = await supabase.from('announcements').select('*')
 
     if (error) {
      throw new Error(error.message);
@@ -87,7 +86,7 @@ export default function PortalCntxt({ children }) {
    
    try {
     
-    const {data, error} = supabase.from('study_dir').select('*')
+    const {data, error} = await studyDirBase.from('dir_record').select('*')
 
     if (error) {
      throw new Error(error.message);
@@ -95,6 +94,8 @@ export default function PortalCntxt({ children }) {
     }
 
     if (!error && data) {
+     console.log(data);
+     
      setStudyMats(data)
     }
 

@@ -22,17 +22,16 @@ export default function ContactForm() {
 
    const { data, error } = await supabase
     .from('feedback')
-    .insert({
+    .insert(
      feedback
-    })
+    )
 
    if (error) {
     throw new Error(error.message);
 
    }
 
-   if (!error && data) {
-    console.log(data);
+   if (!error) {
     
     showPopup('success', 'Your message has been sent successfuly. You will recieve a response via email soon')
    }

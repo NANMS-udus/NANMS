@@ -11,6 +11,9 @@ export default function Main() {
 
   const { studyMats } = useContext(PortalContext)
 
+  console.log(studyMats);
+  
+
   const [pageNo, setPageNo] = useState(1)
 
   const [displayed, setDisplayed] = useState(studyMats)

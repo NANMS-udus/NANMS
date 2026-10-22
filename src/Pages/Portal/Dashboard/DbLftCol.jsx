@@ -66,8 +66,8 @@ export default function DbLftCol({ myDetails }) {
                 }% */}
 
                 {
-                  Math.round(parseInt(level) / 600)
-                }
+                  Math.round((parseInt(level) / 600) * 100)
+                }%
               </span>
             </div>
           </div>
@@ -120,7 +120,7 @@ export default function DbLftCol({ myDetails }) {
                       <h3 class="font-label-md text-on-surface text-base">{p.postingName}</h3>
                       <p class="font-body-md text-on-surface-variant text-sm">
                         {
-                          p.postingDepartments.join(', ')
+                          p.postingDepartments
                         }
                       </p>
                     </div>

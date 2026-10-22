@@ -174,7 +174,7 @@
 }
 
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
 
  .progress-content {
   flex-direction: column-reverse;

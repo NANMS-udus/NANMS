@@ -85,9 +85,9 @@
  padding: 12px 24px;
 }
 
-.nav-btn {
+/* .nav-btn {
  display: none;
-}
+} */
 
 .menu-toggle {
  display: block;
@@ -97,8 +97,31 @@
  cursor: pointer;
 }
 
+/* .menu-toggle img {
+ border: 2px solid var(--primary);
+ padding: 6px 4px;
+ border-radius: 6px;
+} */
 
 
+@media (max-width: 1024px) {
+ .navbar {
+  justify-content: initial;
+  gap: 14px;
+ }
+
+ .nav-brand {
+  flex: 1;
+ }
+
+ .nav-links {
+  flex: 1;
+ }
+
+ .btn {
+  padding: 8px 6px;
+ }
+}
 
 
 

@@ -1,12 +1,19 @@
 import './MainDetails.css';
 import checkCircle from '../../assets/icons/check-circle.svg';
+import checked from '../../assets/icons/check-circle.svg';
+import clock from '../../assets/icons/clock.svg';
+import threeDots from '../../assets/icons/three-dots.svg';
 
-export default function MainDetails({details}) {
+export default function MainDetails({ details }) {
 
  const {
   bio,
-  research_interests
+  research_interests,
+  recent_postings
  } = details || {}
+
+ console.log(details);
+
 
  return (
   <section className="content-area">
@@ -23,27 +30,28 @@ export default function MainDetails({details}) {
       Recent Rotations
      </h3>
      <ul className="rotation-list">
-      <li className="rotation-item">
-      <img src={checkCircle} style={{width: '24px'}}/>
-       <div>
-        <span className="rotation-title">Internal Medicine</span>
-        <span className="rotation-subtitle">ABU Teaching Hospital (12 Weeks)</span>
-       </div>
-      </li>
-      <li className="rotation-item">
-      <img src={checkCircle} style={{width: '24px'}}/>
-       <div>
-        <span className="rotation-title">Surgery</span>
-        <span className="rotation-subtitle">ABU Teaching Hospital (12 Weeks)</span>
-       </div>
-      </li>
-      <li className="rotation-item">
-       <span className="material-symbols-outlined rotation-icon-pending">pending</span>
-       <div>
-        <span className="rotation-title">Pediatrics (Current)</span>
-        <span className="rotation-subtitle">ABU Teaching Hospital (8 Weeks)</span>
-       </div>
-      </li>
+      {
+       recent_postings.map((p) => {
+        return (
+         <li key={crypto.randomUUID()} className="rotation-item">
+          <img
+           src={
+            p.postingStatus === 'Completed'
+             ? checked
+             : p.postingStatus === 'Ongoing'
+              ? threeDots
+              : clock
+           }
+           style={{ width: '24px' }}
+          />
+          <div style={{width: '40%'}}>
+           <span className="rotation-title">{p.postingName}</span>
+           <span className="rotation-subtitle">{p.postingDepartments} {`(${p.postingDuration})`}</span>
+          </div>
+         </li>
+        )
+       })
+      }
      </ul>
     </div>
     <div className="details-card">
@@ -54,10 +62,10 @@ export default function MainDetails({details}) {
      <div className="tag-list">
       {
        research_interests.length
-       ? research_interests.map((res) => {
-        return <span key={crypto.randomUUID()} className="tag label-md">{res}</span>
-       })
-       : ''
+        ? research_interests.map((res) => {
+         return <span key={crypto.randomUUID()} className="tag label-md">{res}</span>
+        })
+        : ''
       }
      </div>
     </div>

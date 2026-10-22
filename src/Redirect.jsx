@@ -11,7 +11,6 @@ export default function Redirect({children, pathName}) {
  
  useEffect(() => {
   function redirect() {
-   console.log(session);
    
    if (!session) {
     console.log('no session');

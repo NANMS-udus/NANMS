@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../Utils/supabase";
 import { UiContext } from "./UiContext";
+import dayjs from "dayjs";
+import { studyDirBase } from "../Utils/StudyDirBase";
 
 export const AuthContext = createContext(null)
 
@@ -114,7 +116,8 @@ export default function Auth({ children }) {
             }),
             research_interests,
             positions_held,
-          }
+          },
+          emailRedirectTo: 'https://nanms-2/vercel.app/members/dashboard'
         }
       })
 
@@ -131,32 +134,61 @@ export default function Auth({ children }) {
       if (!signUpError && signUpData) {
         console.log(signUpData);
 
+        const { data2, error2 } = await studyDirBase.auth.signUp({
+          id: signUpData.user.id,
+          email,
+          password
+        })
+
+        if (error2) {
+          showPopup('err', error2.message)
+
+          throw new Error(error2.message);
+        }
+
+        if (!error2 && data2) {
+          console.log(data2);
+          
+        }
+
         if (avatar.size && avatar.name) {
           console.log('uploading data');
 
+          const { data: myDet, error: detError } = supabase.rpc('get_my_member')
 
-          const { data: uploadData, error: uploadError } = await supabase.storage.from(`avatars`).upload(`${signUpData.user.id}/${fullname}-${Date.now()}`, avatar)
-
-          if (uploadError) {
-            throw new Error(uploadError.message);
+          if (detError) {
+            throw new Error(detError.message);
 
           }
 
-          if (!uploadError && uploadData) {
-            console.log(uploadData);
+          if (!detError && myDet) {
+            const { data: uploadData, error: uploadError } = await supabase.storage.from(`avatars`).upload(myDet.avatar_path, avatar)
 
-            avatar_url = await supabase.storage.from(`avatars`).getPublicUrl(uploadData.path).data.publicUrl
-
-            avatarPath = uploadData.path
-
-            const { data, error } = await supabase.from('members').update({ avatar_url, avatar_path: avatarPath }).select('*')
-
-            if (error) {
-              showPopup('err', 'Your profile picture could not be uploaded')
+            if (uploadError) {
+              throw new Error(uploadError.message);
             }
 
-            if (!error && data) {
-              setDetails(data)
+            if (!uploadError && uploadData) {
+              console.log(uploadData);
+
+              avatar_url = await supabase.storage.from(`avatars`).getPublicUrl(uploadData.path).data.publicUrl
+
+              avatarPath = uploadData.path
+
+              console.log(avatarPath, avatar_url);
+
+
+              /* const { data, error } = await supabase.from('members').update({ avatar_url }).eq('id', signUpData.user.id).select('*')
+
+              if (error) {
+                showPopup('err', 'Your profile picture could not be uploaded')
+              }
+
+              if (!error && data) {
+                console.log(data);
+
+                setDetails(data)
+              } */
             }
           }
         }
@@ -195,6 +227,14 @@ export default function Auth({ children }) {
       if (!error && data) {
         console.log(data);
 
+        const { data: data2, error: error2 } = studyDirBase.auth.signInWithPassword(entries)
+
+        if (error2) {
+          showPopup('err', error.message)
+
+          throw new Error(error2.message);
+        }
+
         showPopup('success', 'signed in successfully', true)
 
         setSession(data.session)
@@ -210,17 +250,19 @@ export default function Auth({ children }) {
 
   async function signOut() {
     try {
+      showPopup('pending', 'logging out')
 
       const { error } = await supabase.auth.signOut()
 
-      if (error) {
-        throw new Error(error.message);
+      const { error: error2 } = await studyDirBase.auth.signOut()
+
+      if (error || error2) {
+        throw new Error(error.message || error2.message);
 
       }
 
-      if (!error) {
+      if (!error && !error2) {
         setSession(null)
-
       }
     } catch (error) {
       console.log(error);
@@ -230,11 +272,6 @@ export default function Auth({ children }) {
 
   async function updtAvatar(prev, input) {
 
-    /* const resp = await supabase.auth.updateUser({
-      data: {
-        avatar_path: 'f1e559ba-1567-4697-9a5e-3592c7e2dcc2/Muhammad-Mukhtar Muslim-1787699199665'
-      }
-    }) */
     const { avatar } = Object.fromEntries(input)
 
     console.log(avatar);
@@ -245,7 +282,7 @@ export default function Auth({ children }) {
 
     try {
       if (avatar.size) {
-        const { data: updtData, error: updtError } = await supabase.storage.from('avatars').update(myDetails.avatar_path, avatar, { contentType: avatar.type })
+        const { data: updtData, error: updtError } = await supabase.storage.from('avatars').upload(myDetails.avatar_path, avatar, { upsert: true })
 
         if (updtError) {
           throw new Error(updtError.message);
@@ -276,6 +313,8 @@ export default function Auth({ children }) {
 
         if (!error && data) {
           console.log(data);
+
+          showPopup('success', 'Your avatar has been updated successfuly')
 
           setDetails(data)
         }
@@ -308,7 +347,7 @@ export default function Auth({ children }) {
       const { data, error } = await supabase.from('members').update({
         fullname,
         phone,
-        date_admitted,
+        date_admitted: dayjs(date_admitted).format(''),
         bio,
         level,
         LGA,
