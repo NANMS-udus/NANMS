@@ -13,7 +13,9 @@ export default function Main() {
  console.log(pymntDet);
 
 
- const { paid, notPaid, payment_history: pymntHist } = pymntDet || {}
+ const { paid, not_paid: notPaid, payment_hist: pymntHist } = pymntDet
+
+ console.log('paid', paid);
 
  return (
   <main class="pymnt-main-content">

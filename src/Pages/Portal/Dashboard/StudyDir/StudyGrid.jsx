@@ -2,6 +2,7 @@ import StudyCard from './StudyCard';
 import './StudyGrid.css';
 
 export default function StudyGrid({studyMats}) {
+  
   return (
    <div class="resource-grid" id="resourceCardsGrid">
     {

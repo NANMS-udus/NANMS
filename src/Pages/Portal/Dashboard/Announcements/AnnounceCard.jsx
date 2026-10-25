@@ -13,7 +13,7 @@ export default function AnnounceCard({details}) {
     <time class="card-date">{dayjs(details.created_at).format('MMM D, YYYY')}</time>
    </div>
    <h2 class="ann-card-title">{details.title}</h2>
-   <p class="ann-card-excerpt">{details.body}</p>
+   <p class="ann-card-excerpt">{details.desc}</p>
    <div class="ann-card-footer">
     Read Full Notice <img style={{width: '20px'}} src={forward} alt="" />
    </div>

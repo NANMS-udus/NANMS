@@ -23,6 +23,7 @@
  display: grid;
  grid-template-columns: 1fr;
  gap: var(--stack-md);
+ margin-bottom: 20px;
 }
 
 @media (min-width: 640px) {

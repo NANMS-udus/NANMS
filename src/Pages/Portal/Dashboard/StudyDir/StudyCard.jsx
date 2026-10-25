@@ -20,7 +20,7 @@ export default function StudyCard({details}) {
 
     <div class="card-meta-list">
      <div class="meta-row">
-      <span class="meta-key">Department:</span>
+      <span class="meta-key">Course:</span>
       <span class="meta-val">{details.course}</span>
      </div>
      <div class="meta-row">

@@ -31,10 +31,8 @@ export default function DbRtCol() {
                     }
                     <span class="font-label-md text-primary text-xs uppercase tracking-wide block mb-1">Upcoming
                       Event</span>
-                    <h3 class="font-label-md text-on-surface text-base line-clamp-2">Annual General Meeting
-                      &amp; Elections 2024</h3>
-                    <p class="font-body-md text-on-surface-variant text-sm mt-1">Join us next week for the
-                      crucial AGM where new executives will be elected...</p>
+                    <h3 class="font-label-md text-on-surface text-base line-clamp-2">{n.title}</h3>
+                    <p class="font-body-md text-on-surface-variant text-sm mt-1">{n.desc}</p>
                   </a>
                 )
               })

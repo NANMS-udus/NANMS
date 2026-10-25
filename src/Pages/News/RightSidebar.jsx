@@ -8,8 +8,8 @@ export default function RightSidebar({ displayed, setSearchResult }) {
 
   const { news } = useContext(GenContext)
 
-  const { setPopup } = useContext(UiContext)
-  
+  const { showPopup } = useContext(UiContext)
+
 
   const [searchProps, setSearchProps] = useState([])
 
@@ -26,6 +26,10 @@ export default function RightSidebar({ displayed, setSearchResult }) {
           })
         }
 
+        if (sp.prop === 'all') {
+          result = target
+        }
+
         if (sp.prop === 'cat') {
           result = target.filter((n) => {
             return n.category.includes(sp.value)
@@ -37,21 +41,13 @@ export default function RightSidebar({ displayed, setSearchResult }) {
       if (result.length) {
         setSearchResult(result)
       } else {
-        setPopup((p) => {
-          return {
-            ...p,
-            show: true,
-            hide: false,
-            msgType: 'err',
-            msg: 'No article with these details was found'
-          }
-        })
-        
+        showPopup('err', 'No article with these details was found')
+
       }
 
     }
 
-    if (searchProps.length) {
+    if (searchProps?.length) {
       searchNews()
     }
   }, [searchProps])
@@ -74,7 +70,7 @@ export default function RightSidebar({ displayed, setSearchResult }) {
 
 
   return (
-    <aside class="sidebar">
+    <aside class="news-sidebar">
       <div class="search-box">
         <h3>Search</h3>
         <input
@@ -106,10 +102,27 @@ export default function RightSidebar({ displayed, setSearchResult }) {
       <div>
         <h3>Categories</h3>
         <ul class="categories-list">
+          <li
+            onClick={() => {
+              setSearchProps((prev) => {
+                return [{
+                  prop: 'all',
+                  value: ''
+                }]
+              })
+            }}
+          >
+            <span>All</span>
+            <span class="cat-count">
+              {
+                news.length
+              }
+            </span>
+          </li>
           {
             categories.length
               ? categories.map((c) => {
-                const isActive = searchProps.find((sp) => sp.value === c)
+                const isActive = searchProps?.find((sp) => sp.value === c)
                 return (
                   <li
                     className={isActive ? 'using' : ''}

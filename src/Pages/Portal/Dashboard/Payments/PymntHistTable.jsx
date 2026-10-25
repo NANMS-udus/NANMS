@@ -1,8 +1,20 @@
+import { useEffect, useState } from 'react';
 import './PymntHistTable.css';
 
 export default function PymntHistTable({ paid, pymntHist }) {
 
-  const completePymntHist = [...paid, ...pymntHist]
+  let [completePymntHist, setPymntHist] = useState([])
+
+  useEffect(() => {
+
+    function updateCompPymntHist() {
+      setPymntHist([...paid, ...pymntHist])
+    }
+
+    updateCompPymntHist()
+
+
+  }, [paid, pymntHist])
 
   return (
     <div class="table-container">
@@ -32,7 +44,7 @@ export default function PymntHistTable({ paid, pymntHist }) {
                     return (
                       <tr>
                         <td>{ph.date}</td>
-                        <td>{ph.desc}</td>
+                        <td>{ph.years.join(', ')} {ph.desc}</td>
                         <td>₦{ph.amount}</td>
                         <td>
                           <span class="status-badge">
@@ -49,7 +61,7 @@ export default function PymntHistTable({ paid, pymntHist }) {
                     )
                   })
                 }
-                <tr>
+               {/*  <tr>
                   <td>Sep 15, 2022</td>
                   <td>2022 Annual Dues</td>
                   <td>₦40,000</td>
@@ -80,7 +92,7 @@ export default function PymntHistTable({ paid, pymntHist }) {
                       <span class="material-symbols-outlined">receipt</span>
                     </button>
                   </td>
-                </tr>
+                </tr> */}
               </tbody>
             </table>
             : <h3 style={{ textAlign: 'center', color: 'grey', padding: '20px', }}>

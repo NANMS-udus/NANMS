@@ -9,7 +9,7 @@ export default function Payments() {
   return (
     <PortalCntxt>
       <Redirect pathName={'payments'}>
-        <Nav />
+        <Nav currentPage={'db'}/>
         <Main />
         <Footer />
       </Redirect>

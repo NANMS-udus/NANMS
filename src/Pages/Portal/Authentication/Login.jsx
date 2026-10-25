@@ -6,7 +6,9 @@ import Forgotpassword from './ForgotPassword';
 import { Link } from 'react-router';
 import { AuthContext } from '../../../MyContexts/AuthContext';
 import Redirect from '../../../Redirect';
-import {UiContext} from '../../../MyContexts/UiContext'
+import { UiContext } from '../../../MyContexts/UiContext'
+import eye from '../../../assets/icons/eye.svg'
+import eyeOff from '../../../assets/icons/eye-off.svg'
 
 export default function Login() {
 
@@ -19,6 +21,8 @@ export default function Login() {
   } = useContext(UiContext)
 
   const [showFrgtnPswd, setShowFrgtnPswd] = useState(false)
+
+  const [showPassword, setShowPassword] = useState(false)
 
   const [
     signInResp,
@@ -34,11 +38,11 @@ export default function Login() {
 
   useEffect(() => {
     console.log(signInResp);
-    
-  }, [signInResp])
-  
 
-  
+  }, [signInResp])
+
+
+
 
   return (
     <Redirect>
@@ -56,8 +60,11 @@ export default function Login() {
                 </div>
                 <div class="login-form-group">
                   <label class="login-form-label" for="password">Password</label>
-                  <input class="login-form-input" id="password" name="password" placeholder="Enter your password"
-                    required type="password" />
+                  <div style={{position: 'relative'}}>
+                    <input class="login-form-input" id="password" name="password" placeholder="Enter your password" required type={showPassword ? 'text' : "password"} />
+                    <img style={{position: 'absolute', width: '20px', top: '24%', right: '6px',  }} onClick={() => { setShowPassword(!showPassword) }} src={showPassword ? eyeOff : eye} alt={showPassword ? 'hide' : 'show'} />
+                  </div>
+
                 </div>
                 <button class="btn-login" type="submit">Login</button>
               </form>

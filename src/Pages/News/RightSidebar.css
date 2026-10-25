@@ -1,11 +1,11 @@
-.sidebar>div {
+.news-sidebar>div {
  border: 1px solid var(--border-color);
  border-radius: 8px;
  padding: 25px;
  margin-bottom: 30px;
 }
 
-.sidebar h3 {
+.news-sidebar h3 {
  font-family: var(--font-family);
  font-size: 24px;
  margin-bottom: 20px;

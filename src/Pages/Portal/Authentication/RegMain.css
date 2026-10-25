@@ -93,6 +93,11 @@
  transition: border-color 0.2s;
 }
 
+.reg-form-grid input[type="password"],
+.reg-form-grid input[type="text"] {
+ width: 100%;
+}
+
 .reg-form-grid input:focus,
 .reg-form-grid select:focus,
 .reg-textarea:focus {

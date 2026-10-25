@@ -131,7 +131,7 @@ export default function EditProfile() {
   }
 
   return (
-   </* Redirect pathName={'edit-profile'} */>
+   < Redirect pathName={'edit-profile'}>
       <Nav currentPage={'db'} />
       <main class="container db-main">
         <Link to={'/members/dashboard'}>
@@ -410,6 +410,6 @@ export default function EditProfile() {
         </div>
       </main>
       <Footer />
-    </ /* Redirect */>
+    </ Redirect>
   );
 };

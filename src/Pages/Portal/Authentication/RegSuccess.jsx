@@ -1,4 +1,5 @@
 import Footer from '../../../Shared/Footer';
+import Nav from '../../../Shared/Nav';
 import './RegSuccess.css';
 import check from '../../../assets/icons/check-circle.svg'
 import { Link } from 'react-router';
@@ -6,13 +7,7 @@ import { Link } from 'react-router';
 export default function RegSuccess() {
  return (
   <>
-   <header class="site-header">
-    <div class="header-container">
-     <div class="header-logo">
-      NANSM
-     </div>
-    </div>
-   </header>
+   <Nav currentPage={'reg'}/>
    <main class="reg-main-content">
     <div class="success-container">
      <div class="icon-circle">

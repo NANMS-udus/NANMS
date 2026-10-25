@@ -1,11 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useActionState, useContext, useEffect, useRef, useState } from 'react';
 import './PymntCard.css';
 import check from '../../../../assets/icons/check-circle.svg'
 import dayjs from 'dayjs';
+import { PortalContext } from '../../../../MyContexts/PortalContext';
+import { UiContext } from '../../../../MyContexts/UiContext';
 
 export default function PymntCard({ type, notPaid, verifyPymnt }) {
 
-  console.log(notPaid);
+  const { years, setYears } = useContext(PortalContext)
+
+  const {showPopup} = useContext(UiContext)
 
   const uploadElem = useRef(null)
 
@@ -13,23 +17,25 @@ export default function PymntCard({ type, notPaid, verifyPymnt }) {
 
   const selectYearElem = useRef(null)
 
+  const evidenceForm = useRef(null)
+
   const amtElem = useRef(null)
 
   const [selectMult, setSelectMult] = useState(false)
 
-  const [years, setYears] = useState([])
+  const [evidenceState, evidenceAction, isSending] = useActionState(verifyPymnt, false)
 
   /* const [outstandingBal, setOutstandingBal] = useState(0) */
 
-  const outstandingBal = notPaid.reduce((acc, itm) => {
-    console.log(acc + itm.amount);
-
-    return acc + itm.amount
+  const outstandingBal = notPaid?.reduce((acc, itm) => {
+    return acc + 2000
   }, 0)
 
   useEffect(() => {
-
-  })
+    if (isSending) {
+      showPopup('pending', 'sending...', false)
+    }
+  }, [isSending])
 
 
 
@@ -49,11 +55,11 @@ export default function PymntCard({ type, notPaid, verifyPymnt }) {
               </li>
               <li class="account-detail-item">
                 <span class="account-detail-label">Account Number</span>
-                <span class="account-detail-value">0123456789</span>
+                <span class="account-detail-value">0669705110</span>
               </li>
               <li class="account-detail-item">
                 <span class="account-detail-label">Account Name</span>
-                <span class="account-detail-value">NANMS UDUS</span>
+                <span class="account-detail-value">NANMS Usmanu Danfodiyo Uni Sok</span>
               </li>
             </ul>
           </>
@@ -62,11 +68,11 @@ export default function PymntCard({ type, notPaid, verifyPymnt }) {
               <h3 class="font-headline text-headline-md card-header">Fee Breakdown</h3>
               <ul class="fee-list text-body-md">
                 {
-                  notPaid.map(np => {
+                  notPaid?.map(np => {
                     return (
                       <li class="fee-item">
-                        <span>{np.year} {np.desc}</span>
-                        <span>₦{np.amount}</span>
+                        <span>{np} Ass. Dues</span>
+                        <span>₦2000</span>
                       </li>
                     )
                   })
@@ -111,7 +117,7 @@ export default function PymntCard({ type, notPaid, verifyPymnt }) {
               : type === 'pymnt-vrfctn'
                 ? <>
                   <h3 class="font-headline text-headline-md card-header">Payment Verification</h3>
-                  <div class="file-upload-container">
+                  <form action={evidenceAction} ref={evidenceForm} class="file-upload-container">
                     <p class="text-body-md" style={{ color: 'var(--color-secondary)', marginBottom: '8px' }}>Upload your
                       payment receipt or transfer evidence for manual verification.</p>
                     <label class="file-input-wrapper">
@@ -129,6 +135,7 @@ export default function PymntCard({ type, notPaid, verifyPymnt }) {
                         accept=".jpg,.jpeg,.png,.pdf"
                         class="file-input"
                         type="file"
+                        name='evidence'
                         onChange={(e) => {
                           e.target.files[0]
                           namePrevElem.current.innerText = e.target.files[0].name
@@ -161,12 +168,13 @@ export default function PymntCard({ type, notPaid, verifyPymnt }) {
                           name="year"
                           id=""
                           onChange={(e) => {
-                            if (selectMult && !years.includes(e.target.value)) { 
+
+                            if (selectMult && !years.includes(e.target.value)) {
                               setYears((p) => {
                                 return [e.target.value, ...p]
                               })
                             }
-                            
+
                             if (!selectMult) {
                               setYears([e.target.value])
                             }
@@ -179,14 +187,14 @@ export default function PymntCard({ type, notPaid, verifyPymnt }) {
                           <option value="" disabled selected>
                             Select the year you are paying for.
                           </option>
-                          <option value="2020">2020</option>
+                          {/* <option value="2020">2020</option>
                           <option value="2023">2023</option>
-                          <option value="2021">2021</option>
+                          <option value="2021">2021</option> */}
                           {
                             notPaid?.map((d) => {
                               return (
-                                <option value={d.year}>
-                                  {d.year}
+                                <option value={d} key={d}>
+                                  {d}
                                 </option>
                               )
                             })
@@ -211,32 +219,15 @@ export default function PymntCard({ type, notPaid, verifyPymnt }) {
                         }
                       </div>
 
-                      <input ref={amtElem} style={{ padding: '10px', height: '40px', border: '1px solid #ccbfbf', borderRadius: '8px', gridColumn: 'span 2' }} type="number" name="amount" id="amount" min={2000} defaultValue={2000} step={500} />
+                      <input name="amount" ref={amtElem} style={{ padding: '10px', height: '40px', border: '1px solid #ccbfbf', borderRadius: '8px', gridColumn: 'span 2' }} type="number" id="amount" min={2000} defaultValue={2000} step={500} />
                     </div>
 
                     <button
-                      onClick={() => {
-                        const evidence = uploadElem.current.files[0]
-
-                        const amount = amtElem.current.value
-
-                        const success = verifyPymnt(years, evidence, 'Association Dues', amount)
-
-                        if (success) {
-                          amtElem.current.value = 2000
-
-                          uploadElem.current.files = []
-
-                          setYears([])
-
-                          setSelectMult(false)
-                        }
-                      }}
                       class="btn-submit 
                       text-label-md">
                       Submit Evidence
                     </button>
-                  </div>
+                  </form>
                 </>
                 : 'no type chosen'
       }

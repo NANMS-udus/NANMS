@@ -5,6 +5,8 @@ import { useActionState, useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../../../MyContexts/AuthContext';
 import dayjs from 'dayjs';
 import check from '../../../assets/icons/check-circle.svg'
+import eye from '../../../assets/icons/eye.svg'
+import eyeOff from '../../../assets/icons/eye-off.svg'
 import { UiContext } from '../../../MyContexts/UiContext';
 
 export default function RegMain() {
@@ -17,7 +19,9 @@ export default function RegMain() {
 
   const [pstngStatus, setPstngStatus] = useState('Completed')
 
-  console.log('hurray');
+  const [showPassword, setShowPassword] = useState(false)
+
+  const [showPassword2, setShowPassword2] = useState(false)
 
 
   const {
@@ -210,11 +214,17 @@ export default function RegMain() {
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input name='password' id="password" placeholder="XXXX XXX XXXX" type="password" required />
+              <div style={{ position: 'relative' }}>
+                <input name='password' id="password" placeholder="XXXX XXX XXXX" type={showPassword ? 'text' : "password"} required />
+                <img style={{ position: 'absolute', width: '20px', top: '24%', right: '6px', }} onClick={() => { setShowPassword(!showPassword) }} src={showPassword ? eyeOff : eye} alt={showPassword ? 'hide' : 'show'} />
+              </div>
             </div>
             <div class="form-group">
               <label for="password">Retype Password</label>
-              <input name='password2' id="password-2" placeholder="XXXX XXX XXXX" type="password" required />
+              <div style={{ position: 'relative' }}>
+                <input name='password2' id="password-2" placeholder="XXXX XXX XXXX" type={showPassword2 ? 'text' : "password"} required />
+                <img style={{ position: 'absolute', width: '20px', top: '24%', right: '6px', }} onClick={() => { setShowPassword2(!showPassword2) }} src={showPassword2 ? eyeOff : eye} alt={showPassword2 ? 'hide' : 'show'} />
+              </div>
             </div>
             <div class="form-group full-width">
               <label>Profile Photo</label>
@@ -458,7 +468,7 @@ export default function RegMain() {
                     <input name='pstngStatus' value='Ongoing' id="ongoing" type="radio"
                       onChange={(e) => {
                         console.log(posStatus);
-                        
+
                         setPstngStatus(e.target.value)
                       }}
                     />

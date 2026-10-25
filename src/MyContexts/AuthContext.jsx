@@ -134,7 +134,7 @@ export default function Auth({ children }) {
       if (!signUpError && signUpData) {
         console.log(signUpData);
 
-        const { data2, error2 } = await studyDirBase.auth.signUp({
+        const { data: data2, error: error2 } = await studyDirBase.auth.signUp({
           id: signUpData.user.id,
           email,
           password
@@ -148,7 +148,7 @@ export default function Auth({ children }) {
 
         if (!error2 && data2) {
           console.log(data2);
-          
+
         }
 
         if (avatar.size && avatar.name) {
@@ -178,17 +178,17 @@ export default function Auth({ children }) {
               console.log(avatarPath, avatar_url);
 
 
-              /* const { data, error } = await supabase.from('members').update({ avatar_url }).eq('id', signUpData.user.id).select('*')
+              const { data: data3, error: error3 } = await supabase.from('members').update({ avatar_url }).eq('id', signUpData.user.id).select('*')
 
-              if (error) {
+              if (error3) {
                 showPopup('err', 'Your profile picture could not be uploaded')
               }
 
-              if (!error && data) {
-                console.log(data);
+              if (!error3 && data3) {
+                console.log(data3);
 
-                setDetails(data)
-              } */
+                setDetails(data3)
+              }
             }
           }
         }
@@ -227,19 +227,25 @@ export default function Auth({ children }) {
       if (!error && data) {
         console.log(data);
 
-        const { data: data2, error: error2 } = studyDirBase.auth.signInWithPassword(entries)
+        const { data: data2, error: error2 } = await studyDirBase.auth.signInWithPassword(entries)
 
         if (error2) {
-          showPopup('err', error.message)
+
+          await supabase.auth.signOut()
+
+          showPopup('err', error2.message)
 
           throw new Error(error2.message);
         }
 
-        showPopup('success', 'signed in successfully', true)
+        if (!error2 && data2) {
+          
+          showPopup('success', 'signed in successfully')
 
-        setSession(data.session)
+          setSession(data.session)
 
-        return
+          return
+        }
       }
 
     } catch (error) {
@@ -257,11 +263,13 @@ export default function Auth({ children }) {
       const { error: error2 } = await studyDirBase.auth.signOut()
 
       if (error || error2) {
+        showPopup('err', error.message || error2.message)
         throw new Error(error.message || error2.message);
 
       }
 
       if (!error && !error2) {
+        showPopup('success', 'logged out')
         setSession(null)
       }
     } catch (error) {

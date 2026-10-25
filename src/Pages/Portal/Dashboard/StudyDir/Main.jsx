@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { PortalContext } from '../../../../MyContexts/PortalContext';
 import Pagination from '../../../../Shared/Pagination';
 import './Main.css';
@@ -17,6 +17,14 @@ export default function Main() {
   const [pageNo, setPageNo] = useState(1)
 
   const [displayed, setDisplayed] = useState(studyMats)
+
+  useEffect(() => {
+    function updateDisplayed() {
+      setDisplayed(studyMats)
+    }
+
+    updateDisplayed()
+  }, [studyMats])
 
   /* const test = [
     {

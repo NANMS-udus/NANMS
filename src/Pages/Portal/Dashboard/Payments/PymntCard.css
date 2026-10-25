@@ -236,7 +236,7 @@
 }
 
 .years-disp {
- height: 40px;
+ min-height: 40px;
  border: 1px solid #ccbfbf;
  border-radius: 8px;
  grid-column: span 2;
@@ -252,5 +252,13 @@
  .sel-mult-wrap {
   flex-direction: column;
   align-items: start;
+ }
+}
+
+
+@media (max-width: 500px) {
+ .years-disp {
+  flex-direction: column;
+  align-items: initial;
  }
 }
