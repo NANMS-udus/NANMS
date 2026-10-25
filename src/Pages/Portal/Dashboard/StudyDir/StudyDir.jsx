@@ -6,6 +6,7 @@ import Hero from './Hero';
 import Main from './Main';
 import './StudyDir.css';
 
+
 export default function StudyDir() {
   return (
     <Redirect pathName={'study-directory'}>

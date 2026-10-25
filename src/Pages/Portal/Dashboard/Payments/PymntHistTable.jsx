@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import './PymntHistTable.css';
+import dayjs from 'dayjs';
+import check from '../../../../assets/icons/check-circle.svg'
+import clock from '../../../../assets/icons/clock.svg'
 
 export default function PymntHistTable({ paid, pymntHist }) {
 
@@ -11,8 +14,9 @@ export default function PymntHistTable({ paid, pymntHist }) {
       setPymntHist([...paid, ...pymntHist])
     }
 
-    updateCompPymntHist()
-
+    if (paid?.length || pymntHist?.length) {
+      updateCompPymntHist()
+    }
 
   }, [paid, pymntHist])
 
@@ -43,12 +47,12 @@ export default function PymntHistTable({ paid, pymntHist }) {
                   completePymntHist.map((ph) => {
                     return (
                       <tr>
-                        <td>{ph.date}</td>
+                        <td>{dayjs(ph.date).format('MMM D, YYYY')}</td>
                         <td>{ph.years.join(', ')} {ph.desc}</td>
                         <td>₦{ph.amount}</td>
                         <td>
                           <span class="status-badge">
-                            <span class="material-symbols-outlined" style={{ fontSize: '14px' }}>check_circle</span>
+                           <img style={{width: '16px'}} src={ph.status === 'Verified' ? check : clock} alt="" />
                             {ph.status}
                           </span>
                         </td>
@@ -61,7 +65,7 @@ export default function PymntHistTable({ paid, pymntHist }) {
                     )
                   })
                 }
-               {/*  <tr>
+                {/*  <tr>
                   <td>Sep 15, 2022</td>
                   <td>2022 Annual Dues</td>
                   <td>₦40,000</td>
