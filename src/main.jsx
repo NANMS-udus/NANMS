@@ -16,6 +16,10 @@ import Auth from './MyContexts/AuthContext.jsx'
 import GenCntxt from './MyContexts/GenContexts.jsx'
 import Portal from './Shared/Portal.jsx'
 import { UiCntxt } from './MyContexts/UiContext.jsx'
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration.js'
+
+dayjs.extend(duration)
 
 createRoot(document.getElementById('root')).render(
   <UiCntxt>

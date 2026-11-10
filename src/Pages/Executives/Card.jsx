@@ -44,7 +44,7 @@ export default function Card({ details }) {
             <span className={`exec-card-label label-${
               position === 'President' 
               ? 'president' 
-              : position.split(' ').includes('Vice-President')  
+              : position?.split(' ').includes('Vice-President')  
               ? 'vp'
               : 'others'
               }`}>{position}</span>

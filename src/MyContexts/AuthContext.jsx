@@ -169,7 +169,7 @@ export default function Auth({ children }) {
             }
 
             if (!uploadError && uploadData) {
-              console.log(uploadData);
+              console.log('uploaded', uploadData);
 
               avatar_url = await supabase.storage.from(`avatars`).getPublicUrl(uploadData.path).data.publicUrl
 
@@ -178,7 +178,7 @@ export default function Auth({ children }) {
               console.log(avatarPath, avatar_url);
 
 
-              const { data: data3, error: error3 } = await supabase.from('members').update({ avatar_url }).eq('id', signUpData.user.id).select('*')
+              const { data: data3, error: error3 } = await supabase.from('members').update({ avatar_url }).eq('id', signUpData.user.id).select('*').single()
 
               if (error3) {
                 showPopup('err', 'Your profile picture could not be uploaded')

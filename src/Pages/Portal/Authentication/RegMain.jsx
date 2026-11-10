@@ -188,7 +188,7 @@ export default function RegMain() {
           <div class="reg-form-grid">
             <div class="form-group full-width">
               <label for="fullName">Full Name</label>
-              <input name='fullname' id="fullName" placeholder="Dr. Jane Doe" required type="text" />
+              <input name='fullname' id="fullName" placeholder="Dr. Jane Doe (First name first)" required type="text" />
             </div>
             <div class="form-group">
               <label for="email">Email Address</label>

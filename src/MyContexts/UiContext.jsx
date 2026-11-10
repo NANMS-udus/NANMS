@@ -18,6 +18,10 @@ export function UiCntxt({ children }) {
 
   const [detModal, setDetModal] = useState({show: false, details: {}})
 
+  const [showBot, setShowbot] = useState(false)
+
+  const [assNavRoute, setAssNavRoute] = useState(null)
+
   function showPopup(msgType, msg, autoHide = true) {
     setPopup({
       show: true,
@@ -62,7 +66,11 @@ export function UiCntxt({ children }) {
       setModal,
       hideModal,
       detModal,
-      setDetModal
+      setDetModal,
+      showBot,
+      setShowbot,
+      assNavRoute,
+      setAssNavRoute
     }}>
       {children}
     </UiContext.Provider>

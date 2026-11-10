@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Member ID Card Preview &amp; Print - NANMS</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --primary: #006837;
+      --primary-dark: #004d27;
+      --primary-light: #e8f5ed;
+      --primary-glow: rgba(0, 104, 55, 0.16);
+      --gold: #c59b27;
+      --gold-light: #fff9e6;
+      --gold-dark: #8c6b12;
+      --surface: #f4f6f8;
+      --card-bg: #ffffff;
+      --text-main: #192024;
+      --text-muted: #5d6d7e;
+      --text-sub: #85929e;
+      --border: #e2e8f0;
+      --border-dark: #cbd5e1;
+      --radius: 12px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-card: 0 14px 32px rgba(0, 104, 55, 0.12), 0 4px 12px rgba(0,0,0,0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--surface);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation */
+    .header-nav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 24px;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      padding: 8px 0;
+    }
+    .brand-logo-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid var(--primary-light);
+      flex-shrink: 0;
+    }
+    .brand-text-block h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.2px;
+      line-height: 1.1;
+    }
+    .brand-text-block span {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      font-weight: 600;
+      display: block;
+    }
+
+    .nav-nav-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      list-style: none;
+    }
+    .nav-link {
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      white-space: nowrap;
+      transition: color 0.15s ease;
+    }
+    .nav-link:hover {
+      color: var(--primary);
+    }
+    .member-portal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      min-height: 42px;
+      transition: background 0.15s ease;
+    }
+    .member-portal-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Sub-header / Page Title Banner */
+    .page-title-banner {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    .title-container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .title-meta-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      color: var(--text-sub);
+    }
+    .breadcrumb a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+    .page-headline-wrap {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .page-headline {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(20px, 3vw, 26px);
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    .badge-verified-top {
+      font-family: 'Inter', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      border: 1px solid rgba(0, 104, 55, 0.2);
+      white-space: nowrap;
+    }
+
+    .action-group-top {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .btn-secondary {
+      background: #ffffff;
+      color: var(--text-main);
+      border: 1px solid var(--border-dark);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      min-height: 44px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .btn-secondary:hover {
+      background: #f8fafc;
+      border-color: var(--text-muted);
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border: 1px solid var(--primary);
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      min-height: 44px;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0, 104, 55, 0.25);
+      transition: all 0.15s ease;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 4px 12px rgba(0, 104, 55, 0.35);
+    }
+
+    /* Main Responsive Grid */
+    .main-wrapper {
+      max-width: 1360px;
+      margin: 32px auto 60px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.75fr) minmax(320px, 1fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* Left Card Preview Panel */
+    .preview-canvas-panel {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      min-width: 0;
+    }
+    .canvas-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .view-switcher {
+      display: inline-flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 3px;
+      border-radius: 8px;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .switch-btn {
+      background: transparent;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 36px;
+      transition: all 0.15s ease;
+    }
+    .switch-btn.active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .scale-info-tag {
+      font-size: 12px;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .scale-info-tag span {
+      background: var(--surface);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    /* Print Preview Stage */
+    .print-stage {
+      background: #edf2f7;
+      border: 1px dashed var(--border-dark);
+      border-radius: 12px;
+      padding: 36px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      position: relative;
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 16px 16px;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .card-stage-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+      justify-content: center;
+    }
+
+    /* Outer Wrapper with Bleed Marks */
+    .card-wrap-trim {
+      position: relative;
+      width: 100%;
+      max-width: 530px;
+      margin: 0 auto;
+    }
+    .crop-mark {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .crop-tl { top: 22px; left: -8px; border-top: 2px solid #94a3b8; border-left: 2px solid #94a3b8; }
+    .crop-tr { top: 22px; right: -8px; border-top: 2px solid #94a3b8; border-right: 2px solid #94a3b8; }
+    .crop-bl { bottom: -8px; left: -8px; border-bottom: 2px solid #94a3b8; border-left: 2px solid #94a3b8; }
+    .crop-br { bottom: -8px; right: -8px; border-bottom: 2px solid #94a3b8; border-right: 2px solid #94a3b8; }
+
+    /* CR80 ID Card Scalable Box */
+    .id-card-unit {
+      width: 100%;
+      aspect-ratio: 520 / 326;
+      border-radius: 14px;
+      background: #ffffff;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      user-select: none;
+    }
+
+    /* CARD FRONT DESIGN */
+    .card-front {
+      background: #ffffff;
+      position: relative;
+    }
+    .card-front::before {
+      content: "";
+      position: absolute;
+      right: -20px;
+      bottom: -20px;
+      width: clamp(140px, 38%, 210px);
+      height: clamp(140px, 38%, 210px);
+      background: url('https://lh3.googleusercontent.com/aida/ALJJyrBH3qL3t5UJgJpKoEdqLypcyun4E20H462yo-U3eQNxf4V7XW3dl0gHAvYaSKEQEizm8dKMmgfbJ_bLIxe5dJjj5amK1XKisPtDxh3GcY7kAKtFpmSW5I4DraAq0xsrKUSKZASyJ9fpz_ljM-tOUTAs5iBpD3gcN-agti5v3IHQz_NPHu_eSkz9AlIWwPuR2yrL80kWlqyytLBS5o1VwpFfs6ly99xJimU6C56g0iJDTkXg16c-T4x2jQ') no-repeat center center;
+      background-size: contain;
+      opacity: 0.045;
+      pointer-events: none;
+    }
+    .card-front-header {
+      background: linear-gradient(135deg, #005a2f 0%, #00783f 100%);
+      padding: clamp(6px, 2%, 10px) clamp(10px, 3%, 16px);
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 1.8%, 12px);
+      color: #ffffff;
+      border-bottom: 2.5px solid var(--gold);
+      flex-shrink: 0;
+    }
+    .card-header-logo {
+      width: clamp(28px, 6.5vw, 38px);
+      height: clamp(28px, 6.5vw, 38px);
+      border-radius: 50%;
+      background: #ffffff;
+      padding: 2px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+    .card-header-meta {
+      flex: 1;
+      min-width: 0;
+    }
+    .card-assoc-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(9.5px, 2.2vw, 13px);
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      line-height: 1.15;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-assoc-sub {
+      font-size: clamp(7px, 1.4vw, 8.5px);
+      color: #d1fae5;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-top: 1px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-assoc-badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 2px clamp(4px, 1vw, 7px);
+      border-radius: 4px;
+      font-size: clamp(6.5px, 1.3vw, 8.5px);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .card-front-body {
+      padding: clamp(8px, 2.4%, 14px) clamp(10px, 3.2%, 18px);
+      display: flex;
+      gap: clamp(10px, 3%, 18px);
+      flex: 1;
+      min-height: 0;
+    }
+    .student-photo-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(4px, 1.2%, 8px);
+      flex-shrink: 0;
+      width: clamp(75px, 21%, 106px);
+    }
+    .photo-frame {
+      width: 100%;
+      aspect-ratio: 106 / 130;
+      border-radius: 6px;
+      border: 2px solid var(--gold);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      position: relative;
+      background: #f1f5f9;
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .photo-security-strip {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 104, 55, 0.88);
+      color: #ffffff;
+      font-size: clamp(5.5px, 1.2vw, 7.5px);
+      font-weight: 700;
+      text-align: center;
+      padding: 1.5px 0;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .chip-security-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(5px, 1.5vw, 10px);
+      margin-top: 1px;
+      width: 100%;
+    }
+    .smart-chip {
+      width: clamp(22px, 5.5vw, 30px);
+      height: clamp(16px, 4.2vw, 23px);
+      background: linear-gradient(135deg, #d4af37 0%, #aa820a 50%, #f3e5ab 100%);
+      border-radius: 3px;
+      border: 1px solid #8c6b12;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.6), 0 1px 3px rgba(0,0,0,0.2);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .smart-chip::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 2px;
+      right: 2px;
+      bottom: 3px;
+      border: 1px solid rgba(0,0,0,0.28);
+      border-left: none;
+      border-right: none;
+    }
+    .hologram-seal {
+      width: clamp(18px, 4.6vw, 24px);
+      height: clamp(18px, 4.6vw, 24px);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 25%, #93c5fd 50%, #fbcfe8 75%, #fde68a 100%);
+      border: 1px solid rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(5px, 1.1vw, 6.5px);
+      font-weight: 800;
+      color: #064e3b;
+      text-shadow: 0 0.5px 1px rgba(255,255,255,0.8);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+
+    .student-details-col {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .student-primary-info h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(11.5px, 2.5vw, 15.5px);
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.15;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .student-id-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(8.5px, 1.8vw, 11px);
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 1px;
+      display: block;
+      letter-spacing: 0.3px;
+    }
+
+    .meta-fields-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2px, 0.8vw, 5px) clamp(6px, 1.5vw, 12px);
+      margin-top: clamp(2px, 1vw, 6px);
+    }
+    .meta-field-item {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .field-label {
+      font-size: clamp(6.5px, 1.3vw, 8px);
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-sub);
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .field-val {
+      font-size: clamp(7.5px, 1.6vw, 10px);
+      font-weight: 600;
+      color: #1e293b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .field-val.highlight-green {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .signatures-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: clamp(3px, 1vw, 6px);
+      border-top: 1px dashed #e2e8f0;
+      margin-top: 3px;
+      gap: 4px;
+    }
+    .signature-block {
+      text-align: center;
+      min-width: 0;
+      flex: 1;
+    }
+    .sig-script {
+      font-family: 'Brush Script MT', cursive, serif;
+      font-size: clamp(10px, 2.4vw, 14px);
+      color: #0f2d1e;
+      line-height: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sig-title {
+      font-size: clamp(5.5px, 1.2vw, 7px);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-sub);
+      border-top: 1px solid #cbd5e1;
+      padding-top: 1.5px;
+      margin-top: 1px;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .official-stamp {
+      border: 1px solid #dc2626;
+      color: #dc2626;
+      padding: 1.5px clamp(2px, 0.8vw, 5px);
+      border-radius: 3px;
+      font-size: clamp(5px, 1vw, 6.5px);
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      transform: rotate(-3deg);
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .card-front-footer {
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: clamp(3px, 1vw, 5px) clamp(10px, 3%, 16px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: clamp(6.5px, 1.3vw, 8px);
+      color: var(--text-sub);
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+    .nfc-indicator {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--primary);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* CARD BACK DESIGN */
+    .card-back {
+      background: #ffffff;
+      position: relative;
+    }
+    .magnetic-stripe {
+      width: 100%;
+      height: clamp(26px, 8vw, 42px);
+      background: #1e293b;
+      margin-top: clamp(8px, 2.5%, 16px);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .magnetic-stripe::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(255,255,255,0.03) 4px, rgba(255,255,255,0.03) 8px);
+    }
+
+    .card-back-body {
+      padding: clamp(6px, 2%, 10px) clamp(10px, 3%, 18px);
+      display: flex;
+      gap: clamp(8px, 2.5%, 16px);
+      flex: 1;
+      min-height: 0;
+    }
+    .back-qr-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(3px, 1vw, 6px);
+      flex-shrink: 0;
+    }
+    .qr-box {
+      width: clamp(60px, 18vw, 92px);
+      height: clamp(60px, 18vw, 92px);
+      background: #ffffff;
+      border: 1.5px solid var(--border-dark);
+      border-radius: 6px;
+      padding: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .qr-svg {
+      width: 100%;
+      height: 100%;
+    }
+    .qr-scan-label {
+      font-size: clamp(5.5px, 1.2vw, 7.5px);
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+
+    .back-legal-col {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 4px;
+    }
+    .back-terms-box {
+      font-size: clamp(6px, 1.3vw, 7.6px);
+      color: #475569;
+      line-height: 1.32;
+      background: #f8fafc;
+      padding: clamp(4px, 1.2vw, 7px) clamp(6px, 1.5vw, 9px);
+      border-radius: 5px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+    .back-terms-box strong {
+      color: #0f172a;
+    }
+    .helpline-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: clamp(6px, 1.3vw, 7.8px);
+      color: #334155;
+      padding: clamp(2px, 0.8vw, 4px) clamp(5px, 1.2vw, 8px);
+      background: var(--gold-light);
+      border: 1px solid rgba(197, 155, 39, 0.3);
+      border-radius: 4px;
+      flex-wrap: wrap;
+      gap: 2px 8px;
+    }
+    .helpline-box span {
+      font-weight: 700;
+      color: var(--gold-dark);
+    }
+
+    .barcode-section {
+      padding: clamp(3px, 1vw, 6px) clamp(10px, 3%, 18px) clamp(6px, 1.5vw, 10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #f1f5f9;
+      flex-shrink: 0;
+      gap: 8px;
+    }
+    .barcode-svg-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1;
+      min-width: 0;
+    }
+    .barcode-lines {
+      height: clamp(14px, 3.8vw, 22px);
+      width: clamp(120px, 45%, 210px);
+    }
+    .barcode-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(6.5px, 1.4vw, 8.5px);
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      margin-top: 1px;
+    }
+    .auth-hash-box {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(6px, 1.2vw, 7.5px);
+      color: var(--text-sub);
+      text-align: right;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    /* Right Sidebar - Print Settings & Options */
+    .print-controls-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      min-width: 0;
+    }
+
+    .control-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .control-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .print-cta-block {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .btn-print-hero {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      box-shadow: 0 4px 14px rgba(0, 104, 55, 0.3);
+      transition: all 0.2s ease;
+    }
+    .btn-print-hero:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 6px 18px rgba(0, 104, 55, 0.4);
+      transform: translateY(-1px);
+    }
+    .btn-download-pdf {
+      background: #ffffff;
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      transition: all 0.15s ease;
+    }
+    .btn-download-pdf:hover {
+      background: var(--primary-light);
+    }
+
+    .setting-row {
+      margin-bottom: 16px;
+    }
+    .setting-row:last-child {
+      margin-bottom: 0;
+    }
+    .setting-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .setting-select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-dark);
+      background: #ffffff;
+      font-size: 13px;
+      color: var(--text-main);
+      outline: none;
+      min-height: 44px;
+      transition: border-color 0.15s ease;
+    }
+    .setting-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .radio-pill-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .radio-pill-label {
+      border: 1px solid var(--border-dark);
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 500;
+      min-height: 44px;
+      transition: all 0.15s ease;
+    }
+    .radio-pill-label:hover {
+      background: var(--surface);
+    }
+    .radio-pill-label input {
+      accent-color: var(--primary);
+    }
+    .radio-pill-label.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .checkbox-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #f1f5f9;
+      gap: 12px;
+    }
+    .checkbox-toggle-row:last-child {
+      border-bottom: none;
+    }
+    .checkbox-toggle-left {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+    .checkbox-toggle-left small {
+      display: block;
+      color: var(--text-sub);
+      font-size: 11px;
+    }
+    
+    .switch-toggle {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+    .switch-toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider-toggle {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #cbd5e1;
+      transition: .25s ease;
+      border-radius: 22px;
+    }
+    .slider-toggle:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .25s ease;
+      border-radius: 50%;
+    }
+    input:checked + .slider-toggle {
+      background-color: var(--primary);
+    }
+    input:checked + .slider-toggle:before {
+      transform: translateX(18px);
+    }
+
+    .notice-card {
+      background: var(--gold-light);
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+      color: #785c07;
+      line-height: 1.45;
+    }
+    .notice-card svg {
+      flex-shrink: 0;
+      color: var(--gold-dark);
+      margin-top: 2px;
+    }
+
+    .specs-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .spec-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f1f5f9;
+      gap: 8px;
+    }
+    .spec-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .spec-name {
+      color: var(--text-muted);
+    }
+    .spec-val {
+      font-weight: 600;
+      color: var(--text-main);
+      font-family: 'JetBrains Mono', monospace;
+      text-align: right;
+    }
+
+    /* Footer */
+    .page-footer {
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      margin-top: 60px;
+    }
+    .footer-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 20px;
+      list-style: none;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Responsive Media Queries */
+    @media (max-width: 1120px) {
+      .nav-links {
+        gap: 12px;
+      }
+      .nav-link {
+        font-size: 12.5px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .main-wrapper {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        margin-top: 24px;
+      }
+      .nav-nav-section {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        justify-content: space-between;
+      }
+      .nav-links {
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 8px 16px;
+        min-height: auto;
+      }
+      .brand-wrap {
+        padding: 4px 0;
+      }
+      .page-title-banner {
+        padding: 16px 0;
+      }
+      .title-container {
+        padding: 0 16px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .action-group-top {
+        width: 100%;
+      }
+      .btn-secondary, .btn-primary {
+        flex: 1;
+        min-width: 140px;
+      }
+      .main-wrapper {
+        padding: 0 16px;
+        margin: 20px auto 40px;
+      }
+      .preview-canvas-panel {
+        padding: 16px;
+      }
+      .print-stage {
+        padding: 24px 10px;
+        gap: 28px;
+      }
+      .canvas-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+      .view-switcher {
+        width: 100%;
+        justify-content: stretch;
+      }
+      .switch-btn {
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+      }
+      .scale-info-tag {
+        font-size: 11px;
+      }
+      .control-card {
+        padding: 18px;
+      }
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      .footer-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .brand-text-block h1 {
+        font-size: 18px;
+      }
+      .brand-text-block span {
+        font-size: 9px;
+      }
+      .radio-pill-group {
+        grid-template-columns: 1fr;
+      }
+      .action-group-top {
+        flex-direction: column;
+      }
+      .btn-secondary, .btn-primary {
+        width: 100%;
+      }
+      .crop-mark {
+        display: none;
+      }
+    }
+
+    /* Print Specific Media Styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .header-nav,
+      .page-title-banner,
+      .canvas-toolbar,
+      .print-controls-sidebar,
+      .page-footer,
+      .crop-mark,
+      .card-stage-label {
+        display: none !important;
+      }
+      .main-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        max-width: 100% !important;
+      }
+      .preview-canvas-panel {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+      .print-stage {
+        background: none !important;
+        border: none !important;
+        padding: 0 !important;
+        gap: 24px !important;
+      }
+      .card-wrap-trim {
+        max-width: 85.6mm !important;
+        page-break-inside: avoid;
+        margin: 0 auto 15mm !important;
+      }
+      .id-card-unit {
+        width: 85.6mm !important;
+        height: 53.98mm !important;
+        box-shadow: none !important;
+        border: 1px solid #94a3b8 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Top Navigation Bar -->
+<header class="header-nav">
+<div class="header-container">
+<a class="brand-wrap" href="#">
+<img alt="NANMS Logo" class="brand-logo-img" src="https://lh3.googleusercontent.com/aida/ALJJyrBH3qL3t5UJgJpKoEdqLypcyun4E20H462yo-U3eQNxf4V7XW3dl0gHAvYaSKEQEizm8dKMmgfbJ_bLIxe5dJjj5amK1XKisPtDxh3GcY7kAKtFpmSW5I4DraAq0xsrKUSKZASyJ9fpz_ljM-tOUTAs5iBpD3gcN-agti5v3IHQz_NPHu_eSkz9AlIWwPuR2yrL80kWlqyytLBS5o1VwpFfs6ly99xJimU6C56g0iJDTkXg16c-T4x2jQ"/>
+<div class="brand-text-block">
+<h1>NANMS</h1>
+<span>Niger State Medical Students</span>
+</div>
+</a>
+<div class="nav-nav-section">
+<ul class="nav-links">
+<li><a class="nav-link" href="#">Home</a></li>
+<li><a class="nav-link" href="#">About Us</a></li>
+<li><a class="nav-link" href="#">Executives</a></li>
+<li><a class="nav-link" href="#">Projects</a></li>
+<li><a class="nav-link" href="#">News</a></li>
+<li><a class="nav-link" href="#">Patrons &amp; Alumni</a></li>
+<li><a class="nav-link" href="#">Study Directory</a></li>
+<li><a class="nav-link" href="#">Exam Countdown</a></li>
+</ul>
+<a class="member-portal-btn" href="#">
+<svg fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="15">
+<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+<circle cx="12" cy="7" r="4"></circle>
+</svg>
+          Member Portal
+        </a>
+</div>
+</div>
+</header>
+<!-- Title & Action Bar -->
+<section class="page-title-banner">
+<div class="title-container">
+<div class="title-meta-block">
+<div class="breadcrumb">
+<a href="#">Portal Dashboard</a>
+<span>/</span>
+<a href="#">Member Credentials</a>
+<span>/</span>
+<span>ID Card Preview &amp; Print</span>
+</div>
+<div class="page-headline-wrap">
+<h2 class="page-headline">Member ID Card Preview &amp; Printing</h2>
+<span class="badge-verified-top">
+<svg fill="none" height="12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 24 24" width="12">
+<polyline points="20 6 9 17 4 12"></polyline>
+</svg>
+            Print-Ready CR80 High Res
+          </span>
+</div>
+</div>
+<div class="action-group-top">
+<button class="btn-secondary" onclick="window.history.back()">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="14">
+<line x1="19" x2="5" y1="12" y2="12"></line>
+<polyline points="12 19 5 12 12 5"></polyline>
+</svg>
+          Return to Dashboard
+        </button>
+<button class="btn-primary" onclick="window.print()">
+<svg fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="15">
+<polyline points="6 9 6 2 18 2 18 9"></polyline>
+<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+<rect height="8" width="12" x="6" y="14"></rect>
+</svg>
+          Print ID Card Now
+        </button>
+</div>
+</div>
+</section>
+<!-- Main Content Layout -->
+<main class="main-wrapper">
+<!-- Left Column: High-Fidelity Printable Canvas Stage -->
+<div class="preview-canvas-panel">
+<div class="canvas-toolbar">
+<div class="view-switcher">
+<button class="switch-btn active" id="btn-show-both" onclick="setCardView('both')">
+<svg fill="none" height="13" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="13">
+<rect height="18" rx="2" width="9" x="2" y="3"></rect>
+<rect height="18" rx="2" width="9" x="13" y="3"></rect>
+</svg>
+            Dual View (Front &amp; Back)
+          </button>
+<button class="switch-btn" id="btn-show-front" onclick="setCardView('front')">Front Only</button>
+<button class="switch-btn" id="btn-show-back" onclick="setCardView('back')">Back Only</button>
+</div>
+<div class="scale-info-tag">
+          Print Spec: <span>CR80 standard (85.60 × 53.98 mm)</span> • <span>300 DPI</span>
+</div>
+</div>
+<!-- Realistic Printing Stage with Bleed/Crop Trim Guides -->
+<div class="print-stage">
+<!-- FRONT OF CARD -->
+<div class="card-wrap-trim" id="card-front-wrap">
+<div class="card-stage-label">
+<svg fill="none" height="13" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="13">
+<rect height="16" rx="2" width="18" x="3" y="4"></rect>
+<line x1="3" x2="21" y1="10" y2="10"></line>
+</svg>
+            Front Face • Verifiable Scholar Credential
+          </div>
+<div class="crop-mark crop-tl"></div>
+<div class="crop-mark crop-tr"></div>
+<div class="crop-mark crop-bl"></div>
+<div class="crop-mark crop-br"></div>
+<div class="id-card-unit card-front">
+<!-- Front Top Banner -->
+<div class="card-front-header">
+<img alt="NANMS Emblem" class="card-header-logo" src="https://lh3.googleusercontent.com/aida/ALJJyrBH3qL3t5UJgJpKoEdqLypcyun4E20H462yo-U3eQNxf4V7XW3dl0gHAvYaSKEQEizm8dKMmgfbJ_bLIxe5dJjj5amK1XKisPtDxh3GcY7kAKtFpmSW5I4DraAq0xsrKUSKZASyJ9fpz_ljM-tOUTAs5iBpD3gcN-agti5v3IHQz_NPHu_eSkz9AlIWwPuR2yrL80kWlqyytLBS5o1VwpFfs6ly99xJimU6C56g0iJDTkXg16c-T4x2jQ"/>
+<div class="card-header-meta">
+<div class="card-assoc-title">National Association of Niger State Medical Students</div>
+<div class="card-assoc-sub">Affiliated to NMA &amp; NiMSA • Motto: Excellence &amp; Care</div>
+</div>
+<div class="card-assoc-badge">OFFICIAL</div>
+</div>
+<!-- Front Content Body -->
+<div class="card-front-body">
+<div class="student-photo-col">
+<div class="photo-frame">
+<img alt="Dr-in-Training Mohammed Mustapha Aliyu" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFEtJV1d1ylYuIbfSDAhaNzbU21QNBRADE5uL5KjGSloEfw2uFlqZm5nWIuFdZPZhGDfKsX8puJ5co-YmdQPWzQtnJPD1FhMzILFTn0qOVpLVRjFmsA2IRpNuF7c1lVojp0DWmw0ukPcMfXDuVAqI5Ke_kaICoKRvSIN5t-22zacJxQejmXxN5dnDQVk0sbYsVmbmSejlOH8uKXB77aKiBaR1gqDHg2UvlVUn1pHA"/>
+<div class="photo-security-strip">SECURE • NANMS</div>
+</div>
+<div class="chip-security-wrap">
+<div class="smart-chip" title="EMV Contactless Microchip"></div>
+<div class="hologram-seal" title="Anti-Counterfeit Hologram">NANMS</div>
+</div>
+</div>
+<div class="student-details-col">
+<div class="student-primary-info">
+<h2>Dr-in-Training Mohammed Mustapha Aliyu</h2>
+<span class="student-id-code">NANMS/ABU/2021/0482</span>
+</div>
+<div class="meta-fields-grid">
+<div class="meta-field-item">
+<span class="field-label">Medical Institution</span>
+<span class="field-val">Ahmadu Bello University / ABUTH</span>
+</div>
+<div class="meta-field-item">
+<span class="field-label">Origin LGA</span>
+<span class="field-val">Bida LGA, Niger State</span>
+</div>
+<div class="meta-field-item">
+<span class="field-label">Academic Cadre &amp; Status</span>
+<span class="field-val">500 Level (MBBS Clinical)</span>
+</div>
+<div class="meta-field-item">
+<span class="field-label">Blood / Genotype</span>
+<span class="field-val">O+ / AA</span>
+</div>
+<div class="meta-field-item">
+<span class="field-label">Issued / Expiry</span>
+<span class="field-val">Nov 2021 | Nov 2026</span>
+</div>
+<div class="meta-field-item">
+<span class="field-label">Membership Standing</span>
+<span class="field-val highlight-green">Active Valid Scholar</span>
+</div>
+</div>
+<!-- Official Signatures -->
+<div class="signatures-row">
+<div class="signature-block">
+<div class="sig-script">Dr. Farooq G. Umar</div>
+<div class="sig-title">National President</div>
+</div>
+<div class="official-stamp">
+                    OFFICIAL SEAL
+                  </div>
+<div class="signature-block">
+<div class="sig-script">Amina K. Ndatsu</div>
+<div class="sig-title">Dir. of Credentials</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Front Footer Strip -->
+<div class="card-front-footer">
+<span class="nfc-indicator">
+<svg fill="none" height="11" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="11">
+<path d="M4 11a9 9 0 0 1 9 9"></path>
+<path d="M4 4a16 16 0 0 1 16 16"></path>
+<circle cx="5" cy="19" r="1"></circle>
+</svg>
+                NFC PASS ENABLED
+              </span>
+<span>STATE SCHOLAR IDENTIFIER • VALID NATIONWIDE</span>
+</div>
+</div>
+</div>
+<!-- BACK OF CARD -->
+<div class="card-wrap-trim" id="card-back-wrap">
+<div class="card-stage-label">
+<svg fill="none" height="13" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="13">
+<rect height="16" rx="2" width="18" x="3" y="4"></rect>
+<line x1="3" x2="21" y1="9" y2="9"></line>
+</svg>
+            Back Face • Security Magnetic Stripe &amp; QR Verification
+          </div>
+<div class="crop-mark crop-tl"></div>
+<div class="crop-mark crop-tr"></div>
+<div class="crop-mark crop-bl"></div>
+<div class="crop-mark crop-br"></div>
+<div class="id-card-unit card-back">
+<!-- Magnetic Stripe simulation -->
+<div class="magnetic-stripe"></div>
+<!-- Card Back Content -->
+<div class="card-back-body">
+<div class="back-qr-col">
+<div class="qr-box">
+<svg class="qr-svg" fill="#0f172a" viewbox="0 0 100 100">
+<rect fill="#006837" height="24" rx="2" width="24" x="10" y="10"></rect>
+<rect fill="#ffffff" height="14" width="14" x="15" y="15"></rect>
+<rect fill="#006837" height="8" width="8" x="18" y="18"></rect>
+<rect fill="#006837" height="24" rx="2" width="24" x="66" y="10"></rect>
+<rect fill="#ffffff" height="14" width="14" x="71" y="15"></rect>
+<rect fill="#006837" height="8" width="8" x="74" y="18"></rect>
+<rect fill="#006837" height="24" rx="2" width="24" x="10" y="66"></rect>
+<rect fill="#ffffff" height="14" width="14" x="15" y="71"></rect>
+<rect fill="#006837" height="8" width="8" x="18" y="74"></rect>
+<rect height="6" width="6" x="42" y="12"></rect>
+<rect height="6" width="6" x="52" y="18"></rect>
+<rect height="6" width="16" x="42" y="28"></rect>
+<rect height="12" width="6" x="12" y="42"></rect>
+<rect height="6" width="8" x="24" y="48"></rect>
+<rect fill="#006837" height="8" width="8" x="40" y="42"></rect>
+<rect height="6" width="6" x="54" y="44"></rect>
+<rect height="6" width="12" x="68" y="42"></rect>
+<rect height="12" width="6" x="84" y="48"></rect>
+<rect height="6" width="8" x="42" y="58"></rect>
+<rect height="6" width="10" x="58" y="58"></rect>
+<rect height="12" width="6" x="42" y="72"></rect>
+<rect height="6" width="12" x="54" y="76"></rect>
+<rect height="8" width="8" x="74" y="72"></rect>
+<rect height="6" width="4" x="86" y="78"></rect>
+</svg>
+</div>
+<div class="qr-scan-label">SCAN TO VERIFY LIVE</div>
+</div>
+<div class="back-legal-col">
+<div class="back-terms-box">
+<strong>CONDITIONS OF ISSUANCE:</strong> This credential card is property of the National Association of Niger State Medical Students (NANMS). It is non-transferable and must be presented upon request during association congresses, clinical postings, mock OSCE exams, and subsidized medical book fairs.
+                </div>
+<div class="helpline-box">
+<div><strong>Secretariat:</strong> Minna, Niger State</div>
+<div><strong>Contact:</strong> <span>support@nanms.org.ng</span></div>
+</div>
+</div>
+</div>
+<!-- Barcode & Cryptographic Hash Footer -->
+<div class="barcode-section">
+<div class="barcode-svg-wrap">
+<svg class="barcode-lines" preserveaspectratio="none" viewbox="0 0 200 24">
+<rect fill="#000" height="24" width="3" x="0" y="0"></rect>
+<rect fill="#000" height="24" width="2" x="5" y="0"></rect>
+<rect fill="#000" height="24" width="4" x="9" y="0"></rect>
+<rect fill="#000" height="24" width="1" x="16" y="0"></rect>
+<rect fill="#000" height="24" width="5" x="19" y="0"></rect>
+<rect fill="#000" height="24" width="2" x="27" y="0"></rect>
+<rect fill="#000" height="24" width="3" x="32" y="0"></rect>
+<rect fill="#000" height="24" width="1" x="38" y="0"></rect>
+<rect fill="#000" height="24" width="4" x="42" y="0"></rect>
+<rect fill="#000" height="24" width="2" x="49" y="0"></rect>
+<rect fill="#000" height="24" width="5" x="54" y="0"></rect>
+<rect fill="#000" height="24" width="2" x="62" y="0"></rect>
+<rect fill="#000" height="24" width="3" x="67" y="0"></rect>
+<rect fill="#000" height="24" width="1" x="73" y="0"></rect>
+<rect fill="#000" height="24" width="4" x="77" y="0"></rect>
+<rect fill="#000" height="24" width="2" x="84" y="0"></rect>
+<rect fill="#000" height="24" width="5" x="89" y="0"></rect>
+<rect fill="#000" height="24" width="1" x="97" y="0"></rect>
+<rect fill="#000" height="24" width="3" x="101" y="0"></rect>
+<rect fill="#000" height="24" width="2" x="107" y="0"></rect>
+<rect fill="#000" height="24" width="4" x="112" y="0"></rect>
+<rect fill="#000" height="24" width="1" x="119" y="0"></rect>
+<rect fill="#000" height="24" width="5" x="123" y="0"></rect>
+<rect fill="#000" height="24" width="2" x="131" y="0"></rect>
+<rect fill="#000" height="24" width="4" x="136" y="0"></rect>
+<rect fill="#000" height="24" width="1" x="143" y="0"></rect>
+<rect fill="#000" height="24" width="5" x="147" y="0"></rect>
+<rect fill="#000" height="24" width="2" x="155" y="0"></rect>
+<rect fill="#000" height="24" width="3" x="160" y="0"></rect>
+<rect fill="#000" height="24" width="1" x="166" y="0"></rect>
+<rect fill="#000" height="24" width="4" x="170" y="0"></rect>
+<rect fill="#000" height="24" width="2" x="177" y="0"></rect>
+<rect fill="#000" height="24" width="5" x="182" y="0"></rect>
+<rect fill="#000" height="24" width="2" x="190" y="0"></rect>
+<rect fill="#000" height="24" width="3" x="195" y="0"></rect>
+</svg>
+<span class="barcode-number">9 7 8 0 2 0 1 0 4 8 2 5</span>
+</div>
+<div class="auth-hash-box">
+<div>HASH: 0x7a89f...b42</div>
+<div>KEY: SEC-ID-2024-NGR</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Print & Layout Preferences Sidebar -->
+<aside class="print-controls-sidebar">
+<!-- Primary Action Buttons Card -->
+<div class="control-card">
+<h3 class="control-card-title">
+<svg fill="none" height="18" stroke="#006837" stroke-width="2.2" viewbox="0 0 24 24" width="18">
+<polyline points="6 9 6 2 18 2 18 9"></polyline>
+<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+<rect height="8" width="12" x="6" y="14"></rect>
+</svg>
+          Print Commands
+        </h3>
+<div class="print-cta-block">
+<button class="btn-print-hero" onclick="window.print()">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.4" viewbox="0 0 24 24" width="18">
+<polyline points="6 9 6 2 18 2 18 9"></polyline>
+<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+<rect height="8" width="12" x="6" y="14"></rect>
+</svg>
+            Print ID Card
+          </button>
+<button class="btn-download-pdf" onclick="alert('Generating print-ready vector PDF (CR80 Standard)...')">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="16">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+<polyline points="7 10 12 15 17 10"></polyline>
+<line x1="12" x2="12" y1="15" y2="3"></line>
+</svg>
+            Download Print PDF (Vector)
+          </button>
+</div>
+</div>
+<!-- Print Output Settings -->
+<div class="control-card">
+<h3 class="control-card-title">
+<svg fill="none" height="18" stroke="#006837" stroke-width="2.2" viewbox="0 0 24 24" width="18">
+<circle cx="12" cy="12" r="3"></circle>
+<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+</svg>
+          Print Setup &amp; Layout
+        </h3>
+<div class="setting-row">
+<label class="setting-label">Destination Media</label>
+<select class="setting-select" id="mediaSelect">
+<option selected="">Direct PVC Card Printer (Fargo / Evolis / Zebra)</option>
+<option>A4 Paper (Cut &amp; Laminate Card Template)</option>
+<option>Standard Letter Sheet</option>
+<option>Pre-Die-Cut Synthetic Adhesive Sheets</option>
+</select>
+</div>
+<div class="setting-row">
+<label class="setting-label">Layout Arrangement</label>
+<div class="radio-pill-group">
+<label class="radio-pill-label selected" id="layout-both" onclick="setLayoutType('both')">
+<input checked="" name="layoutType" type="radio"/> Both Sides
+            </label>
+<label class="radio-pill-label" id="layout-single" onclick="setLayoutType('single')">
+<input name="layoutType" type="radio"/> Separate Pages
+            </label>
+</div>
+</div>
+<div class="setting-row">
+<div class="checkbox-toggle-row">
+<div class="checkbox-toggle-left">
+              Crop &amp; Bleed Trim Guides
+              <small>Displays 3mm cutting lines for guillotine alignment</small>
+</div>
+<label class="switch-toggle">
+<input checked="" id="toggle-bleed" onchange="toggleCropGuides(this.checked)" type="checkbox"/>
+<span class="slider-toggle"></span>
+</label>
+</div>
+<div class="checkbox-toggle-row">
+<div class="checkbox-toggle-left">
+              High-DPI Background Graphics
+              <small>Preserves watermarks and microtext in print</small>
+</div>
+<label class="switch-toggle">
+<input checked="" type="checkbox"/>
+<span class="slider-toggle"></span>
+</label>
+</div>
+<div class="checkbox-toggle-row">
+<div class="checkbox-toggle-left">
+              Include Signature Bars
+              <small>Renders President &amp; Credentials Officer seals</small>
+</div>
+<label class="switch-toggle">
+<input checked="" type="checkbox"/>
+<span class="slider-toggle"></span>
+</label>
+</div>
+</div>
+</div>
+<!-- Printing Guidelines Notice Card -->
+<div class="notice-card">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<circle cx="12" cy="12" r="10"></circle>
+<line x1="12" x2="12" y1="8" y2="12"></line>
+<line x1="12" x2="12.01" y1="16" y2="16"></line>
+</svg>
+<div>
+<strong>Printer Driver Advice:</strong> Ensure <em>"Scale to 100% (Actual Size)"</em> is checked in your system print dialogue so the card precisely matches standard ISO/IEC 7810 wallet dimensions.
+        </div>
+</div>
+<!-- Technical Specifications Summary -->
+<div class="control-card">
+<h3 class="control-card-title">
+<svg fill="none" height="18" stroke="#006837" stroke-width="2.2" viewbox="0 0 24 24" width="18">
+<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+<polyline points="14 2 14 8 20 8"></polyline>
+<line x1="16" x2="8" y1="13" y2="13"></line>
+<line x1="16" x2="8" y1="17" y2="17"></line>
+<polyline points="10 9 9 9 8 9"></polyline>
+</svg>
+          Technical Print Specifications
+        </h3>
+<ul class="specs-list">
+<li class="spec-item">
+<span class="spec-name">Card Standard</span>
+<span class="spec-val">CR80 (ISO 7810 ID-1)</span>
+</li>
+<li class="spec-item">
+<span class="spec-name">Exact Dimensions</span>
+<span class="spec-val">85.60 × 53.98 mm</span>
+</li>
+<li class="spec-item">
+<span class="spec-name">Corner Radius</span>
+<span class="spec-val">3.18 mm (1/8 inch)</span>
+</li>
+<li class="spec-item">
+<span class="spec-name">Resolution Target</span>
+<span class="spec-val">300 DPI (CMYK Emulated)</span>
+</li>
+<li class="spec-item">
+<span class="spec-name">Security Features</span>
+<span class="spec-val">Microtext, EMV, QR, Hash</span>
+</li>
+<li class="spec-item">
+<span class="spec-name">Verification Status</span>
+<span class="spec-val" style="color: #006837;">ACTIVE &amp; VERIFIED</span>
+</li>
+</ul>
+</div>
+</aside>
+</main>
+<!-- Clean Footer -->
+<footer class="page-footer">
+<div class="footer-inner">
+<div>
+<strong>NANMS</strong> • © 2024 National Association of Niger State Medical Students. All rights reserved.
+      </div>
+<ul class="footer-links">
+<li><a href="#">Privacy Policy</a></li>
+<li><a href="#">Terms of Service</a></li>
+<li><a href="#">Constitution</a></li>
+<li><a href="#">Verification FAQ</a></li>
+</ul>
+</div>
+</footer>
+<script>
+    function setCardView(view) {
+      const frontWrap = document.getElementById('card-front-wrap');
+      const backWrap = document.getElementById('card-back-wrap');
+      
+      const btnBoth = document.getElementById('btn-show-both');
+      const btnFront = document.getElementById('btn-show-front');
+      const btnBack = document.getElementById('btn-show-back');
+
+      btnBoth.classList.remove('active');
+      btnFront.classList.remove('active');
+      btnBack.classList.remove('active');
+
+      if (view === 'both') {
+        frontWrap.style.display = 'block';
+        backWrap.style.display = 'block';
+        btnBoth.classList.add('active');
+      } else if (view === 'front') {
+        frontWrap.style.display = 'block';
+        backWrap.style.display = 'none';
+        btnFront.classList.add('active');
+      } else if (view === 'back') {
+        frontWrap.style.display = 'none';
+        backWrap.style.display = 'block';
+        btnBack.classList.add('active');
+      }
+    }
+
+    function setLayoutType(type) {
+      const lblBoth = document.getElementById('layout-both');
+      const lblSingle = document.getElementById('layout-single');
+      if (type === 'both') {
+        lblBoth.classList.add('selected');
+        lblSingle.classList.remove('selected');
+        setCardView('both');
+      } else {
+        lblSingle.classList.add('selected');
+        lblBoth.classList.remove('selected');
+      }
+    }
+
+    function toggleCropGuides(show) {
+      const marks = document.querySelectorAll('.crop-mark');
+      marks.forEach(mark => {
+        mark.style.display = show ? 'block' : 'none';
+      });
+    }
+  </script>
+</body></html>

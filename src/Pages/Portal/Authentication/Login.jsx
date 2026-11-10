@@ -9,6 +9,7 @@ import Redirect from '../../../Redirect';
 import { UiContext } from '../../../MyContexts/UiContext'
 import eye from '../../../assets/icons/eye.svg'
 import eyeOff from '../../../assets/icons/eye-off.svg'
+import AiDirect from '../../../AiDirect';
 
 export default function Login() {
 
@@ -45,46 +46,48 @@ export default function Login() {
 
 
   return (
-    <Redirect>
-      <Nav currentPage={'login'} />
-      {
-        !showFrgtnPswd ?
-          <main class="login-main-content">
-            <div class="login-card">
-              <h1 class="login-title">Member Portal Login</h1>
-              <form action={signInAction}>
-                <div class="login-form-group">
-                  <label class="login-form-label" for="email">Email</label>
-                  <input class="login-form-input" id="email" name="email" placeholder="Enter your email"
-                    required type="email" />
-                </div>
-                <div class="login-form-group">
-                  <label class="login-form-label" for="password">Password</label>
-                  <div style={{position: 'relative'}}>
-                    <input class="login-form-input" id="password" name="password" placeholder="Enter your password" required type={showPassword ? 'text' : "password"} />
-                    <img style={{position: 'absolute', width: '20px', top: '24%', right: '6px',  }} onClick={() => { setShowPassword(!showPassword) }} src={showPassword ? eyeOff : eye} alt={showPassword ? 'hide' : 'show'} />
+    <AiDirect>
+      <Redirect>
+        <Nav currentPage={'login'} />
+        {
+          !showFrgtnPswd ?
+            <main class="login-main-content">
+              <div class="login-card">
+                <h1 class="login-title">Member Portal Login</h1>
+                <form action={signInAction}>
+                  <div class="login-form-group">
+                    <label class="login-form-label" for="email">Email</label>
+                    <input class="login-form-input" id="email" name="email" placeholder="Enter your email"
+                      required type="email" />
                   </div>
+                  <div class="login-form-group">
+                    <label class="login-form-label" for="password">Password</label>
+                    <div style={{ position: 'relative' }}>
+                      <input class="login-form-input" id="password" name="password" placeholder="Enter your password" required type={showPassword ? 'text' : "password"} />
+                      <img style={{ position: 'absolute', width: '20px', top: '24%', right: '6px', }} onClick={() => { setShowPassword(!showPassword) }} src={showPassword ? eyeOff : eye} alt={showPassword ? 'hide' : 'show'} />
+                    </div>
 
+                  </div>
+                  <button class="btn-login" type="submit">Login</button>
+                </form>
+                <div class="links-container">
+                  <button
+                    class="auth-link"
+                    onClick={() => {
+                      setShowFrgtnPswd(true)
+                    }}
+                  >
+                    Forgot Password?
+                  </button>
+                  <Link to={'/members/registration'} class="auth-link">Not registered? Join the Association</Link>
                 </div>
-                <button class="btn-login" type="submit">Login</button>
-              </form>
-              <div class="links-container">
-                <button
-                  class="auth-link"
-                  onClick={() => {
-                    setShowFrgtnPswd(true)
-                  }}
-                >
-                  Forgot Password?
-                </button>
-                <Link to={'/members/registration'} class="auth-link">Not registered? Join the Association</Link>
               </div>
-            </div>
-          </main>
-          : <Forgotpassword setShowFrgtnPswd={setShowFrgtnPswd} />
-      }
-      <Footer />
-    </Redirect>
+            </main>
+            : <Forgotpassword setShowFrgtnPswd={setShowFrgtnPswd} />
+        }
+        <Footer />
+      </Redirect>
+    </AiDirect>
 
   );
 };

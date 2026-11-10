@@ -104,7 +104,7 @@ export default function RightSidebar({ displayed, setSearchResult }) {
         <ul class="categories-list">
           <li
             onClick={() => {
-              setSearchProps((prev) => {
+              setSearchProps(() => {
                 return [{
                   prop: 'all',
                   value: ''

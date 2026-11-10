@@ -1,11 +1,14 @@
 import { useContext, useEffect } from "react"
 import { AuthContext } from "./MyContexts/AuthContext"
 import { useNavigate } from "react-router"
+import { UiContext } from "./MyContexts/UiContext"
 
 
 export default function Redirect({children, pathName}) {
 
  const {session} = useContext(AuthContext)
+
+ const {assNavRoute} = useContext(UiContext)
 
  const navigate = useNavigate()
  
@@ -29,6 +32,12 @@ export default function Redirect({children, pathName}) {
 
   redirect()
  }, [session])
+
+ useEffect(() => {
+  if (assNavRoute) {
+   navigate(assNavRoute)
+  }
+ }, [assNavRoute])
 
  return (
   <>

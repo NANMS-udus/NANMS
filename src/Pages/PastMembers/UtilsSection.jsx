@@ -10,7 +10,7 @@ export default function UtilsSection({ def, target, filterParams, setterFun }) {
      <input
       aria-label="Search patrons by name or title"
       class="search-input-2"
-      placeholder="Search patrons by name or title..."
+      placeholder="Search patrons by name..."
       type="text"
       onChange={(e) => {
        const result = target.filter(itm => {
